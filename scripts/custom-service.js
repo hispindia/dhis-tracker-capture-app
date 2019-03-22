@@ -17,7 +17,9 @@ angular.module('trackerCaptureServices')
             "OVBvzaxZpWs"];
         return {
             uphmisCheckIfEventAlreadyExistsForSelDate: function (currentDate, events, programStage) {
+            	
                 if (this.checkForDailyStages(currentDate, events, programStage)) {
+                	
                     return true;
                 }
 
@@ -28,9 +30,16 @@ angular.module('trackerCaptureServices')
                 return false;
             },
             checkForDailyStages: function (currentDate, events, programStage) {
+            
+            	console.log("Daily Program Stage: "+ Object.values(programStage));
+            	
+            	
+            	
                 if (dailyProgramStagesUIDs.indexOf(programStage) > -1) {
                     for (var i = 0; i < events.length; i++) {
-                        if (events[i].eventDate === currentDate) {
+                    
+                        if (events[i].eventDate === currentDate && events[i].name !== "Paediatric - PBR monitoring - Monthly") {
+                        
                             return true;
                         }
                     }
@@ -43,10 +52,8 @@ angular.module('trackerCaptureServices')
 
                 var gettingMonth = new Date(currentDate).getMonth();
                 var gettingYear = new Date(currentDate).getFullYear();
-
+                
                 if (monthlyProgramStagesUIDs.indexOf(programStage) > -1) {
-                     //for (var i = 0; i < events.length; i++) {
-                     alert("today Month "+todayMonth+" getting Month "+gettingMonth)
                         if (new Date(gettingYear, gettingMonth).valueOf() > new Date(todayYear, todayMonth).valueOf()) {
                             return true;
                         //}

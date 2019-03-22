@@ -32,9 +32,9 @@ trackerCapture.controller('DataEntryController',
                 EventCreationService,
                 AuthorityService,
                 AccessUtils,
-                TCOrgUnitService,
-                MetaDataFactory) {
+                TCOrgUnitService) {
     
+    $scope.editData = '';
     //Unique instance id for the controller:
     $scope.APIURL = DHIS2URL;
     $scope.instanceId = Math.floor(Math.random() * 1000000000);
@@ -169,6 +169,8 @@ trackerCapture.controller('DataEntryController',
     $scope.optionGroupsById = CurrentSelection.getOptionGroupsById();
 
     $scope.userAuthority = AuthorityService.getUserAuthorities(SessionStorageService.get('USER_PROFILE'));
+    
+    console.log('user authority: '+$scope.userAuthority);
     if(!$scope.attributesById){
         $scope.attributesById = [];
         AttributesFactory.getAll().then(function(atts){
@@ -177,17 +179,6 @@ trackerCapture.controller('DataEntryController',
             });
             
             CurrentSelection.setAttributesById($scope.attributesById);
-        });
-    }
-
-    $scope.optionSets = CurrentSelection.getOptionSets();        
-    if(!$scope.optionSets){
-        $scope.optionSets = [];
-        MetaDataFactory.getAll('optionSets').then(function(optionSets){
-            angular.forEach(optionSets, function(optionSet){                        
-                $scope.optionSets[optionSet.id] = optionSet;
-            });
-            CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
 
@@ -444,7 +435,7 @@ trackerCapture.controller('DataEntryController',
                     }
                 }
             } else if (effect.action === "SHOWWARNING" 
-                    || effect.action === "WARNINGONCOMPLETE") {
+                    ||Â effect.action === "WARNINGONCOMPLETE") {
                 if (effect.ineffect) {
                     var message = effect.content + (effect.data ? effect.data : "");
                         
@@ -584,7 +575,7 @@ trackerCapture.controller('DataEntryController',
         $scope.tabularEntryStages = [];
         angular.forEach($scope.programStages, function(programStage){
             if(!$scope.stagesNotShowingInStageTasks[programStage.id]
-                    || ($scope.eventsByStage[programStage.id] && 
+                    ||Â ($scope.eventsByStage[programStage.id] && 
                     $scope.eventsByStage[programStage.id].length > 0)) {
                 $scope.tabularEntryStages.push(programStage);
             }
@@ -1007,12 +998,12 @@ trackerCapture.controller('DataEntryController',
                         dhis2Event.executionDateLabel = eventStage.executionDateLabel ? eventStage.executionDateLabel : $translate.instant('report_date');
                         dhis2Event.dueDateLabel = eventStage.dueDateLabel ? eventStage.dueDateLabel : $translate.instant('due_date');
                         dhis2Event.dueDate = DateUtils.formatFromApiToUser(dhis2Event.dueDate);
-                        dhis2Event.sortingDate = DateUtils.formatFromUserToApi(dhis2Event.dueDate);
+                        dhis2Event.sortingDate = dhis2Event.dueDate;
                         dhis2Event.style = eventStage.style;
 
                         if (dhis2Event.eventDate) {                            
                             dhis2Event.eventDate = DateUtils.formatFromApiToUser(dhis2Event.eventDate);
-                            dhis2Event.sortingDate = DateUtils.formatFromUserToApi(dhis2Event.eventDate);                            
+                            dhis2Event.sortingDate = dhis2Event.eventDate;                            
                         }
                         
                         dhis2Event.editingNotAllowed = EventUtils.getEditingStatus(dhis2Event, eventStage, $scope.selectedOrgUnit, $scope.selectedTei, $scope.selectedEnrollment, $scope.selectedProgram, userSearchOrgUnits);
@@ -1839,7 +1830,7 @@ trackerCapture.controller('DataEntryController',
         };
         
         DHIS2EventFactory.updateForEventDate(e).then(function (data) {
-            eventToSave.sortingDate = DateUtils.formatFromUserToApi(eventToSave.eventDate);
+            eventToSave.sortingDate = eventToSave.eventDate;
             
             $scope.invalidDate = false;
             $scope.validatedDateSetForEvent = {date: eventToSave.eventDate, event: eventToSave};
@@ -2125,6 +2116,7 @@ trackerCapture.controller('DataEntryController',
         
         if($scope.currentEvent.status !== 'COMPLETED'){
             $scope.outerDataEntryForm.submitted = true;
+            $scope.editData = 'Not Edit';
             if($scope.outerDataEntryForm.$invalid){
                 NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_invalid"));
                 return;
@@ -2132,7 +2124,7 @@ trackerCapture.controller('DataEntryController',
         }
 
         var modalOptions;
-        
+                
         var modalDefaults = {};
         var dhis2Event = $scope.makeDhis2EventToUpdate();        
         
@@ -2142,7 +2134,21 @@ trackerCapture.controller('DataEntryController',
                 headerText: 'edit',
                 bodyText: 'are_you_sure_to_incomplete_event'
             };
+            
+       $scope.pbiAdminRole = '';
+    	$scope.currentUserRoles = $scope.currentUserDetails.userRoles;
+        for (var i = 0; i <= $scope.currentUserRoles.length; i++) {
+        	
+        	if($scope.currentUserRoles[i] !== undefined && $scope.currentUserRoles[i].id === 'Y9nNqnTdMMX')
+              { 
+                $scope.pbiAdminRole = 'YES'; }
+              else{
+              $scope.pbiAdminRole = 'NO';}
+        }
+        
+            $scope.editData = 'Edit';
             dhis2Event.status = 'ACTIVE';
+            $scope.eventEditable(false);
         }
         else {//complete event    
             //We must execute the rules right before deciding wheter to allow completion:
@@ -2221,7 +2227,7 @@ trackerCapture.controller('DataEntryController',
                 
                 modalDefaults.templateUrl = 'components/dataentry/modal-complete-event.html';
                 dhis2Event.status = 'COMPLETED';
-                dhis2Event.completedDate = DateUtils.formatFromUserToApi(today);
+                dhis2Event.completedDate = today;
             }
         }
         ModalService.showModal(modalDefaults, modalOptions).then(function (modalResult) {
@@ -2400,6 +2406,15 @@ trackerCapture.controller('DataEntryController',
     }
 
     $scope.eventEditable = function(isButton){
+    
+    	
+    	if($scope.editData === 'Edit' ){
+    		console.log("$scope.pbiAdminRole: "+$scope.pbiAdminRole);
+    		if($scope.pbiAdminRole === 'YES')
+    		{ return true ;}
+    		else 
+    		{ return false;}
+    	} 
         if(!$scope.currentStage || !$scope.currentStage.access || !$scope.currentStage.access.data.write) return false;
         if($scope.selectedOrgUnit.closedStatus || $scope.selectedEnrollment.status !== 'ACTIVE') return false;
         if(isButton) {
@@ -2410,13 +2425,8 @@ trackerCapture.controller('DataEntryController',
         return true;
     }
 
-    $scope.canDeleteEvent = function() {
-        if(!$scope.currentStage || !$scope.currentStage.access || !$scope.currentStage.access.data.write) return false;
-        return true;
-    };
-
     $scope.deleteEvent = function () {
-        if(!$scope.canDeleteEvent()){
+        if(!$scope.eventEditable()){
             var bodyText = $translate.instant('you_do_not_have_the_necessary_authorities_to_delete') +' '+ $translate.instant('this') +' '+$translate.instant('event').toLowerCase();
             var headerText = $translate.instant('delete_failed');
             return NotificationService.showNotifcationDialog(headerText, bodyText);

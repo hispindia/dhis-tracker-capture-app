@@ -19,7 +19,17 @@ trackerCapture.controller('ProfileController',
         $scope.currentUserName = '';
         $scope.isValidProgram = false;
         $scope.superUserAuthority = "";
-
+        $scope.pbfUserAuthority = "";
+        
+        /*for (var i = 0; i <= $scope.userCredentials.userRoles.length; i++) {
+        if($scope.userCredentials.userRoles[i] != undefined || $scope.userCredentials.userRoles[i] != null)*/
+        
+		/*
+		if ($scope.currentUserDetails.userRoles[i] !== undefined && $scope.currentUserDetails.userRoles[i] !== null && Object.values($scope.currentUserDetails.userRoles[i]) == 'Y9nNqnTdMMX') {
+				$scope.pbfUserAuthority = 'PBF'; 
+			}
+		}*/
+							
         //getting user details
 
         $scope.currentUserDetail = SessionStorageService.get('USER_PROFILE');
@@ -27,8 +37,10 @@ trackerCapture.controller('ProfileController',
         $scope.currentUserName = $scope.currentUserDetails.username;
         $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
         for (var i = 0; i < $scope.currentUserRoles.length; i++) {
+        	if($scope.currentUserDetails.userRoles[i].id === 'Y9nNqnTdMMX'){    $scope.pbfUserAuthority = "YES"; }     	
             $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
             for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
+            	
                 if ($scope.currentUserRoleAuthorities[j] === "ALL") {
                     //$scope.accessAuthority = true;
                     $scope.superUserAuthority = "YES";
@@ -53,7 +65,7 @@ trackerCapture.controller('ProfileController',
         }
         // Getting user attribute value
 
-        console.log($scope.isValidProgram);
+        //console.log($scope.isValidProgram);
 
         $scope.selectedEntityinstance = CurrentSelection.currentSelection.tei.attributes;
         for (var i = 0; i < $scope.selectedEntityinstance.length; i++) {
@@ -143,8 +155,9 @@ trackerCapture.controller('ProfileController',
 
         $scope.editProfile = function () {
             if ($scope.isValidProgram) {
-                if ($scope.currentUserName === $scope.selectedUserName || $scope.currentUserName === "admin" || $scope.superUserAuthority === "YES") {
-                    return true
+                if ($scope.currentUserName === $scope.selectedUserName || $scope.currentUserName === "admin" || $scope.superUserAuthority === "YES" || $scope.pbfUserAuthority === "YES") {
+                   
+                   return true
                 }
                 else {
                     return false

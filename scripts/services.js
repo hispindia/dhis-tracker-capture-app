@@ -216,6 +216,11 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 index = i;
                 occupied = angular.copy(periods[i]);
             }
+           if ( moment(periods[i].endDate).isAfter(event.sortingDate) && moment(event.sortingDate).isAfter(periods[i].endDate))
+            {
+            	index = i;
+                occupied = angular.copy(periods[i]);
+            }
         }
 
         if(index !== -1){
@@ -250,13 +255,14 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
 
             var startDate = DateUtils.format( moment(referenceDate, calendarSetting.momentFormat).add(offset, 'days') );
             var periodOffset = 0;
-            if((splitDate(startDate).year) <= splitDate(DateUtils.getToday()).year)
+            if((splitDate(startDate).year) < splitDate(DateUtils.getToday()).year)
             {
-            	periodOffset = _periodOffset && dhis2.validation.isNumber( _periodOffset ) ? _periodOffset : (splitDate(startDate).year)+1 - splitDate(DateUtils.getToday()).year;
+            	periodOffset = _periodOffset && dhis2.validation.isNumber( _periodOffset ) ? _periodOffset : ((splitDate(startDate).year) - splitDate(DateUtils.getToday()).year)+1;
+            	console.log("periodOffset: "+periodOffset);
+            	
             }
             else
             {
-            	
            		 periodOffset = _periodOffset && dhis2.validation.isNumber( _periodOffset ) ? _periodOffset : (splitDate(startDate).year) - splitDate(DateUtils.getToday()).year;
             
             }
@@ -272,9 +278,9 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 p.endDate = DateUtils.formatFromApiToUser(p.endDate);
                 p.startDate = DateUtils.formatFromApiToUser(p.startDate);
 				
-                if(moment(p.endDate, calendarSetting.momentFormat).isAfter(moment(eventDateOffSet,calendarSetting.momentFormat))){
+                if(moment(p.endDate, calendarSetting.momentFormat).isBefore(moment(eventDateOffSet,calendarSetting.momentFormat)) || moment(p.endDate, calendarSetting.momentFormat).isAfter(moment(eventDateOffSet,calendarSetting.momentFormat))){
                   
-                  console.log("available Period    "+ Object.values(p));  
+                 // console.log("available Period    "+ Object.values(p));  
                     availablePeriods.push( p );
                 }
 
@@ -574,12 +580,12 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
     };
 
     return {
-        registerOrUpdate: function(tei, optionSets, attributesById, programId){
+        registerOrUpdate: function(tei, optionSets, attributesById){
             var apiTei = convertFromUserToApi(angular.copy(tei));
             if(apiTei){
                 var def = $q.defer();
                 if(apiTei.trackedEntityInstance){
-                    TEIService.update(apiTei, optionSets, attributesById, programId).then(function(response){
+                    TEIService.update(apiTei, optionSets, attributesById).then(function(response){
                         def.resolve(response);
                     });
                 }
@@ -1139,15 +1145,14 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             });
             return deferred.promise;
         },
-        update: function(tei, optionSets, attributesById, programId){
+        update: function(tei, optionSets, attributesById){
             var formattedTei = convertFromUserToApi(angular.copy(tei));
             var attributes = [];
             angular.forEach(formattedTei.attributes, function(att){
                 attributes.push({attribute: att.attribute, value: CommonUtils.formatDataValue(null, att.value, attributesById[att.attribute], optionSets, 'API')});
             });
             formattedTei.attributes = attributes;
-            var programFilter = programId ? "?program=" + programId : "";
-            var promise = $http.put( DHIS2URL + '/trackedEntityInstances/' + formattedTei.trackedEntityInstance + programFilter, formattedTei ).then(function(response){
+            var promise = $http.put( DHIS2URL + '/trackedEntityInstances/' + formattedTei.trackedEntityInstance , formattedTei ).then(function(response){
                 return response.data;
             }, function(response){
                 NotificationService.showNotifcationDialog($translate.instant('update_error'), $translate.instant('failed_to_update_tei'), response);
@@ -2549,7 +2554,6 @@ i
         var modalInstance = $modal.open({
             templateUrl: 'components/dataentry/new-event.html',
             controller: 'EventCreationController',
-            windowClass: 'modal-new-event-window',
             resolve: {
                 eventsByStage: function () {
                     return eventsByStage;

@@ -208,6 +208,7 @@ trackerCapture.controller('EventCreationController',
 
         // Custom function for UPHMIS
         $scope.validEventDate = $scope.dhis2Event.eventDate;
+        
         //
             if (UPHMISCustomService.uphmisCheckIfEventAlreadyExistsForSelDate($scope.validEventDate,$scope.events,dummyEvent.programStage)){
 
@@ -325,7 +326,7 @@ trackerCapture.controller('EventCreationController',
             return;
         }
         
-        $scope.periodOffset = period === 'NEXT' ? $scope.periodOffset + 2 : $scope.periodOffset - 2;
+        $scope.periodOffset = period === 'NEXT' ? $scope.periodOffset + 1 : $scope.periodOffset - 1;
         $scope.dhis2Event.selectedPeriod = null;
         
         var prds = PeriodService.getPeriods(eventsByStage[stage.id], $scope.model.selectedStage, $scope.selectedEnrollment, $scope.periodOffset);
