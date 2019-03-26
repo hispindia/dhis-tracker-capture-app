@@ -98,20 +98,22 @@ trackerCapture.controller('DataEntryController',
 	
 		//get attribute of user
 	  ///Assign value to option set 
-	$.get("../api/me.json?fields=userCredentials[openId]", function (data1) {
+	$.get("../api/me.json?fields=id,name,attributeValues[attribute[id,code,name]]", function (data1) {
 			  var trackdata=data1;
 			 $scope.custom_section_name=[];
 			 
-			 
+			 for(var i=0;i<trackdata.attributeValues.length;i++)
+				{
+				
+				var attributevalue=trackdata.attributeValues[i].value;
+				
+					 $scope.custom_section_name.push(trackdata.attributeValues[i].attribute.name);
+					
+				
+				
+				 
+				}
 	                      
-							//var eventdata=trackdata.attributeValues[i].attribute;
-							
-							 //var section_id=eventdata.id;
-							  var section_name=trackdata.userCredentials.openId;
-							    var section_array = section_name.split(',');
-							 // var json_section_name={"id":section_id,"displayName":section_name};
-							  $scope.custom_section_name=section_array;
-							  console.log($scope.custom_section_name);
 							
                              							
 			        

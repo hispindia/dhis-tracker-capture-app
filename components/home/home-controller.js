@@ -58,22 +58,8 @@ trackerCapture.controller('HomeController',function(
             },
 
         }
-		
-		 var loadPrograms = function(){
-            return ProgramFactory.getProgramsByOu($scope.selectedOrgUnit,true, previousProgram).then(function(response){
-                $scope.programs = response.programs;
-				$scope.checkloaded_program=response.selectedProgram.id;		
-			if($scope.checkloaded_program=="TcaMMqHJxK5" || $scope.checkloaded_program=="BgTTdBNKHwc")
         $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
-			else
-				$scope.views = [viewsByType.lists, viewsByType.search];
-                $scope.setProgram(response.selectedProgram);
-            });
-        }
-		 
-		
-	
-		
+
         var mapOuLevelsToId = function(){
             $scope.base.ouLevelsByLevel = {};
             angular.forEach(ouLevels, function(ouLevel){
@@ -154,9 +140,15 @@ trackerCapture.controller('HomeController',function(
             return resolvedEmptyPromise();
         }
 
-        /*var loadPrograms = function(){
+        var loadPrograms = function(){
             return ProgramFactory.getProgramsByOu($scope.selectedOrgUnit,true, previousProgram).then(function(response){
                 $scope.programs = response.programs;
+				
+				$scope.checkloaded_program=response.selectedProgram.id;		
+			if($scope.checkloaded_program=="TcaMMqHJxK5" || $scope.checkloaded_program=="BgTTdBNKHwc")
+        $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
+			else
+				$scope.views = [viewsByType.lists, viewsByType.search];
                 var programIdFromURL = ($location.search()).program;
                 var fullProgram = null;
                 if(programIdFromURL) {
@@ -171,7 +163,7 @@ trackerCapture.controller('HomeController',function(
                     $scope.setProgram(response.selectedProgram);
                 }
             });
-        }*/
+        }
 
         var loadCachedData = function(){
             var frontPageData = CurrentSelection.getFrontPageData();
@@ -201,7 +193,6 @@ trackerCapture.controller('HomeController',function(
             deferred.resolve();
             return deferred.promise;
         }
-
 
         var loadOptionSets = function(){
             if(!$scope.base.optionSets){
