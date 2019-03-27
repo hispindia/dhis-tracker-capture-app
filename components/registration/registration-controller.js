@@ -508,7 +508,7 @@ trackerCapture.controller('RegistrationController',
         //registration form comes empty, in this case enforce at least one value
 
         // custom-code for SAVE CHILD for generate Custom-Id start
-        if ($scope.registrationMode === 'REGISTRATION') {
+        if ($scope.registrationMode === 'REGISTRATION' || $scope.registrationMode === 'PROFILE' ) {
             var lastName = "";
             var dobYear = "";
             var sex = "";
