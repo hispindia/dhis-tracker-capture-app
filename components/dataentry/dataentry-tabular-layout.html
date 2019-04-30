@@ -53,9 +53,17 @@
                                     ng-disabled="selectedEntity.inactive || selectedEnrollment.status !== 'ACTIVE' || selectedOrgUnit.closedStatus || currentStage.hideDueDate || currentStage.periodType || (!currentStage.repeatable && eventsByStage[currentStage.id].length > 0)">
                                 <i class="fa fa-calendar"></i>
                             </button>
-                            <button type="button" 
+                            <!-- custom change for punjab hmis -->
+                            <button type="button" ng-if="selectedProgram.id === 'JuZA8mxRZV2'"
+                                    ng-attr-title="{{'deputation_transfer'| translate}}"
+                                    class="btn btn-warning long-vertical-spacing"
+                                    ng-click="useMainMenu ? showCreateEventIfStageNeedsEvent(selectedMainMenuStage, eventCreationActions.referral, false, true) : showCreateEvent(null, eventCreationActions.referral)"
+                                    ng-disabled="selectedEntity.inactive || selectedEnrollment.status !== 'ACTIVE' || selectedOrgUnit.closedStatus || currentStage.hideDueDate || currentStage.periodType || (!currentStage.repeatable && eventsByStage[currentStage.id].length > 0)">
+                                <i class="fa fa-share"></i>
+                            </button>
+                            <button type="button" ng-if="selectedProgram.id != 'JuZA8mxRZV2'"
                                     ng-attr-title="{{'make_referral'| translate}}"
-                                    class="btn btn-warning long-vertical-spacing" 
+                                    class="btn btn-warning long-vertical-spacing"
                                     ng-click="useMainMenu ? showCreateEventIfStageNeedsEvent(selectedMainMenuStage, eventCreationActions.referral, false, true) : showCreateEvent(null, eventCreationActions.referral)"
                                     ng-disabled="selectedEntity.inactive || selectedEnrollment.status !== 'ACTIVE' || selectedOrgUnit.closedStatus || currentStage.hideDueDate || currentStage.periodType || (!currentStage.repeatable && eventsByStage[currentStage.id].length > 0)">
                                 <i class="fa fa-share"></i>

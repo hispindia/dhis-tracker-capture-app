@@ -63,13 +63,21 @@
                 </a>                
             </div>
             <!-- TODO: Edit so that referral shows-->
-            <!--  <div ng-if="useReferral && showReferral"> -->           
-            <div>
-                <a href class="disable-link-effects" ng-click="useMainMenu ? showCreateEventIfStageNeedsEvent(selectedMainMenuStage, eventCreationActions.referral, false, true) : showCreateEvent(null, eventCreationActions.referral)" ng-attr-title="{{'make_referral'| translate}}">
-                    <span class="stage-tasks-badge" ng-class="useMainMenu ? {'stage-tasks-badge-disabled': !stageNeedsEventOfType(selectedMainMenuStage, eventCreationActions.referral)} : ''">                                     
-                        <span><i class="fa fa-share vertical-center"></i></span>                
+            <!--  <div ng-if="useReferral && showReferral"> -->
+            <!-- custom change for punjab hmis -->
+            <div ng-if="selectedProgram.id === 'JuZA8mxRZV2'">
+                <a href class="disable-link-effects" ng-click="useMainMenu ? showCreateEventIfStageNeedsEvent(selectedMainMenuStage, eventCreationActions.referral, false, true) : showCreateEvent(null, eventCreationActions.referral)" ng-attr-title="{{'deputation_transfer'| translate}}">
+                    <span class="stage-tasks-badge" ng-class="useMainMenu ? {'stage-tasks-badge-disabled': !stageNeedsEventOfType(selectedMainMenuStage, eventCreationActions.referral)} : ''">
+                        <span><i class="fa fa-share vertical-center"></i></span>
                     </span>
-                </a>                
+                </a>
+            </div>
+            <div ng-if="selectedProgram.id != 'JuZA8mxRZV2'">
+                <a href class="disable-link-effects" ng-click="useMainMenu ? showCreateEventIfStageNeedsEvent(selectedMainMenuStage, eventCreationActions.referral, false, true) : showCreateEvent(null, eventCreationActions.referral)" ng-attr-title="{{'make_referral'| translate}}">
+                    <span class="stage-tasks-badge" ng-class="useMainMenu ? {'stage-tasks-badge-disabled': !stageNeedsEventOfType(selectedMainMenuStage, eventCreationActions.referral)} : ''">
+                        <span><i class="fa fa-share vertical-center"></i></span>
+                    </span>
+                </a>
             </div>
         </div>
     </div>
