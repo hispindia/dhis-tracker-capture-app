@@ -168,6 +168,7 @@ trackerCapture.controller('RegistrationController',
     $scope.$watch('selectedProgram', function (newValue, oldValue) {
         if($scope.selectedOrgUnit) {
             if (newValue !== oldValue) {
+                init();
                 getProgramRules();
 
                 if ($scope.registrationMode === 'REGISTRATION') {
