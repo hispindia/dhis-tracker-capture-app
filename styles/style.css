@@ -1,7 +1,9 @@
 html, body {
-    margin: 0;
+	
+	width: 97%;
+    margin: auto;
     padding: 0;
-    background-color: white;
+    background-color: whitesmoke;
     font-size: 9pt;
 }
 
@@ -812,11 +814,6 @@ table.table-striped tr td.optionset {
 }
 
 .modal-map-window .modal-dialog {
-    width: 75%;
-    height: 100%;
-}
-
-.modal-new-event-window .modal-dialog {
     width: 75%;
     height: 100%;
 }
@@ -2296,6 +2293,7 @@ button.list-group-item-danger.active:focus {
 
 .custom-workinglist-dropdown {
     width:400px;
+    height: 430px;
 }
 @media (max-width:767px){
     .custom-workinglist-dropdown {
@@ -2315,7 +2313,7 @@ button.list-group-item-danger.active:focus {
 .custom-workinglist-dropdown-list {
     margin: 5px;
     padding: 5px 9px 5px 5px;
-    max-height: 570px;
+    max-height: 400px;
     overflow-y: auto;
 }
 .search-tei-form {
