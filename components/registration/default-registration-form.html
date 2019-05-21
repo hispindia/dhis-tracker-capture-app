@@ -13,11 +13,11 @@
                 placement="right">
                 <a href ng-attr-title="{{'details'| translate}}" class="wrap-text" tabindex="-1">{{attribute.displayName}}</a>
             </span>
+			<span ng-if="attributeIsRequired(attribute.id, attribute.mandatory)" class="required">*</span>
             <span class="not-for-screen">
                 {{attribute.displayName}}
-            </span>
-            <span ng-if="attributeIsRequired(attribute.id, attribute.mandatory)" class="required">*</span>
-        </td>
+            </span>		
+            <span ng-if="attribute.id === 'E4DiWTWSQNM' && selectedProgram.id === 'epM6D15AtIy'">&#160; +91</span>
         <td class="absorbing-column">
             <ng-form name="innerForm">
                 <span ng-if="attribute.optionSetValue">

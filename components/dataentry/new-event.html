@@ -68,7 +68,7 @@
                     </div>
                 </td>
             </tr>            
-            <tr ng-if="isNewEvent && !model.selectedStage.periodType">
+            <tr ng-if="isNewEvent && !model.selectedStage.periodType && selectedProgram.id != 'JuZA8mxRZV2'" >
                 <td>
                     {{model.selectedStage.executionDateLabel}}
                 </td>
@@ -87,7 +87,29 @@
                     <div ng-messages="eventCreationForm.eventDate.$error" ng-if="interacted(eventCreationForm.eventDate)" class="required" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">                        
                     </div>
                 </td>
-            </tr>            
+            </tr>
+            <!-- custom change for PUNJAB HMIS block enable calender up to past 3 days -->
+            <tr ng-if="isNewEvent && !model.selectedStage.periodType && selectedProgram.id === 'JuZA8mxRZV2'">
+                <td>
+                    {{model.selectedStage.executionDateLabel}}
+                </td>
+                <td class="absorbing-column">
+                    <input type="text" 
+                           class="form-control" 
+                           id="eventDate"
+                           name="eventDate"
+                           ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}" 
+                           ng-rquired="true" 
+                           d2-date
+                           d2-date-validator 
+                           max-date="0"
+                           min-date="-3"
+                           ng-model="dhis2Event.eventDate">
+                    <div ng-messages="eventCreationForm.eventDate.$error" ng-if="interacted(eventCreationForm.eventDate)" class="required" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">                        
+                    </div>
+                </td>
+            </tr> 
+			
             <tr ng-if="model.selectedStage.periodType">
                 <td>
                     {{'period'| translate}}

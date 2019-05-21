@@ -4,7 +4,24 @@
     <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]">
         {{currentStage.executionDateLabel ? currentStage.executionDateLabel : 'report_date' | translate}}
         <span class="required">*</span>
-        <input type="text"
+        <input type="text" ng-if="selectedProgram.id === 'JuZA8mxRZV2'"
+               ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}"
+               class="form-control hideInPrint"
+               ng-class="{'input-success': eventDateSaved}"
+               d2-date-validator
+               d2-date
+               max-date="0"
+               min-date="-3"
+               picker-class="hide-clear"
+               name="eventDate"
+               ng-model="currentEvent.eventDate"
+               ng-change="verifyEventExpiryDate('eventDate')"
+               ng-disabled="!reportDateEditable()"
+               ng-required="true"
+               blur-or-change="saveEventDate()"
+               ng-focus="setDateOnFocus(currentEvent.eventDate, selectedEnrollment.enrollmentDate)"/>
+
+        <input type="text" ng-if="selectedProgram.id != 'JuZA8mxRZV2'"
                ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}"
                class="form-control hideInPrint"
                ng-class="{'input-success': eventDateSaved}"
@@ -20,6 +37,9 @@
                ng-required="true"
                blur-or-change="saveEventDate()"
                ng-focus="setDateOnFocus(currentEvent.eventDate, selectedEnrollment.enrollmentDate)"/>
+
+
+
         <input type="text"
                class="form-control not-for-screen"
                ng-class="{'input-success': eventDateSaved}"

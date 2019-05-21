@@ -66,6 +66,9 @@ trackerCapture.controller('RegistrationController',
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
 
+    // for punjab-hmis-customizations display on load
+    $scope.phoneNumber = 'E4DiWTWSQNM';
+
     if(!$scope.attributesById){
         $scope.attributesById = [];
         AttributesFactory.getAll().then(function(atts){
@@ -309,6 +312,18 @@ trackerCapture.controller('RegistrationController',
         if($scope.selectedProgram){
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+                /*
+                if( $scope.selectedProgram.id === 'epM6D15AtIy')
+                {
+                    $timeout( function (){
+                        if( !$scope.selectedTei[$scope.phoneNumber] && $scope.selectedTei[$scope.phoneNumber] == undefined)
+                        {
+                            $scope.selectedTei[$scope.phoneNumber] = '+91'; //put default value on load form
+                        }
+
+                    },0);
+                }
+                */
                 fetchGeneratedAttributes();
                 if ($scope.selectedProgram && $scope.selectedProgram.id) {
                     if ($scope.selectedProgram.dataEntryForm && $scope.selectedProgram.dataEntryForm.htmlCode) {
