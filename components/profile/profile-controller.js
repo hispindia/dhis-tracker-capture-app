@@ -19,7 +19,7 @@ trackerCapture.controller('ProfileController',
         $scope.currentUserName = '';
         $scope.isValidProgram = false;
         $scope.superUserAuthority = "";
-        $scope.pbfUserAuthority = "";
+       // $scope.pbfUserAuthority = "";
         
         /*for (var i = 0; i <= $scope.userCredentials.userRoles.length; i++) {
         if($scope.userCredentials.userRoles[i] != undefined || $scope.userCredentials.userRoles[i] != null)*/
@@ -36,8 +36,7 @@ trackerCapture.controller('ProfileController',
         $scope.currentUserDetails = $scope.currentUserDetail.userCredentials
         $scope.currentUserName = $scope.currentUserDetails.username;
         $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
-        for (var i = 0; i < $scope.currentUserRoles.length; i++) {
-        	if($scope.currentUserDetails.userRoles[i].id === 'Y9nNqnTdMMX'){    $scope.pbfUserAuthority = "YES"; }     	
+        for (var i = 0; i < $scope.currentUserRoles.length; i++) {        	   	
             $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
             for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
             	
@@ -90,8 +89,8 @@ trackerCapture.controller('ProfileController',
         }
 
         $scope.topBarFilter = function (attr) {
-            if ($scope.widget && $scope.widget.topBarFields[attr.id] && $scope.widget.topBarFields[attr.id].show && $scope.selectedTei[attr.id]) return true;
-            return false;
+            if ($scope.widget && $scope.widget.topBarFields[attr.id] && $scope.widget.topBarFields[attr.id].show && $scope.selectedTei[attr.id]) return false;
+            
         }
 
         $scope.topBarOrder = function (attr) {
@@ -155,7 +154,7 @@ trackerCapture.controller('ProfileController',
 
         $scope.editProfile = function () {
             if ($scope.isValidProgram) {
-                if ($scope.currentUserName === $scope.selectedUserName || $scope.currentUserName === "admin" || $scope.superUserAuthority === "YES" || $scope.pbfUserAuthority === "YES") {
+                if ($scope.currentUserName === $scope.selectedUserName || $scope.currentUserName === "admin" || $scope.superUserAuthority === "YES") {
                    
                    return true
                 }
@@ -171,8 +170,8 @@ trackerCapture.controller('ProfileController',
 
         $scope.enableEdit = function () {
             $scope.teiOriginal = angular.copy($scope.selectedTei);
-            $scope.editingDisabled = !$scope.editingDisabled;
-            $rootScope.profileWidget.expand = true;
+           	$scope.editingDisabled = !$scope.editingDisabled;
+           $rootScope.profileWidget.expand = false;
         };
 
         $scope.cancel = function () {
