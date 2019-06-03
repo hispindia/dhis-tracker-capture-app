@@ -12,7 +12,7 @@
         <table class="table table-bordered">
             <tr>
                 <td class="bold">{{'description' | translate}}</td>
-                <td>{{content.displayDescription ? content.displayDescription : content.description ? content.description : 'not_available' | translate}}</td>
+                <td>{{content.description ? content.description : 'not_available' | translate}}</td>
             </tr>
             <tr>
                 <td class="bold">{{'url' | translate}}</td>
@@ -87,9 +87,8 @@
         </div>
 
         <div class="vertical-spacing btn-group" ng-if="registrationMode === 'ENROLLMENT'">            
-            <button type="button" class="btn btn-primary" ng-disabled="model.savingRegistration || selectedOrgUnit.closedStatus" ng-click="registerEntity('ENROLLMENT')">{{'enroll'| translate}}</button>
-            <button type="button" class="btn btn-default small-horizontal-spacing" ng-disabled="model.savingRegistration || selectedOrgUnit.closedStatus" ng-click="cancelRegistrationWarning(showNewEnrollment)">{{'cancel'| translate}}</button>
-            <span ng-show="model.savingRegistration" style="margin-left: 25px;"><i class="fa fa-spinner fa-spin fa-3x"></i></span>
+            <button type="button" class="btn btn-primary" ng-disabled="selectedOrgUnit.closedStatus" ng-click="registerEntity(null)">{{'enroll'| translate}}</button>
+            <button type="button" class="btn btn-default small-horizontal-spacing" ng-disabled="selectedOrgUnit.closedStatus" ng-click="cancelRegistrationWarning(showNewEnrollment)">{{'cancel'| translate}}</button>
         </div>
 
         <div class="vertical-spacing hideInPrint btn-group" ng-if="showRegistrationButtons()">

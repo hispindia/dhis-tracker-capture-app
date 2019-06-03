@@ -11,6 +11,7 @@ import 'd2-tracker/lib/dhis2.angular.templates.js';
 import 'd2-tracker/src/styles/style.css';
 
 // App files
+
 import '../scripts/services.js';
 import '../scripts/filters.js';
 import '../scripts/directives.js';
@@ -19,6 +20,7 @@ import '../scripts/report-types-controller.js';
 import '../scripts/display-mode-controller.js';
 import '../scripts/sticky.min.js';
 import '../scripts/ng-csv.js';
+import '../scripts/custom-service.js';
 import '../components/dashboard/dashboard-controller.js';
 import '../components/dashboard/dashboard-widgets-controller.js';
 import '../components/registration/registration-controller.js';

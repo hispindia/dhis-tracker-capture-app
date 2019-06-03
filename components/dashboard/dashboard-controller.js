@@ -31,6 +31,9 @@ trackerCapture.controller('DashboardController',
             NotificationService,
             TeiAccessApiService) {
 
+            $scope.currentUserName = '';
+            $scope.isValidProgram = false;
+            $scope.superUserAuthority = '';
 
     var preAuditCancelled = function(){
         var modalOptions = {
@@ -239,6 +242,80 @@ trackerCapture.controller('DashboardController',
                                         });
                                     });
                                 }
+                            
+                                    // Custom Changes for UPHMIS
+                                    //getting user details
+
+                                    $scope.currentUserDetail = SessionStorageService.get('USER_PROFILE');
+                                    $scope.currentUserDetails = $scope.currentUserDetail.userCredentials
+                                    $scope.currentUserName = $scope.currentUserDetails.username;
+                                    $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
+                                    for (var i = 0; i < $scope.currentUserRoles.length; i++) {
+                                        $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
+                                        for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
+                                            if ($scope.currentUserRoleAuthorities[j] === "ALL") {
+                                                //$scope.accessAuthority = true;
+                                                $scope.superUserAuthority = "YES";
+                                                break;
+                                            }
+                                        }
+                                    }
+
+
+                                    //Validate Program validation
+                                    var url1 = window.location.href;
+                                    var params = url1.split('=');
+
+                                    var gotProgramId = params[2];
+                                    var paramsprogram = gotProgramId.split('&');
+                                    var gotProgramIdUsed = paramsprogram[0];
+
+                                    $.ajax({
+                                        type: "GET",
+                                        dataType: "json",
+                                        async: false,
+                                        contentType: "application/json",
+                                        url: "../api/programs/" + gotProgramIdUsed + ".json?fields=*,attributeValues[*,attribute[id,code]]&paging=false",
+                                        success: function (responseName) {
+                                            $scope.gotProgramDetails = responseName;
+                                        }
+                                    });
+
+
+                                    // $scope.currentProgramDetail = CurrentSelection.currentSelection.pr;
+                                    var programAttributeLength = $scope.gotProgramDetails.attributeValues.length;
+                                    for (var i = 0; i < programAttributeLength; i++) {
+                                        if ($scope.gotProgramDetails.attributeValues[i].attribute.code === 'pbfProgram' && $scope.gotProgramDetails.attributeValues[i].value === 'true') {
+                                            $scope.isValidProgram = true;
+                                            break;
+                                        }
+                                    }
+
+                                    // Getting user attribute value
+
+                                    $scope.selectedEntityinstance = $scope.selectedTei.attributes;
+                                    for (var i = 0; i < $scope.selectedEntityinstance.length; i++) {
+                                        if ($scope.selectedEntityinstance[i].code === "user_name") {
+                                            $scope.selectedUserName = $scope.selectedEntityinstance[i].value;
+                                            break;
+                                        }
+                                    }
+
+
+                                    $scope.editProfile = function () {
+                                        if ($scope.isValidProgram) {
+                                            if ($scope.currentUserName === $scope.selectedUserName || $scope.currentUserName === "admin" || $scope.superUserAuthority === "YES") {
+                                                return true
+                                            }
+                                            else {
+                                                return false
+                                            }
+                                        }
+                                        return true;
+                                    }
+                            
+                                //End of Custom Changes for UPHMIS
+                            
                             }, function(error){
                                 if(error && error.auditDismissed){
                                     $rootScope.hasAccess = false;
@@ -262,7 +339,7 @@ trackerCapture.controller('DashboardController',
         $scope.orderChanged = false;
         
         DashboardLayoutService.getLockedList().then(function(r){
-            if(!r || r === '') {
+            if(!r ||r === '') {
                 $scope.lockedList = {};
             } else {
                 $scope.lockedList = r;                
@@ -471,7 +548,6 @@ trackerCapture.controller('DashboardController',
 
     $scope.$on('ErollmentDeleted', function (args, data) {
         $scope.allEnrollments = data.enrollments;
-        updateDashboard();
     });
 
     $scope.$on('DataEntryMainMenuVisibilitySet', function (event, data) {

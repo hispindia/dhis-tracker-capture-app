@@ -5,7 +5,6 @@ trackerCapture.controller('TEIAddController',
     function($scope, 
             $rootScope,
             $translate,
-            $modal,
             $modalInstance, 
             $location,
             DateUtils,
@@ -59,46 +58,6 @@ trackerCapture.controller('TEIAddController',
 
             CurrentSelection.setOptionSets($scope.optionSets);
         });
-    }
-
-
-    $scope.getTrackerAssociateInternal = function (selectedAttribute, existingAssociateUid,tei) {
-        var p = allPrograms;
-        var modalInstance = $modal.open({
-            templateUrl: 'components/teiadd/tei-add.html',
-            controller: 'TEIAddController',
-            windowClass: 'modal-full-window',
-            resolve: {
-                relationshipTypes: function () {
-                    return $scope.relationshipTypes;
-                },
-                addingRelationship: function () {
-                    return false;
-                },
-                selections: function () {
-                    return CurrentSelection.get();
-                },
-                selectedTei: function () {
-                    return tei;
-                },
-                selectedAttribute: function () {
-                    return selectedAttribute;
-                },
-                existingAssociateUid: function () {
-                    return existingAssociateUid;
-                },
-                selectedProgram: function () {
-                    return $scope.selectedProgram;
-                },
-                relatedProgramRelationship: function () {
-                    return $scope.relatedProgramRelationship;
-                },
-                allPrograms: function () {
-                    return p;
-                },
-            }
-        });
-        return modalInstance.result;
     }
 
     var isValidCurrentTeiConstraint = function(constraint){
@@ -674,17 +633,6 @@ trackerCapture.controller('TEIAddController',
             CurrentSelection.setAttributesById($scope.attributesById);
         });
     }    
-
-    $scope.getTrackerAssociate = function(selectedAttribute, existingAssociateUid){
-        return $scope.getTrackerAssociateInternal(selectedAttribute, existingAssociateUid, $scope.selectedTei).then(function(res){
-            if (res && res.id) {
-                //Send object with tei id and program id
-                $scope.selectedTei[selectedAttribute.id] = res.id;
-            }
-            return res;
-        });
-
-    }
     
     $scope.optionSets = CurrentSelection.getOptionSets();        
     if(!$scope.optionSets){
@@ -714,7 +662,7 @@ trackerCapture.controller('TEIAddController',
             t = {};
         }
     };
-
+    
     var getRules = function(){
         $scope.allProgramRules = {constants: [], programIndicators: {}, programVariables: [], programRules: []};
         if( angular.isObject($scope.base.selectedProgramForRelative) && $scope.base.selectedProgramForRelative.id ){
@@ -820,9 +768,9 @@ trackerCapture.controller('TEIAddController',
         }
         
         RegistrationService.registerOrUpdate($scope.tei, $scope.optionSets, $scope.attributesById).then(function(registrationResponse){
-            var reg = registrationResponse.response.responseType ==='ImportSummaries' ? registrationResponse.response.importSummaries[0] : registrationResponse.response.responseType === 'ImportSummary' ? registrationResponse.response : {};
-            if (reg.status === 'SUCCESS'){                
-                $scope.tei.trackedEntityInstance = $scope.tei.id = reg.reference; 
+            var reg = registrationResponse.response ? registrationResponse.response : {};
+            if (reg.importSummaries[0].reference && reg.status === 'SUCCESS'){                
+                $scope.tei.trackedEntityInstance = $scope.tei.id = reg.importSummaries[0].reference; 
                 
                 //registration is successful and check for enrollment
                 if($scope.base.selectedProgramForRelative){    
@@ -881,11 +829,9 @@ trackerCapture.controller('TEIAddController',
             
             CurrentSelection.setRelationshipInfo({tei: $scope.tei});
             
-            if($scope.addingRelationship) {
-                $timeout(function() { 
-                    $rootScope.$broadcast('relationship', {result: 'SUCCESS'});
-                }, 100);
-            }
+            $timeout(function() { 
+                $rootScope.$broadcast('relationship', {result: 'SUCCESS'});
+            }, 100);
         }        
     };
     

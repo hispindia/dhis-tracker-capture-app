@@ -1,9 +1,24 @@
+<!-- <script src="components/lib/commons/ouwt/ouwt1.js"></script> -->
+<!-- <script src="../dhis-web-commons/ouwt/ouwt.js"></script> -->
+
+<style>
+    #mySelect1{
+       height: 100px;
+       width: 460px;
+    }
+    #mySelect{
+       height: 100px;
+       width: 460px;
+    }
+</style>
+
+<link type="text/css" rel="stylesheet" media="screen" href="styles/custom.css">
 <div ng-if="widget !== 'PROFILE' && trackedEntityTypes.selected" class="section-label section-spacing vertical-spacing">
     {{'profile'| translate}}
 </div>
 <table class="dhis2-list-table-striped default-form-table">
     <tr ng-if="trackedEntityTypes.selected && !hiddenFields[attribute.id] && ((editingDisabled  && attribute.show) || !editingDisabled)" ng-repeat="attribute in attributes | filter: {attribute: 'true'} ">
-        <td>
+        <td  ng-show="attribute.code != 'user_name'">
             <span d2-pop-over
                 details="{{'details'| translate}}"
                 content="attribute"
@@ -18,10 +33,29 @@
             </span>
             <span ng-if="attributeIsRequired(attribute.id, attribute.mandatory)" class="required">*</span>
         </td>
-        <td class="absorbing-column">
+        <td  ng-hide="attribute.code === 'user_name'">
+            <span d2-pop-over
+                ng-hide="true"
+               
+                details="{{'details'| translate}}"
+                content="attribute"
+                class="popover-label hideInPrint small-horizontal-spacing"
+                template="attribute-details.html"
+                trigger="click"
+                placement="right">
+                <a href ng-attr-title="{{'details'| translate}}" class="wrap-text" tabindex="-1">{{attribute.displayName}}</a>
+            </span>
+            <span class="not-for-screen" ng-hide="true">
+                {{attribute.displayName}}
+            </span>
+            <span ng-if="attributeIsRequired(attribute)" class="required" ng-hide="true">*</span>
+        </td>
+
+        
+        <td class="absorbing-column"  ng-hide="attribute.code === 'user_name'">
             <ng-form name="innerForm">
-                <span ng-if="attribute.optionSetValue">
-                    <span class="hideInPrint" ng-if="!attribute.renderOptionsAsRadio || optionSets[attributesById[attribute.id].optionSet.id].options.length >= 7">
+                <span ng-if="attribute.optionSetValue && attribute.optionSet.id != 'IsSMYQkdppA'">
+                    <span class="hideInPrint" ng-if="attribute.optionSet.id != 'IsSMYQkdppA' &&!attribute.renderOptionsAsRadio || optionSets[attributesById[attribute.id].optionSet.id].options.length >= 7">
                         <d2-option-list d2-model="selectedTei"
                                         d2-model-id="attribute.id"
                                         d2-required="attributeIsRequired(attribute.id, attribute.mandatory)"
@@ -46,6 +80,27 @@
                         <input type="text" ng-attr-value={{selectedTei[attribute.id]}}>
                     </span>        
                 </span> 
+
+
+
+                <span ng-if= "attribute.optionSet.id == 'IsSMYQkdppA'" >
+                    <span class="hideInPrint" ng-if="attribute.optionSet.id == 'IsSMYQkdppA' &&!attribute.renderOptionsAsRadio || optionSets[attributesById[attribute.id].optionSet.id].options.length >= 7">
+                        <d2-option-list d2-model="selectedTei"
+                                    
+                                        d2-model-id="attribute.id"
+                                        ng-click="validate(optionSets[attributesById[attribute.id].optionSet.id].options,selectedTei[attribute.id])"
+                                        d2-required="attributeIsRequired(attribute.id, attribute.mandatory)"
+                                        d2-disabled="attributeFieldDisabled(attribute)"
+                                        d2-change="teiValueUpdated(selectedTei,attribute.id)"
+                                        d2-option-filter="optionVisibility"
+                                        d2-max-option-size="maxOptionSize"
+                                        d2-all-options="optionSets[attributesById[attribute.id].optionSet.id].options">
+                        </d2-option-list>
+                    </span>
+                    </span>
+
+                
+
 
                 <span ng-if="!attribute.optionSetValue" ng-switch="attribute.valueType">
                     <span ng-switch-when="DATE">
@@ -288,7 +343,7 @@
                                   d2-disabled="attributeFieldDisabled(attribute)">
                         </d2-image>
                     </span>
-                    <span ng-switch-when="LONG_TEXT">
+                    <span ng-switch-when="LONG_TEXT" ng-if ="attribute.id != 'KlbwCtOXU29'">
                         <textarea row="3"
                                name="foo" 
                                class="form-control"
@@ -303,6 +358,71 @@
                                ng-blur="teiValueUpdated(selectedTei, attribute.id)"
                                ng-required="attributeIsRequired(attribute.id, attribute.mandatory)">
                         </textarea>
+                    </span>
+
+                    <span ng-switch-when="LONG_TEXT" ng-if ="attribute.id == 'KlbwCtOXU29'">
+                        <textarea row="3"
+                               name="foo" 
+                               class="form-control"
+                               ng-model="selectedTei[attribute.id]" 
+                               ng-bind="orgSel"
+                               ng-model-options="{ updateOn: 'default blur', allowInvalid: true }" 
+                               d2-attribute-validator
+                               selected-tet={{trackedEntityTypes.selected.id}}
+                               attribute-data={{attribute}}
+                               selected-program-id={{selectedProgram.id}}  
+                               selected-tei-id={{selectedTei.trackedEntityInstance}}  
+                               ng-disabled="attributeFieldDisabled(attribute)"
+                               ng-blur="teiValueUpdated(selectedTei, attribute.id)"
+                               ng-required="attributeIsRequired(attribute.id, attribute.mandatory)">
+                        </textarea>
+                        
+                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">
+                            +
+                          </button>
+                          <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                </div>
+                                <div class="modal-body" >
+                                   
+                                        <select style="max-width:90%;" class="dropdown"  id = "mySelect" ng-model="selectedName" multiple >
+                                                               
+                    
+                                                <option  ng-repeat="option in orgNameArray track by $index" value="option" >{{option}}</option>
+                                             
+                                            </select>
+                                            
+                                            <button type="button" ng-click="getvalue()">Select</button> 
+                    
+                    
+                    
+                                    <select style="max-width:90%;" class="dropdown"  item-width="100px"  item-height="100px" id = "mySelect1" ng-model="selectedName1" multiple >
+                                  <option  ng-repeat="option1 in selectedOrg track by $index" value="option1" >{{option1}}</option>
+                         
+                                 </select>
+                                     
+                                      <button type="button" ng-click="getvalue1()">UnSelect</button>
+                      
+                    
+                                              
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    
+                                                      
+                                                       
+                                
+                                            
                     </span>
                     <span ng-switch-when="USERNAME">
                         <d2-users-input d2-model="selectedTei"
@@ -347,7 +467,7 @@
                                 d2-orgunit-names="orgUnitNames">
                         </d2-org-unit-tree>
                     </span>
-                    <span ng-switch-when="TEXT">
+                    <span ng-switch-when="TEXT" && ng-if="attribute.code != 'user_name'">
                         <input type="text"
                                name="foo" 
                                class="form-control"
@@ -362,6 +482,24 @@
                                ng-blur="teiValueUpdated(selectedTei, attribute.id)"
                                ng-required="attributeIsRequired(attribute.id, attribute.mandatory)"/>
                     </span>
+                    <span ng-switch-when="TEXT" && ng-if="attribute.code === 'user_name'" && ng-hide="true">
+                        <input type="text"
+                               name="foo" 
+                               class="form-control"
+                               ng-model="selectedTei[attribute.id]" 
+                               ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
+                               selected-tet={{trackedEntityTypes.selected.id}}
+                               attribute-data={{attribute}}
+                               selected-program-id={{selectedProgram.id}}  
+                               selected-tei-id={{selectedTei.trackedEntityInstance}}  
+                               ng-disabled="attributeFieldDisabled(attribute)"
+                               ng-blur="teiValueUpdated(selectedTei, attribute.id)"
+                               ng-required="attributeIsRequired(attribute)"
+                               ng-hide="true"
+                               />
+                    </span>
+
                     <span ng-switch-when="PHONE_NUMBER">
                         <input type="text"
                                name="foo" 

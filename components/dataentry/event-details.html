@@ -1,7 +1,69 @@
 <!-- event dates/scheduling begin -->
 <div class="row" ng-if="displayCustomForm !== 'TABLE' && displayCustomForm !== 'COMPARE'">
         
-    <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]">
+    <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]"  ng-if="!editProfile()">
+        {{currentStage.executionDateLabel ? currentStage.executionDateLabel : 'report_date' | translate}}
+        <span class="required">*</span>
+        <input type="text"
+        ng-if="checkUserRole() && !checkUserRoleForDate"
+               ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}"
+               class="form-control hideInPrint"
+               ng-class="{'input-success': eventDateSaved}"
+               d2-date-validator
+               d2-date
+               max-date="model.maxDate?model.maxDate : '0'"
+               min-date="model.minDate?model.minDate : '-7'"
+               picker-class="hide-clear"
+               name="eventDate"
+               ng-model="currentEvent.eventDate"
+               ng-change="verifyEventExpiryDate('eventDate')"
+               ng-disabled="!reportDateEditable()"
+               ng-required="true"
+               blur-or-change="saveEventDate()"
+               ng-focus="setDateOnFocus(currentEvent.eventDate, selectedEnrollment.enrollmentDate)"/>
+        <input type="text"
+        ng-if="checkUserRole() && checkUserRoleForDate"
+               ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}"
+               class="form-control hideInPrint"
+               ng-class="{'input-success': eventDateSaved}"
+               d2-date-validator
+               d2-date
+               max-date="model.maxDate?model.maxDate : '0'"
+               min-date="model.minDate?model.minDate : ''"
+               picker-class="hide-clear"
+               name="eventDate"
+               ng-model="currentEvent.eventDate"
+               ng-change="verifyEventExpiryDate('eventDate')"
+               ng-disabled="!reportDateEditable()"
+               ng-required="true"
+               blur-or-change="saveEventDate()"
+               ng-focus="setDateOnFocus(currentEvent.eventDate, selectedEnrollment.enrollmentDate)"/>
+        <input type="text"
+        ng-if="!checkUserRole()"
+               ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}"
+               class="form-control hideInPrint"
+               ng-class="{'input-success': eventDateSaved}"
+               d2-date-validator
+               d2-date
+               max-date="model.maxDate?model.maxDate : '0'"
+               min-date="model.minDate?model.minDate : ''"
+               picker-class="hide-clear"
+               name="eventDate"
+               ng-model="currentEvent.eventDate"
+               ng-change="verifyEventExpiryDate('eventDate')"
+               ng-disabled="!reportDateEditable()"
+               ng-required="true"
+               blur-or-change="saveEventDate()"
+               ng-focus="setDateOnFocus(currentEvent.eventDate, selectedEnrollment.enrollmentDate)"/>
+        <input type="text"
+               class="form-control not-for-screen"
+               ng-class="{'input-success': eventDateSaved}"
+               ng-attr-value={{currentEvent.eventDate}}>
+        <div ng-messages="outerDataEntryForm.eventDate.$error" ng-if="interacted(outerDataEntryForm.eventDate)" class="required" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">
+        </div>
+    </div>
+        
+    <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]" ng-if ="editProfile()">
         {{currentStage.executionDateLabel ? currentStage.executionDateLabel : 'report_date' | translate}}
         <span class="required">*</span>
         <input type="text"

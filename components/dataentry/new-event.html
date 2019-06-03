@@ -68,7 +68,47 @@
                     </div>
                 </td>
             </tr>            
-            <tr ng-if="isNewEvent && !model.selectedStage.periodType">
+            <tr ng-if="isNewEvent && !model.selectedStage.periodType && checkUserRole() && !checkUserRoleForDate">
+                <td>
+                    {{model.selectedStage.executionDateLabel}}
+                </td>
+                <td class="absorbing-column">
+                    <input type="text" 
+                           class="form-control" 
+                           id="eventDate"
+                           name="eventDate"
+                           ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}" 
+                           ng-rquired="true" 
+                           d2-date
+                           d2-date-validator 
+                           max-date="0"
+                           min-date="-7"
+                           ng-model="dhis2Event.eventDate">
+                    <div ng-messages="eventCreationForm.eventDate.$error" ng-if="interacted(eventCreationForm.eventDate)" class="required" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">                        
+                    </div>
+                </td>
+            </tr>            
+            <tr ng-if="isNewEvent && !model.selectedStage.periodType && checkUserRole() && checkUserRoleForDate">
+                <td>
+                    {{model.selectedStage.executionDateLabel}}
+                </td>
+                <td class="absorbing-column">
+                    <input type="text" 
+                           class="form-control" 
+                           id="eventDate"
+                           name="eventDate"
+                           ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}" 
+                           ng-rquired="true" 
+                           d2-date
+                           d2-date-validator 
+                           max-date="0"
+                           min-date=""
+                           ng-model="dhis2Event.eventDate">
+                    <div ng-messages="eventCreationForm.eventDate.$error" ng-if="interacted(eventCreationForm.eventDate)" class="required" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">                        
+                    </div>
+                </td>
+            </tr>            
+            <tr ng-if="isNewEvent && !model.selectedStage.periodType && !checkUserRole()">
                 <td>
                     {{model.selectedStage.executionDateLabel}}
                 </td>

@@ -212,8 +212,13 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
         for(var i=0; i<periods.length && index === -1; i++){
             if(moment(periods[i].endDate).isSame(event.sortingDate) ||
                 moment(periods[i].startDate).isSame(event.sortingDate) ||
-                moment(periods[i].endDate).isAfter(event.sortingDate) && moment(event.sortingDate).isAfter(periods[i].endDate)){
+                moment(periods[i].endDate).isBefore(event.sortingDate) && moment(event.sortingDate).isBefore(periods[i].endDate)){
                 index = i;
+                occupied = angular.copy(periods[i]);
+            }
+           if ( moment(periods[i].endDate).isAfter(event.sortingDate) && moment(event.sortingDate).isAfter(periods[i].endDate))
+            {
+            	index = i;
                 occupied = angular.copy(periods[i]);
             }
         }
@@ -249,19 +254,34 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
         else{
 
             var startDate = DateUtils.format( moment(referenceDate, calendarSetting.momentFormat).add(offset, 'days') );
-            var periodOffset = _periodOffset && dhis2.validation.isNumber( _periodOffset ) ? _periodOffset : splitDate(startDate).year - splitDate(DateUtils.getToday()).year;
+            var periodOffset = 0;
+            if((splitDate(startDate).year) < splitDate(DateUtils.getToday()).year)
+            {
+            	var plus = splitDate(DateUtils.getToday()).year - (splitDate(startDate).year);
+            	periodOffset = _periodOffset && dhis2.validation.isNumber( _periodOffset ) ? _periodOffset : ((splitDate(startDate).year) - splitDate(DateUtils.getToday()).year)+plus;
+            	console.log("periodOffset: "+periodOffset);
+            	
+            }
+            else
+            {
+           		 periodOffset = _periodOffset && dhis2.validation.isNumber( _periodOffset ) ? _periodOffset : (splitDate(startDate).year) - splitDate(DateUtils.getToday()).year;
+            
+            }
+             
             var eventDateOffSet = moment(referenceDate, calendarSetting.momentFormat).add('d', offset)._d;
             eventDateOffSet = $filter('date')(eventDateOffSet, calendarSetting.keyDateFormat);
 
             //generate availablePeriods
             var pt = new PeriodType();
             var d2Periods = pt.get(stage.periodType).generatePeriods({offset: periodOffset, filterFuturePeriods: false, reversePeriods: false});
-
+			
             angular.forEach(d2Periods, function(p){
                 p.endDate = DateUtils.formatFromApiToUser(p.endDate);
                 p.startDate = DateUtils.formatFromApiToUser(p.startDate);
-
-                if(moment(p.endDate, calendarSetting.momentFormat).isAfter(moment(eventDateOffSet,calendarSetting.momentFormat))){
+				
+                if(moment(p.endDate, calendarSetting.momentFormat).isBefore(moment(eventDateOffSet,calendarSetting.momentFormat)) || moment(p.endDate, calendarSetting.momentFormat).isAfter(moment(eventDateOffSet,calendarSetting.momentFormat))){
+                  
+                 // console.log("available Period    "+ Object.values(p));  
                     availablePeriods.push( p );
                 }
 
@@ -269,10 +289,11 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                     hasFuturePeriod = true;
                 }
             });
-
+            
             //get occupied periods
             angular.forEach(events, function(event){
                 var ps = processPeriodsForEvent(availablePeriods, event);
+                
                 availablePeriods = ps.available;
                 if(ps.occupied){
                     occupiedPeriods.push(ps.occupied);
@@ -560,12 +581,12 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
     };
 
     return {
-        registerOrUpdate: function(tei, optionSets, attributesById, programId){
+        registerOrUpdate: function(tei, optionSets, attributesById){
             var apiTei = convertFromUserToApi(angular.copy(tei));
             if(apiTei){
                 var def = $q.defer();
                 if(apiTei.trackedEntityInstance){
-                    TEIService.update(apiTei, optionSets, attributesById, programId).then(function(response){
+                    TEIService.update(apiTei, optionSets, attributesById).then(function(response){
                         def.resolve(response);
                     });
                 }
@@ -1125,15 +1146,14 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             });
             return deferred.promise;
         },
-        update: function(tei, optionSets, attributesById, programId){
+        update: function(tei, optionSets, attributesById){
             var formattedTei = convertFromUserToApi(angular.copy(tei));
             var attributes = [];
             angular.forEach(formattedTei.attributes, function(att){
                 attributes.push({attribute: att.attribute, value: CommonUtils.formatDataValue(null, att.value, attributesById[att.attribute], optionSets, 'API')});
             });
             formattedTei.attributes = attributes;
-            var programFilter = programId ? "?program=" + programId : "";
-            var promise = $http.put( DHIS2URL + '/trackedEntityInstances/' + formattedTei.trackedEntityInstance + programFilter, formattedTei ).then(function(response){
+            var promise = $http.put( DHIS2URL + '/trackedEntityInstances/' + formattedTei.trackedEntityInstance , formattedTei ).then(function(response){
                 return response.data;
             }, function(response){
                 NotificationService.showNotifcationDialog($translate.instant('update_error'), $translate.instant('failed_to_update_tei'), response);
@@ -1201,7 +1221,6 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 if(required && !valueUrl) throw "value "+valueToSet+ "not found";
                 return valueUrl;
             }
-
             return $http.get(DHIS2URL + '/trackedEntityAttributes/'+attribute+'/requiredValues').then(function(response){
                 var paramsUrl = "?";
                 if(response && response.data){
@@ -2422,7 +2441,7 @@ i
                         };
                         if(stage.periodType){
                             var periods = getEventDuePeriod(null, stage, enrollment);
-                            newEvent.dueDate = DateUtils.formatFromUserToApi(periods[0].endDate);
+                            newEvent.dueDate = DateUtils.formatFromUserToApi(periods.availablePeriods[0].endDate);
                             newEvent.eventDate = newEvent.dueDate;
                         }
                         else{
@@ -2535,7 +2554,6 @@ i
         var modalInstance = $modal.open({
             templateUrl: 'components/dataentry/new-event.html',
             controller: 'EventCreationController',
-            windowClass: 'modal-new-event-window',
             resolve: {
                 eventsByStage: function () {
                     return eventsByStage;
@@ -2998,7 +3016,7 @@ i
         var params = getSearchParams(searchGroup, program, trackedEntityType, orgUnit, pager, searchScopes.PROGRAM);
         if(params){
             return TEIService.searchCount(params.orgUnit.id, params.ouMode,null, params.programOrTETUrl, params.queryUrl, params.pager, true).then(function(response){
-                if(response || response === 0){
+                if(response ||response === 0){
                     return response;
                 }else{
                     return tetScopeSearchCount(tetSearchGroup, trackedEntityType, orgUnit, pager);
@@ -3281,5 +3299,3 @@ i
         });
     }
 });
-
-

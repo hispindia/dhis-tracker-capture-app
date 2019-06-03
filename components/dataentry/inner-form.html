@@ -1,11 +1,24 @@
 <ng-form name="innerForm">
     <div ng-if="prStDe.dataElement.optionSetValue">
         <div class="hideInPrint">
-            <div ng-if="!prStDe.renderOptionsAsRadio || optionSets[prStDe.dataElement.optionSet.id].options.length >= 7">
+            <div ng-if="(!prStDe.renderOptionsAsRadio || optionSets[prStDe.dataElement.optionSet.id].options.length >= 7) && prStDe.dataElement.code !='approve_reject'">
                 <d2-option-list d2-model="currentEvent"
                                 d2-model-id="prStDe.dataElement.id"
                                 d2-required="prStDe.compulsory || mandatoryFields[currentEvent.event][prStDe.dataElement.id]"
                                 d2-disabled="!dataElementEditable(prStDe)"
+                                d2-change="saveDatavalue(prStDe,innerForm.foo)"
+                                d2-max-option-size="maxOptionSize"
+                                d2-option-filter="optionVisibility[currentEvent.event]"
+                                d2-all-options="optionSets[prStDe.dataElement.optionSet.id].options"
+                                d2-use-notification="true"
+                                d2-element="currentElement">
+                </d2-option-list>
+            </div>
+            <div ng-if="(!prStDe.renderOptionsAsRadio || optionSets[prStDe.dataElement.optionSet.id].options.length >= 7) && prStDe.dataElement.code ==='approve_reject'">
+                <d2-option-list d2-model="currentEvent"
+                                d2-model-id="prStDe.dataElement.id"
+                                d2-required="prStDe.compulsory || mandatoryFields[currentEvent.event][prStDe.dataElement.id]"
+                                d2-disabled="true"
                                 d2-change="saveDatavalue(prStDe,innerForm.foo)"
                                 d2-max-option-size="maxOptionSize"
                                 d2-option-filter="optionVisibility[currentEvent.event]"
@@ -165,7 +178,7 @@
                 <input type="text" class="form-control" ng-attr-value={{currentEvent[prStDe.dataElement.id]}}>
             </div>
         </div>
-        <div ng-switch-when="LONG_TEXT">
+        <div ng-switch-when="LONG_TEXT" ng-if="prStDe.dataElement.code !='reason_for_rejection'">
             <div class="hideInPrint">
                 <textarea rows="3"
                           ng-class="getInputNotifcationClass(prStDe.dataElement.id,false, currentEvent)"
@@ -173,6 +186,22 @@
                           ng-model="currentEvent[prStDe.dataElement.id]"
                           ng-required="prStDe.compulsory || mandatoryFields[currentEvent.event][prStDe.dataElement.id]"
                           ng-disabled="!dataElementEditable(prStDe)"
+                          ng-blur="saveDatavalue(prStDe, innerForm.foo)"
+                          name="foo">
+                </textarea>
+            </div>
+            <div class="not-for-screen">
+                <textarea rows="3" class="form-control">{{currentEvent[prStDe.dataElement.id]}}</textarea>
+            </div>
+        </div>
+        <div ng-switch-when="LONG_TEXT" ng-if="prStDe.dataElement.code ==='reason_for_rejection'">
+            <div class="hideInPrint">
+                <textarea rows="3"
+                          ng-class="getInputNotifcationClass(prStDe.dataElement.id,false, currentEvent)"
+                          class="form-control"
+                          ng-model="currentEvent[prStDe.dataElement.id]"
+                          ng-required="prStDe.compulsory || mandatoryFields[currentEvent.event][prStDe.dataElement.id]"
+                          ng-disabled="true"
                           ng-blur="saveDatavalue(prStDe, innerForm.foo)"
                           name="foo">
                 </textarea>
