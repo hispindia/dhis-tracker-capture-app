@@ -295,5 +295,19 @@ trackerCapture.controller('HomeController',function(
 
             }
           });
-        
+        // change for punjab HMIS hide registration Button for upper level <=3
+        $scope.hideRegister = function (viewName) {
+            if(viewName === 'Register')
+            {
+                if ($scope.selectedOrgUnit.l <= 3 ) {
+                    return false;
+                }
+                else {
+                    return true
+                }
+            }
+            else if(viewName != 'Register'){
+                return true
+            }
+        }
 });

@@ -193,7 +193,9 @@
 <!-- custom change for punjab hmis -->
 <div class="modal-footer page" ng-if="isReferralEvent">
     <button class="btn btn-primary" ng-if="selectedProgram.id === 'JuZA8mxRZV2'" data-ng-click="onetimeReferral()">{{'temporary_deputation'| translate}}</button>
-    <button class="btn btn-primary" ng-if="selectedProgram.id != 'JuZA8mxRZV2'" data-ng-click="onetimeReferral()">{{'onetime_referral'| translate}}</button>
-    <button class="btn btn-primary" data-ng-click="movePermanently()">{{'move_permanently'| translate}}</button>
+    <button class="btn btn-primary" ng-if="selectedProgram.id === 'epM6D15AtIy'" data-ng-click="onetimeReferral()">{{'make_referral'| translate}}</button>
+    <button class="btn btn-primary" ng-if="selectedProgram.id != 'JuZA8mxRZV2' && selectedProgram.id != 'epM6D15AtIy'" data-ng-click="onetimeReferral()">{{'onetime_referral'| translate}}</button>
+    <!--<button class="btn btn-primary" data-ng-click="movePermanently()">{{'move_permanently'| translate}}</button>-->
     <button class="btn btn-default" data-ng-click="cancel()">{{'cancel'| translate}}</button>
 </div>
+
