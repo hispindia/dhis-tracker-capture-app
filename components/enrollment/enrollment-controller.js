@@ -30,6 +30,44 @@ trackerCapture.controller('EnrollmentController',
             };
         }
 
+        // Custom Changes for Punjab-HMIS
+
+        $scope.currentUserName = '';
+        $scope.isValidProgram = false;
+        $scope.isDeleteButtonHide = false;
+        $scope.currentUserAuthority  = '';
+
+        //getting user details
+        $scope.currentUserDetail = SessionStorageService.get('USER_PROFILE');
+        $scope.currentUserDetails = $scope.currentUserDetail.userCredentials
+        $scope.currentUserName = $scope.currentUserDetails.username;
+        $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
+        for (var i = 0; i < $scope.currentUserRoles.length; i++) {
+
+            if( $scope.currentUserRoles[i].displayName === 'Block user - RBSK' || $scope.currentUserRoles[i].displayName === 'District User - RBSK' ){
+                $scope.currentUserAuthority = "YES";
+                break;
+            }
+            /*
+            $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
+            for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
+                if ($scope.currentUserRoleAuthorities[j] === "ALL") {
+                    //$scope.accessAuthority = true;
+                    $scope.superUserAuthority = "YES";
+
+                }
+            }
+            */
+        }
+
+        if( $scope.currentUserAuthority == 'YES'){
+            $scope.isDeleteButtonHide = true;
+        }
+        else
+        {
+            $scope.isDeleteButtonHide = false;
+        }
+
         $scope.getReportDateNotificationClass = function(reportDateType){
             var notificationClass = "form-control";
             if(currentReportDate && currentReportDate.type === reportDateType){

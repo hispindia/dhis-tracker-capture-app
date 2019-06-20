@@ -8,6 +8,7 @@ trackerCapture.controller('HomeController',function(
     $filter,
     $timeout,
     $q,
+    $http,
     Paginator,
     MetaDataFactory,
     DateUtils,
@@ -296,15 +297,90 @@ trackerCapture.controller('HomeController',function(
             }
           });
         // change for punjab HMIS hide registration Button for upper level <=3
+    // Custom Changes for Punjab-HMIS
+
+        $scope.currentUserName = '';
+        $scope.isValidProgram = false;
+        $scope.isRegistrationButtonHide = false;
+        $scope.currentUserAuthority  = '';
+
+        /*
+        //http://127.0.0.1:8090/punjab/api/me.json?fields=fields=id,displayName,userCredentials[username,userRoles[id,displayName,programs,authorities]]&skipPaging=true
+        $http.get('../api/me.json?fields=[id,name,userCredentials]&skipPaging=true')
+        .then(function(response) {
+            $scope.currentUserName = response.data.userCredentials.username;
+        });
+        */
+
+        //getting user details
+
+    $http.get('../api/me.json?fields=id,displayName,userCredentials[username,userRoles[id,displayName,programs,authorities]]&skipPaging=true')
+        .then(function(responseUser) {
+            $scope.currentUserName = responseUser.data.userCredentials.username;
+
+            for (var j = 0; j < responseUser.data.userCredentials.userRoles.length; j++) {
+                if( responseUser.data.userCredentials.userRoles[j].displayName === 'District user - Gynae' || responseUser.data.userCredentials.userRoles[j].displayName === 'District User - RBSK' ){
+                    $scope.currentUserAuthority = 'YES';
+                    break;
+                }
+            }
+
+            if( $scope.currentUserAuthority == 'YES'){
+                $scope.isRegistrationButtonHide = true;
+            }
+            else
+            {
+                $scope.isRegistrationButtonHide = false;
+            }
+
+        });
+
+    /*
+        $.ajax({
+            async: false,
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            url: "../api/me.json?fields=id,displayName,userCredentials[username,userRoles[id,displayName,programs,authorities]]&skipPaging=true",
+            success: function (responseUser) {
+                //$scope.awcOptionsList.push(optionSetOptions.options);
+                for (var j = 0; j < responseUser.userCredentials.userRoles.length; j++) {
+                    if( responseUser.userCredentials.userRoles[j].displayName === 'District user - Gynae' || responseUser.userCredentials.userRoles[j].displayName === 'District User - RBSK' ){
+                        $scope.currentUserAuthority = "YES";
+                        break;
+                    }
+                }
+            }
+        });
+
+        if( $scope.currentUserAuthority == 'YES'){
+            $scope.isRegistrationButtonHide = true;
+        }
+        else
+        {
+            $scope.isRegistrationButtonHide = false;
+        }
+        */
+
+        //alert( $scope.isRegistrationButtonHide );
         $scope.hideRegister = function (viewName) {
             if(viewName === 'Register')
             {
-                if ($scope.selectedOrgUnit.l <= 3 ) {
+                if ( $scope.selectedOrgUnit.l <= 3 || $scope.isRegistrationButtonHide ) {
                     return false;
                 }
                 else {
                     return true
                 }
+                /*
+                if ( $scope.isRegistrationButtonHide ) {
+                    return false;
+                }
+                else {
+                    return true
+                }
+                */
+
             }
             else if(viewName != 'Register'){
                 return true

@@ -1,8 +1,8 @@
 <script type="text/ng-template" id="program-selector">
     <div>
         <button ng-disabled="!previousTeiExists" type="button"
-        class="btn btn-default small-horizontal-spacing" ng-click="fetchTei('PREV')"
-        ng-attr-title="{{'previous'| translate}}" style="margin-bottom:3px"><i class="fa fa-caret-left"></i></button>
+                class="btn btn-default small-horizontal-spacing" ng-click="fetchTei('PREV')"
+                ng-attr-title="{{'previous'| translate}}" style="margin-bottom:3px"><i class="fa fa-caret-left"></i></button>
 
         <button ng-disabled="!nextTeiExists" type="button" class="btn btn-default small-horizontal-spacing"
                 ng-click="fetchTei('NEXT')" ng-attr-title="{{'next'| translate}}" style="margin-bottom:3px"><i class="fa fa-caret-right"></i>
@@ -33,10 +33,10 @@
         <div class="row" ng-class="{'dashboard-top-bar-sticky' : topBarConfig.settings && topBarConfig.settings.active}" height-change-source>
             <div style="display:flex;margin-left:15px;" class="vertical-spacing">
                 <div><button type="button" class="btn btn-default remove-focus-effects" ng-click="back()">
-                        {{getBackButtonText()}}
-                    </button>
+                    {{getBackButtonText()}}
+                </button>
                 </div>
-                
+
                 <div ng-include="'program-selector'" ng-if="!topBarConfig.settings || !topBarConfig.settings.active" style="flex: 1 100%;"></div>
                 <div ng-include="'components/topbar/topbar.html'" ng-style="{'flex' : (topBarConfig.settings && topBarConfig.settings.active) ? '1 100%' : '0'}"></div>
                 <div ng-class="topbarRightSizeClass" style="width:150px; display:flex;">
@@ -49,17 +49,18 @@
                             style="height: 35px;">
                         <i class="fa fa-thumb-tack"></i>
                     </button>
-                    
-                    <div class="btn-group trim" ng-if="showManageTeiDropdown()">
-                        <button type="button" ng-attr-title="{{'manage' | translate}} {{trackedEntityType.displayName}}" class="btn btn-danger dropdown-toggle" ng-disabled="selectedOrgUnit.closedStatus" data-toggle="dropdown" style="height: 35px;">
-                            <i class="fa fa-exclamation-circle"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">                            
-                            <li><a href ng-click="activiateTEI()">{{selectedTei.inactive ? 'activate' : 'deactivate' | translate}} {{trackedEntityType.displayName}}</a></li>
-                            <li><a href ng-click="deleteTEI()">{{'delete' | translate}} {{trackedEntityType.displayName}}</a></li>
-                        </ul>
+                    <!-- change for Punjab HMIS -->
+                    <div ng-if="!isDeleteButtonHide">
+                        <div class="btn-group trim" ng-if="showManageTeiDropdown()">
+                            <button type="button" ng-attr-title="{{'manage' | translate}} {{trackedEntityType.displayName}}" class="btn btn-danger dropdown-toggle" ng-disabled="selectedOrgUnit.closedStatus" data-toggle="dropdown" style="height: 35px;">
+                                <i class="fa fa-exclamation-circle"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href ng-click="activiateTEI()">{{selectedTei.inactive ? 'activate' : 'deactivate' | translate}} {{trackedEntityType.displayName}}</a></li>
+                                <li><a href ng-click="deleteTEI()">{{'delete' | translate}} {{trackedEntityType.displayName}}</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    
                     <div class="btn-group trim">
                         <button type="button" ng-attr-title="{{settingsLabel}}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 35px;">
                             <i class="fa fa-cog"></i>
@@ -76,7 +77,7 @@
             </div>
         </div>
         <div class="row">
-            
+
         </div>
         <div class="row">
             <div height-change-target class="vertical-spacing" ng-show="topBarConfig.settings && topBarConfig.settings.active" style="margin-bottom:0px;"></div>
@@ -92,7 +93,7 @@
                     <div ng-show="(!biggerWidget.useAsTopBar && biggerWidget.show && !temporaryHideWidgets[biggerWidget.title]) || temporaryShowWidgets[biggerWidget.title]"
                          ng-include="biggerWidget.view"
                          ng-class="{true: 'hideInPrint'} [biggerWidget.title != 'report']">
-					</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,16 +115,16 @@
 
 
     </div>
-    </div>
-    </div>
+</div>
+</div>
 
-    <!-- dashboard widgets end -->
+<!-- dashboard widgets end -->
 
 
-    <div class="col-sm-12" ng-if="!metaDataCached">
-        <img src="../images/ajax-loader-bar.gif" alt="{{'in_progress'| translate}}"/><br>
-            {{'loading_metadata'| translate}}
-    </div>
+<div class="col-sm-12" ng-if="!metaDataCached">
+    <img src="../images/ajax-loader-bar.gif" alt="{{'in_progress'| translate}}"/><br>
+    {{'loading_metadata'| translate}}
+</div>
 
 </div>
 

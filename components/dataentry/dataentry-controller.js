@@ -33,7 +33,8 @@ trackerCapture.controller('DataEntryController',
                 AuthorityService,
                 AccessUtils,
                 TCOrgUnitService,
-                MetaDataFactory) {
+                MetaDataFactory,
+                SQLViewService) {
     
     //Unique instance id for the controller:
     $scope.APIURL = DHIS2URL;
@@ -74,6 +75,9 @@ trackerCapture.controller('DataEntryController',
     $scope.orgUnitNames = {};
     $scope.originalDate = '';
 
+    $scope.awcOptionsList = [];
+    $scope.schoolOptionsList = [];
+
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
     
@@ -90,7 +94,11 @@ trackerCapture.controller('DataEntryController',
     $scope.compareDataEntryFormModes = { PREVIOUS: 1, ALL: 2};
     $scope.visibleWidgetsInMainMenu = {enrollment: true, dataentry: true, close_file: true};    
     $rootScope.$broadcast('DataEntryMainMenuVisibilitySet', {visible: $scope.useMainMenu, visibleItems: $scope.visibleWidgetsInMainMenu});
-    
+
+    // http://127.0.0.1:8090/punjab/api/optionSets.json?fields=id,name,code&paging=false
+   // http://127.0.0.1:8090/punjab/api/optionSets/mhJ5oNwsGvR.json?fields=id,name,code,options[id,name,code]&paging=false
+     //$scope.selectedOrgUnit.name;
+
     $scope.attributesById = CurrentSelection.getAttributesById();
     $scope.optionGroupsById = CurrentSelection.getOptionGroupsById();
 
@@ -116,6 +124,64 @@ trackerCapture.controller('DataEntryController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
+
+    //add for punjab-hmis
+    SQLViewService.getALLSQLView().then(function( responseSQLViews ){
+        var sqlViewNameToUIDMap = [];
+        for(var i=0; i<responseSQLViews.sqlViews.length; i++)
+        {
+            sqlViewNameToUIDMap[responseSQLViews.sqlViews[i].displayName]=responseSQLViews.sqlViews[i].id;
+        }
+        var optionSetCodeAWC = $scope.selectedOrgUnit.displayName + " - " + "AWC";
+        var optionSetCodeSCH = $scope.selectedOrgUnit.displayName + " - " + "School";
+        SQLViewService.getOptionsByOprionSetCodeThroughSQLView( sqlViewNameToUIDMap['OPTION_VALUE'], optionSetCodeAWC ).then(function(awcResponse){
+            for (var j = 0; j < awcResponse.listGrid.rows.length; j++) {
+                $scope.awcOptionsList.push( awcResponse.listGrid.rows[j][1]);
+            }
+            SQLViewService.getOptionsByOprionSetCodeThroughSQLView( sqlViewNameToUIDMap['OPTION_VALUE'], optionSetCodeSCH ).then(function(schResponse){
+                for (var k = 0; k < schResponse.listGrid.rows.length; k++) {
+                    $scope.schoolOptionsList.push( schResponse.listGrid.rows[k][1]);
+                }
+            });
+        });
+     });
+
+
+/*
+    $.ajax({
+        async: false,
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json",
+        url: "../api/optionSets.json?fields=id,name,code&paging=false",
+        success: function ( data ) {
+            for (var i = 0; i < data.optionSets.length; i++) {
+                var optionSetCode = data.optionSets[i].code;
+                var tempOptionSetCode = optionSetCode.split("-")[0].trim();
+                var tempOptionSetSubStr = optionSetCode.split("-")[1].trim();
+                var optionSetId = data.optionSets[i].id;
+                //console.log("optionSetCode " + optionSetCode);
+                if( tempOptionSetCode === $scope.selectedOrgUnit.displayName && tempOptionSetSubStr === 'AWC'){
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        dataType: "json",
+                        contentType: "application/json",
+                        url: "../api/optionSets/" + optionSetId + ".json?fields=id,name,code,options[id,name,code]&paging=false",
+                        success: function (optionSetOptions) {
+                            //$scope.awcOptionsList.push(optionSetOptions.options);
+                            for (var j = 0; j < optionSetOptions.options.length; j++) {
+                                $scope.awcOptionsList.push( optionSetOptions.options[j].name);
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    });
+
+*/
+
 
     var modalCompleteIncompleteActions = { complete: 'complete', completeAndExit: 'completeandexit', completeEnrollment: 'completeenrollment', edit: 'edit'};
 

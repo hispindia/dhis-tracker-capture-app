@@ -209,7 +209,7 @@ function getUserProfile()
        return; 
     }
     
-    return dhis2.tracker.getTrackerObject(null, 'USER_PROFILE', DHIS2URL + '/me.json', 'fields=id,displayName,userCredentials[username,userRoles[id,programs,authorities]],organisationUnits[id,displayName,programs[id],level,code,path,children[id,displayName,programs[id],level,children[id]]],dataViewOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]],teiSearchOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]]', 'sessionStorage', dhis2.tc.store);
+    return dhis2.tracker.getTrackerObject(null, 'USER_PROFILE', DHIS2URL + '/me.json', 'fields=id,displayName,userCredentials[username,userRoles[id,displayName,programs,authorities]],organisationUnits[id,displayName,programs[id],level,code,path,children[id,displayName,programs[id],level,children[id]]],dataViewOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]],teiSearchOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]]', 'sessionStorage', dhis2.tc.store);
 }
 
 function getConstants()
@@ -581,7 +581,7 @@ function getOptionSetsForDataElements( data )
 
 function getOptionSets()
 {   
-    return dhis2.tracker.getBatches( optionSetIds, batchSize, null, 'optionSets', 'optionSets', DHIS2URL + '/optionSets.json', 'paging=false&fields=id,displayName,version,options[id,displayName,code]', 'idb', dhis2.tc.store );
+    return dhis2.tracker.getBatches( optionSetIds, batchSize, null, 'optionSets', 'optionSets', DHIS2URL + '/optionSets.json', 'paging=false&fields=id,displayName,code,version,options[id,displayName,code]', 'idb', dhis2.tc.store );
 }
 
 function getObjectIds(data){
