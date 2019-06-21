@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "(rm -r build && mkdir build) || mkdir build",
-    "build": "webpack && cp -r i18n build/i18n && cp -r core build/core && cp -r views build/views && cp -r styles build/styles && find ./components -iname \"*.html\" -exec rsync -R '{}' ./build/ \\;",
-    "start": "webpack-dev-server"
+    "build": "webpack && cp -r i18n build/i18n && cp -r core build/core && cp -r views build/views && cp -r styles build/styles &&  find components -iname '*.html' -exec rsync --perms --chmod D+x -R {} ./build/ ';'",
+	"start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
