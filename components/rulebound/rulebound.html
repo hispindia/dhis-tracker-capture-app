@@ -19,7 +19,7 @@
                         <div class="info-container-text">{{item.data | trimquotes}}</div>          
                     </div>
                 </div>
-                <table class="table table-striped dashboard-element-container" ng-if="data && data.textInEffect">
+                <table class="table table-striped dashboard-element-container table-container" ng-if="data && data.textInEffect">
                     <tr ng-repeat="(key,item) in data.displayTextEffects" ng-if="item.ineffect">
                         <td>
                             <div>

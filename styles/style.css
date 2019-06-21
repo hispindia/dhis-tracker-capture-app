@@ -579,21 +579,27 @@ table.table-striped tr td.optionset {
     margin-left: 5px;
 }
 
-.info-container {
-    display: inline-block;
-    height:60px;
-    opacity: 1.0;
-    white-space: normal;
+.table-container {
+    width:92%;
+    margin-left:17px;
     text-align: center;
     border: 1px solid #aaa;
     border-radius: 4px;
-    padding:0px;
-    margin-right: 10px
+}
+.info-container {
+    display: inline-block;
+    opacity: 1.0;
+    width: 95%;
+    margin: 2px;
+    white-space: normal;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #aaa;
+    border-radius: 4px;
 }
 .info-container-text{
     font-weight: bold;
     padding: 5px 10px;
-    margin:0px;
 }
 .info-container-heading {
     font-weight: normal;
@@ -604,7 +610,6 @@ table.table-striped tr td.optionset {
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
 }
-
 
 /*----------------------------------------------------------------------------*/
 /* Tracked entity
