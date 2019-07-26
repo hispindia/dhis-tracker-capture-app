@@ -136,7 +136,6 @@ trackerCapture.controller('HomeController',function(
                 return;
             }
             $scope.setCurrentView(viewToSet);
-
         }
 
         var loadOrgUnit = function(){
@@ -158,10 +157,36 @@ trackerCapture.controller('HomeController',function(
         }*/
 
 	var loadPrograms = function(){
-	 return ProgramFactory.getProgramsByOu($scope.selectedOrgUnit,true, previousProgram).then(function(response){ 
-	 	$scope.programs = response.programs; 
-		$scope.setProgram(response.selectedProgram);
-	 $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration]; 
+	 return ProgramFactory.getProgramsByOu($scope.selectedOrgUnit,true, previousProgram).then(function(response){
+      $scope.setProgram(response.selectedProgram);
+
+        var superRole = "";
+
+         for(var i = 0; i <  $scope.userCredentials.userRoles.length; i++)
+         {
+             console.log("user role: "+$scope.userCredentials.userRoles[i]);
+             if(Object.values($scope.userCredentials.userRoles[i])+"" === ('bQEbL7cusd7'))
+             {
+                 superRole = "yes";
+             }
+         }
+             if(superRole === 'yes')
+             {
+                 $scope.programs = response.programs;
+                 $scope.views[0].disabled = false;
+                 $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
+             }
+             else
+             {
+                 $scope.programs = response.programs;
+                 $scope.views[1].disabled = true;
+                 for (var i = 0; i < $scope.programs.length; i++) {
+                     if($scope.programs[i].id === 'Bv3DaiOd5Ai' )
+                     {
+                         $scope.programs = $scope.programs.filter(item => item !== $scope.programs[i])
+                     }
+                 }
+             }
  });
             
         }
@@ -217,8 +242,7 @@ trackerCapture.controller('HomeController',function(
                 $scope.views[0].disabled = false;
             }
             resetView(defaultView);
-            loadCanRegister();      
-			
+            loadCanRegister();
         }
         var loadCanRegister = function(){
             if($scope.selectedProgram){
@@ -308,6 +332,7 @@ trackerCapture.controller('HomeController',function(
 
         $http.get('../api/me.json?fields=[id,name,userCredentials]&skipPaging=true')
         .then(function(response) {
+            $scope.userCredentials = response.data.userCredentials;
             $scope.currentUserName = response.data.userCredentials.username;
         });
 
