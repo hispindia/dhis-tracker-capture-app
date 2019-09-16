@@ -35,7 +35,8 @@ trackerCapture.controller('HomeController',function(
         $scope.APIURL = DHIS2URL;
 
    		$scope.isValidProgram = false;
-	
+
+        $scope.superUserAuthority = "";
 	
 	
         var viewsByType = {
@@ -156,37 +157,25 @@ trackerCapture.controller('HomeController',function(
             
         }*/
 
+
 	var loadPrograms = function(){
-	 return ProgramFactory.getProgramsByOu($scope.selectedOrgUnit,true, previousProgram).then(function(response){
-      $scope.setProgram(response.selectedProgram);
+        return ProgramFactory.getProgramsByOu($scope.selectedOrgUnit,true, previousProgram).then(function(response){
+            $scope.programs = response.programs;
 
-        var superRole = "";
+            var programIdFromURL = ($location.search()).program;
+            var fullProgram = null;
+            if(programIdFromURL) {
+                fullProgram = $scope.programs.find(function(program) {
+                    return program.id === programIdFromURL;
+                });
+            }
 
-         for(var i = 0; i <  $scope.userCredentials.userRoles.length; i++)
-         {
-             console.log("user role: "+$scope.userCredentials.userRoles[i]);
-             if(Object.values($scope.userCredentials.userRoles[i])+"" === ('bQEbL7cusd7'))
-             {
-                 superRole = "yes";
-             }
-         }
-             if(superRole === 'yes')
-             {
-                 $scope.programs = response.programs;
-                 $scope.views[0].disabled = false;
-                 $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
-             }
-             else
-             {
-                 $scope.programs = response.programs;
-                 $scope.views[1].disabled = true;
-                 for (var i = 0; i < $scope.programs.length; i++) {
-                     if($scope.programs[i].id === 'Bv3DaiOd5Ai' )
-                     {
-                         $scope.programs = $scope.programs.filter(item => item !== $scope.programs[i])
-                     }
-                 }
-             }
+            if(fullProgram) {
+                $scope.setProgram(fullProgram);
+            } else {
+                $scope.setProgram(response.selectedProgram);
+            }
+            console.log("-----------------"+Object.entries($scope.userCredentials));
  });
             
         }
@@ -238,7 +227,16 @@ trackerCapture.controller('HomeController',function(
             if(!$scope.base.selectedProgram || !$scope.base.selectedProgram.displayFrontPageList) {
                 $scope.views[0].disabled = true;
                 defaultView = $scope.views[1];
-            } else {
+            }
+            else if($scope.base.selectedProgram.id === 'Bv3DaiOd5Ai')
+            {
+                if($scope.superUserAuthority !== 'YES'){
+                    viewsByType.registration.disabled = true;
+                    $scope.views['registration'].disabled = true;
+                    defaultView = $scope.views[1];
+                }
+            }
+            else {
                 $scope.views[0].disabled = false;
             }
             resetView(defaultView);
@@ -336,6 +334,26 @@ trackerCapture.controller('HomeController',function(
             $scope.currentUserName = response.data.userCredentials.username;
         });
 
+    var getSuperUser = function () {
+        $scope.currentUserDetail = SessionStorageService.get('USER_PROFILE');
+        $scope.currentUserDetails = $scope.currentUserDetail.userCredentials
+        $scope.currentUserName = $scope.currentUserDetails.username;
+        $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
+        for (var i = 0; i < $scope.currentUserRoles.length; i++) {
+            $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
+            for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
+                if ($scope.currentUserRoleAuthorities[j] === "ALL") {
+                    //$scope.accessAuthority = true;
+                    $scope.superUserAuthority = "YES";
+                    break;
+                }
+            }
+        }
+    }
+
+    var loadUserPrograms = function () {
+        $scope.programs = $scope.userCredentials.programs;
+    }
           $scope.hideRegister = function (viewName) {
               if(viewName === 'Register')
               {

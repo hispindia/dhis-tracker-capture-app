@@ -48,14 +48,29 @@
         </div>
     </div>    
     
-    <!--- Error display for search ends -->    
-    <tracker-tei-list 
-        tei-data="currentTrackedEntityList.data" 
-        tei-pager="pager" 
-        tei-sort-column="currentTrackedEntityList.sortColumn"
-        tei-grid-columns="gridColumns"
-        tei-refetch-data="fetchTeis(pager, sortColumn)"
-        on-tei-clicked="openTei(tei)"
-        >
-    </tracker-tei-list>
+    <!--- Error display for search ends -->
+    <div ng-switch="selectedProgram.id">
+        <div ng-switch-when="Bv3DaiOd5Ai">
+            <h2>Please Use Doctor Diary for Data Entry <a onclick="window.open('https://uphmis.in/dd/', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">https://uphmis.in/dd/</a> </h2>
+            <tracker-tei-list
+                    tei-data="currentTrackedEntityList.data"
+                    tei-pager="pager"
+                    tei-sort-column="currentTrackedEntityList.sortColumn"
+                    tei-grid-columns="gridColumns"
+                    tei-refetch-data="fetchTeis(pager, sortColumn)"
+            >
+            </tracker-tei-list>
+        </div>
+        <div ng-switch-default>
+            <tracker-tei-list
+                    tei-data="currentTrackedEntityList.data"
+                    tei-pager="pager"
+                    tei-sort-column="currentTrackedEntityList.sortColumn"
+                    tei-grid-columns="gridColumns"
+                    tei-refetch-data="fetchTeis(pager, sortColumn)"
+                    on-tei-clicked="openTei(tei)"
+            >
+            </tracker-tei-list>
+        </div>
+    </div>
 </div>
