@@ -2790,6 +2790,8 @@ trackerCapture.controller('DataEntryController',
                         }
                     }
                 }
+
+                CurrentSelection.setSelectedTeiEvents();
                 
                 broadcastDataEntryControllerData();
                 
