@@ -1,0 +1,495 @@
+
+/*  Left Plam  */
+.lefthandContainer {
+    position: relative;
+    width: 500px;
+    height: 550px;
+    border: 1px black solid;
+    overflow: hidden;
+    background-color: #EEE;
+    cursor: pointer;
+    background: url('./img/LeftPalm.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.lhthing {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.lhthing1 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.lhthing2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.lhthing3 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.lhthing4 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+
+
+/* Right Palm */
+
+.righthandContainer {
+    position: relative;
+    width: 500px;
+    height: 550px;
+    border: 1px black solid;
+    overflow: hidden;
+    background-color: #EEE;
+    cursor: pointer;
+    background: url('./img/RightPalm.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.rhthing {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.rhthing1 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.rhthing2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.rhthing3 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.rhthing4 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+
+/* left sole  */
+
+.leftsoleContainer {
+    position: relative;
+    width: 500px;
+    height: 550px;
+    border: 1px black solid;
+    overflow: hidden;
+    background-color: #EEE;
+    cursor: pointer;
+    background: url('./img/Leftsole.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.lsthing {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.lsthing1 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.lsthing2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.lsthing3 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.lsthing4 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+/* Right sole */
+
+
+.rightsoleContainer {
+    position: relative;
+    width: 500px;
+    height: 550px;
+    border: 1px black solid;
+    overflow: hidden;
+    background-color: #EEE;
+    cursor: pointer;
+    background: url('./img/rightSole.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.rsthing {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.rsthing1 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.rsthing2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.rsthing3 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.rsthing4 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+
+/*  Front Body  */
+.FrontBodyContainer {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    border: 1px black solid;
+    overflow: hidden;
+    background-color: #EEE;
+    cursor: pointer;
+    background: url('./img/Front_body.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.fbthing {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.fbthing1 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+.fbthing2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    background-color: red;
+    border-radius: 25px 25px;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+
+/* Front Body Drop Point location */
+
+.FrontBodyDropconatiner{
+    padding-left: 250px;
+    width: 700px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#Fbdcthing {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+#Fbdcthing1 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+#Fbdcthing2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+
+
+
+
+/*  Back Body  */
+.BackBodyContainer {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    border: 1px black solid;
+    overflow: hidden;
+    background-color: #EEE;
+    cursor: pointer;
+    background: url('./img/Back_body.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+
+
+
+#bbthing {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+#bbthing1 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+#bbthing2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+
+
+/*  Side Body  */
+.SideBodyContainer {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    border: 1px black solid;
+    overflow: hidden;
+    background-color: #EEE;
+    cursor: pointer;
+    background: url('./img/Side_body.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+
+#sbthing {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+#sbthing1 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
+
+#sbthing2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 50px;
+    top: 50px;
+    border: 2px solid red;
+    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
+    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
+}
