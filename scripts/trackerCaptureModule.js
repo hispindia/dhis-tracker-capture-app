@@ -22,5 +22,5 @@ export default angular.module('trackerCapture', [
     'pascalprecht.translate',
     'leaflet-directive',
     'angularCSS',
-    'vs-repeat',
+    'vs-repeat'
 ]);

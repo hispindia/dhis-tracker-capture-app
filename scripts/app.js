@@ -16,6 +16,8 @@ import '../scripts/filters.js';
 import '../scripts/directives.js';
 import '../scripts/leftbar-menu-controller.js';
 import '../scripts/report-types-controller.js';
+import '../scripts/dueperson-controller.js';
+import '../scripts/waitingqueue-controller.js';
 import '../scripts/display-mode-controller.js';
 import '../scripts/sticky.min.js';
 import '../scripts/ng-csv.js';
@@ -91,6 +93,12 @@ angular.module('trackerCapture')
     }).when('/report-types',{
         templateUrl:'views/report-types.html',
         controller: 'ReportTypesController'
+    }).when('/dueperson',{
+        templateUrl:'views/dueperson.html',
+        controller: 'duepersonController'
+    }).when('/waitingqueue',{
+        templateUrl:'views/waitingqueue.html',
+        controller: 'waitingqueueController'
     }).when('/program-summary',{
         templateUrl:'components/report/program-summary.html',
         controller: 'ProgramSummaryController'

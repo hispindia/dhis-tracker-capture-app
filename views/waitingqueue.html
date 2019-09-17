@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Queue</title>
+    <!-- <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <style>
+        a {
+            color: white;
+        }
+
+        .navbar {
+            border-radius: 0px;
+            min-height: 37px;
+
+        }
+
+        .line {
+            margin-top: 6px;
+        }
+
+        .container-fluid {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .nav>li>a {
+            padding-bottom: 0px;
+            padding-right: 20px;
+            font-size: 16px;
+        }
+
+        a.tab {
+            color: black;
+            font-size: 13px !important;
+            font-weight: 600;
+        }
+
+        .tabs2 {
+            border: 1px solid #009d8e;
+            padding: 5px 0px 0px 0px;
+            /*padding: 6px;*/
+        }
+
+        .col-md-12 {
+            position: relative;
+            min-height: 1px;
+            padding: 8px 5px 0px 5px;
+        }
+
+        .col-md-11 {
+            margin-top: 50px;
+        }
+
+        a.topbar {
+            color: red;
+            font-size: 13px !important;
+            text-decoration: underline;
+        }
+
+        .navbar-nav>li>a {
+            padding-top: 8px !important;
+        }
+
+        .row {
+            margin-right: 0px;
+        }
+
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:focus,
+        .nav-pills>li.active>a:hover {
+            color: #fff;
+            background-color: #009d8e;
+        }
+
+        .ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+            margin-bottom: 0;
+            padding-bottom: 1px;
+        }
+
+        .nav>li>a {
+
+            font-size: 13px;
+        }
+
+        .ui-tabs .ui-tabs-nav li {
+            /* list-style: none; */
+            float: left;
+            position: relative;
+            top: 1px;
+            margin: 0 .2em 1px 0;
+            border-bottom: 0 !important;
+            padding: 0;
+            white-space: nowrap;
+        }
+
+        .ui-state-active,
+        .ui-widget-content .ui-state-active,
+        .ui-widget-header .ui-state-active {
+            border: 1px solid #1aad96;
+            background: #ffffff url(images/ui-bg_inset-soft_30_ffffff_1x100.png) 50% 50% repeat-x;
+            font-weight: bold;
+            color: #0e5c52;
+        }
+
+        .ui-state-default,
+        .ui-widget-content .ui-state-default,
+        .ui-widget-header .ui-state-default {
+            border: 1px solid #1aad9b;
+            background: #f0f0f0 url(images/ui-bg_glass_100_f0f0f0_1x400.png) 50% 50% repeat-x;
+            font-weight: bold;
+            color: #1aad9b;
+        }
+
+        .ui-corner-top {
+            -moz-border-radius-topleft: 8px;
+            -webkit-border-top-left-radius: 8px;
+            border-top-left-radius: 8px;
+            -moz-border-radius-topright: 8px;
+            -webkit-border-top-right-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        * {
+            font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+            -moz-box-sizing: border-box;
+        }
+
+        user agent stylesheet li {
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+
+        .ui-widget-header {
+            border: 1px solid #1aad9b;
+            background: #1aad9b url(images/ui-bg_highlight-soft_50_1aad9b_1x100.png) 50% 50% repeat-x;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .ui-helper-reset {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            line-height: 1.3;
+
+            text-decoration: none;
+            font-size: 100%;
+            list-style: none;
+        }
+
+        * {
+            font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+            -moz-box-sizing: border-box;
+        }
+
+        user agent stylesheet ul,
+        menu,
+        dir {
+            display: block;
+            list-style-type: disc;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+            -webkit-padding-start: 40px;
+        }
+
+        .ui-tabs {
+            font-size: 12px;
+        }
+
+        .ui-widget-content {
+            border: 1px solid #1aad9b;
+            background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x;
+            color: #000000;
+        }
+
+        .ui-widget {
+            font-family: Segoe UI, Arial, sans-serifrif;
+            font-size: 1.1em;
+        }
+
+        .box>*,
+        .boxRed>*,
+        .boxExited>* {
+            font-size: .9em;
+        }
+
+        * {
+            font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+            -moz-box-sizing: border-box;
+        }
+
+        .box,
+        .boxHeader,
+        .boxRed,
+        .boxHeaderRed,
+        .boxExited,
+        .boxHeaderExited {
+            border: 1px solid #1aac9b;
+            width: 99%;
+            padding: 5px 2px 5px 2px;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        * {
+            font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+            -moz-box-sizing: border-box;
+        }
+
+        #content {
+            margin: 0px 0 0 0;
+            padding: 80px 10px 10px 10px;
+            font-size: 1.2em;
+            background-color: #ffffff;
+            z-index: 8;
+        }
+
+        * {
+            font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+            -moz-box-sizing: border-box;
+        }
+
+        * {
+            font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+            -moz-box-sizing: border-box;
+        }
+
+        body {
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+            font-size: 12px;
+        }
+
+        * {
+            font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+            -moz-box-sizing: border-box;
+        }
+
+        * {
+            font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+            -moz-box-sizing: border-box;
+        }
+
+        .panel-primary>.panel-heading {
+            color: #fff;
+            background-color: #009d8e;
+            border-color: #009d8e;
+        }
+
+        .panel-heading {
+            padding: 5px 5px;
+            /* border-bottom: 1px solid transparent; */
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+
+        .panel {
+            margin-bottom: 5px;
+        }
+
+        .container {
+            width: 98%;
+        }
+
+        .line {
+            font-size: 20px;
+        }
+
+        .col-md-11 {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <!--<div class="col-md-1" style="width: 7.333333%;">
+     <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img src="styles/logo.gif" width="65px"  style="margin-top:-27px"></a>
+    </div>
+   </div>-->
+        <div class="col-md-11" style="padding-top: 0px;padding-right: 2px;padding-left: 0px;">
+            <nav class="navbar navbar" style="background: #009d8e;color: white;">
+                <div class="container-fluid">
+
+                    <ul class="nav navbar-nav">
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li class="line"><a ng-click="gotohome()"><b>Home</b></a></li>
+                        <li class="line"><b>|</b></li>
+                        <li class="line" ng-if="username == 'OPD User'" ng-click="gototriage()"><a><b>Triage</b></a>
+                        </li>
+                        <li class="line" ng-if="username == 'OPD User'"><b>|</b></li>
+                        <li class="line" ng-if="username == 'OPD User'" ng-click="got_to_other_then_triage('OPD User')">
+                            <a><b>OPD</b></a></li>
+                        <li class="line" ng-if="username == 'OPD User'"><b>|</b></li>
+                        <li class="line" ng-if="username == 'OPD User'"
+                            ng-click="got_to_other_then_triage('Laboratory User')"><a><b>Laboratory</b></a></li>
+                        <li class="line" ng-if="username == 'OPD User'"><b>|</b></li>
+                        <li class="line" ng-if="username == 'OPD User'"
+                            ng-click="got_to_other_then_triage('Pharmacy User')"><a><b>Pharmacy</b></a></li>
+                        <li class="line" ng-if="username == 'OPD User'"><b>|</b></li>
+                        <li class="line"><a ng-click="gotoreport()"><b>Report</b></a></li>
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+
+
+    </div>
+    </div>
+    <div class="container">
+        <div class="row tabs2">
+            <!-- <h4 align="center"> Pending Patients in Queue :- <span style="color:#009d8e">{{detail_house_member.length}}</span></h4>-->
+
+            <h5 align="center"><img src="views/images/logo.gif" width="65px" style="margin-top:-15px" align="left"
+                    height="50px"> <b>Currently logged in as <span style="color:green">{{username}}</span></b></h5>
+            <div class="col-md-12">
+                <div class="panel with-nav-tabs panel-primary">
+                    <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li><a href="waitingqueue#tab3primary" data-toggle="tab"
+                                    class="ui-state-default ui-corner-top">Patient queue</a></li>
+                            <li><a href="waitingqueue#tab1primary" data-toggle="tab"
+                                    class="ui-state-default ui-corner-top">Search Patient in Queue</a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div id="tab3primary" class="tab-pane fade in active">
+                                <table class="table table-striped dhis2-table-hover table-bordered ng-scope custom">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Name</th>
+                                            <th>House</th>
+                                            <th>Age</th>
+                                            <th>Sex</th>
+                                            <th>Mobile</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody ng-repeat="emp in detail_house_member | filter:searchvale">
+                                        <tr ng-click="patientdetials(emp)">
+
+                                            <td>{{emp.Sno}}</td>
+                                            <td>{{emp.namemember}}</td>
+                                            <td>{{emp.house}}</td>
+                                            <td>{{emp.agevalue}}</td>
+                                            <td>{{emp.sexvalue}}</td>
+                                            <td>{{emp.mobilevalue}}</td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <div id="tab1primary" class="tab-pane fade" style="margin-top:12px;">
+                                <div class="col-lg-1" style="width: 13.333333%;margin-top:15px">
+                                    <p>Patient Name/ID:</p>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" placeholder="Search for..."
+                                            ng-model="searchvale">
+                                    </div>
+                                </div>
+                                <table class="table table-striped dhis2-table-hover table-bordered ng-scope custom"
+                                    ng-show="searchvale">
+                                    <thead>
+                                        <tr>
+                                            <td><b>Name</b></td>
+                                            <td><b>House</b></td>
+                                            <td><b>Age</b></td>
+                                            <td><b>Sex</b></td>
+                                            <td><b>Mobile</b></td>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody ng-repeat="emp in detail_house_member | filter:searchvale">
+                                        <tr ng-click="patientdetials(emp)">
+
+                                            <td>{{emp.namemember}}</td>
+                                            <td>{{emp.house}}</td>
+                                            <td>{{emp.agevalue}}</td>
+                                            <td>{{emp.sexvalue}}</td>
+                                            <td>{{emp.mobilevalue}}</td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

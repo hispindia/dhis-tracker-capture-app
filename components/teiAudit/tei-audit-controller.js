@@ -34,8 +34,5 @@ trackerCapture.controller('TeiAuditController',
             }
             return $q.when({});
         }
-
-
-
     }
 );
