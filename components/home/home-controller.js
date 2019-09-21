@@ -30,6 +30,8 @@ trackerCapture.controller('HomeController',function(
         var previousProgram = null;
         $scope.base = {};
         $scope.APIURL = DHIS2URL;
+        $scope.houseHoldProgramId = "BgTTdBNKHwc";
+        $scope.houseHoldMemberProgramId = "TcaMMqHJxK5";
         
         var viewsByType = {
             registration: {
@@ -215,8 +217,17 @@ trackerCapture.controller('HomeController',function(
             loadCanRegister();      
 
         }
+
         var loadCanRegister = function(){
             if($scope.selectedProgram){
+                // custom change for show registration button for household/member program
+                if ($scope.selectedProgram.id == $scope.houseHoldProgramId || $scope.selectedProgram.id == $scope.houseHoldMemberProgramId){
+                    $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
+                }
+                else{
+                    $scope.views = [viewsByType.lists, viewsByType.search];
+                }
+                // end
                 var tet = $scope.trackedEntityTypesById[$scope.selectedProgram.trackedEntityType.id];
                 var promise;
                 if(tet){
