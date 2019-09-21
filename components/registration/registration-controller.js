@@ -644,7 +644,44 @@ trackerCapture.controller('RegistrationController',
         return false;
     };
 
-    $scope.teiValueUpdated = function (tei, field) {
+    // custom change for INTPART generate custom ID
+    $scope.generateFamilyMemberUniqueId = function (selectedTEI, teiAttId) {
+        //var seriesofmember = trackvalues.UqhbFTbVeSD;
+        //var typeofhouse = trackvalues.dCer94znEuY;
+
+        var personNameValue = selectedTEI.xalnzkNfD77;
+        var householdValue = selectedTEI.YFjB0zhySP6;
+
+        if (personNameValue && householdValue) {
+            var personNameUpperCase = personNameValue.toUpperCase();
+            householdValue = householdValue.substring(0, 4);
+            var familyMemberUniqueId = $scope.selectedOrgUnit.displayName + '/' + householdValue + '/' + personNameUpperCase.substring(0, 4);
+            //var mergedata = $scope.selectedOrgUnit.displayName + householdValue + typeofhouse + '/' + personNameUpperCase.substring(0, 4) + '/' + seriesofmember;
+            $scope.selectedTei[teiAttId] = familyMemberUniqueId;
+        }
+        else{
+            alert("Please fill Required Detail.");
+        }
+    };
+    $scope.generateFamilyUniqueId = function (selectedTEI, teiAttId) {
+        //var typeofhouse = trackvalues.dCer94znEuY;
+        //var headoffamily = trackvalues.FML9pARILz5;
+        var houseIdentifierValue = selectedTEI.ZQMF7taSAw8;
+
+        if ( houseIdentifierValue){
+            //var uppercaseheadname = headoffamily.toUpperCase();
+            houseIdentifierValue = houseIdentifierValue.substring(0, 4);
+            //var mergedata = 'CHD25/' + houseIdentifierValue + typeofhouse + '/' + uppercaseheadname.substring(0, 4) + '/H1';
+            var familyUniqueId = $scope.selectedOrgUnit.displayName + '/' + houseIdentifierValue;
+            $scope.selectedTei[teiAttId] = familyUniqueId;
+        }
+        else{
+            alert("Please fill Required Detail.");
+        }
+    };
+    // end
+
+     $scope.teiValueUpdated = function (tei, field) {
         getMatchingTeisCount(tei,field)
         .then(function()
         {
