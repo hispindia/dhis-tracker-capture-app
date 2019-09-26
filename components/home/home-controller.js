@@ -231,8 +231,12 @@ trackerCapture.controller('HomeController',function(
             else if($scope.base.selectedProgram.id === 'Bv3DaiOd5Ai')
             {
                 if($scope.superUserAuthority !== 'YES'){
-                    viewsByType.registration.disabled = true;
-                    $scope.views['registration'].disabled = true;
+                    viewsByType.registration.disabled = false;
+                    $scope.views['registration'].disabled = false;
+                    defaultView = $scope.views[1];
+                }
+                else{
+                    $scope.views[0].disabled = true;
                     defaultView = $scope.views[1];
                 }
             }
