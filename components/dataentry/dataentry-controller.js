@@ -1577,7 +1577,7 @@ trackerCapture.controller('DataEntryController',
         }
     };
 
-    // Function When Double clock is triggred
+    // Function When Double click is triggred
 
     $scope._thing = function (x, y) {
 
@@ -1633,8 +1633,53 @@ trackerCapture.controller('DataEntryController',
         setTimeout(function () {
             var theThing = document.getElementsByClassName('lhthing4');
             var container = document.getElementsByClassName("lefthandContainer");
-            var xPosition = 260 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 60 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 100 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lhthing5');
+            var container = document.getElementsByClassName("lefthandContainer");
+            var xPosition = 268 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -160 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lhthing6');
+            var container = document.getElementsByClassName("lefthandContainer");
+            var xPosition = 325 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -175 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lhthing7');
+            var container = document.getElementsByClassName("lefthandContainer");
+            var xPosition = 240 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -50 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lhthing8');
+            var container = document.getElementsByClassName("lefthandContainer");
+            var xPosition = 365 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -55 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lhthing9');
+            var container = document.getElementsByClassName("lefthandContainer");
+            var xPosition = 355 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -30 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
         }, 3000);
@@ -1680,8 +1725,53 @@ trackerCapture.controller('DataEntryController',
         setTimeout(function () {
             var theThing = document.getElementsByClassName('rhthing4');
             var container = document.getElementsByClassName("righthandContainer");
-            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 230 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -65 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rhthing5');
+            var container = document.getElementsByClassName("righthandContainer");
+            var xPosition = 155 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -90 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rhthing6');
+            var container = document.getElementsByClassName("righthandContainer");
+            var xPosition = 145 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 70 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rhthing7');
+            var container = document.getElementsByClassName("righthandContainer");
+            var xPosition = 150 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 85 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rhthing8');
+            var container = document.getElementsByClassName("righthandContainer");
+            var xPosition = 285 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -50 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rhthing9');
+            var container = document.getElementsByClassName("righthandContainer");
+            var xPosition = 420 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -120 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
         }, 3000);
@@ -1733,6 +1823,51 @@ trackerCapture.controller('DataEntryController',
             theThing[1].style.top = yPosition + "px";
         }, 3000);
 
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lsthing5');
+            var container = document.getElementsByClassName("leftsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lsthing6');
+            var container = document.getElementsByClassName("leftsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lsthing7');
+            var container = document.getElementsByClassName("leftsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lsthing8');
+            var container = document.getElementsByClassName("leftsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('lsthing9');
+            var container = document.getElementsByClassName("leftsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
         //Right sole container location
         setTimeout(function () {
             var theThing = document.getElementsByClassName('rsthing');
@@ -1770,14 +1905,59 @@ trackerCapture.controller('DataEntryController',
             theThing[1].style.top = yPosition + "px";
         }, 3000);
 
-        // setTimeout(function () {
-        //     var theThing = document.getElementsByClassName('rsthing4');
-        //     var container = document.getElementsByClassName("rightsoleContainer");
-        //     var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-        //     var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
-        //     theThing[1].style.left = xPosition + "px";
-        //     theThing[1].style.top = yPosition + "px";
-        // }, 3000);
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rsthing4');
+            var container = document.getElementsByClassName("rightsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rsthing5');
+            var container = document.getElementsByClassName("rightsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rsthing6');
+            var container = document.getElementsByClassName("rightsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rsthing7');
+            var container = document.getElementsByClassName("rightsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rsthing8');
+            var container = document.getElementsByClassName("rightsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
+
+        setTimeout(function () {
+            var theThing = document.getElementsByClassName('rsthing9');
+            var container = document.getElementsByClassName("rightsoleContainer");
+            var xPosition = 300 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 180 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            theThing[1].style.left = xPosition + "px";
+            theThing[1].style.top = yPosition + "px";
+        }, 3000);
 
         // Front body drop locations
         setTimeout(function () {
