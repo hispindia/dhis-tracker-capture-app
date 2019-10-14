@@ -1,7 +1,7 @@
 <div class="section-label vertical-spacing">
     {{'enrollment'| translate}}
 </div>
-<table class="dhis2-list-table-striped default-form-table">
+<table class="dhis2-list-table-striped default-form-table" ng-init="initiateNepaliCalendar();">
     <tr>
         <td>
             {{'enrolling_orgunit' | translate}}
@@ -33,6 +33,7 @@
         </td>
         <td class="absorbing-column">
             <input type="text"
+                   id="updatedISODate"
                    ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}" 
                    name="enrollmentDate" 
                    class="form-control hideInPrint" 
@@ -99,4 +100,14 @@
             <d2-map d2-object="selectedEnrollment" d2-coordinate-format="'COORDINATE'" d2-disabled="selectedOrgUnit.closedStatus"></d2-map>
         </td>                                            
     </tr>
+    <!-- add for nepali Calendar -->
+    <tr>
+        <td>
+            Nepali Calendar
+        </td>
+        <td>
+            <input type="text" class="form-control hideInPrint" name="nepali-date-picker"  id="nepali-date-picker">
+        </td>
+    </tr>
+
 </table>

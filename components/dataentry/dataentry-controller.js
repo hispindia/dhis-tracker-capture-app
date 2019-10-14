@@ -74,6 +74,8 @@ trackerCapture.controller('DataEntryController',
     $scope.orgUnitNames = {};
     $scope.originalDate = '';
 
+    $scope.convertedFromNepaliCalEventDate = '';
+    $scope.convertedNepaliDate = '';
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
     
@@ -94,10 +96,148 @@ trackerCapture.controller('DataEntryController',
     $scope.attributesById = CurrentSelection.getAttributesById();
     $scope.optionGroupsById = CurrentSelection.getOptionGroupsById();
 
+
+
+    $scope.convertISOEventDateToNepaliDate = function () {
+        var tempEventDate = $scope.currentEvent.eventDate;
+        var nepaliConverter = new DateConverter();
+        //nepaliConverter.setEnglishDate(tempYear, tempMonth, tempDay);
+
+        var nepaliConverter = new DateConverter();
+
+        nepaliConverter.setEnglishDate( parseInt(tempEventDate.split("-")[0]), parseInt(tempEventDate.split("-")[1]), parseInt(tempEventDate.split("-")[2]) );
+
+        console.log('nepali date', parseInt(tempEventDate.split("-")[0]), parseInt(tempEventDate.split("-")[1]), parseInt(tempEventDate.split("-")[2]) );
+
+        var convertedNepaliDate = nepaliConverter.getNepaliYear()+"-"+ nepaliConverter.getNepaliMonth() +"-"+ nepaliConverter.getNepaliDate();
+
+        var tempArr = [];
+        var l = convertedNepaliDate.length;
+        for(var i=0; i<l; i++){
+            if( convertedNepaliDate[i] == 0 ) { tempArr.push("०") }
+            if( convertedNepaliDate[i] == 1 ) { tempArr.push("१") }
+            if( convertedNepaliDate[i] == 2 ) { tempArr.push("२") }
+            if( convertedNepaliDate[i] == 3 ) { tempArr.push("३") }
+            if( convertedNepaliDate[i] == 4 ) { tempArr.push("४") }
+            if( convertedNepaliDate[i] == 5 ) { tempArr.push("५") }
+            if( convertedNepaliDate[i] == 6 ) { tempArr.push("६") }
+            if( convertedNepaliDate[i] == 7 ) { tempArr.push("७") }
+            if( convertedNepaliDate[i] == 8 ) { tempArr.push("८") }
+            if( convertedNepaliDate[i] == 9 ) { tempArr.push("९") }
+            if( convertedNepaliDate[i] == "-" ) { tempArr.push("-") }
+        }
+
+        var tempString = tempArr.toString();
+        var tempString = tempArr.toString();
+        tempString.replace(/\,/g,"");
+        var tempStr2 = tempString.replace(/\,/g,"");
+        var tempArr = tempStr2.split("-");
+        var tempYear =  tempArr[0];
+        var tempMonth = tempArr[1];
+        var tempDay = tempArr[2];
+        console.log(tempYear, tempMonth, tempDay , tempArr);
+
+        var finalNepaliDate = tempYear + "-" + tempMonth + "-" + tempDay;
+
+        $('#nepaliEventDatePicker').val(finalNepaliDate);
+        $scope.convertedNepaliDate = finalNepaliDate;
+    };
+
+    // add for nepali Calendar start
+    $scope.initiateNepaliEventCalendar = function () {
+
+        $scope.convertISOEventDateToNepaliDate();
+
+        var currentDate = new Date();
+        var currentNepaliDate = calenderFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate() - 1);
+        var currentConvertedNepaliDate = calenderFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+
+        $("#nepaliEventDatePicker").nepaliDatePicker({
+            dateFormat: "%y-%m-%d",
+            closeOnDateSelect: true,
+            //minDate: "२०००-२-१",
+            maxDate: currentConvertedNepaliDate
+        });
+
+        $("#nepaliEventDatePicker").on("dateChange", function (nepaliCalendarEvent) {
+            var finalUpdatedDate = "";
+            var date = [];
+            var val = nepaliCalendarEvent.datePickerData.formattedDate;
+
+            console.log('here is date', val);
+            //alert( val );
+            var arr = [];
+            var l = val.length;
+            for(var i=0; i<l; i++){
+                if( val[i] == "०") { arr.push(0) }
+                if( val[i] == "१") { arr.push(1) }
+                if( val[i] == "२") { arr.push(2) }
+                if( val[i] == "३") { arr.push(3) }
+                if( val[i] == "४") { arr.push(4) }
+                if( val[i] == "५") { arr.push(5) }
+                if( val[i] == "६") { arr.push(6) }
+                if( val[i] == "७") { arr.push(7) }
+                if( val[i] == "८") { arr.push(8) }
+                if( val[i] == "९") { arr.push(9) }
+                if( val[i] == "-") { arr.push("-") }
+                // console.log(l, arr);
+            }
+            var s = arr.toString();
+            s.replace(/\,/g,"");
+            var str2 = s.replace(/\,/g,"");
+            var arr = str2.split("-");
+            var year =  arr[0];
+            var month = arr[1];
+            var day = arr[2];
+            console.log(year, month, day , arr);
+
+            //convertEventDateToISO( nepaliDate );
+
+            try{
+                var isoMonth = "";
+                var isoDate = "";
+                var converter = new DateConverter();
+                converter.setNepaliDate(year, month, day);
+
+                var convetedDate =converter.getEnglishYear()+"-"+converter.getEnglishMonth()+"-"+converter.getEnglishDate();
+
+                var IsoMonth = "";
+                var IsoDate = "";
+
+                if( parseInt(convetedDate.split("-")[1]) >=1 && parseInt(convetedDate.split("-")[1]) < 10 ){
+                    IsoMonth = "0" + parseInt(convetedDate.split("-")[1])
+                }
+                else{
+                    IsoMonth = parseInt(convetedDate.split("-")[1]);
+                }
+
+                if( parseInt(convetedDate.split("-")[2]) >=1 && parseInt(convetedDate.split("-")[2]) < 10 ){
+                    IsoDate = "0" + parseInt(convetedDate.split("-")[2])
+                }
+                else{
+                    IsoDate = parseInt(convetedDate.split("-")[2]);
+                }
+
+                finalUpdatedDate = parseInt(convetedDate.split("-")[0]) + "-" + IsoMonth + "-" + IsoDate;
+
+                console.log( "Final " + convetedDate + ' finalUpdatedDate ' + finalUpdatedDate );
+                console.log('date valooo', finalUpdatedDate);
+                //$('#updatedISOEventDate').val(finalUpdatedDate);
+
+                $scope.convertedFromNepaliCalEventDate = finalUpdatedDate;
+                $scope.saveEventDate();
+            }catch(err)
+            {
+                alert(err.message);
+            }
+        });
+    };
+    // add for nepali Calendar end
+
     DashboardLayoutService.get().then(function(response) {
         $scope.dashBoardLayout = response;
-        if($scope.dashBoardLayout.customLayout && 
-            $scope.dashBoardLayout.customLayout[$scope.selectedProgramId] && 
+        if($scope.dashBoardLayout.customLayout &&
+            $scope.dashBoardLayout.customLayout[$scope.selectedProgramId] &&
             $scope.dashBoardLayout.customLayout[$scope.selectedProgramId].programStageTimeLineLayout
         ) {
             DashboardLayoutService.setProgramStageLayout($scope.dashBoardLayout.customLayout[$scope.selectedProgramId].programStageTimeLineLayout);
@@ -1798,8 +1938,10 @@ trackerCapture.controller('DataEntryController',
         }
     };
 
-    $scope.saveEventDate = function (reOrder) {       
-        $scope.saveEventDateForEvent($scope.currentEvent, reOrder);        
+    $scope.saveEventDate = function (reOrder) {
+        // add for nepali Calendar
+        $scope.initiateNepaliEventCalendar();
+        $scope.saveEventDateForEvent($scope.currentEvent, reOrder);
     };
 
     $scope.saveEventDateForEvent = function (eventToSave, reOrder) {
@@ -1809,7 +1951,13 @@ trackerCapture.controller('DataEntryController',
         $scope.eventDateSaved = false;
         
         $scope.currentElement = {id: "eventDate", event: eventToSave.event, saved: false};
-        
+
+        // add for nepali Calendar start
+        if($scope.convertedFromNepaliCalEventDate) {
+            eventToSave.eventDate = $scope.convertedFromNepaliCalEventDate;
+        }
+        // add for nepali Calendar end
+
         var e = {event: eventToSave.event,
             enrollment: eventToSave.enrollment,
             dueDate: DateUtils.formatFromUserToApi(eventToSave.dueDate),

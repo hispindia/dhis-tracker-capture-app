@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "(rm -r build && mkdir build) || mkdir build",
-    "build": "webpack && cp -r i18n build/i18n && cp -r core build/core && cp -r views build/views && cp -r styles build/styles &&  find components -iname '*.html' -exec rsync --perms --chmod D+x -R {} ./build/ ';'",
+    "build": "webpack && cp -r i18n build/i18n && cp -r core build/core && cp -r views build/views && cp -r styles build/styles && cp -r nepali-date-picker-library build/nepali-date-picker-library && find components -iname '*.html' -exec rsync --perms --chmod D+x -R {} ./build/ ';'",
     "start": "webpack-dev-server"
   },
   "repository": {
@@ -29,7 +29,8 @@
     "leaflet": "^1.3.1",
     "leaflet-contextmenu": "^1.1.0",
     "leaflet-control-geocoder": "^1.5.8",
-    "leaflet-draw": "^1.0.2"
+    "leaflet-draw": "^1.0.2",
+    "nepali-date-picker": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.8.0",

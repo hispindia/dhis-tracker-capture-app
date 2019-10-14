@@ -17,6 +17,13 @@
         <link type="text/css" rel="stylesheet" media="print" href="../dhis-web-core-resource/dhis/css/print-5ebb8063eb.css" />
         <link type="text/css" rel="stylesheet" media="screen" href="../dhis-web-core-resource/angular.ui-select/0.12.0/select.min.css" />
         <link type="text/css" rel="stylesheet" media="screen" href="../dhis-web-core-resource/angular-plugins/select2-3c4dc0b207.css" />
+	
+		<!-- here is css for nepali calndar new added -->
+        <link type="text/css" rel="stylesheet"  href="nepali-date-picker-library/css/nepali.datepicker.v2.1.css" />
+        <link type="text/css" rel="stylesheet"  href="nepali-date-picker-library/css/nepali.datepicker.v2.2.min.css" />
+        <link type="text/css" rel="stylesheet"  href="nepali-date-picker-library/css/nepaliDatePicker.min.css" />
+
+		<!-- end -->
 
         <%= htmlWebpackPlugin.options.stylesheets(webpack.hash) %>
 
@@ -110,6 +117,15 @@
         <script src="../dhis-web-core-resource/babel-polyfill/6.20.0/dist/polyfill.min.js"></script>
         <script src="../dhis-web-core-resource/d2-ui/28.0.3/dist/header-bar.js"></script>
         
+        <!-- here is script for nepali calndar new added -->
+        <script src="nepali-date-picker-library/jquery.nepaliDatePicker.js"></script>
+        <script src="nepali-date-picker-library/jquery.nepaliDatePicker.min.js"></script>
+        <script src="nepali-date-picker-library/nepali.datepicker.v2.1.min.js"></script>
+        <script src="nepali-date-picker-library/nepali.datepicker.v2.2.min.js"></script>
+        <script src="nepali-date-picker-library/nepali.dateUtil.js"></script>
+        <script src="nepali-date-picker-library/nepaliToEnglish.js"></script>
+		<!-- end -->
+		
         <script>
             // Needs to be wrapped in jQuery to be sure the DOM is parsed as the script is not at the bottom.
             jQuery(function () {
