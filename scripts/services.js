@@ -585,11 +585,22 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 return def.promise;
             }
         },
-        processForm: function(existingTei, formTei, originalTei, attributesById){
+        processForm: function(existingTei, formTei, originalTei, attributesById, finalCustomId){
             var tei = angular.copy(existingTei);
             tei.attributes = [];
             var formEmpty = true;
             for(var k in attributesById){
+
+                // for SAVE CHILD Assign attribute value
+                if( finalCustomId != null && finalCustomId != "" )
+                {
+                    if(  attributesById[k].code === 'Client_code' )
+                    {
+                        formTei[k] = finalCustomId;
+                        console.log( " Final Custome Id -- " + finalCustomId );
+                    }
+                }
+
                 if(originalTei && formTei[k] !== originalTei[k] && !formTei[k] && !originalTei[k]){
                     formChanged = true;
                 }
@@ -669,7 +680,9 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             });
         },
         getByEntity: function( entity ){
-            var promise = $http.get(  DHIS2URL + '/enrollments.json?ouMode=ACCESSIBLE&trackedEntityInstance=' + entity + '&fields=:all&paging=false').then(function(response){
+            // change for bi-metric ouMode from ACCESSIBLE to ALL
+            //DHIS2URL + '/enrollments.json?ouMode=ACCESSIBLE&trackedEntityInstance=' + entity + '&fields=:all&paging=false'
+            var promise = $http.get(  DHIS2URL + '/enrollments.json?ouMode=ALL&trackedEntityInstance=' + entity + '&fields=:all&paging=false').then(function(response){
                 return convertFromApiToUser(response.data);
             },function(response){
                 var errorBody = $translate.instant('failed_to_fetch_enrollment');
@@ -679,7 +692,9 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             return promise;
         },
         getByEntityAndProgram: function( entity, program ){
-            var url = DHIS2URL + '/enrollments.json?ouMode=ACCESSIBLE&trackedEntityInstance=' + entity + '&program=' + program + '&fields=:all&paging=false';
+            // change for bi-metric ouMode from ACCESSIBLE to ALL
+            //var url = DHIS2URL + '/enrollments.json?ouMode=ACCESSIBLE&trackedEntityInstance=' + entity + '&program=' + program + '&fields=:all&paging=false';
+            var url = DHIS2URL + '/enrollments.json?ouMode=ALL&trackedEntityInstance=' + entity + '&program=' + program + '&fields=:all&paging=false';
             var promise = TeiAccessApiService.get(entity,program,url).then(function(response){
                 return convertFromApiToUser(response.data);
             }, function(response){

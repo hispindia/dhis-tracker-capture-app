@@ -68,7 +68,7 @@ trackerCapture.controller('RegistrationController',
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
     $scope.nepaliDatePicker = "";
-
+    $scope.generatedCustomId = ''; // custom change for SAVE-CHILD
     // add for nepali Calendar start
     $scope.initiateNepaliCalendar = function () {
         var currentDate = new Date();
@@ -150,6 +150,37 @@ trackerCapture.controller('RegistrationController',
     };
      // add for nepali Calendar end
 
+    // custom change for SAVE-CHILD for fingerPrint read Start
+    var url = $location.absUrl();
+    console.log(url);
+    var key = false;
+    var fidKey = "fid", fsKey = "string";
+    $scope.fingerprintID = "";
+    $scope.fingerprintStr = "";
+    var urll = url.split("html");
+    if (urll.length > 1) {
+        var url2 = urll[1];
+        var url3 = url2.split("&");
+        if (url3[0] == "?key=register") { key = true; }
+        if (key) {
+            var keyfs = url3[1];
+            var keyfid = url3[2];
+            if (fsKey == keyfs.split("=")[0]) {
+                var stringFs = keyfs.split("=")[1];
+                $scope.fingerprintStr = stringFs;
+                console.log($scope.fingerprintStr);
+
+            }
+            if (fidKey == keyfid.split("=")[0]) {
+                var numFid = keyfid.split("=")[1];
+                var anumFid = numFid.split("#")[0];
+                $scope.fingerprintID = anumFid;
+                console.log($scope.fingerprintID);
+            }
+        }
+    }
+    // custom change for SAVE-CHILD fingerPrint read end
+
     if(!$scope.attributesById){
         $scope.attributesById = [];
         AttributesFactory.getAll().then(function(atts){
@@ -190,10 +221,23 @@ trackerCapture.controller('RegistrationController',
         });
     }
 
+    // custom change for SAVE-CHILD Start
+    // update for SAVE CHILD  for disable attribute patient_identifier
+    $scope.isDisabled = function (attribute) {
+        if (attribute.code === 'Client_code' || attribute.code === 'fingerprint_id' || attribute.code === 'fingerprint_str') {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
+    // custom change for SAVE-CHILD end
+
+   /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
-
+    */
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
         incidentDate: $scope.today,
@@ -421,6 +465,20 @@ trackerCapture.controller('RegistrationController',
         if($scope.selectedProgram){
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+                // custom change for SAVE-CHILD fingerPrint read start
+                $timeout( function (){
+                    if( !$scope.selectedTei["UHoTGT1dtjj"] && $scope.selectedTei["UHoTGT1dtjj"] == undefined)
+                    {
+                        $scope.selectedTei["UHoTGT1dtjj"] = $scope.fingerprintID; //put default value on load form
+                    }
+                    if( !$scope.selectedTei["uiOMHu4LtAP"] && $scope.selectedTei["uiOMHu4LtAP"] == undefined)
+                    {
+                        $scope.selectedTei["uiOMHu4LtAP"] = $scope.fingerprintStr; //put default value on load form
+                    }
+
+                },0);
+                //custom change for SAVE-CHILD fingerPrint read end
+
                 fetchGeneratedAttributes();
                 if ($scope.selectedProgram && $scope.selectedProgram.id) {
                     if ($scope.selectedProgram.dataEntryForm && $scope.selectedProgram.dataEntryForm.htmlCode) {
@@ -690,7 +748,41 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
-        var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+
+        // custom-code for SAVE CHILD for generate Custom-Id start
+        if ($scope.registrationMode === 'REGISTRATION' || $scope.registrationMode === 'PROFILE' ) {
+            var lastName = "";
+            var dobYear = "";
+            var sex = "";
+            var serviceRegNo = "";
+            if ($scope.selectedTei.gVGIL7DJp4b != undefined) {
+                var str = $scope.selectedTei.gVGIL7DJp4b;
+                lastName = str.substr(0, 2).toUpperCase();
+            }
+            if ($scope.selectedTei.fOVzjBOZdvQ != undefined) {
+                var dob = $scope.selectedTei.fOVzjBOZdvQ;
+                dobYear = dob.substr(2, 2);
+            }
+            if ($scope.selectedTei.TN7r3ws7IG9 != undefined) {
+                if ($scope.selectedTei.TN7r3ws7IG9 === 'Female') {
+                    sex = "1";
+                }
+                else if ($scope.selectedTei.TN7r3ws7IG9 === 'Male') {
+                    sex = "2";
+                }
+                else if ($scope.selectedTei.TN7r3ws7IG9 === 'Other') {
+                    sex = "3";
+                }
+            }
+            if ($scope.selectedTei.Fu4LhjNsJZL != undefined) {
+                serviceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
+
+            }
+
+            $scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+        }
+
+        var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.tei = result.tei;
 
