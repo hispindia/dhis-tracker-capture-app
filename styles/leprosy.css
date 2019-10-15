@@ -117,31 +117,7 @@
     background-size: 100% 100%;
 }
 
-.fbthing {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    left: 50px;
-    top: 50px;
-    background-color: red;
-    border-radius: 25px 25px;
-    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
-    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
-}
-
-.fbthing1 {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    left: 50px;
-    top: 50px;
-    background-color: red;
-    border-radius: 25px 25px;
-    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
-    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
-}
-
-.fbthing2 {
+.fbthing, .fbthing1, .fbthing2, .fbthing3, .fbthing4, .fbthing5, .fbthing6, .fbthing7, .fbthing8, .fbthing9, .fbthing10, .fbthing11, .fbthing12, .fbthing13, .fbthing14, .fbthing15, .fbthing16, .fbthing17 {
     position: relative;
     width: 40px;
     height: 40px;
@@ -164,7 +140,7 @@
     font-weight: 600;
 }
 
-#Fbdcthing {
+#Fbdcthing, #Fbdcthing1, #Fbdcthing2, #Fbdcthing3, #Fbdcthing4, #Fbdcthing5, #Fbdcthing6, #Fbdcthing7, #Fbdcthing8, #Fbdcthing9, #Fbdcthing10, #Fbdcthing11, #Fbdcthing12, #Fbdcthing13, #Fbdcthing14, #Fbdcthing15, #Fbdcthing16, #Fbdcthing17 {
     position: relative;
     width: 40px;
     height: 40px;
@@ -174,32 +150,6 @@
     transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
     top .5s cubic-bezier(.42, -0.3, .78, 1.25);
 }
-
-#Fbdcthing1 {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    left: 50px;
-    top: 50px;
-    border: 2px solid red;
-    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
-    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
-}
-
-#Fbdcthing2 {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    left: 50px;
-    top: 50px;
-    border: 2px solid red;
-    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
-    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
-}
-
-
-
-
 
 /*  Back Body  */
 .BackBodyContainer {
@@ -213,11 +163,7 @@
     background: url('./img/Back_body.png') no-repeat;
     background-size: 100% 100%;
 }
-
-
-
-
-#bbthing {
+#bbthing, #bbthing1, #bbthing2, #bbthing3, #bbthing4, #bbthing5, #bbthing6, #bbthing7, #bbthing8, #bbthing9, #bbthing10, #bbthing11, #bbthing12, #bbthing13, #bbthing14, #bbthing15, #bbthing16, #bbthing17{
     position: relative;
     width: 40px;
     height: 40px;
@@ -227,30 +173,6 @@
     transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
     top .5s cubic-bezier(.42, -0.3, .78, 1.25);
 }
-
-#bbthing1 {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    left: 50px;
-    top: 50px;
-    border: 2px solid red;
-    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
-    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
-}
-
-#bbthing2 {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    left: 50px;
-    top: 50px;
-    border: 2px solid red;
-    transition: left .5s cubic-bezier(.42, -0.3, .78, 1.25),
-    top .5s cubic-bezier(.42, -0.3, .78, 1.25);
-}
-
-
 
 /*  Side Body  */
 .SideBodyContainer {
@@ -264,7 +186,6 @@
     background: url('./img/Side_body.png') no-repeat;
     background-size: 100% 100%;
 }
-
 
 #sbthing {
     position: relative;

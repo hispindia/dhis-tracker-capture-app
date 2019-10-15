@@ -118,13 +118,13 @@
                                             <Strong>Symptoms of Leprosy</Strong>
                                         </td>
                                     </tr>
-                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
                                         <td>
                                             <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                                 details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
                                                 template="dataelement-details.html" trigger="click" placement="right">
                                                 <a href title="{{'details'| translate}}" class="wrap-text" tabindex="-1">
-                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                    <strong>{{section.displayName}}</strong>
                                                 </a>
                                             </span>
                                             <span class="not-for-screen">
@@ -151,7 +151,7 @@
                                             <strong>1</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                             <p ng-init></p>
                                         </td>
@@ -167,7 +167,7 @@
                                             <strong>2</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 2}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 16 && $index >= 8">
+                                    <tr class="{{section.id + 2}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 2 && $index >= 1">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html"></td>
                                     </tr>
                                 </table>
@@ -181,7 +181,7 @@
                                             <strong>3</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 3}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 24 && $index >= 16">
+                                    <tr class="{{section.id + 3}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 3 && $index >= 2">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -196,7 +196,7 @@
                                             <strong>4</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 4}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 32 && $index >= 24">
+                                    <tr class="{{section.id + 4}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 4 && $index >= 3">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -211,7 +211,7 @@
                                                 <strong>5</strong>
                                             </td>
                                         </tr>
-                                        <tr class="{{section.id + 5}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 40 && $index >= 32">
+                                        <tr class="{{section.id + 5}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 5 && $index >= 4">
                                             <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                             </td>
                                         </tr>
@@ -226,7 +226,7 @@
                                             <strong>6</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 6}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 48 && $index >= 40">
+                                    <tr class="{{section.id + 6}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 6 && $index >= 5">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -241,7 +241,7 @@
                                             <strong>7</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 7}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 56 && $index >= 48">
+                                    <tr class="{{section.id + 7}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 7 && $index >= 6">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -256,7 +256,7 @@
                                             <strong>8</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 8}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 64 && $index >= 56">
+                                    <tr class="{{section.id + 8}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8 && $index >= 7">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -271,7 +271,7 @@
                                             <strong>9</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 9}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 72 && $index >= 64">
+                                    <tr class="{{section.id + 9}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 9 && $index >= 8">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -286,7 +286,7 @@
                                             <strong>10</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 10}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 80 && $index >= 72">
+                                    <tr class="{{section.id + 10}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 10 && $index >= 9">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -310,13 +310,13 @@
                                             <Strong>Symptoms of Leprosy</Strong>
                                         </td>
                                     </tr>
-                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
                                         <td>
                                             <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                                 details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
                                                 template="dataelement-details.html" trigger="click" placement="right">
                                                 <a href title="{{'details'| translate}}" class="wrap-text" tabindex="-1">
-                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                    <strong>{{section.displayName}}</strong>
                                                 </a>
                                             </span>
                                             <span class="not-for-screen">
@@ -343,7 +343,7 @@
                                             <strong>1</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                             <p ng-init></p>
                                         </td>
@@ -359,7 +359,7 @@
                                             <strong>2</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 2}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 16 && $index >= 8">
+                                    <tr class="{{section.id + 2}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 2 && $index >= 1">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html"></td>
                                     </tr>
                                 </table>
@@ -373,7 +373,7 @@
                                             <strong>3</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 3}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 24 && $index >= 16">
+                                    <tr class="{{section.id + 3}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 3 && $index >= 2">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -388,7 +388,7 @@
                                             <strong>4</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 4}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 32 && $index >= 24">
+                                    <tr class="{{section.id + 4}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 4 && $index >= 3">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -403,7 +403,7 @@
                                             <strong>5</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 5}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 40 && $index >= 32">
+                                    <tr class="{{section.id + 5}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 5 && $index >= 4">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -418,7 +418,7 @@
                                             <strong>6</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 6}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 48 && $index >= 40">
+                                    <tr class="{{section.id + 6}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 6 && $index >= 5">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -433,7 +433,7 @@
                                             <strong>7</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 7}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 56 && $index >= 48">
+                                    <tr class="{{section.id + 7}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 7 && $index >= 6">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -448,7 +448,7 @@
                                             <strong>8</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 8}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 64 && $index >= 56">
+                                    <tr class="{{section.id + 8}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8 && $index >= 7">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -463,7 +463,7 @@
                                             <strong>9</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 9}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 72 && $index >= 64">
+                                    <tr class="{{section.id + 9}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 9 && $index >= 8">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -478,7 +478,7 @@
                                             <strong>10</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 10}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 80 && $index >= 72">
+                                    <tr class="{{section.id + 10}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 10 && $index >= 9">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -554,13 +554,13 @@
                                             <Strong>Symptoms of Leprosy</Strong>
                                         </td>
                                     </tr>
-                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
                                         <td>
                                             <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                                 details="{{'details '| translate}}" content="prStDes[de.id].dataElement"
                                                 template="dataelement-details.html" trigger="click" placement="right">
                                                 <a href title="{{'details '| translate}}" class="wrap-text" tabindex="-1">
-                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                    <strong>Sensation - {{section.displayName}}</strong>
                                                 </a>
                                             </span>
                                             <span class="not-for-screen">
@@ -589,7 +589,7 @@
                                             <strong>1</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                             <p ng-init></p>
                                         </td>
@@ -605,7 +605,7 @@
                                             <strong>2</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 2}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 16 && $index >= 8">
+                                    <tr class="{{section.id + 2}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 2 && $index >= 1">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html"></td>
                                     </tr>
                                 </table>
@@ -619,7 +619,7 @@
                                             <strong>3</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 3}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 24 && $index >= 16">
+                                    <tr class="{{section.id + 3}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 3 && $index >= 2">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -634,7 +634,7 @@
                                             <strong>4</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 4}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 32 && $index >= 24">
+                                    <tr class="{{section.id + 4}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 4 && $index >= 3">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -649,7 +649,7 @@
                                             <strong>5</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 5}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 40 && $index >= 32">
+                                    <tr class="{{section.id + 5}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 5 && $index >= 4">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -664,7 +664,7 @@
                                             <strong>6</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 6}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 48 && $index >= 40">
+                                    <tr class="{{section.id + 6}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 6 && $index >= 5">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -679,7 +679,7 @@
                                             <strong>7</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 7}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 56 && $index >= 48">
+                                    <tr class="{{section.id + 7}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 7 && $index >= 6">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -694,7 +694,7 @@
                                             <strong>8</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 8}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 64 && $index >= 56">
+                                    <tr class="{{section.id + 8}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8 && $index >= 7">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -709,7 +709,7 @@
                                             <strong>9</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 9}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 72 && $index >= 64">
+                                    <tr class="{{section.id + 9}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 9 && $index >= 8">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -724,7 +724,7 @@
                                             <strong>10</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 10}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 80 && $index >= 72">
+                                    <tr class="{{section.id + 10}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 10 && $index >= 9">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -748,13 +748,13 @@
                                             <Strong>Symptoms of Leprosy</Strong>
                                         </td>
                                     </tr>
-                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
                                         <td>
                                             <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                                 details="{{'details '| translate}}" content="prStDes[de.id].dataElement"
                                                 template="dataelement-details.html" trigger="click" placement="right">
                                                 <a href title="{{'details '| translate}}" class="wrap-text" tabindex="-1">
-                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                    <strong>Sensation - {{section.displayName}}</strong>
                                                 </a>
                                             </span>
                                             <span class="not-for-screen">
@@ -783,7 +783,7 @@
                                             <strong>1</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                             <p ng-init></p>
                                         </td>
@@ -799,7 +799,7 @@
                                             <strong>2</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 2}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 16 && $index >= 8">
+                                    <tr class="{{section.id + 2}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 2 && $index >= 1">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html"></td>
                                     </tr>
                                 </table>
@@ -813,7 +813,7 @@
                                             <strong>3</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 3}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 24 && $index >= 16">
+                                    <tr class="{{section.id + 3}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 3 && $index >= 2">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -828,7 +828,7 @@
                                             <strong>4</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 4}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 32 && $index >= 24">
+                                    <tr class="{{section.id + 4}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 4 && $index >= 3">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -843,7 +843,7 @@
                                             <strong>5</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 5}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 40 && $index >= 32">
+                                    <tr class="{{section.id + 5}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 5 && $index >= 4">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -858,7 +858,7 @@
                                             <strong>6</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 6}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 48 && $index >= 40">
+                                    <tr class="{{section.id + 6}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 6 && $index >= 5">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -873,7 +873,7 @@
                                             <strong>7</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 7}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 56 && $index >= 48">
+                                    <tr class="{{section.id + 7}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 7 && $index >= 6">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -888,7 +888,7 @@
                                             <strong>8</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 8}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 64 && $index >= 56">
+                                    <tr class="{{section.id + 8}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8 && $index >= 7">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -903,7 +903,7 @@
                                             <strong>9</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 9}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 72 && $index >= 64">
+                                    <tr class="{{section.id + 9}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 9 && $index >= 8">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -918,7 +918,7 @@
                                             <strong>10</strong>
                                         </td>
                                     </tr>
-                                    <tr class="{{section.id + 10}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 80 && $index >= 72">
+                                    <tr class="{{section.id + 10}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 10 && $index >= 9">
                                         <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                         </td>
                                     </tr>
@@ -954,16 +954,12 @@
 
                     <!-- End of Design format for right sole -->
 
-
-
                     <!-- Design for body -->
-
-
-                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'miQG2Ed4oBA'" style='text-align:center'>
-
-                        <!-- start of front body -->
+                    <!-- start of front body -->
+                    <!-- BinhPgLJOzw  -->
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'BinhPgLJOzw'" style='text-align:center'> 
                         <tr>
-                            <td ng-if="section.id == 'miQG2Ed4oBA'" ng-init="pointerLocation()">
+                            <td ng-if="section.id == 'BinhPgLJOzw'" ng-init="pointerLocation()">
                                 <div class="FrontBodyContainer">
                                     <div id="Fbdcthing" class='Fbdcthing' ondrop="drop(event)" ondragover="allowDrop(event)">
                                     </div>
@@ -971,33 +967,75 @@
                                     </div>
                                     <div id="Fbdcthing2" class='Fbdcthing2' ondrop="drop(event)" ondragover="allowDrop(event)">
                                     </div>
+                                    <div id="Fbdcthing3" class='Fbdcthing3' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing4" class='Fbdcthing4' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing5" class='Fbdcthing5' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing6" class='Fbdcthing6' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing7" class='Fbdcthing7' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing8" class='Fbdcthing8' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing9" class='Fbdcthing9' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing10" class='Fbdcthing10' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing11" class='Fbdcthing11' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing12" class='Fbdcthing12' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing13" class='Fbdcthing13' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing14" class='Fbdcthing14' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing15" class='Fbdcthing15' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing16" class='Fbdcthing16' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing17" class='Fbdcthing17' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
                                 </div>
                             </td>
 
                             <td>
                                 <div class='FrontBodyDropconatiner'>
                                     <p draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">1.
-                                        Area of patch </p>
+                                        Clear border </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag2" width="88" height="31">2.
-                                        Claw finger or toe </p>
+                                        Colapse of nose </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag3" width="88" height="31">3.
-                                        Hypopigmentation with loss of sensation </p>
+                                        Contracture </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag4" width="88" height="31">4.
-                                        Hypopigmentation </p>
+                                        Erythema </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag5" width="88" height="31">5.
-                                        Infiltration in the patch </p>
+                                        Foot Drop/ wrist drop </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag6" width="88" height="31">6.
-                                        Loss of sensation </p>
+                                        infiltrat </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag7" width="88" height="31">7.
-                                        Nodule </p>
+                                        Madarosis </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag8" width="88" height="31">8.
-                                        Wounds </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag8" width="88" height="31">9.
-                                        Loss of finger </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag8" width="88" height="31">10.
-                                        Foot drop </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag8" width="88" height="31">11.
-                                        Collapse nose  </p>
+                                        Mutilation </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag9" width="88" height="31">9.
+                                        Nerve Thickening </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag10" width="88" height="31">10.
+                                        Nodule </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag11" width="88" height="31">11.
+                                        Plaque  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag12" width="88" height="31">12.
+                                        Stif contracture  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag13" width="88" height="31">13.
+                                        Unclear border  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag14" width="88" height="31">14.
+                                        Lagopthalmos  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag15" width="88" height="31">15.
+                                        Hypopigmentation  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag16" width="88" height="31">16.
+                                        Gynaecomastia  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag17" width="88" height="31">17.
+                                        Anasthesia  </p>
                                 </div>
                             </td>
 
@@ -1059,12 +1097,11 @@
                     </table>
                     <!-- END of front body -->
 
-
-
-                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'tbyY247Qq7g'" style='text-align:center'>
-                        <!-- Start of back body -->
+                    <!-- Start of back body -->
+                    <!-- jU3BqhzqiE1  -->
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'jU3BqhzqiE1'" style='text-align:center'>
                         <tr>
-                            <td ng-if="section.id == 'tbyY247Qq7g'" ng-init="pointerLocation()">
+                            <td ng-if="section.id == 'jU3BqhzqiE1'" ng-init="pointerLocation()">
                                 <div class="BackBodyContainer">
                                     <div id="bbthing" class="bbthing" ondrop="drop(event)" ondragover="allowDrop(event)">
                                     </div>
@@ -1072,25 +1109,73 @@
                                     </div>
                                     <div id="bbthing2" class="bbthing2" ondrop="drop(event)" ondragover="allowDrop(event)">
                                     </div>
+                                    <div id="bbthing3" class="bbthing3" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing4" class="bbthing4" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing5" class="bbthing5" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing6" class="bbthing6" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing7" class="bbthing7" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing8" class="bbthing8" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing9" class="bbthing9" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing10" class="bbthing10" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing11" class="bbthing11" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing12" class="bbthing12" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing13" class="bbthing13" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing14" class="bbthing14" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing15" class="bbthing15" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing16" class="bbthing16" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing17" class="bbthing17" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
                                 </div>
                             </td>
 
                             <td>
                                 <div class='FrontBodyDropconatiner'>
                                     <p draggable="true" ondragstart="drag(event)" id="drag11" width="88" height="31">1.
-                                        Area of patch </p>
+                                        Clear border </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag22" width="88" height="31">2.
-                                        Hypopigmentation with loss of sensation </p>
+                                        Ulcus </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag33" width="88" height="31">3.
-                                        Hypopigmentation  </p>
+                                        Contracture </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag44" width="88" height="31">4.
-                                        Infiltration in the patch  </p>
+                                        Erythema </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag55" width="88" height="31">5.
-                                        Loss of sensation  </p>
+                                        Foot Drop/ wrist drop </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag66" width="88" height="31">6.
-                                        Nodule  </p>
+                                        infiltrat </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag77" width="88" height="31">7.
-                                        Wounds  </p>
+                                        Madarosis </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag88" width="88" height="31">8.
+                                        Mutilation </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag99" width="88" height="31">9.
+                                        Nerve Thickening </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1010" width="88" height="31">10.
+                                        Nodule </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1111" width="88" height="31">11.
+                                        Plaque </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1212" width="88" height="31">12.
+                                        Stif contracture  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1313" width="88" height="31">13.
+                                        Unclear border  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1414" width="88" height="31">14.
+                                        Anasthesia </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1515" width="88" height="31">15.
+                                        Hypopigmentation  </p>
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1616" width="88" height="31">16.
+                                        Remarks </p>
 
                                 </div>
                             </td>
@@ -1151,12 +1236,10 @@
 
                         <!-- END of back body -->
                     </table>
+                    <!-- END of back body -->
 
-
-
-
-                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'UUSlmTPSD4L'" style='text-align:center'>
-                        <!--Start of side body-->
+                    <!--Start of side body-->
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'UUSlmTPSD4L'" style='text-align:center'>   
                         <tr>
                             <td ng-if="section.id == 'UUSlmTPSD4L'" ng-init="pointerLocation()">
                                 <div class="SideBodyContainer">
@@ -1241,19 +1324,13 @@
                                     </table>
                             </td> -->
                         </tr>
-
-                        <!--Start of side body-->
-
-
                     </table>
-
+                    <!--end of side body-->
 
                     <!-- End of Design for body -->
 
-
-
                     <!-- For Default form -->
-                    <div ng-if="section.id != 'j1u6ase0X3G' && section.id != 'QSl2krdBWLO' && section.id != 'JRDmB5WCYbJ' && section.id  != 'c2QJ8q8xPDI' && section.id != 'miQG2Ed4oBA' &&  section.id != 'tbyY247Qq7g' &&  section.id != 'UUSlmTPSD4L'">
+                    <div ng-if="section.id != 'uY2szxSAXpk' && section.id != 'P5Jx4SfMGGS' && section.id != 'Bqj5dYTyA0Y' && section.id  != 'ySHnTsMgLvN' && section.id != 'BinhPgLJOzw' &&  section.id != 'jU3BqhzqiE1' &&  section.id != 'UUSlmTPSD4L'">
                         <table class="dhis2-list-table-striped default-form-table" ng-if="section.dataElements && section.dataElements.length > 0">
                         <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id)">
                             <td>
@@ -1291,7 +1368,6 @@
                             </td>
                         </tr>
                     </table>
-
                     </div>
                 </div>
             </accordion-group>
