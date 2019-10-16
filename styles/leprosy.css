@@ -119,8 +119,8 @@
 
 .fbthing, .fbthing1, .fbthing2, .fbthing3, .fbthing4, .fbthing5, .fbthing6, .fbthing7, .fbthing8, .fbthing9, .fbthing10, .fbthing11, .fbthing12, .fbthing13, .fbthing14, .fbthing15, .fbthing16, .fbthing17 {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     left: 50px;
     top: 50px;
     background-color: red;
@@ -142,8 +142,8 @@
 
 #Fbdcthing, #Fbdcthing1, #Fbdcthing2, #Fbdcthing3, #Fbdcthing4, #Fbdcthing5, #Fbdcthing6, #Fbdcthing7, #Fbdcthing8, #Fbdcthing9, #Fbdcthing10, #Fbdcthing11, #Fbdcthing12, #Fbdcthing13, #Fbdcthing14, #Fbdcthing15, #Fbdcthing16, #Fbdcthing17 {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     left: 50px;
     top: 50px;
     border: 2px solid red;
@@ -165,8 +165,8 @@
 }
 #bbthing, #bbthing1, #bbthing2, #bbthing3, #bbthing4, #bbthing5, #bbthing6, #bbthing7, #bbthing8, #bbthing9, #bbthing10, #bbthing11, #bbthing12, #bbthing13, #bbthing14, #bbthing15, #bbthing16, #bbthing17{
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     left: 50px;
     top: 50px;
     border: 2px solid red;
