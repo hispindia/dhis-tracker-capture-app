@@ -35,7 +35,9 @@ trackerCapture.controller('RegistrationController',
                 SessionStorageService,
                 AttributeUtils,
                 TCOrgUnitService,
-                ProgramFactory) {
+                ProgramFactory,
+                // for plan custom ID Generation
+                CustomIDGenerationService) {
     var prefilledTet = null;
     $scope.today = DateUtils.getToday();
     $scope.trackedEntityForm = null;
@@ -511,13 +513,40 @@ trackerCapture.controller('RegistrationController',
                                     $scope.selectedEnrollment = enrollment;
                                     var avilableEvent = $scope.currentEvent && $scope.currentEvent.event ? $scope.currentEvent : null;
                                     var dhis2Events = EventUtils.autoGenerateEvents($scope.tei.trackedEntityInstance, $scope.selectedProgram, $scope.selectedOrgUnit, enrollment, avilableEvent);
+
+                                    // update for PLAN for custom_id_generation
+                                    if ($scope.selectedProgram.id == "y6lXVg8TdOj" && $scope.selectedTei.KLSVjftH2xS != undefined )
+                                    {
+                                        $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
+                                    }
+                                    else if ( $scope.selectedProgram.id  == "Fcyldy4VqSt" && $scope.selectedTei.o94ggG6Mhx8 != undefined)
+                                    {
+                                        $scope.projectDonor = $scope.selectedTei.o94ggG6Mhx8;
+                                    }
+
+                                    CustomIDGenerationService.validateAndCreateCustomId($scope.tei,$scope.selectedProgram.id,$scope.attributes,destination,$scope.optionSets,$scope.attributesById,$scope.selectedEnrollment.enrollmentDate, $scope.projectDonor).then(function(){
+                                        $timeout(function () {
+                                            if (dhis2Events.events.length > 0) {
+                                                DHIS2EventFactory.create(dhis2Events).then(function () {
+                                                    notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                                });
+                                            } else {
+                                                notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                            }
+                                        }, 0);
+                                    });
+                                    // update for PLAN for custom_id_generation  id close
+
+                                    /*
                                     if (dhis2Events.events.length > 0) {
                                         DHIS2EventFactory.create(dhis2Events).then(function () {
                                             notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
                                         });
-                                    } else {
+                                    }
+                                    else {
                                         notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
                                     }
+                                   */
                                 }
                                 else {
                                     //enrollment has failed

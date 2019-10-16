@@ -1,0 +1,60 @@
+
+/*----------------------------------------------------------------------------*/
+/* Left bar                                                                   */
+/*----------------------------------------------------------------------------*/
+
+#leftBarWidget
+{
+    /*height: 130%;
+    */
+
+    height: 70%;
+
+    width: 235px;
+    position: fixed;
+    left: 2%;
+    padding-top: 7px;
+    z-index: 10;
+    float :left;
+}
+
+#pageWidget{
+    margin: 0px 10px 10px 250px;
+    height: 70%;
+    overflow-x: scroll;
+    min-height: 250px;
+
+    /*
+    overflow: auto;
+    min-height: 550px;
+    max-height: 550px;
+    */
+}
+
+#div.row{
+    height: inherit;
+}
+.widgetTable{
+    overflow: scroll;
+}
+.widgetDiv{
+    height: auto;
+    width: auto;
+    overflow-x:scroll;
+}
+.widgetDiv td,th {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+.associated{
+    font-style: italic;
+    color: green;
+    /*font-weight: bold;
+    */
+}
+.teiHeading{
+    border-color: burlywood!important;
+}
+.minHeight{
+    min-height: 300px;
+}

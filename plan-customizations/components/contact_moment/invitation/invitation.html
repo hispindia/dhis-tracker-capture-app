@@ -1,0 +1,39 @@
+<div class="panel panel-info" ng-controller="InvitationController">
+    <div class="panel-heading handle bold">
+
+         <!--<h1 class="align-left">{{'invitation_list'| translate}}</h1>-->
+
+         <span class="nav-pills">{{'invitation_list'| translate}}
+            | <a href ng-click="showInvitationSelectionScreen()" title="{{'add_invitation'| translate}}">{{'add'| translate}}</a>
+         </span>
+
+        <span class="nav-pills" ng-if="selectedEventInvitation && selectedEventInvitation.eventMembers.length > 0">
+            | <label>{{selectedEventInvitation.eventMembers.length}} {{'member_invited'| translate}}</label>
+        </span>
+		 <!-- for csv export -->
+		<button type="button" ng-csv="data1"  filename="test1.csv">Export</button>
+
+    </div>
+    <div ng-show="selectedEventInvitation" class="widgetDiv">
+        <table class="table table-striped dhis2-table-hover table-bordered">
+            <tr>
+                <th># {{selectedEventInvitation.eventMembers.length}}</th>
+                <th ng-repeat="attr in invitationAttributes">{{attr.displayName}}</th>
+            </tr>
+
+            <tbody ng-repeat="TEWise in TEWiseEventTEIs" >
+
+                <tr ng-repeat="TEI in TEWise.TEIList">
+                    <td>{{$index+1}}</td>
+                    <td ng-repeat="attr in invitationAttributes">{{teiAttributesMapInvitation[TEI.trackedEntityInstance][attr.id]}}</td>
+                    <!-- for Delete TEI -->
+                    <td  ng-click="deleteTrackedEntityInstanceFromEventInvitation(TEI.trackedEntityInstance,selectedEventInvitation)" title="{{'delete'| translate}}">
+                        <i class="fa fa-trash-o alert-danger bold"></i>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</div>

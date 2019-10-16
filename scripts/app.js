@@ -46,6 +46,17 @@ import '../components/home/search/search-controller.js';
 import '../components/topbar/topbar-controller.js';
 import '../components/teiAudit/tei-audit-controller.js';
 
+//for PLAN
+import '../plan-customizations/scripts/custom-services.js';
+import '../plan-customizations/scripts/plan-service.js';
+import '../plan-customizations/components/association/association-controller.js';
+import '../plan-customizations/components/association/add-association-controller.js';
+import '../plan-customizations/components/contact_moment/invitation/invitation-controller.js';
+import '../plan-customizations/components/contact_moment/invitation/add-invitation-controller.js';
+import '../plan-customizations/components/contact_moment/attendance/attendance-controller.js';
+import '../plan-customizations/components/contact_moment/attendance/add-attendance-controller.js';
+
+
 import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;
 
