@@ -455,7 +455,7 @@ angular.module('trackerCaptureServices')
             url3 += "var=programUid:" + programUid;
             $.get(url3, function (data) {
 
-                def.resolve(data);
+                def.resolve(data.listGrid);
               
                
             });
@@ -500,7 +500,7 @@ angular.module('trackerCaptureServices')
                 contentType: "application/json",
                 url: '../api/sqlViews/'+sqlViewUID+"/data?"+param+"&paging=false",
                 success: function (data) {
-                    def.resolve(data);
+                    def.resolve(data.listGrid);
                 }
             });
             return def;
@@ -540,5 +540,3 @@ angular.module('trackerCaptureServices')
         }
 
         });
-
-
