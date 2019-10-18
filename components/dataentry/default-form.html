@@ -70,7 +70,7 @@
             <!-- The inline style was needed to override overflow:hidden in the css. Can possibly be replaced with a CSS update. -->
             <accordion-group is-open="section.open" ng-repeat="section in currentStage.programStageSections | orderBy: 'sortOrder'" ng-if="!hiddenSections[currentEvent.event][section.id]" style="overflow:visible">
                 <accordion-heading>
-                    Symptoms of leprosy: Sensation - {{section.displayName}}
+                    {{section.displayName}}
                 </accordion-heading>
                 <div class="alert alert-info" ng-if="section.description">
 					{{section.description}}
@@ -1176,8 +1176,6 @@
                                         Anasthesia </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag1515" width="88" height="31">15.
                                         Hypopigmentation  </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag1616" width="88" height="31">16.
-                                        Remarks </p>
 
                                 </div>
                             </td>
