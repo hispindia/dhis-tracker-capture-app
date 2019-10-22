@@ -104,13 +104,11 @@
                 style="margin-left:12px;"></div>
             <!-- dashboard bigger widgets begin -->
             <div ng-class="widgetSize.bigger">
-
+                <!-- custom change for INTPART -->
                 <div id="biggerWidget" class="row connectedSortable empty-dashboard-container" d2-sortable
-                    bigger-widgets={{dashboardWidgets | filter: {parent:
-                'biggerWidget'}}} smaller-widgets={{ dashboardWidgets | filter: {parent: 'smallerWidget'}}}>
+                    bigger-widgets={{dashboardWidgets | filter: {parent:'biggerWidget'}}} smaller-widgets={{ dashboardWidgets | filter: {parent: 'smallerWidget'}}}>
                     <button type="button"
-                        ng-show="selectedProgram.id=='jC8Gprj4pWV' || selectedProgram.id=='JdZ3gv6cx54'|| selectedProgram.id=='Nb2EygU6dwp'"
-                        id="myBtn" class="btn btn-default" ng-click="eventmodel();">Medical History</button>
+                        ng-show="selectedProgram.id=='JdZ3gv6cx54'"  id="myBtn" class="btn btn-default" ng-click="eventmodel();">Medical History</button>
                     <button type="button" ng-show="selectedProgram.id=='jC8Gprj4pWV'" id="myBtnchart"
                         class="btn btn-default" ng-click="chartmodel();">HTN-Graph</button>
                     <button type="button" ng-show="selectedProgram.id=='SUCUF657zNe'" id="myBtnchartdm"

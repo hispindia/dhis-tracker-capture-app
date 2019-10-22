@@ -221,7 +221,7 @@ trackerCapture.controller('HomeController',function(
         var loadCanRegister = function(){
             if($scope.selectedProgram){
                 // custom change for show registration button for household/member program
-                if ($scope.selectedProgram.id == $scope.houseHoldProgramId || $scope.selectedProgram.id == $scope.houseHoldMemberProgramId){
+                if ($scope.selectedProgram.id == $scope.houseHoldProgramId ){
                     $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
                 }
                 else{
