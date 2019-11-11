@@ -342,7 +342,7 @@ trackerCapture.controller('DataEntryController',
                 }
             }
         });
-    }
+    };
 
     var processRuleEffect = function(event, callerId){
 
@@ -555,7 +555,7 @@ trackerCapture.controller('DataEntryController',
                 if(angular.isDefined(value) && value !== "") {
                     var optionSet = $scope.optionSets[$scope.prStDes[de].dataElement.optionSet.id];
                     //Find selectedOption by displayName
-                    var selectedOption = optionSet.options.find(function(o) { return o.displayName === value });
+                    var selectedOption = optionSet.options.find(function(o) { return o.displayName === value; });
                     var shouldClear = !selectedOption;
                     
                     //If has selected option and a option is not in showOnly or is in hidden, field should be cleared.
@@ -3125,18 +3125,18 @@ trackerCapture.controller('DataEntryController',
             return true;
         }
         return false;
-    }
+    };
 
     var getOrgUnitIdsFromPath = function(orgUnitPath) {
         var formattedPath = orgUnitPath.replace(/^\/|\/$/g, '');
         return formattedPath.split('/');
-    }
+    };
 
     var isInSearchOrgUnits = function(orgUnitPath, searchOrgUnits){
         if($scope.userAuthority.ALL) return true;
         if(!orgUnitPath) return false;
         return TCOrgUnitService.isPathInOrgUnitList(orgUnitPath, searchOrgUnits);
-    }
+    };
 
     $scope.reportDateEditable = function() {
         //Check if user has data write to current program stage
@@ -3153,7 +3153,7 @@ trackerCapture.controller('DataEntryController',
         if(($scope.currentEvent.expired && !$scope.userAuthority.canEditExpiredStuff)) return false;
 
         return true;
-    }
+    };
 
     $scope.eventEditable = function(isButton){
         if(!$scope.currentStage || !$scope.currentStage.access || !$scope.currentStage.access.data.write) return false;
@@ -3164,7 +3164,7 @@ trackerCapture.controller('DataEntryController',
             if(!$scope.currentEvent || $scope.currentEvent.editingNotAllowed || ($scope.currentEvent.expired && !$scope.userAuthority.canEditExpiredStuff)) return false;
         }
         return true;
-    }
+    };
 
     $scope.canDeleteEvent = function() {
         if(!$scope.currentStage || !$scope.currentStage.access || !$scope.currentStage.access.data.write) return false;
@@ -3478,7 +3478,7 @@ trackerCapture.controller('DataEntryController',
     
     var getColSize = function(colSize){
         return 'col-xs-'+Math.floor(colSize);
-    }
+    };
     //for compare-mode
     $scope.compareModeColDefs = {header: 1, otherEvent: 2, currentEvent: 3, otherEvents: 4, providedElsewhere: 5, nextEvent: 6, nextEvents: 7};
     $scope.getCompareModeColSize = function(colId){                
