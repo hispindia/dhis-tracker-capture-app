@@ -741,7 +741,7 @@
                     <!-- ySHnTsMgLvN -->
                     <table ng-if="currentStage.id == 'YrjjV4LVXo6' && section.id == 'ySHnTsMgLvN'" style="text-align:center">
                         <tr>
-                            <!-- <td>
+                             <!-- <td>
                                 <table class="dhis2-list-table-striped default-form-table" style="text-align:center"
                                     ng-if="section.dataElements && section.dataElements.length > 0">
                                     <tr>
@@ -749,7 +749,7 @@
                                             <Strong>Symptoms of Leprosy</Strong>
                                         </td>
                                     </tr>
-                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 1">
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 5">
                                         <td>
                                             <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                                 details="{{'details '| translate}}" content="prStDes[de.id].dataElement"
@@ -999,9 +999,36 @@
                                     </div>
                                     <div id="Fbdcthing17" class='Fbdcthing17' ondrop="drop(event)" ondragover="allowDrop(event)">
                                     </div>
+                                    <div id="Fbdcthing18" class='Fbdcthing18' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing19" class='Fbdcthing19' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing20" class='Fbdcthing20' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing21" class='Fbdcthing21' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="Fbdcthing22" class='Fbdcthing22' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
                                 </div>
                             </td>
+							
+							<td>
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center"
+                                    ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white">
+                                            <strong>1</strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 14">
+                                        <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                            <p ng-init></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
 
+							
                             <td>
                                 <div class='FrontBodyDropconatiner'>
                                     <p draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">1.
@@ -1032,7 +1059,7 @@
                                         Gynaecomastia </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag14" width="88" height="31">14.
                                         Lagopthalmos  </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag15" width="88" height="31">15.
+                                    <!-- <p draggable="true" ondragstart="drag(event)" id="drag15" width="88" height="31">15.
                                         Hypopigmentation </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag16" width="88" height="31">16.
                                         Anasthesia  </p>
@@ -1041,7 +1068,7 @@
                                     <p draggable="true" ondragstart="drag(event)" id="drag18" width="88" height="31">18.
                                         Erythema  </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag19" width="88" height="31">19.
-                                        Plaque </p>
+                                        Plaque </p> -->
                                 </div>
                             </td>
 
@@ -1145,8 +1172,33 @@
                                     </div>
                                     <div id="bbthing17" class="bbthing17" ondrop="drop(event)" ondragover="allowDrop(event)">
                                     </div>
+                                    <div id="bbthing18" class="bbthing18" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing19" class="bbthing19" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing20" class="bbthing20" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
+                                    <div id="bbthing21" class="bbthing21" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </div>
                                 </div>
                             </td>
+							
+							<td>
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center"
+                                    ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white">
+                                            <strong>1</strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 9">
+                                        <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                            <p ng-init></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
 
                             <td>
                                 <div class='FrontBodyDropconatiner'>
@@ -1160,25 +1212,25 @@
                                         Nodule </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag55" width="88" height="31">5.
                                         Nerve Thickening </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag66" width="88" height="31">6.
+                                    <!-- <p draggable="true" ondragstart="drag(event)" id="drag66" width="88" height="31">6.
                                         Madarosis </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag77" width="88" height="31">7.
-                                        Collapse of nose </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag88" width="88" height="31">8.
+                                        Collapse of nose </p> -->
+                                    <p draggable="true" ondragstart="drag(event)" id="drag88" width="88" height="31">6.
                                         Clawing </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag99" width="88" height="31">9.
+                                    <p draggable="true" ondragstart="drag(event)" id="drag99" width="88" height="31">7.
                                         Stif contracture </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag1010" width="88" height="31">10.
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1010" width="88" height="31">8.
                                         Mutilation </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag1111" width="88" height="31">11.
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1111" width="88" height="31">9.
                                         Ulcus </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag1212" width="88" height="31">12.
+                                    <p draggable="true" ondragstart="drag(event)" id="drag1212" width="88" height="31">10.
                                         Foot Drop/ wrist drop </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag1313" width="88" height="31">13.
+                                    <!-- <p draggable="true" ondragstart="drag(event)" id="drag1313" width="88" height="31">13.
                                         Gynaecomastia</p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag1414" width="88" height="31">14.
-                                        Lagopthalmos </p>
-                                    <p draggable="true" ondragstart="drag(event)" id="drag1515" width="88" height="31">15.
+                                        Lagopthalmos </p> -->
+                                    <!-- <p draggable="true" ondragstart="drag(event)" id="drag1515" width="88" height="31">15.
                                         Plaque </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag1616" width="88" height="31">16.
                                         Hypopigmentation </p>
@@ -1187,7 +1239,7 @@
                                     <p draggable="true" ondragstart="drag(event)" id="drag1818" width="88" height="31">18.
                                         Erythema </p>
                                     <p draggable="true" ondragstart="drag(event)" id="drag1919" width="88" height="31">19.
-                                        Anasthesia </p>
+                                        Anasthesia </p> -->
                                 </div>
                             </td>
 
@@ -1431,7 +1483,9 @@
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
-        console.log(data);
+        document.getElementById(data).innerHTML = document.getElementById(data).innerHTML.slice(0,1);
+        //console.log(document.getElementById(data).innerHTML.slice(0,1));
+		console.log(document.getElementById(data).innerHTML.slice(0,1));
     }
 
 </script>
