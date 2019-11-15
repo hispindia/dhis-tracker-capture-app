@@ -144,6 +144,7 @@
 #Fbdcthing7, #Fbdcthing8, #Fbdcthing9, #Fbdcthing10, #Fbdcthing11, #Fbdcthing12, #Fbdcthing13,
 #Fbdcthing14, #Fbdcthing15, #Fbdcthing16, #Fbdcthing17, #Fbdcthing18, #Fbdcthing19, #Fbdcthing20, #Fbdcthing21, #Fbdcthing22{
     position: relative;
+    text-align: center;
     width: 30px;
     height: 30px;
     left: 50px;
@@ -168,6 +169,7 @@
 #bbthing, #bbthing1, #bbthing2, #bbthing3, #bbthing4, #bbthing5, #bbthing6, #bbthing7, #bbthing8, #bbthing9, 
 #bbthing10, #bbthing11, #bbthing12, #bbthing13, #bbthing14, #bbthing15, #bbthing16, #bbthing17, #bbthing18, #bbthing19, #bbthing20, #bbthing21{
     position: relative;
+    text-align: center;
     width: 30px;
     height: 30px;
     left: 50px;
