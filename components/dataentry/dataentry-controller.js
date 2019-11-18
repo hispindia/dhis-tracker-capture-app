@@ -34,6 +34,9 @@ trackerCapture.controller('DataEntryController',
                 AuthorityService,
                 AccessUtils,
                 TCOrgUnitService) {
+
+    $scope.name = 1;
+    $scope.name1 = 1;
     
     //Unique instance id for the controller:
     $scope.APIURL = DHIS2URL;
@@ -1589,6 +1592,16 @@ trackerCapture.controller('DataEntryController',
             rowColor[i].style.backgroundColor = "";
         }
     };
+
+    $scope.dataelenochng = function (id) {
+        var boxclck = document.getElementById(id);
+        if (id.startsWith("F")) {
+            $scope.name = boxclck.innerHTML;
+        } else {
+            $scope.name1 = boxclck.innerHTML;
+        }
+        //
+    }
 
     // change for lep synsor nikusht start
     $scope.pointerLocation = function () {
