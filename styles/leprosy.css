@@ -134,11 +134,17 @@
 
 .FrontBodyDropconatiner{
     padding-left: 20px;
+    padding-top: 50px;
     width: 600px;
     text-align: left;
     font-size: 20px;
     font-weight: 600;
 }
+
+p.padlist {
+    padding-bottom: 2px;
+  }
+  
 
 #Fbdcthing, #Fbdcthing1, #Fbdcthing2, #Fbdcthing3, #Fbdcthing4, #Fbdcthing5, #Fbdcthing6,
 #Fbdcthing7, #Fbdcthing8, #Fbdcthing9, #Fbdcthing10, #Fbdcthing11, #Fbdcthing12, #Fbdcthing13,

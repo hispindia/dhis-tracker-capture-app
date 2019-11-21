@@ -1981,7 +1981,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = 65 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //1
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing1');
@@ -1990,7 +1990,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = 34 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //2
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing2');
@@ -1999,7 +1999,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = 33 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //3
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing3');
@@ -2008,7 +2008,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = 70 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //4
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing4');
@@ -2017,7 +2017,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = 40 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //5
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing5');
@@ -2026,7 +2026,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -7 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing6');
@@ -2035,25 +2035,25 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -38 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing7');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 89 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var xPosition = 113 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
             var yPosition = 12 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing8');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 233 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var xPosition = 259 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
             var yPosition = -17 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing9');
@@ -2062,7 +2062,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = 37 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //10
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing10');
@@ -2071,7 +2071,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = 5 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing11');
@@ -2080,16 +2080,16 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -117 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing12');
             var container = document.getElementsByClassName("FrontBodyContainer");
             var xPosition = 212 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -173 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var yPosition = -148 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing13');
@@ -2098,7 +2098,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -117 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing14');
@@ -2107,7 +2107,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -147 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //15
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing15');
@@ -2116,7 +2116,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -120 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //16
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing16');
@@ -2125,43 +2125,43 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -150 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //17
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing17');
             var container = document.getElementsByClassName("FrontBodyContainer");
             var xPosition = 163 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -197 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var yPosition = -100 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //18
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing18');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 184 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -127 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 210 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -131 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //19
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing19');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 166 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -103 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 163 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -111 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //20
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing20');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 207 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -133 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 210 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -141 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //21
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing21');
@@ -2170,7 +2170,7 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -89 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //22
         setTimeout(function () {
             var theThing = document.getElementsByClassName('Fbdcthing22');
@@ -2179,117 +2179,117 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -119 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         // Back body drop locations
         //0
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 177 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 304 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 170 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 100 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //1
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing1');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 283 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 289 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 228 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 70 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //2
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing2');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 115 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 259 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 142 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 115 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //3
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing3');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 130 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 150 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 175 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 100 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //4
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing4');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 142 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 55 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 222 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 69 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //5
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing5');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 170 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -50 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 257 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 24 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //6
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing6');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 175 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 190 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 133 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 63 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //7
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing7');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 223 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 160 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 176 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 28 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //8
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing8');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 180 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 299 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 223 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -2 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //9
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing9');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 220 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 268 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 267 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -30 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //10
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing10');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 222 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -111 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 113 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = 23 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //11
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing11');
             var container = document.getElementsByClassName("BackBodyContainer");
             var xPosition = 175 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -140 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var yPosition = -26 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //12
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing12');
@@ -2298,116 +2298,116 @@ trackerCapture.controller('DataEntryController',
             var yPosition = -56 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //13
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing13');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 267 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -150 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 285 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -67 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //14
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing14');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 257 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -246 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 175 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -51 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //15
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing15');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 218 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 18 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 223 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -81 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //16
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing16');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 180 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -12 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 178 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -69 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //17
         setTimeout(function () {
             var theThing = document.getElementsByClassName('bbthing17');
             var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 228 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -410 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 219 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -98 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //18
         setTimeout(function () {
-            var theThing = document.getElementsByClassName('Fbdcthing18');
+            var theThing = document.getElementsByClassName('bbthing18');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 218 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -296 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 176 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -85 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //19
         setTimeout(function () {
-            var theThing = document.getElementsByClassName('Fbdcthing19');
+            var theThing = document.getElementsByClassName('bbthing19');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 180 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -326 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 222 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -114 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //20
         setTimeout(function () {
-            var theThing = document.getElementsByClassName('Fbdcthing20');
+            var theThing = document.getElementsByClassName('bbthing20');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 220 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -185 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 179 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -59 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
         //21
         setTimeout(function () {
-            var theThing = document.getElementsByClassName('Fbdcthing21');
+            var theThing = document.getElementsByClassName('bbthing21');
             var container = document.getElementsByClassName("FrontBodyContainer");
-            var xPosition = 177 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = -215 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+            var xPosition = 218 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+            var yPosition = -89 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
             theThing[1].style.left = xPosition + "px";
             theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        }, 4000);
 
         // Side body drop locations
-        setTimeout(function () {
-            var theThing = document.getElementsByClassName('sbthing');
-            var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 190 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 150 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
-            theThing[1].style.left = xPosition + "px";
-            theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        // setTimeout(function () {
+        //     var theThing = document.getElementsByClassName('sbthing');
+        //     var container = document.getElementsByClassName("BackBodyContainer");
+        //     var xPosition = 190 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+        //     var yPosition = 150 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+        //     theThing[1].style.left = xPosition + "px";
+        //     theThing[1].style.top = yPosition + "px";
+        // }, 3000);
 
-        setTimeout(function () {
-            var theThing = document.getElementsByClassName('sbthing1');
-            var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 200 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 200 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
-            theThing[1].style.left = xPosition + "px";
-            theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        // setTimeout(function () {
+        //     var theThing = document.getElementsByClassName('sbthing1');
+        //     var container = document.getElementsByClassName("BackBodyContainer");
+        //     var xPosition = 200 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+        //     var yPosition = 200 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+        //     theThing[1].style.left = xPosition + "px";
+        //     theThing[1].style.top = yPosition + "px";
+        // }, 3000);
 
-        setTimeout(function () {
-            var theThing = document.getElementsByClassName('sbthing2');
-            var container = document.getElementsByClassName("BackBodyContainer");
-            var xPosition = 210 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
-            var yPosition = 350 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
-            theThing[1].style.left = xPosition + "px";
-            theThing[1].style.top = yPosition + "px";
-        }, 3000);
+        // setTimeout(function () {
+        //     var theThing = document.getElementsByClassName('sbthing2');
+        //     var container = document.getElementsByClassName("BackBodyContainer");
+        //     var xPosition = 210 - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+        //     var yPosition = 350 - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+        //     theThing[1].style.left = xPosition + "px";
+        //     theThing[1].style.top = yPosition + "px";
+        // }, 3000);
     };
     // change for lep synsor nikusht end
 
