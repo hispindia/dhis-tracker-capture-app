@@ -63,6 +63,8 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
     w.relationshipWidget = {title: 'relationships', view: "components/relationship/relationship.html", show: true, expand: true, parent: 'smallerWidget', order: 3};
     w.notesWidget = {title: 'notes', view: "components/notes/notes.html", show: true, expand: true, parent: 'smallerWidget', order: 4};
     w.messagingWidget = {title: 'messaging', view: "components/messaging/messaging.html", show: false, expand: true, parent: 'smallerWidget', order: 5};
+    w.growthTrackingWidget = {title: 'growthTracking', view: "components/growthtracking/growthtracking.html", show: true, expand: true, parent: 'biggerWidget', order: 0};
+
     var defaultLayout = new Object();
 
     defaultLayout['DEFAULT'] = {widgets: w, program: 'DEFAULT'};
@@ -1440,8 +1442,56 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
         }
     };
 })
+// change for rowanda
+/* factory for getting data elements */
+    .factory('DHIS2DataElementFactory', function($http, DHIS2URL, NotificationService, $translate) {
+        var skipPaging = "?paging=false";
+        var errorHeader = $translate.instant("error");
+        return {
+            getDataElements: function(){
+                var promise = $http.get( DHIS2URL + '/dataElements.json' + skipPaging).then(function(response){
+                    return response.data.dataElements;
+                }, function (response) {
+                    var errorBody = $translate.instant('failed_to_fetch_events');
+                    NotificationService.showNotifcationDialog(errorHeader, errorBody, response);
+                });
 
-/* factory for handling events */
+                return promise;
+            },
+        };
+    })
+
+    /* factory for interacting with data store */
+    .factory('DataStoreFactory', function($http, DHIS2URL, NotificationService, $translate) {
+        var errorHeader = $translate.instant("error");
+        return {
+            create: function(namespace, key, data){
+                var promise = $http.post(`${DHIS2URL}/dataStore/${namespace}/${key}`, data).then(function(response){
+                    return response;
+                });
+
+                return promise;
+            },
+            get: function(namespace, key){
+                var promise = $http.get(`${DHIS2URL}/dataStore/${namespace}/${key}`).then(function(response){
+                    return response;
+                });
+
+                return promise;
+            },
+            update: function(namespace, key, data){
+                var promise = $http.put(`${DHIS2URL}/dataStore/${namespace}/${key}`, data).then(function(response){
+                    return response;
+                });
+
+                return promise;
+            },
+        };
+    })
+
+// end
+
+    /* factory for handling events */
 .factory('DHIS2EventFactory', function($http, DHIS2URL, NotificationService, $translate, TeiAccessApiService) {
 
     var skipPaging = "&skipPaging=true";

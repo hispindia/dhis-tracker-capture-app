@@ -1,0 +1,11 @@
+{
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "parser": "babel-eslint",
+  // Rules
+  "rules": {
+    "react/prefer-stateless-function": 1,
+    "import/extensions": 0,
+    "quotes": ["error", "single", { "avoidEscape": true }]
+  },
+  "globals": { "document": true }
+}
