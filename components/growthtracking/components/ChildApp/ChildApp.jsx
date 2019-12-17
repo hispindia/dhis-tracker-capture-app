@@ -96,14 +96,37 @@ class ChildApp extends React.Component {
             event.dataValues.find(val => val.dataElement === eventIds.height)
               .value
           );
+        const wfa = event.dataValues.find(val => val.dataElement === eventIds.wfa)&&
+        Number(
+          event.dataValues.find(val => val.dataElement === eventIds.wfa)
+            .value
+        );
+        const hfa = event.dataValues.find(val => val.dataElement === eventIds.hfa)&&
+        Number(
+          event.dataValues.find(val => val.dataElement === eventIds.hfa)
+            .value
+        );
+        const wfh = event.dataValues.find(val => val.dataElement === eventIds.wfh)&&
+        Number(
+          event.dataValues.find(val => val.dataElement === eventIds.wfh)
+            .value
+        );
+      
+        const bmi = event.dataValues.find(val => val.dataElement === eventIds.bmi)&&
+        Number(
+          event.dataValues.find(val => val.dataElement === eventIds.bmi)
+            .value
+        ).toFixed("2");;
+        
 
-        const bmi = weight / (height / 100) ** 2;
+        //const bmi = weight / (height / 100) ** 2;
 
-        const rawWfl = getWeightForLength(patient.gender, weight, height);
-        const rawWfa = getWeightForAge(patient.gender, weight, ageInDays);
-        const rawLhfa = getLengthForAge(patient.gender, height, ageInDays);
-        const rawAcfa = getMUACForAge(patient.gender, muac, ageInDays);
-        const rawBfa = getBMIForAge(patient.gender, bmi, ageInDays);
+      
+        // const rawWfl = getWeightForLength(patient.gender, weight, height);
+        // const rawWfa = getWeightForAge(patient.gender, weight, ageInDays);
+        // const rawLhfa = getLengthForAge(patient.gender, height, ageInDays);
+        // const rawAcfa = getMUACForAge(patient.gender, muac, ageInDays);
+        // const rawBfa = getBMIForAge(patient.gender, bmi, ageInDays);
         return {
           index,
           eventDate,
@@ -112,11 +135,14 @@ class ChildApp extends React.Component {
           weight,
           height,
           bmi,
-          wfl: rawWfl === null ? null : Math.round(rawWfl * 100) / 100,
-          wfa: rawWfa === null ? null : Math.round(rawWfa * 100) / 100,
-          lhfa: rawLhfa === null ? null : Math.round(rawLhfa * 100) / 100,
-          bfa: rawBfa === null ? null : Math.round(rawBfa * 100) / 100,
-          acfa: rawAcfa === null ? null : Math.round(rawAcfa * 100) / 100,
+          // wfl: rawWfl === null ? null : Math.round(rawWfl * 100) / 100,
+          // wfa: rawWfa === null ? null : Math.round(rawWfa * 100) / 100,
+          // lhfa: rawLhfa === null ? null : Math.round(rawLhfa * 100) / 100,          
+          wfl: wfh === null ? null : wfh,
+          wfa: wfa === null ? null : wfa,
+          lhfa: hfa === null ? null : hfa,
+          bfa: bmi === null ? null : bmi,
+          acfa: muac === null ? null : muac,
           completedBy: event.completedBy
         };
       });
