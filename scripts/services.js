@@ -618,6 +618,11 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         formTei[k] = finalCustomId;
                         console.log( " Final custom Id -- " + finalCustomId );
                     }
+                    else if ( attributesById[k].code === 'person_unique_id' )
+                    {
+                        formTei[k] = finalCustomId;
+                        console.log( " Final custom Id -- " + finalCustomId );
+                    }
                 }
 
                 if(originalTei && formTei[k] !== originalTei[k] && !formTei[k] && !originalTei[k]){
