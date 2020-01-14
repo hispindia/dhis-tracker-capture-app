@@ -255,33 +255,35 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
 
             var startDate = DateUtils.format( moment(referenceDate, calendarSetting.momentFormat).add(offset, 'days') );
             var periodOffset = 0;
-            if((splitDate(startDate).year) < splitDate(DateUtils.getToday()).year)
+            if((splitDate(startDate).year) < splitDate(DateUtils.getToday()).year && periodOffset > -1)
             {
             	var plus = splitDate(DateUtils.getToday()).year - (splitDate(startDate).year);
             	periodOffset = _periodOffset && dhis2.validation.isNumber( _periodOffset ) ? _periodOffset : ((splitDate(startDate).year) - splitDate(DateUtils.getToday()).year)+plus;
             	console.log("periodOffset: "+periodOffset);
-            	
+                hasFuturePeriod = true;
+
             }
             else
             {
            		 periodOffset = _periodOffset && dhis2.validation.isNumber( _periodOffset ) ? _periodOffset : (splitDate(startDate).year) - splitDate(DateUtils.getToday()).year;
-            
+
             }
-             
+
             var eventDateOffSet = moment(referenceDate, calendarSetting.momentFormat).add('d', offset)._d;
             eventDateOffSet = $filter('date')(eventDateOffSet, calendarSetting.keyDateFormat);
 
             //generate availablePeriods
             var pt = new PeriodType();
-            var d2Periods = pt.get(stage.periodType).generatePeriods({offset: periodOffset, filterFuturePeriods: false, reversePeriods: false});
+            var d2Periods = pt.get(stage.periodType).generatePeriods({offset: periodOffset, filterFuturePeriods: true, reversePeriods: true});
 			
             angular.forEach(d2Periods, function(p){
+
                 p.endDate = DateUtils.formatFromApiToUser(p.endDate);
                 p.startDate = DateUtils.formatFromApiToUser(p.startDate);
-				
-                if(moment(p.endDate, calendarSetting.momentFormat).isBefore(moment(eventDateOffSet,calendarSetting.momentFormat)) || moment(p.endDate, calendarSetting.momentFormat).isAfter(moment(eventDateOffSet,calendarSetting.momentFormat))){
+
+                if(moment(p.endDate, calendarSetting.momentFormat).isAfter(moment(eventDateOffSet,calendarSetting.momentFormat)) || moment(p.endDate, calendarSetting.momentFormat).isAfter(moment(eventDateOffSet,calendarSetting.momentFormat))){
                   
-                 // console.log("available Period    "+ Object.values(p));  
+                 console.log("available Period    "+ Object.values(p));
                     availablePeriods.push( p );
                 }
 
@@ -925,7 +927,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
         
         if (format === "csv") {
             url = url+'.csv?ou=' + ouId + '&ouMode=' + ouMode;
-        } else if (format === "xml") {
+        }else if (format === "xml") {
             url = url+'.json?ou=' + ouId + '&ouMode=' + ouMode;
         }else {
             url = url+'.json?ou=' + ouId + '&ouMode=' + ouMode;

@@ -57,6 +57,7 @@
                     tei-pager="pager"
                     tei-sort-column="currentTrackedEntityList.sortColumn"
                     tei-grid-columns="gridColumns"
+                    on-tei-clicked="!superUserAuthority || !pbfUserAuthority ? '': openTei(tei)"
                     tei-refetch-data="fetchTeis(pager, sortColumn)"
             >
             </tracker-tei-list>

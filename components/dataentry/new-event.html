@@ -142,15 +142,15 @@
                         </select>
                         <span class="input-group-btn">
                             <button type="button"
-                                    class="btn btn-default trim" 
-                                    ng-disabled="periodOffset <= referenceOffset" 
+                                    class="btn btn-default trim"
+                                    ng-disabled="periodOffset < referenceOffset"
                                     ng-click="fetchPeriod('PREV')" 
                                     ng-attr-title="{{'prev_period'| translate}}">
                                 <i class="fa fa-backward"></i>
                             </button>
                             <button type="button" 
                                     class="btn btn-default trim" 
-                                     ng-disabled="isNewEvent && hasFuturePeriod" 
+                                     ng-disabled="isNewEvent && hasFuturePeriod && (periodOffset >= referenceOffset)"
                                     ng-click="fetchPeriod('NEXT')" 
                                     ng-attr-title="{{'nxt_period'| translate}}">
                                 <i class="fa fa-forward"></i>

@@ -95,6 +95,7 @@
             <button type="button" ng-disabled="model.savingRegistration || selectedOrgUnit.closedStatus" class="btn btn-primary" ng-if="matchingTeisCount && matchingTeisCount > 0" ng-click="showMatchesModal(true)">{{ 'continue' | translate}}</button>
             <div ng-switch="selectedProgram.id">
                 <div ng-switch-when="Bv3DaiOd5Ai">
+                    <button type="button" ng-disabled="!superUserAuthority || ( model.savingRegistration || selectedOrgUnit.closedStatus)" class="btn btn-primary" ng-if="!matchingTeisCount || matchingTeisCount === 0" ng-click="registerEntity('DASHBOARD')">{{'save_and_continue'| translate}}</button>
                     <button type="button" ng-disabled="model.savingRegistration || selectedOrgUnit.closedStatus" class="btn btn-success" ng-if="!matchingTeisCount || matchingTeisCount === 0" ng-click="registerEntity('SELF')">{{'save_and_add_new'| translate}}</button>
 
                 </div>

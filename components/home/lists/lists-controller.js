@@ -20,7 +20,7 @@ trackerCapture.controller('ListsController',function(
     TEIService,
     UserDataStoreService,
     ProgramWorkingListService,
-    OperatorFactory) {
+    OperatorFactory,SessionStorageService) {
         var ouModes = [{name: 'SELECTED'}, {name: 'CHILDREN'}, {name: 'DESCENDANTS'}, {name: 'ACCESSIBLE'}];
         var userGridColumns = null;
         var defaultCustomWorkingListValues = { ouMode: ouModes[0], programStatus: ""};
@@ -33,6 +33,8 @@ trackerCapture.controller('ListsController',function(
         $scope.defaultOperators = OperatorFactory.defaultOperators;
         $scope.boolOperators = OperatorFactory.boolOperators;
 
+        $scope.superUserAuthority = false;
+
         var setPager = function(pager){
             $scope.pager = pager;
             $scope.pager.toolBarDisplay = 5;
@@ -41,6 +43,20 @@ trackerCapture.controller('ListsController',function(
         $scope.$watch('base.selectedProgram', function() {
             init();
         });
+
+        $scope.currentUserDetail = SessionStorageService.get('USER_PROFILE');
+        $scope.currentUserDetails = $scope.currentUserDetail.userCredentials;
+        $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
+        for (var i = 0; i < $scope.currentUserRoles.length; i++) {
+        $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
+        for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
+
+            if ($scope.currentUserRoleAuthorities[j] === "ALL") {
+                $scope.superUserAuthority = true;
+                break;
+            }
+        }
+        }
 
         var init = function(){
             if( angular.isObject($scope.base.selectedProgram)){
@@ -84,7 +100,8 @@ trackerCapture.controller('ListsController',function(
 
                     });*/
                 });
-            }
+             }
+
             return resolvedEmptyPromise();
 
         }
@@ -353,8 +370,7 @@ trackerCapture.controller('ListsController',function(
                     var fileName = "trackedEntityList." + format;// any file name with any extension
                     var a = document.createElement('a');
                     var blob, url;
-                    a.style = "display: none";
-                    blob = new Blob(['' + data], {type: "octet/stream", endings: 'native'});
+                    blob = new Blob(['' + data.toString('base64')], {type: "octet/stream", encoding: 'base64', endings: 'native'});
                     url = window.URL.createObjectURL(blob);
                     a.href = url;
                     a.download = fileName;
@@ -377,6 +393,7 @@ trackerCapture.controller('ListsController',function(
                 var data = $scope.currentTrackedEntityList.data;
                 var sortedTei = [];
                 var sortedTeiIds = [];
+
                 if(data.rows && data.rows.own) {
                     sortedTei = sortedTei.concat(data.rows.own);
                 }

@@ -37,6 +37,8 @@ trackerCapture.controller('HomeController',function(
    		$scope.isValidProgram = false;
 
         $scope.superUserAuthority = "";
+
+        $scope.pbfUserAuthority = "";
 	
 	
         var viewsByType = {
@@ -231,13 +233,11 @@ trackerCapture.controller('HomeController',function(
             else if($scope.base.selectedProgram.id === 'Bv3DaiOd5Ai')
             {
                 if($scope.superUserAuthority !== 'YES'){
-                    viewsByType.registration.disabled = false;
-                    $scope.views['registration'].disabled = false;
-                    defaultView = $scope.views[1];
+                    $scope.views[2].disabled = true;
                 }
                 else{
-                    $scope.views[0].disabled = true;
-                    defaultView = $scope.views[1];
+                    $scope.views[2].disabled = false;
+                    defaultView = $scope.views[0];
                 }
             }
             else {
@@ -345,6 +345,9 @@ trackerCapture.controller('HomeController',function(
         $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
         for (var i = 0; i < $scope.currentUserRoles.length; i++) {
             $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
+
+            if($scope.currentUserDetails.userRoles[i].id === 'Y9nNqnTdMMX'){    $scope.pbfUserAuthority = "YES"; }
+
             for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
                 if ($scope.currentUserRoleAuthorities[j] === "ALL") {
                     //$scope.accessAuthority = true;
