@@ -100,6 +100,12 @@ trackerCapture.controller('DataEntryController',
 
     $scope.convertISOEventDateToNepaliDate = function () {
         var tempEventDate = $scope.currentEvent.eventDate;
+
+        if( tempEventDate === undefined ){
+            tempEventDate = $scope.currentEvent.dueDate;
+        }
+        //var tempDueDate = $scope.currentEvent.dueDate;
+
         var nepaliConverter = new DateConverter();
         //nepaliConverter.setEnglishDate(tempYear, tempMonth, tempDay);
 
