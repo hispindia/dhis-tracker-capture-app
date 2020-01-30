@@ -609,6 +609,18 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             tei.attributes = [];
             var formEmpty = true;
             for(var k in attributesById){
+
+                /*
+                if( finalCustomId != null && finalCustomId != "" )
+                {
+                    if(  attributesById[k].code === 'patient_identifier' )
+                    {
+                        formTei[k] = finalCustomId;
+                        console.log( " Final Custome Id -- " + finalCustomId );
+                    }
+                }
+                */
+
                 if(originalTei && formTei[k] !== originalTei[k] && !formTei[k] && !originalTei[k]){
                     formChanged = true;
                 }

@@ -147,16 +147,17 @@ angular.module('trackerCaptureServices')
                     RegistrationService.registerOrUpdate(tei,optionSets,attributesById).then(function(response){
                         if (response.response.status == "SUCCESS"){
                             //alert("Beneficiary Id : " + customId);
+                            def.resolve(response.response);
                         }
-                        def.resolve(response.data);
+                        else{
+                            def.resolve(response.response);
+                        }
                     })
-
-
                 });
 
                 return def;
             },
-            validateAndCreateCustomId : function(tei,programUid,tEAttributes,destination,optionSets,attributesById,enrolmentdate,projectdonner) {
+            validateAndCreateCustomId : function(tei,programUid,tEAttributes,destination,optionSets,attributesById,enrolmentdate,projectDonner) {
                 var def = $.Deferred();
                 var thiz = this;
                 var customIDAttribute;
@@ -206,7 +207,7 @@ angular.module('trackerCaptureServices')
                         if (isValidAttribute && isValidProgram)
                         {
                             var regDate = enrolmentdate;
-
+                            var orgUnitUid = tei.orgUnit;
                             //var customRegDate = regDate.split("-")[2]+regDate.split("-")[1]+regDate.split("-")[0];
                             var customRegDate = regDate.split("-")[0];
                             CustomIdService.getALLSQLView().then(function( responseSQLViews ){
@@ -222,10 +223,11 @@ angular.module('trackerCaptureServices')
                                 //var totalTei = countTeiByProgram;
                                     CustomIdService.getOrgunitCode(tei.orgUnit).then(function(orgUnitCodeResponse){
                                     var orgUnitCode = orgUnitCodeResponse.code;
-                                        thiz.createCustomIdAndSave(tei,customIDAttribute,optionSets,attributesById,customRegDate,totalTei,orgUnitCode,projectdonner, sqlViewNameToUIDMap, programUid ).then(function(response){
-                                            def.resolve(response);
+                                    thiz.createCustomIdAndSave(tei,customIDAttribute,optionSets,attributesById,customRegDate,totalTei,orgUnitCode,projectDonner, sqlViewNameToUIDMap, programUid ).then(function(customIdResponse){
+                                    //thiz.createCustomId(regDate,totalTei,orgUnitCode,projectDonner, sqlViewNameToUIDMap, orgUnitUid, programUid ).then(function( generatedCustomId ){
+                                        console.log( " 1 " + customIdResponse );
+                                            def.resolve( customIdResponse );
                                         });
-
                                     });
                                 });
                             //});
@@ -526,17 +528,16 @@ angular.module('trackerCaptureServices')
 })
 
 
-    .service('HideProgramFromDashboardService', function(){
-        return {
-            isProgramToBeUsedForRegistration : function(program){
+.service('HideProgramFromDashboardService', function(){
+    return {
+        isProgramToBeUsedForRegistration : function(program){
 
-                for(var i=0;i < program.attributeValues.length;i++){
-                    if (program.attributeValues[i].attribute.code == "allowRegistration" && program.attributeValues[i].value == "true"){
-                        return true;
-                    }
+            for(var i=0;i < program.attributeValues.length;i++){
+                if (program.attributeValues[i].attribute.code == "allowRegistration" && program.attributeValues[i].value == "true"){
+                    return true;
                 }
-                return false;
             }
+            return false;
         }
-
-        });
+    }
+});

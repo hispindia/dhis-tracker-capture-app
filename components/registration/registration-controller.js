@@ -71,6 +71,7 @@ trackerCapture.controller('RegistrationController',
 
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
+    $scope.generatedCustomId = '';
 
     if(!$scope.attributesById){
         $scope.attributesById = [];
@@ -414,6 +415,7 @@ trackerCapture.controller('RegistrationController',
 
     var goToDashboard = function (destination, teiId) {
         //reset form
+        //alert( $scope.model.savingRegistration );
         $scope.selectedTei = {};
         $scope.selectedEnrollment = {
             enrollmentDate: $scope.today,
@@ -479,7 +481,7 @@ trackerCapture.controller('RegistrationController',
 
     var performRegistration = function (destination) {
         if (destination === "DASHBOARD" || destination === "SELF" || destination === "ENROLLMENT") {
-           $scope.model.savingRegistration = true;
+            $scope.model.savingRegistration = true;
         }
 
         //Temp fix for not being able to save images with attribute.value = "" or null.
@@ -510,7 +512,7 @@ trackerCapture.controller('RegistrationController',
                 }
                 else {
                     if ($scope.selectedProgram) {
-
+                        $scope.model.savingRegistration = true;
                         //enroll TEI
                         var enrollment = {};
                         enrollment.trackedEntityInstance = $scope.tei.trackedEntityInstance;
@@ -526,17 +528,20 @@ trackerCapture.controller('RegistrationController',
 
                         EnrollmentService.enroll(enrollment).then(function (enrollmentResponse) {
                             if(enrollmentResponse) {
+
                                 var en = enrollmentResponse.response;
                                 if (en.status === 'SUCCESS') {
                                     if($scope.registrationMode !== 'ENROLLMENT') {
-                                        $scope.model.savingRegistration = false;
+                                        $scope.model.savingRegistration = true;
                                     }
+                                    //alert( $scope.model.savingRegistration );
                                     enrollment.enrollment = en.importSummaries[0].reference;
                                     $scope.selectedEnrollment = enrollment;
                                     var avilableEvent = $scope.currentEvent && $scope.currentEvent.event ? $scope.currentEvent : null;
                                     var dhis2Events = EventUtils.autoGenerateEvents($scope.tei.trackedEntityInstance, $scope.selectedProgram, $scope.selectedOrgUnit, enrollment, avilableEvent);
-
+                                    //alert( $scope.model.savingRegistration );
                                     // update for PLAN for custom_id_generation
+
                                     if ($scope.selectedProgram.id == "y6lXVg8TdOj" && $scope.selectedTei.KLSVjftH2xS != undefined )
                                     {
                                         $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
@@ -545,30 +550,40 @@ trackerCapture.controller('RegistrationController',
                                     {
                                         $scope.projectDonor = $scope.selectedTei.o94ggG6Mhx8;
                                     }
-
-                                    CustomIDGenerationService.validateAndCreateCustomId($scope.tei,$scope.selectedProgram.id,$scope.attributes,destination,$scope.optionSets,$scope.attributesById,$scope.selectedEnrollment.enrollmentDate, $scope.projectDonor).then(function(){
-                                        $timeout(function () {
-                                            if (dhis2Events.events.length > 0) {
-                                                DHIS2EventFactory.create(dhis2Events).then(function () {
+                                    $scope.model.savingRegistration = true;
+                                    CustomIDGenerationService.validateAndCreateCustomId($scope.tei,$scope.selectedProgram.id,$scope.attributes,destination,$scope.optionSets,$scope.attributesById,$scope.selectedEnrollment.enrollmentDate, $scope.projectDonor).then(function( customIdGeneratedResponse ){
+                                        console.log( " 2 " + customIdGeneratedResponse );
+                                        if( customIdGeneratedResponse.status === 'SUCCESS' ){
+                                            $timeout(function () {
+                                                if (dhis2Events.events.length > 0) {
+                                                    DHIS2EventFactory.create(dhis2Events).then(function () {
+                                                        notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                                        $scope.model.savingRegistration = false;
+                                                    });
+                                                } else {
                                                     notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
-                                                });
-                                            } else {
-                                                notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
-                                            }
-                                        }, 0);
+                                                    $scope.model.savingRegistration  = false;
+                                                }
+                                            });
+                                        }
+                                        else{
+                                            $scope.model.savingRegistration = true;
+                                        }
                                     });
+
                                     // update for PLAN for custom_id_generation  id close
 
                                     /*
                                     if (dhis2Events.events.length > 0) {
                                         DHIS2EventFactory.create(dhis2Events).then(function () {
+                                            //alert( $scope.model.savingRegistration );
                                             notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
                                         });
                                     }
                                     else {
                                         notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
                                     }
-                                   */
+                                    */
                                 }
                                 else {
                                     //enrollment has failed
@@ -690,6 +705,31 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
+
+        /*
+        if ( $scope.registrationMode === 'REGISTRATION' ) {
+            var prefix = "";
+            var constantPreFix = "PLAN";
+            // update for PLAN for custom_id_generation
+
+            if (  $scope.selectedProgram.id === "y6lXVg8TdOj" || $scope.selectedProgram.id === "VscnMM6g6Ow" || $scope.selectedProgram.id  === "Fcyldy4VqSt" )
+            {
+                if ( ( $scope.selectedProgram.id === "y6lXVg8TdOj" || $scope.selectedProgram.id === "VscnMM6g6Ow" ) &&
+                    ( $scope.selectedTei.KLSVjftH2xS !== undefined ) )
+                {
+                    $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
+                }
+                else if ( $scope.selectedProgram.id  === "Fcyldy4VqSt" && $scope.selectedTei.o94ggG6Mhx8 !== undefined)
+                {
+                    $scope.projectDonor = $scope.selectedTei.o94ggG6Mhx8;
+                }
+                prefix = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+
+                $scope.generatedCustomId = constantPreFix + "-" + $scope.projectDonor + "-" + prefix;
+            }
+        }
+        */
+
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
         $scope.formEmpty = result.formEmpty;
         $scope.tei = result.tei;
@@ -698,6 +738,7 @@ trackerCapture.controller('RegistrationController',
             NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_is_empty_fill_at_least_one"));
             return;
         }
+
         if(!destination && $scope.tei) {
             TEIService.getRelationships($scope.tei.trackedEntityInstance).then(function(result) {
                 $scope.tei.relationships = result;
