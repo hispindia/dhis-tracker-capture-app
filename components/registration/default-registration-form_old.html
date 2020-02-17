@@ -1,3 +1,37 @@
+<!-- custom change for INTPART -->
+<style>
+
+    .search-box,btn btn-info btn-sm{
+        position: relative;
+        padding: 6px 12px;
+    }
+
+    .search-box {
+        font-family: sans-serif;
+        font-size: 14px;
+        color: #555;
+        width:85%;
+        height:35px;
+        border: 1px solid #ccc;
+        outline: 0;
+        border-radius: 15px;
+    }
+    .search-box:focus {
+        box-shadow: 0 0 15px 5px #b0e0ee;
+        border: 2px solid #bebede;
+    }
+    .btncolor {
+        background-color:#FC6700;
+        color:white;
+    }
+    .btncolorgenerate{
+        background-color:#FC0008;
+        color:white;
+
+    }
+
+</style>
+<!-- end -->
 <div ng-if="widget !== 'PROFILE' && trackedEntityTypes.selected" class="section-label section-spacing vertical-spacing">
     {{'profile'| translate}}
 </div>
@@ -72,6 +106,7 @@
                                max-date="attribute.allowFutureDate ? '' : 0"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -110,6 +145,7 @@
                                class="form-control-checkbox"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -143,6 +179,7 @@
                                    class="form-control"
                                    ng-model="selectedTei[attribute.id]"
                                    ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                                   d2-attribute-validator
                                    selected-tet={{trackedEntityTypes.selected.id}}
                                    attribute-data={{attribute}}
                                    selected-program-id={{selectedProgram.id}}
@@ -163,6 +200,7 @@
                                class="form-control"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -179,6 +217,7 @@
                                class="form-control"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -195,6 +234,7 @@
                                class="form-control"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -211,6 +251,7 @@
                                class="form-control"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -227,6 +268,7 @@
                                class="form-control"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -251,6 +293,7 @@
                                class="form-control"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -268,6 +311,7 @@
                                ng-pattern="/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?(\/.*)?$/"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -298,6 +342,7 @@
                                   class="form-control"
                                   ng-model="selectedTei[attribute.id]"
                                   ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                                  d2-attribute-validator
                                   selected-tet={{trackedEntityTypes.selected.id}}
                                   attribute-data={{attribute}}
                                   selected-program-id={{selectedProgram.id}}
@@ -356,6 +401,7 @@
                                class="form-control"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -363,6 +409,17 @@
                                ng-disabled="attributeFieldDisabled(attribute)"
                                ng-blur="teiValueUpdated(selectedTei, attribute.id)"
                                ng-required="attributeIsRequired(attribute.id, attribute.mandatory)"/>
+                        <!-- custom change for INTPART -->
+							   <!--
+                               <button ng-show="attribute.id=='Dnm1mq6iq2d'"  id="familyid" class="btncolorgenerate" ng-click="generateFamilyMemberUniqueId(selectedTei, attribute.id)">
+                                   Generate Custom ID
+                               </button>
+							   <button ng-show="attribute.id=='uHv60gjn2gp'"  id="houseid" class="btncolorgenerate" ng-click="generateFamilyUniqueId(selectedTei, attribute.id)">
+                                   Generate Custom ID
+                               </button>
+                               -->
+                        <!-- end -->
+
                     </span>
                     <span ng-switch-when="PHONE_NUMBER">
                         <input type="text"
@@ -370,6 +427,7 @@
                                class="form-control"
                                ng-model="selectedTei[attribute.id]"
                                ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               d2-attribute-validator
                                selected-tet={{trackedEntityTypes.selected.id}}
                                attribute-data={{attribute}}
                                selected-program-id={{selectedProgram.id}}
@@ -392,9 +450,6 @@
                     <div class="alert alert-danger alert-dismissible" role="alert" ng-if="errorMessages[attribute.id]">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close" tabindex="-1"><span aria-hidden="true">&times;</span></button>
                         {{errorMessages[attribute.id]}}
-                    </div>
-                    <div ng-if="attributeUniquenessError[attribute.id]">
-                        {{'value_not_unique' | translate}}
                     </div>
                     <!-- URL error message is temporarily placed here. Should be placed with the other error messages in the core. -->
                     <span ng-message="urlValidator">{{'url_error' | translate}}</span>
