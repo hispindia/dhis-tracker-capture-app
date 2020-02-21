@@ -35,7 +35,8 @@ trackerCapture.controller('ListsController',function(
 
         var initPager = function(){
             $scope.defaultRequestProps = {
-                skipTotalPages: true
+                //skipTotalPages: true
+                skipTotalPages: false
             };
 
             $scope.pager = {
@@ -349,7 +350,8 @@ trackerCapture.controller('ListsController',function(
                 
                 var config = $scope.currentTrackedEntityList.config;
                 var promise;
-                var program = "program=" + $scope.currentTrackedEntityList.config.program.id;
+                //var program = "program=" + $scope.currentTrackedEntityList.config.program.id;
+                var program = $scope.currentTrackedEntityList.config.programUrl;
                 if($scope.currentTrackedEntityList.type === $scope.trackedEntityListTypes.CUSTOM){
                     promise = TEIService.search($scope.selectedOrgUnit.id, config.ouMode.name, config.queryAndSortUrl, config.programUrl, attrIdList, false, false, format, attrNamesList, attrNamesIdMap, $scope.base.optionSets);
                 }else{
