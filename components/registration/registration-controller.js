@@ -256,13 +256,12 @@ trackerCapture.controller('RegistrationController',
             }
             if ( $scope.optionSets[key].code == 'ImplementingPartner' ){
                 for( var j=0; j<$scope.optionSets[key].options.length; j++ ){
-                    if ( $scope.optionSets[key].options[j].id === $scope.ImplementingPartner &&
-                        $scope.optionSets[key].options[j].id !== 'NCASC' ){
+                    if ( $scope.optionSets[key].options[j].id === $scope.ImplementingPartner ){
                         $scope.ImplementingPartnerAttrValue = $scope.optionSets[key].options[j].code;
                     }
-                    else {
-                        $scope.ImplementingPartnerAttrValue = '';
-                    }
+                    //else {
+                    //    $scope.ImplementingPartnerAttrValue = '';
+                    //}
                 }
             }
         }
