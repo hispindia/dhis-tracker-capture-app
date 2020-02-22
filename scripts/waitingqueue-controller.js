@@ -1,5 +1,5 @@
 var trackerCaptureamesNimhans = angular.module('trackerCapture');
-trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootScope, $scope, $timeout, $location) {
+trackerCaptureamesNimhans.controller('waitingqueueController',  function (CurrentSelection,$rootScope, $scope, $timeout, $location, SessionStorageService) {
     $.ajaxSetup({
         async: false
     });
@@ -11,10 +11,13 @@ trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootS
     $scope.objtrack_lab = [];
     $scope.basichouse = ["iIf1gJ4FVdR", "YFjB0zhySP6", "xalnzkNfD77", "MV4wWoZBrJS", "yDCO4KM4WVA", "Lt9ZrfgAMuw"];
     $scope.username;
+    $scope.currentOrgUnit = "";
+    $scope.currentProgramId = "";
     $scope.countval = 0;
     $scope.detail_house_member = [];
     $scope.global_id_array = ["xeY2hFI7J9p", "hBAATiHH0rL", "T4eGuI8Gn5P", "kkLvVNLd0Le"];
     $scope.registeredid = [];
+    $scope.currentPrograms = [];
     $scope.goToDashboard = function (evv) {
         evv.clicked = true;
         var base = location.protocol + '//' + location.host + "/dhis"; //+window.location.pathname;
@@ -27,6 +30,16 @@ trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootS
         // $window.open(base+'/dhis-web-tracker-capture/index.html#/dashboard?tei='+ev.tei+'&program=a9cQSlDVI2n&ou=CPtzIhyn36z'+$scope.ouId, '_blank');
     };
 
+    //$scope.selectedOrgUnit = SessionStorageService.get('SELECTED_OU');
+    $scope.currentOrgUnit = SessionStorageService.get('SELECTED_OU');
+    //var selections = CurrentSelection.get();
+    //$scope.currentOrgUnit =  selections.orgUnit;
+    //$scope.currentPrograms =  selections.prNames;
+    //$scope.currentProgramId =  $scope.currentPrograms[0].id;
+
+
+    //var selectedOrgUnit = CurrentSelection.get()["orgUnit"];
+
     $scope.loadQueue2 = function () {
 
         // Get name of login user
@@ -37,9 +50,10 @@ trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootS
             console.log($scope.username);
         });
 
+        //../api/events.json?orgUnit=fMTeIPKpZbI&program=Nb2EygU6dwp&order=created:asc&skipPaging=true
         // map the dataelement value check if its true
         if ($scope.username == "Triage User") {
-            $.get("../api/events.json?orgUnit=fMTeIPKpZbI&program=Nb2EygU6dwp&order=created:asc&skipPaging=true", function (data) {
+            $.get("../api/events.json?orgUnit=" + $scope.currentOrgUnit.id + "&program=Nb2EygU6dwp&order=created:asc&skipPaging=true", function (data) {
 
                 var trackdata = data;
                 console.log(trackdata);
@@ -95,9 +109,9 @@ trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootS
 
         //USERS OTHERS THEN TRIAGE 
 
-
+        //../api/events.json?orgUnit=fMTeIPKpZbI&program=Nb2EygU6dwp&order=lastUpdated:asc&skipPaging=true
         if ($scope.username == "OPD User" || $scope.username == "Pharmacy User" || $scope.username == "Laboratory User") {
-            $.get("../api/events.json?orgUnit=fMTeIPKpZbI&program=Nb2EygU6dwp&order=lastUpdated:asc&skipPaging=true", function (data) {
+            $.get("../api/events.json?orgUnit=" + $scope.currentOrgUnit.id + "&program=Nb2EygU6dwp&order=created:asc&skipPaging=true", function (data) {
 
                 var trackdata = data;
                 console.log(trackdata);
@@ -188,9 +202,9 @@ trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootS
                         {
                             var aa = trackdata.attributes[i].value;
 
-                            //housenumber=aa;
+                            //housenumber=aa; xalnzkNfD77
                             var house = aa;
-                        } else if (attributepath == "xalnzkNfD77") //Name of woman
+                        } else if (attributepath == "TfdH5KvFmMy") //Name of woman First Name
                         {
                             var aa = trackdata.attributes[i].value;
 
@@ -237,14 +251,15 @@ trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootS
 
     $scope.gotohome = function () {
 
-        var url = document.location.href = '../dhis-web-dashboard-integration/index.html';
+        var url = document.location.href = '../dhis-web-dashboard/index.html#/';
     };
     $scope.gotoreport = function () {
         var url = document.location.href = '../dhis-web-reporting/displayViewReportForm.action';
     };
     $scope.gototriage = function () {
         $scope.objtrack_triage_value = [];
-        $.get("../api/events.json?orgUnit=fMTeIPKpZbI&program=Nb2EygU6dwp&order=created:asc&skipPaging=true", function (data) {
+        //../api/events.json?orgUnit=fMTeIPKpZbI&program=Nb2EygU6dwp&order=created:asc&skipPaging=true
+        $.get("../api/events.json?orgUnit=" + $scope.currentOrgUnit.id + "&program=Nb2EygU6dwp&order=created:asc&skipPaging=true", function (data) {
 
             var trackdata = data;
             console.log(trackdata);
@@ -285,7 +300,8 @@ trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootS
         $scope.objtrack_opd = [];
         $scope.objtrack_pharmacy = [];
         $scope.objtrack_lab = [];
-        $.get("../api/events.json?orgUnit=fMTeIPKpZbI&program=Nb2EygU6dwp&order=lastUpdated:asc&skipPaging=true", function (data) {
+
+        $.get("../api/events.json?orgUnit=" + $scope.currentOrgUnit.id + "&program=Nb2EygU6dwp&order=created:asc&skipPaging=true", function (data) {
 
             var trackdata = data;
             console.log(trackdata);
@@ -360,7 +376,7 @@ trackerCaptureamesNimhans.controller('waitingqueueController',  function ($rootS
         console.log($scope.patient_detail);
         $scope.tei = $scope.patient_detail.TEI;
 
-        var url = document.location.href = '../dhis-web-tracker-capture/index.html#/dashboard?tei=' + $scope.tei + '&program=Nb2EygU6dwp&ou=fMTeIPKpZbI';
+        var url = document.location.href = '../dhis-web-tracker-capture/index.html#/dashboard?tei=' + $scope.tei + '&program=Nb2EygU6dwp&ou='+ $scope.currentOrgUnit.id;
     };
 
     $scope.loadQueue2();
