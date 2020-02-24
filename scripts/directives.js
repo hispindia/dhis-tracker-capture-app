@@ -555,6 +555,89 @@ var trackerCaptureDirectives = angular.module('trackerCaptureDirectives', [])
             refetchData: "&teiRefetchData",
             onTeiClicked: "&onTeiClicked",
         },
+        
+        controller: function($scope, Paginator,TEIGridService, CurrentSelection){
+            var attributesById = CurrentSelection.getAttributesById();
+            $scope.$watch("pager", function(){
+                if($scope.pager){
+                    Paginator.setPage($scope.pager.page);
+                    Paginator.setPageCount($scope.pager.pageCount);
+                    Paginator.setPageSize($scope.pager.pageSize);
+                    Paginator.setItemCount($scope.pager.total);
+                }
+            });
+
+            $scope.$watch("data", function(){
+                setGridColumns();
+            });
+
+            var setGridColumns = function(){
+                if($scope.data && !$scope.gridColumns){
+                    var columnAttributes = [];
+                    angular.forEach($scope.data.headers, function(header){
+                        if(attributesById[header.id]){
+                            var attr = angular.copy(attributesById[header.id]);
+                            attr.displayInListNoProgram = true;
+                            columnAttributes.push(attr);
+                        }
+                    });
+                    var gridColumnConfig = { showAll: true};
+                    $scope.gridColumns = TEIGridService.makeGridColumns(columnAttributes, gridColumnConfig);
+                }
+            }
+
+            setGridColumns();
+
+            $scope.sortGrid = function(gridHeader){
+                if ($scope.sortColumn && $scope.sortColumn.id === gridHeader.id){
+                    $scope.sortColumn.direction = $scope.sortColumn.direction === 'asc' ? 'desc' : 'asc';
+                }else if(!$scope.sortColumn){
+                    $scope.sortColumn = {id: gridHeader.id, direction: 'asc'};
+                }else{
+                    $scope.sortColumn.id = gridHeader.id;
+                    $scope.sortColumn.direction = 'asc';
+                }
+                $scope.pager = undefined;
+                $scope.refetchData({pager: $scope.pager, sortColumn: $scope.sortColumn});
+            };
+
+            $scope.onTeiClickedInternal = function(tei){
+                $scope.onTeiClicked({tei : tei});
+            }
+            
+            $scope.getPage = function(page){
+                $scope.pager.page = page;
+
+                $scope.refetchData({pager: $scope.pager, sortColumn: $scope.sortColumn});
+            };
+
+            $scope.resetPageSize = function(){
+                $scope.pager.page = 1;
+                $scope.refetchData({pager: $scope.pager, sortColumn: $scope.sortColumn});
+            };
+
+            $scope.jumpToPage = function(){
+                if($scope.pager && $scope.pager.page && $scope.pager.pageCount && $scope.pager.page > $scope.pager.pageCount){
+                    $scope.pager.page = $scope.pager.pageCount;
+                }
+                $scope.refetchData({pager: $scope.pager, sortColumn: $scope.sortColumn});
+                
+            };
+        }
+    }
+})
+.directive('trackerTeiListPerformant', function(){
+    return {
+        restrict: 'E',
+        templateUrl: 'views/tei-list-performant.html',
+        scope: {
+            data: "=teiData",
+            pager: "=?teiPager",
+            sortColumn: "=?teiSortColumn",
+            gridColumns: "=?teiGridColumns",
+            refetchData: "&teiRefetchData",
+            onTeiClicked: "&onTeiClicked",
+        },
 
         
         controller: function($scope, Paginator,TEIGridService, CurrentSelection){
@@ -602,26 +685,50 @@ var trackerCaptureDirectives = angular.module('trackerCaptureDirectives', [])
             };
 
             $scope.onTeiClickedInternal = function(tei){
-                $scope.onTeiClicked({tei : tei});
+                $scope.onTeiClicked({tei: tei});
             }
             
             $scope.getPage = function(page){
                 $scope.pager.page = page;
+                $scope.pager.pageEdit = page;
 
                 $scope.refetchData({pager: $scope.pager, sortColumn: $scope.sortColumn});
             };
 
             $scope.resetPageSize = function(){
                 $scope.pager.page = 1;
+
+                var pageSizeEdit = $scope.pager.pageSizeEdit;
+                if(isNaN(pageSizeEdit)){
+                    $scope.pager.pageSizeEdit = $scope.pager.pageSize;
+                    return;
+                }
+
+                var pageSizeEditNumber = Number(pageSizeEdit);
+                if (!Number.isSafeInteger(pageSizeEditNumber)){
+                    $scope.page.pageSizeEdit = $scope.pager.pageSize;
+                    return;
+                }
+
+                $scope.pager.pageSize = pageSizeEditNumber;
                 $scope.refetchData({pager: $scope.pager, sortColumn: $scope.sortColumn});
             };
 
             $scope.jumpToPage = function(){
-                if($scope.pager && $scope.pager.page && $scope.pager.pageCount && $scope.pager.page > $scope.pager.pageCount){
-                    $scope.pager.page = $scope.pager.pageCount;
+                var pageEdit = $scope.pager.pageEdit;
+                if(isNaN(pageEdit)){
+                    $scope.pager.pageEdit = $scope.pager.page;
+                    return;
                 }
-                $scope.refetchData({pager: $scope.pager, sortColumn: $scope.sortColumn});
-                
+
+                var pageEditNumber = Number(pageEdit);
+                if (!Number.isSafeInteger(pageEditNumber)){
+                    $scope.page.pageEdit = $scope.pager.page;
+                    return;
+                }
+
+                $scope.pager.page = pageEditNumber;
+                $scope.refetchData({pager: $scope.pager, sortColumn: $scope.sortColumn});                
             };
         }
     }
