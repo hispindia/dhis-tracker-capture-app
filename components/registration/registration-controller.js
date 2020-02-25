@@ -250,14 +250,14 @@ trackerCapture.controller('RegistrationController',
             if($scope.optionSets[key].code == 'ImplementingAgency' ){
                 for( var j=0; j<$scope.optionSets[key].options.length; j++ ){
                     if ( $scope.optionSets[key].options[j].id === $scope.ImplementingAgency ){
-                        $scope.ImplementingAgencyAttrValue = $scope.optionSets[key].options[j].code;
+                        $scope.ImplementingAgencyAttrValue = $scope.optionSets[key].options[j].displayName;
                     }
                 }
             }
             if ( $scope.optionSets[key].code == 'ImplementingPartner' ){
                 for( var j=0; j<$scope.optionSets[key].options.length; j++ ){
                     if ( $scope.optionSets[key].options[j].id === $scope.ImplementingPartner ){
-                        $scope.ImplementingPartnerAttrValue = $scope.optionSets[key].options[j].code;
+                        $scope.ImplementingPartnerAttrValue = $scope.optionSets[key].options[j].displayName;
                     }
                     //else {
                     //    $scope.ImplementingPartnerAttrValue = '';
