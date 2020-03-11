@@ -542,7 +542,8 @@ trackerCapture.controller('RegistrationController',
                                     //alert( $scope.model.savingRegistration );
                                     // update for PLAN for custom_id_generation
 
-                                    if ($scope.selectedProgram.id == "y6lXVg8TdOj" && $scope.selectedTei.KLSVjftH2xS != undefined )
+                                    if ( ( $scope.selectedProgram.id == "y6lXVg8TdOj"  || $scope.selectedProgram.id == "aYkLHnoPNo5")
+                                        && $scope.selectedTei.KLSVjftH2xS != undefined )
                                     {
                                         $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
                                     }
@@ -550,40 +551,43 @@ trackerCapture.controller('RegistrationController',
                                     {
                                         $scope.projectDonor = $scope.selectedTei.o94ggG6Mhx8;
                                     }
-                                    $scope.model.savingRegistration = true;
-                                    CustomIDGenerationService.validateAndCreateCustomId($scope.tei,$scope.selectedProgram.id,$scope.attributes,destination,$scope.optionSets,$scope.attributesById,$scope.selectedEnrollment.enrollmentDate, $scope.projectDonor).then(function( customIdGeneratedResponse ){
-                                        console.log( " 2 " + customIdGeneratedResponse );
-                                        if( customIdGeneratedResponse.status === 'SUCCESS' ){
-                                            $timeout(function () {
-                                                if (dhis2Events.events.length > 0) {
-                                                    DHIS2EventFactory.create(dhis2Events).then(function () {
+                                    else if ( $scope.selectedProgram.id === "VscnMM6g6Ow" && $scope.selectedTei.KLSVjftH2xS != undefined)
+                                    {
+                                        $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
+                                    }
+
+                                    if ($scope.registrationMode === 'REGISTRATION' ) {
+                                        $scope.model.savingRegistration = true;
+                                        CustomIDGenerationService.validateAndCreateCustomId($scope.tei, $scope.selectedProgram.id, $scope.attributes, destination, $scope.optionSets, $scope.attributesById, $scope.selectedEnrollment.enrollmentDate, $scope.projectDonor).then(function (customIdGeneratedResponse) {
+                                            console.log(" 2 " + customIdGeneratedResponse);
+                                            if (customIdGeneratedResponse.status === 'SUCCESS') {
+                                                $timeout(function () {
+                                                    if (dhis2Events.events.length > 0) {
+                                                        DHIS2EventFactory.create(dhis2Events).then(function () {
+                                                            notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                                            $scope.model.savingRegistration = false;
+                                                        });
+                                                    } else {
                                                         notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
                                                         $scope.model.savingRegistration = false;
-                                                    });
-                                                } else {
-                                                    notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
-                                                    $scope.model.savingRegistration  = false;
-                                                }
-                                            });
-                                        }
-                                        else{
-                                            $scope.model.savingRegistration = true;
-                                        }
-                                    });
-
-                                    // update for PLAN for custom_id_generation  id close
-
-                                    /*
-                                    if (dhis2Events.events.length > 0) {
-                                        DHIS2EventFactory.create(dhis2Events).then(function () {
-                                            //alert( $scope.model.savingRegistration );
-                                            notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                                    }
+                                                });
+                                            }
+                                            else {
+                                                $scope.model.savingRegistration = true;
+                                            }
                                         });
                                     }
-                                    else {
-                                        notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                    else{
+                                        $scope.model.savingRegistration = false;
+                                        if (dhis2Events.events.length > 0) {
+                                            DHIS2EventFactory.create(dhis2Events).then(function () {
+                                                notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                            });
+                                        } else {
+                                            notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                        }
                                     }
-                                    */
                                 }
                                 else {
                                     //enrollment has failed
