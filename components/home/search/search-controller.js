@@ -101,7 +101,7 @@ trackerCapture.controller('SearchController',function(
             deferred.resolve();
             return deferred.promise;
         }
-        var searching = false;
+        $scope.searching = null;
 
         var programScopeSearch =  function(programSearchGroup){
             return SearchGroupService.search(programSearchGroup, $scope.base.selectedProgram,$scope.trackedEntityTypes.selected, $scope.selectedOrgUnit, searchScopes.PROGRAM).then(function(res)
@@ -130,57 +130,83 @@ trackerCapture.controller('SearchController',function(
         }
 
         $scope.search = function(searchGroup){
-            if(!searching){
-                searching = true;
+            if(!$scope.searching){
+                $scope.searching = searchGroup.id;
                 if(!SearchGroupService.isValidSearchGroup(searchGroup, $scope.base.attributesById)){
                     searchGroup.error = true;
-                    searching = false; 
+                    $scope.searching = null; 
                     return;
                 }
-            }
-            var promise;
-            if(currentSearchScope === searchScopes.PROGRAM){
-                var tetSearchGroup = SearchGroupService.findValidTetSearchGroup(searchGroup, $scope.tetSearchConfig, $scope.base.attributesById);
-                promise = SearchGroupService.programScopeSearch(searchGroup,tetSearchGroup, $scope.base.selectedProgram,$scope.trackedEntityTypes.selected, $scope.selectedOrgUnit)
-            }else{
-                promise = SearchGroupService.tetScopeSearch(searchGroup,$scope.trackedEntityTypes.selected, $scope.selectedOrgUnit);
-            }
 
-            
-            return promise.then(function(res){
-                //If only one tei found and in selectedOrgUnit, go straight to dashboard
-                if(res && res.data && res.data.rows){
-                    if(res.data.rows.length === 1) {
+                const showOnlyDisplayInListAttributes = (headers, attributesContainer) => {
+                    const attributeHeaders = headers.slice(7);
+                    attributeHeaders
+                        .forEach(attributeHeader => {
+                            const foundAttributeContainer = attributesContainer.find(attributeContainer => (attributeContainer.trackedEntityAttribute && attributeContainer.trackedEntityAttribute.id)  === attributeHeader.name);
+                            if (foundAttributeContainer && !foundAttributeContainer.displayInList) {
+                                attributeHeader.hideInList = true;
+                            }
+                        });
+                    return headers;
+                };
+                
+                var promise;
+                if(currentSearchScope === searchScopes.PROGRAM){
+                    var tetSearchGroup = SearchGroupService.findValidTetSearchGroup(searchGroup, $scope.tetSearchConfig, $scope.base.attributesById);
+                    promise = SearchGroupService.programScopeSearch(
+                        searchGroup,
+                        tetSearchGroup,
+                        $scope.base.selectedProgram,
+                        $scope.trackedEntityTypes.selected,
+                        $scope.selectedOrgUnit,
+                        { skipTotalPages: true },
+                        undefined,
+                        showOnlyDisplayInListAttributes,
+                    );
+                }else{
+                    promise = SearchGroupService.tetScopeSearch(
+                        searchGroup,
+                        $scope.trackedEntityTypes.selected,
+                        $scope.selectedOrgUnit,
+                        { skipTotalPages: true },
+                        undefined,
+                        showOnlyDisplayInListAttributes,
+                    );
+                }
+
+                return promise.then(function(res){
+                    //If only one tei found and in selectedOrgUnit, go straight to dashboard
+                    var rowsCnt = (res && res.data && res.data.rows && res.data.rows.length) || 0;
+                    if(rowsCnt === 1) {
                         var gridData = TEIGridService.format($scope.selectedOrgUnit.id, res.data, false, $scope.base.optionSets, null);
 
                         //Open TEI if unique and in same search scope and in selected org unit
                         if(gridData.rows.own.length ===1 && res.callingScope === res.resultScope && searchGroup.uniqueGroup){
-                            searching = false;
+                            $scope.searching = null;
                             openTei(gridData.rows.own[0]);
                             return;
                         }
-                    }
-                    
-                    if(res.data.rows.length > 0) {
+                    } else if(rowsCnt > 0){
                         var teiList = [];
                         
-                        angular.forEach(res.data.rows.own, function(ownTei) {
-                            teiList.push(ownTei.id);
-                        });
                         angular.forEach(res.data.rows.own, function(ownTei) {
                             teiList.push(ownTei.id);
                         });
 
                         var potentialDuplicatesPromise = TEIService.getPotentialDuplicates(teiList);
                         return potentialDuplicatesPromise.then(function(duplicates) {
-                            return showResultModal(res, searchGroup, duplicates.identifiableObjects ? duplicates.identifiableObjects : []).then(function(){ searching = false;});
+                            $scope.searching = null;
+                            return showResultModal(res, searchGroup, duplicates.identifiableObjects ? duplicates.identifiableObjects : []);
                         });
                     }
-                }
-
-                
-            });
-
+                    $scope.searching = null;
+                    return showResultModal(res, searchGroup);
+                })
+                .catch(function(error){
+                    console.log("could not execute search");
+                    $scope.searching = null;
+                });
+            }
         }
 
         var openTei = function(tei, fromAudit){
@@ -256,19 +282,6 @@ trackerCapture.controller('SearchController',function(
 
             res.existingDuplicates = existingDuplicates;
 
-            var refetch;
-            if(currentSearchScope === searchScopes.PROGRAM) {
-                var tetSearchGroup = SearchGroupService.findValidTetSearchGroup(searchGroup, $scope.tetSearchConfig, $scope.base.attributesById);
-                refetch = function(pager) {
-                    return SearchGroupService.programScopeSearch(searchGroup,tetSearchGroup, $scope.base.selectedProgram,$scope.trackedEntityTypes.selected, $scope.selectedOrgUnit, pager);
-                } 
-            } else {
-                refetch = function(pager) {
-                    return SearchGroupService.tetScopeSearch(searchGroup,$scope.trackedEntityTypes.selected, $scope.selectedOrgUnit, pager);
-                };
-
-            }
-
             return $modal.open({
                 templateUrl: 'components/home/search/result-modal.html',
                 controller: function($scope,$modalInstance, TEIGridService,OrgUnitFactory, orgUnit, res, refetchDataFn, internalService, canOpenRegistration, TEIService, NotificationService)
@@ -284,7 +297,10 @@ trackerCapture.controller('SearchController',function(
                             $scope.gridData = TEIGridService.format(orgUnit.id, res.data, false, internalService.base.optionSets, null);
                         }
                         $scope.notInSameScope = res.callingScope != res.resultScope;
-                        $scope.pager = res.data && res.data.metaData ? res.data.metaData.pager : null;
+                        $scope.pager = {
+                            ...(res.data && res.data.metaData && res.data.metaData.pager),
+                            skipTotalPages: true
+                        };
     
                         if(res.status === "UNIQUE"){
                             $scope.isUnique = true;
@@ -361,18 +377,30 @@ trackerCapture.controller('SearchController',function(
                     }
 
                     $scope.refetchData = function(pager, sortColumn){
-                        refetchDataFn(pager, sortColumn).then(function(newRes)
-                        {
-                            res = newRes;
-                            loadData();
-                        });
+                        refetchDataFn(pager, sortColumn)
+                            .then(function(response){
+                                if(response && response.rows && response.rows.length > 0){
+                                    $scope.gridData = TEIGridService.format(orgUnit.id, response, false, internalService.base.optionSets, null);
+                                }
+                                else {
+                                    $scope.gridData = [];
+                                }
+                            })
+                            .catch(function(error){
+                                $scope.gridData = null;
+                                if(error && error.data && error.data.message === "maxteicountreached"){
+                                    $scope.tooManySearchResults = true;
+                                } else {
+                                    $scope.error = true;
+                                    console.log(error);
+                                }
+                            });
                     }
                 },
                 resolve: {
                     refetchDataFn: function(){
-                        return refetch;
+                        return res.onRefetch;
                     },
-
                     orgUnit: function(){
                         return $scope.selectedOrgUnit;
                     },
