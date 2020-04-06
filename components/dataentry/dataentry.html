@@ -50,7 +50,7 @@
         </div>       
     </div>
 
-    <div ng-show="dataentryWidget.expand" class="panel-body dashboard-widget-container">        
+    <div ng-show="dataentryWidget.expand" class="panel-body dashboard-widget-container" ng-if="editProfile()">        
         <div ng-if="showSelf">
             <div>
                 <div ng-if="model.showLegend">

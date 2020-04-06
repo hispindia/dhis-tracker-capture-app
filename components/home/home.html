@@ -72,7 +72,11 @@
         
             <div>
                 <ul class="nav nav-pills small-vertical-spacing hideInPrint" style="padding-left:15px;">
-                    <li ng-repeat="view in views" ng-class="{'active' : view.name === currentView.name}" ng-click="setCurrentView(view)" ng-if="!view.disabled"><a href="">{{view.name}}</a></li>
+                    <li ng-repeat="view in views" ng-class="{'active' : view.name === currentView.name}" ng-click="setCurrentView(view)" ng-if="!view.disabled">
+                        <!-- <span ng-if = "hideRegister(view.name)" > -->
+                            <a ng-if = "hideRegister(view.name)" href="">{{view.name}}</a>
+                        <!-- </span> -->
+                    </li>
                 </ul>
             </div>
         </div>
@@ -83,6 +87,4 @@
         <div class="row" ng-if="!selectedProgram || (selectedProgram && hasProgramTetAccess())">
             <div ng-repeat="view in views" ng-class="view.class" ng-include="view.template" ng-if="(view.name === currentView.name && view.shouldReset) || (!view.shouldReset && view.loaded)" ng-show="view.name === currentView.name && ((view.loaded && !view.shouldReset) || view.shouldReset)"></div>
         </div>
-</div>           
-
-
+    </div></div>

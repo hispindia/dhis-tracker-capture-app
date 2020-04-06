@@ -55,7 +55,7 @@
                     </span>
                 </a>                
             </div>
-            <div>
+            <div ng-hide="myValidation()">
                 <a href class="disable-link-effects" ng-click="useMainMenu ? showCreateEventIfStageNeedsEvent(selectedMainMenuStage, eventCreationActions.schedule, false, true) : showCreateEvent(null, eventCreationActions.schedule)" ng-attr-title="{{'schedule_new'| translate}}">
                     <span class="stage-tasks-badge" ng-class="useMainMenu ? {'stage-tasks-badge-disabled': !stageNeedsEventOfType(selectedMainMenuStage, eventCreationActions.schedule)} : ''">                                     
                         <span><i class="fa fa-calendar vertical-center"></i></span>                

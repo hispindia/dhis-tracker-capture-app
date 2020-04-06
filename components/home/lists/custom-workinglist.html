@@ -1,10 +1,7 @@
-
-
-
 <table class="table dhis2-list-table-striped dhis2-table-hover">
     <tr>
         <td>{{'ou_search_scope'| translate}}</td>
-        <td>                    
+        <td>
             <label><input type="radio" ng-model="customWorkingListValues.ouMode.name" name="selected" ng-attr-value="SELECTED"> {{'SELECTED'| translate}}</label><br/>
             <label><input type="radio" ng-model="customWorkingListValues.ouMode.name" name="children" ng-attr-value="CHILDREN"> {{'CHILDREN'| translate}}</label><br/>
             <label><input type="radio" ng-model="customWorkingListValues.ouMode.name" name="descendants" ng-attr-value="DESCENDANTS"> {{'DESCENDANTS'| translate}}</label><br/>
@@ -36,8 +33,6 @@
                 min-date="customWorkingListValues.enrollment.programEnrollmentStartDate ? customWorkingListValues.enrollment.programEnrollmentStartDate : ''"
                 max-date="base.selectedProgram.selectEnrollmentDatesInFuture ? '' : 0"
                 ng-model="customWorkingListValues.enrollment.programEnrollmentEndDate"/>
-
-
         </td>
     </tr>
     <tr ng-if="base.selectedProgram && base.selectedProgram.displayIncidentDate">
@@ -127,10 +122,10 @@
 </table>
 
 
-<div class="horizontal-spacing">
+<div class="horizontal-spacing" >
 <button type="button"
         class="btn btn-primary dropdown-toggle"
         ng-click="setCustomWorkingList()" data-toggle="dropdown">
     {{'search'| translate}}
-</button>        
+</button>
 </div>

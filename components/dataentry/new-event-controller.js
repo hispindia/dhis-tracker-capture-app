@@ -1,4 +1,3 @@
-
 /* global trackerCapture, angular */
 
 var trackerCapture = angular.module('trackerCapture');
@@ -32,7 +31,9 @@ trackerCapture.controller('EventCreationController',
                 ModalService,
                 CurrentSelection,
                 TEIService,
-                TCOrgUnitService) {
+                TCOrgUnitService,
+                SessionStorageService,
+                UPHMISCustomService) {
     $scope.selectedOrgUnit = orgUnit;
     $scope.selectedEnrollment = enrollment;      
     $scope.stages = stages;
@@ -55,6 +56,7 @@ trackerCapture.controller('EventCreationController',
     $scope.periods = [];
     $scope.hasFuturePeriod = false;
     $scope.today = DateUtils.getToday();
+    $scope.checkUserRoleForDate;
     
     if( $scope.isScheduleEvent ){        
         $scope.stages = $filter('filter')(stages, {hideDueDate: false});
@@ -81,7 +83,8 @@ trackerCapture.controller('EventCreationController',
             $scope.referenceOffset = angular.copy( dummyEvent.periodOffset );
             $scope.hasFuturePeriod = angular.copy( dummyEvent.hasFuturePeriod );
             $scope.dhis2Event.selectedPeriod = dummyEvent.periods[0];
-            $scope.periods = PeriodService.managePeriods($scope.periods, $scope.isNewEvent);
+            console.log($scope.isNewEvent);
+            $scope.periods = PeriodService.managePeriods(dummyEvent.periods, $scope.isNewEvent);
         }
     };
     
@@ -202,75 +205,84 @@ trackerCapture.controller('EventCreationController',
     };
 
     $scope.save = function () {
-        $scope.lockButton = true;
-        $scope.getCategoryOptions();
+
+        // Custom function for UPHMIS
+        $scope.validEventDate = $scope.dhis2Event.eventDate;
         
-        //check for form validity
-        $scope.eventCreationForm.submitted = true;        
-        if( $scope.eventCreationForm.$invalid ){
-            return false;
-        }
-        
-        if($scope.isReferralEvent && !$scope.selectedSearchingOrgUnit){
-            $scope.orgUnitError = true;
-            return false;
-        }        
-        
-        $scope.orgUnitError =  false;
-        
-        var newEvents = {events: []};
-        var newEvent = {
-            trackedEntityInstance: dummyEvent.trackedEntityInstance,
-            program: dummyEvent.program,
-            programStage: dummyEvent.programStage,
-            enrollment: dummyEvent.enrollment,
-            orgUnit: dummyEvent.orgUnit,
-            notes: [],
-            dataValues: [],
-            status: 'ACTIVE'
-        };
-        
-        if ($scope.model.selectedStage.periodType) {
-            if( $scope.isNewEvent ){
-                newEvent.eventDate = DateUtils.formatFromUserToApi( $scope.dhis2Event.selectedPeriod.endDate );
+        //
+            if (UPHMISCustomService.uphmisCheckIfEventAlreadyExistsForSelDate($scope.validEventDate,$scope.events,dummyEvent.programStage)){
+
+                alert('Unable to create a new event!!');
             }
             else{
-                newEvent.dueDate = DateUtils.formatFromUserToApi( $scope.dhis2Event.selectedPeriod.endDate );
-            }
-        }
-        else{
-            if( $scope.isNewEvent ){
-                newEvent.eventDate = DateUtils.formatFromUserToApi($scope.dhis2Event.eventDate);
-            }
-            else{
-                newEvent.dueDate = DateUtils.formatFromUserToApi($scope.dhis2Event.dueDate);
-            }
-        }
-
-        newEvent.status = newEvent.eventDate ? 'ACTIVE' : 'SCHEDULE';
+                $scope.lockButton = true;
+                $scope.getCategoryOptions();
+                
+                //check for form validity
+                $scope.eventCreationForm.submitted = true;        
+                if( $scope.eventCreationForm.$invalid ){
+                    return false;
+                }
+                
+                if($scope.isReferralEvent && !$scope.selectedSearchingOrgUnit){
+                    $scope.orgUnitError = true;
+                    return false;
+                }        
+                
+                $scope.orgUnitError =  false;
+                
+                var newEvents = {events: []};
+                var newEvent = {
+                    trackedEntityInstance: dummyEvent.trackedEntityInstance,
+                    program: dummyEvent.program,
+                    programStage: dummyEvent.programStage,
+                    enrollment: dummyEvent.enrollment,
+                    orgUnit: dummyEvent.orgUnit,
+                    notes: [],
+                    dataValues: [],
+                    status: 'ACTIVE'
+                };
+                
+                if ($scope.model.selectedStage.periodType) {
+                    if( $scope.isNewEvent ){
+                        newEvent.eventDate = DateUtils.formatFromUserToApi( $scope.dhis2Event.selectedPeriod.endDate );
+                    }
+                    else{
+                        newEvent.dueDate = DateUtils.formatFromUserToApi( $scope.dhis2Event.selectedPeriod.endDate );
+                    }
+                }
+                else{
+                    if( $scope.isNewEvent ){
+                        newEvent.eventDate = DateUtils.formatFromUserToApi($scope.dhis2Event.eventDate);
+                    }
+                    else{
+                        newEvent.dueDate = DateUtils.formatFromUserToApi($scope.dhis2Event.dueDate);
+                    }
+                }
+                newEvent.status = newEvent.eventDate ? 'ACTIVE' : 'SCHEDULE';
         
-        //for saving category combo
-        if ($scope.selectedProgram.categoryCombo && !$scope.selectedProgram.categoryCombo.isDefault) {
-            if ($scope.selectedOptions.length !== $scope.selectedCategories.length) {
-                $scope.lockButton = false;
-                NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("fill_all_category_options"));
-                return;
+                //for saving category combo
+                if ($scope.selectedProgram.categoryCombo && !$scope.selectedProgram.categoryCombo.isDefault) {
+                    if ($scope.selectedOptions.length !== $scope.selectedCategories.length) {
+                        $scope.lockButton = false;
+                        NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("fill_all_category_options"));
+                        return;
+                    }
+                    newEvent.attributeCategoryOptions = $scope.selectedOptions.join(';');
+                }
+                
+                newEvents.events.push(newEvent);
+                DHIS2EventFactory.create(newEvents).then(function (response) {
+                    if (response && response.response && response.response.importSummaries[0].status === 'SUCCESS') {
+                        newEvent.event = response.response.importSummaries[0].reference;
+                        $modalInstance.close({dummyEvent: dummyEvent, ev: newEvent});
+                    } else {
+                        $scope.eventCreationForm.submitted = false;
+                    }
+                    $scope.lockButton = false;
+                });
             }
-            newEvent.attributeCategoryOptions = $scope.selectedOptions.join(';');
-        }
-
-        newEvents.events.push(newEvent);
-        DHIS2EventFactory.create(newEvents).then(function (response) {
-            if (response && response.response && response.response.importSummaries[0].status === 'SUCCESS') {
-                newEvent.event = response.response.importSummaries[0].reference;
-                $modalInstance.close({dummyEvent: dummyEvent, ev: newEvent});
-            } else {
-                $scope.eventCreationForm.submitted = false;
-            }
-            $scope.lockButton = false;
-        });
     };
-
     //Start referral logic
     $scope.setSelectedSearchingOrgUnit = function(orgUnit){
         $scope.selectedSearchingOrgUnit = orgUnit;
@@ -365,4 +377,57 @@ trackerCapture.controller('EventCreationController',
         orgUnit.hasSelectedProgram = false;
         return false;
      };
+
+     // Custom Changes for UPHMIS
+
+     $scope.currentUserName = '';
+     $scope.isValidProgram = false;
+     $scope.superUserAuthority = "";
+
+     //getting user details
+
+     $scope.currentUserDetail = SessionStorageService.get('USER_PROFILE');
+     $scope.currentUserDetails = $scope.currentUserDetail.userCredentials
+     $scope.currentUserName = $scope.currentUserDetails.username;
+     $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
+     for (var i = 0; i < $scope.currentUserRoles.length; i++) {
+         $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
+         for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
+             if ($scope.currentUserRoleAuthorities[j] === "ALL") {
+                 //$scope.accessAuthority = true;
+                 $scope.superUserAuthority = "YES";
+                 break;
+             }
+         }
+     }
+
+     if( $scope.superUserAuthority == 'YES'){
+            $scope.checkUserRoleForDate = true;
+        }
+        else
+        {
+            $scope.checkUserRoleForDate = false;
+        }
+
+     //Validate Program validation
+
+     $scope.currentProgramDetail = $scope.selectedProgram;
+     var programAttributeLength = $scope.currentProgramDetail.attributeValues.length;
+     for (var i = 0; i < programAttributeLength; i++) {
+         if ($scope.currentProgramDetail.attributeValues[i].attribute.code === 'pbfProgram' && $scope.currentProgramDetail.attributeValues[i].value === 'true') {
+             $scope.isValidProgram = true;
+             break;
+         }
+     }
+
+     $scope.checkUserRole = function () {
+        if($scope.isValidProgram)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+     }
 });

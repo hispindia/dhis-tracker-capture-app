@@ -71,23 +71,6 @@
                     </div>
                 </span>
 
-                <span ng-switch-when="AGE">
-                    <div class="col-xs-12" ng-if="attribute.unique">
-                        <input type="text" ng-attr-placeholder="{{'exact_date'| translate}}" class="form-control" d2-date ng-model="searchGroup[attribute.id].exactValue"/>
-                    </div>
-                    <div class="col-xs-3 no-padding" ng-if="!attribute.unique">
-                        <select ng-model="attribute.operator" ng-init="attribute.operator = defaultOperators[0]" class="form-control" ng-options="operator | translate for operator in defaultOperators">
-                        </select>
-                    </div>
-                    <div class="col-xs-9 no-padding" ng-if="attribute.operator === defaultOperators[0] && !attribute.unique">
-                        <input type="text" ng-attr-placeholder="{{'exact_date'| translate}}" class="form-control" d2-date ng-model="searchGroup[attribute.id].exactValue"/>
-                    </div>
-                    <div class="col-xs-9 no-padding" ng-if="attribute.operator === defaultOperators[1] && !attribute.sunique">
-                        <div class="col-xs-6 no-padding"><input type="text" ng-attr-placeholder="{{'start_date'| translate}}" class="form-control" d2-date ng-model="searchGroup[attribute.id].startValue"/></div>
-                        <div class="col-xs-6 no-padding"><input type="text" ng-attr-placeholder="{{'end_date'| translate}}" class="form-control" d2-date ng-model="searchGroup[attribute.id].endValue"/></div>
-                    </div>
-                </span>
-
                 <span ng-switch-when="DATETIME">
                     <div class="col-xs-12 no-padding" ng-if="attribute.unique">
                         <select ng-model="attribute.operator" class="form-control" ng-options="operator | translate for operator in defaultOperators">
@@ -184,10 +167,7 @@
         <div class="form-group search-tei-form-button">
             <div class="col-md-12 text-center" style="height:34px;line-height:34px;">
                 <span ng-if="!searchGroup.uniqueGroup" ng-class="{ 'error' : searchGroup.error}" ng-if="searchGroup.minAttributesRequiredToSearch">Fill in at least {{searchGroup.minAttributesRequiredToSearch}} {{searchGroup.minAttributesRequiredToSearch === 1 ? 'attribute' : 'attributes'}} to search</span>
-                <button ng-disabled="searching" class="btn btn-default btn-tei-search pull-right" ng-click="search(searchGroup)">
-                    <span ng-if="searching !== searchGroup.id" class="fa fa-search-plus"></span>
-                    <span ng-if="searching === searchGroup.id" class="fa fa-spinner fa-spin"></span>
-                </button>
+                <button class="btn btn-default pull-right" ng-click="search(searchGroup)"><span class="fa fa-search-plus"></span></button>
             </div>
 
         </div>

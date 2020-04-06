@@ -6,7 +6,7 @@ trackerCapture.controller('MessagingController',
                 MessagingService,
                 CurrentSelection) {
 
-    $scope.messagingForm = {};
+    //$scope.messagingForm = {};
     $scope.note = {};
     $scope.message = {};
     $scope.showMessagingDiv = false;
@@ -38,10 +38,9 @@ trackerCapture.controller('MessagingController',
         }
     });
 
-    $scope.sendMessage = function(messagingForm){
+    $scope.sendMessage = function(){
         var message;
         //check for form validity
-        $scope.messagingForm = messagingForm;
         $scope.messagingForm.submitted = true;
         if ($scope.messagingForm.$invalid) {
             return false;

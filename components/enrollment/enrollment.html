@@ -10,7 +10,7 @@
             <a ng-show="userAuthority.canAdministerDashboard || !lockedList[selectedProgram.id]" class="small-horizontal-spacing" href ng-click="removeWidget(enrollmentWidget)" ng-attr-title="{{removeLabel}}"><i class="fa fa-times-circle"></i></a>            
         </span>
     </div>
-    <div ng-show="enrollmentWidget.expand" class="panel-body dashboard-widget-container">
+    <div ng-show="enrollmentWidget.expand" class="panel-body dashboard-widget-container" ng-if="editProfile()">
         
         <div>
             <!-- operations on selected enrollment begins -->

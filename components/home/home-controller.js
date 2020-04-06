@@ -1,3 +1,4 @@
+
 var trackerCapture = angular.module('trackerCapture');
 
 trackerCapture.controller('HomeController',function(
@@ -8,6 +9,7 @@ trackerCapture.controller('HomeController',function(
     $filter,
     $timeout,
     $q,
+    $http,
     Paginator,
     MetaDataFactory,
     DateUtils,
@@ -24,13 +26,21 @@ trackerCapture.controller('HomeController',function(
     orderByFilter,
     TEService,
     AccessUtils,
-    TeiAccessApiService) {
+    TeiAccessApiService,
+    SessionStorageService) {
         TeiAccessApiService.setAuditCancelledSettings(null);
         $scope.trackedEntityTypesById ={};
         var previousProgram = null;
         $scope.base = {};
         $scope.APIURL = DHIS2URL;
-        
+
+   		$scope.isValidProgram = false;
+
+        $scope.superUserAuthority = "";
+
+        $scope.pbfUserAuthority = "";
+	
+	
         var viewsByType = {
             registration: {
                 name: "Register",
@@ -104,6 +114,8 @@ trackerCapture.controller('HomeController',function(
             });
         });
 
+
+
         $scope.$watch('selectedOrgUnit', function(a,b,c) {
             if( angular.isObject($scope.selectedOrgUnit) && !$scope.selectedOrgUnit.loaded){
                 loadOrgUnit()
@@ -127,7 +139,6 @@ trackerCapture.controller('HomeController',function(
                 return;
             }
             $scope.setCurrentView(viewToSet);
-
         }
 
         var loadOrgUnit = function(){
@@ -139,26 +150,37 @@ trackerCapture.controller('HomeController',function(
             }
             return resolvedEmptyPromise();
         }
-
+/*
         var loadPrograms = function(){
             return ProgramFactory.getProgramsByOu($scope.selectedOrgUnit,true, previousProgram).then(function(response){
                 $scope.programs = response.programs;
-                var programIdFromURL = ($location.search()).program;
-                var fullProgram = null;
-                if(programIdFromURL) {
-                    fullProgram = $scope.programs.find(function(program) {
-                        return program.id === programIdFromURL;
-                      });
-                }
-                
-                if(fullProgram) {
-                    $scope.setProgram(fullProgram);
-                } else {
-                    $scope.setProgram(response.selectedProgram);
-                }
+                $scope.setProgram(response.selectedProgram);
             });
-        }
+            
+        }*/
 
+
+	var loadPrograms = function(){
+        return ProgramFactory.getProgramsByOu($scope.selectedOrgUnit,true, previousProgram).then(function(response){
+            $scope.programs = response.programs;
+
+            var programIdFromURL = ($location.search()).program;
+            var fullProgram = null;
+            if(programIdFromURL) {
+                fullProgram = $scope.programs.find(function(program) {
+                    return program.id === programIdFromURL;
+                });
+            }
+
+            if(fullProgram) {
+                $scope.setProgram(fullProgram);
+            } else {
+                $scope.setProgram(response.selectedProgram);
+            }
+            console.log("-----------------"+Object.entries($scope.userCredentials));
+ });
+            
+        }
         var loadCachedData = function(){
             var frontPageData = CurrentSelection.getFrontPageData();
             if(frontPageData){
@@ -207,13 +229,22 @@ trackerCapture.controller('HomeController',function(
             if(!$scope.base.selectedProgram || !$scope.base.selectedProgram.displayFrontPageList) {
                 $scope.views[0].disabled = true;
                 defaultView = $scope.views[1];
-            } else {
+            }
+            else if($scope.base.selectedProgram.id === 'Bv3DaiOd5Ai')
+            {
+                if($scope.superUserAuthority !== 'YES'){
+                    $scope.views[2].disabled = true;
+                }
+                else{
+                    $scope.views[2].disabled = false;
+                    defaultView = $scope.views[0];
+                }
+            }
+            else {
                 $scope.views[0].disabled = false;
             }
-
             resetView(defaultView);
-            loadCanRegister();      
-
+            loadCanRegister();
         }
         var loadCanRegister = function(){
             if($scope.selectedProgram){
@@ -250,11 +281,6 @@ trackerCapture.controller('HomeController',function(
             if(!view.shouldReset){
                 view.loaded = true;
             }
-
-            if($scope.selectedProgram) {
-                $location.path('/').search({program: $scope.selectedProgram.id}); 
-            }
-
             loadCanRegister();
         }
 
@@ -295,5 +321,88 @@ trackerCapture.controller('HomeController',function(
 
             }
           });
+
+        // getting user details
+
+        $scope.usernameAttributeId ='GCyx4hTzy3j';
+
+        // $scope.currentUserDetail = SessionStorageService.get('USER_PROFILE');
+        // $scope.currentUserDetails = $scope.currentUserDetail.userCredentials
+        // $scope.currentUserName = $scope.currentUserDetails.username;
+
         
+
+        $http.get('../api/me.json?fields=[id,name,userCredentials]&skipPaging=true')
+        .then(function(response) {
+            $scope.userCredentials = response.data.userCredentials;
+            $scope.currentUserName = response.data.userCredentials.username;
+        });
+
+    var getSuperUser = function () {
+        $scope.currentUserDetail = SessionStorageService.get('USER_PROFILE');
+        $scope.currentUserDetails = $scope.currentUserDetail.userCredentials
+        $scope.currentUserName = $scope.currentUserDetails.username;
+        $scope.currentUserRoles = $scope.currentUserDetails.userRoles;
+        for (var i = 0; i < $scope.currentUserRoles.length; i++) {
+            $scope.currentUserRoleAuthorities = $scope.currentUserRoles[i].authorities;
+
+            if($scope.currentUserDetails.userRoles[i].id === 'Y9nNqnTdMMX'){    $scope.pbfUserAuthority = "YES"; }
+
+            for (var j = 0; j < $scope.currentUserRoleAuthorities.length; j++) {
+                if ($scope.currentUserRoleAuthorities[j] === "ALL") {
+                    //$scope.accessAuthority = true;
+                    $scope.superUserAuthority = "YES";
+                    break;
+                }
+            }
+        }
+    }
+
+    var loadUserPrograms = function () {
+        $scope.programs = $scope.userCredentials.programs;
+    }
+          $scope.hideRegister = function (viewName) {
+              if(viewName === 'Register')
+              {
+                if ($scope.selectedOrgUnit != undefined && $scope.currentUserName != undefined) {
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        async: false,
+                        contentType: "application/json",
+                        url: '../api/trackedEntityInstances.json?fields=trackedEntityInstance&filter=' + $scope.usernameAttributeId + ':EQ:' + $scope.currentUserName + '&ou=' + $scope.selectedOrgUnit.id + '&skipPaging=true',
+                        success: function (responseData) {
+                            $scope.trackedEntities = responseData.trackedEntityInstances;
+                            //alert($scope.trackedEntities);
+                        }
+                    });
+                }
+                if ($scope.selectedProgram != undefined) {
+                    $scope.isValidProgram = false;
+                    for (var i = 0; i < $scope.selectedProgram.attributeValues.length; i++) {
+                        if ($scope.selectedProgram.attributeValues[i].attribute.code === 'pbfProgram' && $scope.selectedProgram.attributeValues[i].value == "true") {
+                            $scope.isValidProgram = true;
+                            break;
+                        }
+                    }                
+                }
+                if ($scope.selectedProgram != undefined) {
+                    if($scope.isValidProgram){
+                        if ($scope.trackedEntities.length > 0) {
+                            return false
+                        }
+                        else {
+                            return true
+                        }
+                    }
+                    else {
+                        return true
+                    }
+                }   
+            }
+            else if(viewName != 'Register'){
+                    return true
+            }
+        }
+
 });
