@@ -8,3 +8,5 @@ build/
 target/
 nbproject/*
 .DS_Store
+i18n/i18n_app_nb.properties
+i18n/i18n_app_zh_CN.properties
