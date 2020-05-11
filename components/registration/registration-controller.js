@@ -542,18 +542,14 @@ trackerCapture.controller('RegistrationController',
                                     //alert( $scope.model.savingRegistration );
                                     // update for PLAN for custom_id_generation
 
-                                    if ( ( $scope.selectedProgram.id == "y6lXVg8TdOj"  || $scope.selectedProgram.id == "aYkLHnoPNo5")
-                                        && $scope.selectedTei.KLSVjftH2xS != undefined )
+                                    if ( ( $scope.selectedProgram.id == "y6lXVg8TdOj"  || $scope.selectedProgram.id == "aYkLHnoPNo5"
+                                        || $scope.selectedProgram.id === "VscnMM6g6Ow")  && $scope.selectedTei.KLSVjftH2xS != undefined )
                                     {
                                         $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
                                     }
                                     else if ( $scope.selectedProgram.id  == "Fcyldy4VqSt" && $scope.selectedTei.o94ggG6Mhx8 != undefined)
                                     {
                                         $scope.projectDonor = $scope.selectedTei.o94ggG6Mhx8;
-                                    }
-                                    else if ( $scope.selectedProgram.id === "VscnMM6g6Ow" && $scope.selectedTei.KLSVjftH2xS != undefined)
-                                    {
-                                        $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
                                     }
 
                                     if ($scope.registrationMode === 'REGISTRATION' ) {
