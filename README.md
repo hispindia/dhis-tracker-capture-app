@@ -25,9 +25,14 @@ Change the npm package version for the app either for `major`, `minor`, or `patc
 npm version patch
 ```
 
+Build script to build the app
+```
+npm install
+
 Run the build script to build the app
 ```
 npm run build
+
 ```
 > **Note:** If you have problems running the app try running the dhis2-core server with TomCat.
 
