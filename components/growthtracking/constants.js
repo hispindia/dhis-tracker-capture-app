@@ -9,18 +9,20 @@
  */
 
 // old mapping
-/*
+
 const programIds = {
   childProgramId: 'U1xZvvCVWIM',
   motherProgramId: 'qbQ4TP1Yy3K'
 };
-*/
 
+
+// new mapping
+/*
 const programIds = {
   childProgramId: 'c6RvWfvm3wl',
   motherProgramId: 'ibLaOIQtFDM'
 };
-
+*/
 
 
 
@@ -37,6 +39,8 @@ const eventIds = {
 };
 */
 
+
+/*
 const eventIds = {
   muac: 'SnQtKzhwOKw', // Needs to be in centimeters
   weight: 'JsRev4ChjQq', // Needs to be in kg
@@ -46,6 +50,25 @@ const eventIds = {
   wfh: "tdI91a7mv4j", //z-score of wfh
   bmi: "DHd4SEJ27pC", //bmi
 };
+*/
+
+
+// new mapping
+
+
+const eventIds = {
+  muac: 'SnQtKzhwOKw', // Needs to be in centimeters
+  weight: 'JsRev4ChjQq', // Needs to be in kg
+  height: 'GFSN50ohT0E', // Needs to be in cm
+  wfa: "sSbuKXKiYZN",  //z-score of WFA
+  hfa: "Bc19GUIGdI0", //z-score of HFA
+  wfh: "tdI91a7mv4j", //z-score of wfh
+  bmi: "DHd4SEJ27pC", //bmi
+};
+
+
+
+
 /**
  * Here you can change the default tracked entity instance IDs that the program will search for.
  * The IDs need to correspond to each data value listed below.
