@@ -96,7 +96,7 @@ class CirclePage extends React.Component {
           {config.indicators.wfl && (
             <Circle
               onClick={() => this.togglePlot('wfl')}
-              label="Weight-for-length"
+              label="Weight for Height"
               zscore={visit.wfl}
               config={config}
             />
@@ -104,7 +104,7 @@ class CirclePage extends React.Component {
           {config.indicators.wfa && (
             <Circle
               onClick={() => this.togglePlot('wfa')}
-              label="Weight-for-age"
+              label="Weight for Age"
               zscore={visit.wfa}
               config={config}
             />
@@ -112,7 +112,7 @@ class CirclePage extends React.Component {
           {config.indicators.lhfa && (
             <Circle
               onClick={() => this.togglePlot('lhfa')}
-              label="Length-for-age"
+              label="Height for Age"
               zscore={visit.lhfa}
               config={config}
             />
@@ -120,7 +120,7 @@ class CirclePage extends React.Component {
           {config.indicators.bfa && (
             <Circle
               onClick={() => this.togglePlot('bfa')}
-              label="BMI-for-age"
+              label="BMI for Age"
               zscore={visit.bfa}
               config={config}
             />
@@ -128,7 +128,7 @@ class CirclePage extends React.Component {
           {config.indicators.acfa && (
             <Circle
               onClick={() => this.togglePlot('acfa')}
-              label="MUAC-for-age"
+              label="MUAC for Age"
               zscore={visit.acfa}
               config={config}
             />

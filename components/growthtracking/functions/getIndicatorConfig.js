@@ -2,7 +2,7 @@ import { sdSets, centileSets } from '../datasets';
 
 const indicatorConfigs = (female, displayType) => ({
   wfl: {
-    title: 'Weight-for-length',
+    title: 'Weight for Height',
     xtitle: 'Height (cm)',
     ytitle: 'Weight (kg)',
     dataSet:
@@ -13,7 +13,7 @@ const indicatorConfigs = (female, displayType) => ({
     measurement2: 'weight' // replace string with corresponding data value string from config
   },
   wfa: {
-    title: 'Weight-for-age',
+    title: 'Weight for Age',
     xtitle: 'Age (months)',
     ytitle: 'Weight (kg)',
     dataSet:
@@ -25,7 +25,7 @@ const indicatorConfigs = (female, displayType) => ({
     measurement2: 'weight' // replace string with corresponding data value string from config
   },
   lhfa: {
-    title: 'Length-for-age',
+    title: 'Height for Age',
     xtitle: 'Age (months)',
     ytitle: 'Height (cm)',
     dataSet:
@@ -37,7 +37,7 @@ const indicatorConfigs = (female, displayType) => ({
     measurement2: 'height' // replace string with corresponding data value string from config
   },
   bfa: {
-    title: 'BMI-for-age',
+    title: 'BMI for Age',
     xtitle: 'Age (months)',
     ytitle: 'BMI',
     dataSet:

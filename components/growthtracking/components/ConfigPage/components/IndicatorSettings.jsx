@@ -21,7 +21,7 @@ const IndicatorSettings = ({ setIndicator, config }) => {
       >
         <Circle
           onClick={() => setIndicator('wfl')}
-          label="Weight-for-length"
+          label="Weight-for-Height"
           zscore={0.52}
           scale={0.8}
           config={config}
@@ -39,7 +39,7 @@ const IndicatorSettings = ({ setIndicator, config }) => {
 
         <Circle
           onClick={() => setIndicator('lhfa')}
-          label="Length-for-age"
+          label="Height-for-age"
           zscore={0.52}
           scale={0.8}
           config={config}

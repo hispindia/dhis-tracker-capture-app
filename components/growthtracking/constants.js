@@ -87,7 +87,7 @@ const teiIds = {
   firstname: 's8LMyJZmim8',
   lastname: 'ZOVsQef0rb8',
   gender: 'uSIz5uHBMdY', // Corresponding data element needs to be a string value "Male" or "Female"
-  birthdate: 'twbKlJeT7bX'
+  birthdate: 'yj8BaYdkTA6'
 };
 
 export { programIds, eventIds, teiIds };

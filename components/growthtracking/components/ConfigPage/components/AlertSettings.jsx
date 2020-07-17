@@ -41,7 +41,7 @@ class AlertSettings extends React.Component {
           />
 
           <div style={{ textAlign: 'center' }}>
-            Weight-for-length:
+            Weight-for-Height:
             <input
               style={{ height: '2.5rem', borderColor: '#ccc', width: '60%' }}
               type="text"
@@ -63,7 +63,7 @@ class AlertSettings extends React.Component {
             />
           </div>
           <div style={{ textAlign: 'center' }}>
-            Length-for-age:
+            Height-for-age:
             <input
               style={{ height: '2.5rem', borderColor: '#ccc', width: '60%' }}
               type="text"

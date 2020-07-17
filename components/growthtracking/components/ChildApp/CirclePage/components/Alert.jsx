@@ -25,7 +25,7 @@ class Alert extends React.Component {
       message.push(alerts.wfa);
     }
     if (indicators.lhfa && Math.abs(visit.lhfa) >= alertThreshold) {
-      message.push(alerts.lhfa);
+      message.push(alerts.lhfa)
     }
     if (indicators.muac && Math.abs(visit.muac) < 12.5) {
       message.push(alerts.muac);

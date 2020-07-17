@@ -116,8 +116,9 @@ class ChildApp extends React.Component {
         Number(
           event.dataValues.find(val => val.dataElement === eventIds.bmi)
             .value
-        ).toFixed("2");;
+        ).toFixed(2);
         
+        console.log( " wfh -- " + wfh + " wfa -- " + wfa + " hfa -- " + hfa );
 
         //const bmi = weight / (height / 100) ** 2;
 
@@ -145,8 +146,9 @@ class ChildApp extends React.Component {
           acfa: muac === null ? null : muac,
           completedBy: event.completedBy
         };
-      });
 
+      });
+      //console.log( " wfl -- " + wfl + " wfa -- " + wfa + " hfa -- " + hfa );
     return (
       <CirclePage
         visits={visits}

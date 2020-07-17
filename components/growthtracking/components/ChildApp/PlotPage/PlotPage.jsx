@@ -71,9 +71,9 @@ const PlotPage = ({
           value={plotType}
           onChange={setPlotType}
         >
-          <option value="wfl">Weight-for-length</option>
+          <option value="wfl">Weight-for-Height</option>
           <option value="wfa">Weight-for-age</option>
-          <option value="lhfa">Length-for-age</option>
+          <option value="lhfa">Height-for-age</option>
           <option value="bfa">BMI-for-age</option>
           <option value="acfa">MUAC-for-age</option>
         </select>

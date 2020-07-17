@@ -28,13 +28,15 @@ const defaultIndicators = {
 };
 
 const defaultAlerts = {
-  wfl: 'Weight-for-length is at a dangerous level.',
-  wfa: 'Weight-for-age is at a dangerous level.',
-  lhfa: 'Length-for-age is at a dangerous level.',
-  acfa: 'MUAC-for-age is at a dangerous level.',
+  wfl: 'Weight for Height is at a dangerous level.',
+  wfa: 'Weight for Age is at a dangerous level.',
+  lhfa: 'Height for Age is at a dangerous level.',
+  acfa: 'MUAC for Age is at a dangerous level.',
   muac: 'MUAC is at a dangerous level.',
-  bfa: 'BMI-for-age is at a dangerous level.'
+  bfa: 'BMI for Age is at a dangerous level.'
 };
+
+
 
 const defaultConfig = {
   colors: defaultColors,
