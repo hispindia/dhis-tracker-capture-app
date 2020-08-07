@@ -11,4 +11,12 @@ trackerCapture.controller('LeftBarMenuController',
     $scope.showReportTypes = function(){
         $location.path('/report-types').search();
     };
+	
+	// custom change for intpart
+    $scope.showduepersonInterface = function () {
+        $location.path('/dueperson').search();
+    };
+    $scope.showQueueInterface = function () {
+        $location.path('/waitingqueue').search();
+    };	
 });

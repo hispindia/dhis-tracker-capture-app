@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Oswald);
+
+        .table-wrapper {
+            border: 3px solid black;
+            width: 55%;
+            height: 200px;
+            overflow: auto;
+            left: 300px;
+            top: 120px;
+            position: relative;
+        }
+
+
+
+        td {
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+            padding: 1px;
+
+
+        }
+
+
+        .window {
+            position: absolute;
+            width: 30rem;
+            height: 18rem;
+            border-radius: 1rem;
+            border: 3px solid #495564;
+            text-align: center;
+            margin: 5rem auto;
+            overflow: hidden;
+            top: 340px;
+            left: 1%;
+            overflow: auto;
+        }
+
+        .window2 {
+            position: absolute;
+            width: 30rem;
+            height: 18rem;
+            border-radius: 1rem;
+            border: 3px solid #495564;
+            text-align: center;
+            margin: 5rem auto;
+            overflow: hidden;
+            top: 340px;
+            left: 37%;
+            overflow: auto;
+
+        }
+
+        .headerofapp {
+            position: absolute;
+            top: 8%;
+            left: 47%;
+
+        }
+
+        .searchbar {
+            position: absolute;
+            top: 10%;
+            left: 25%;
+
+        }
+
+        .tableidentity {
+
+            position: absolute;
+            overflow: auto;
+            top: 5%;
+            left: 10%;
+            float: left;
+        }
+
+        tr:hover {
+            background-color: #04FD96;
+        }
+
+
+        .bar {
+            width: inherit;
+            height: 2rem;
+            background-color: #B2F9FF;
+            border-bottom: 0.4rem solid #495564;
+        }
+
+
+        .window3 {
+            position: absolute;
+            width: 30rem;
+            height: 18rem;
+            border-radius: 1rem;
+            border: 3px solid #495564;
+            text-align: center;
+            margin: 5rem auto;
+            overflow: hidden;
+            top: 340px;
+            left: 73%;
+            overflow: auto;
+
+        }
+
+        .window4 {
+            position: absolute;
+            width: 30rem;
+            height: 18rem;
+            border-radius: 1rem;
+            border: 3px solid #495564;
+            text-align: center;
+            margin: 5rem auto;
+            overflow: hidden;
+            top: 570px;
+            left: 1%;
+            overflow: auto;
+
+
+        }
+
+        input[type=text] {
+            width: 170px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+
+        }
+
+        .searchbar1 {
+            position: absolute;
+            top: 10%;
+            left: 38%;
+        }
+
+        .searchbar2 {
+            position: absolute;
+            top: 10%;
+            left: 38%;
+
+        }
+
+        .loading {
+            position: fixed;
+            z-index: 999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            display: none;
+        }
+
+        /* Transparent Overlay */
+        .loading:before {
+            content: '';
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        /* :not(:required) hides these rules from IE9 and below */
+        .loading:not(:required) {
+            /* hide "loading..." text */
+            font: 0/0 a;
+            color: transparent;
+            text-shadow: none;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .loading:not(:required):after {
+            content: '';
+            display: block;
+            font-size: 10px;
+            width: 1em;
+            height: 1em;
+            margin-top: 3em;
+            -webkit-animation: spinner 1500ms infinite linear;
+            -moz-animation: spinner 1500ms infinite linear;
+            -ms-animation: spinner 1500ms infinite linear;
+            -o-animation: spinner 1500ms infinite linear;
+            animation: spinner 1500ms infinite linear;
+            border-radius: 0.5em;
+            -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+            box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+        }
+
+        /* Animation */
+        @-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate();
+                transform: rotate(360deg);
+                }
+            }
+
+            #loadtext {
+                color : black !important;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                font-size: 20px !important;
+                width: 400px !important;
+                margin-left: -120px !important;
+                margin-top: -50px !important;
+            }
+    </style>
+
+</head>
+
+<body>
+    <div class="loading" style="display:none;" id="loader">
+        <p id='loadtext'></p>
+    </div>
+    <input class="searchbar" id="searchvalue" type="text" name="search" placeholder="Search..">
+    <a class="btn btn-info btn-lg searchbar1" ng-click="loadQueue2()">
+        <span class="glyphicon glyphicon-search"></span>
+    </a>
+    <a class="btn btn-danger searchbar2" onclick="location.reload();"
+        style='font-size:20px;color:white;margin-left:60px;'><i class="fa fa-trash-o fa-lg"></i></a>
+    <h1 class="headerofapp"><b>SEARCH DUE PERSONS</b></h1>
+
+
+    <div class="table-wrapper" ng-show="trackkdata">
+        <table class="housedata" id="housedata" style="width:100%">
+            <!--This table is to display the data-->
+            <thead ng-show="objtrack1.length>0">
+                <tr>
+                    <td style="background-color:#FFF1BA"><b>Name</b></td>
+                    <td style="background-color:#FFF1BA"><b>house</b></td>
+                    <td style="background-color:#FFF1BA"><b>Patient id</b></td>
+                    <td style="background-color:#FFF1BA"><b>Service Provided</b></td>
+                </tr>
+            </thead>
+
+            <tbody ng-repeat="emp in detail_house_member | filter:searchvale">
+                <tr>
+
+
+                    <td>{{emp.namemember}}</td>
+                    <td>{{emp.house}}</td>
+                    <td>{{emp.familyid}}</td>
+                    <td>{{emp.programvalue}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="window" ng-show="trackkdata">
+        <div class="bar">
+            <span><b>ANC VISIT</b></span>
+        </div>
+        <table class="ancdata" id="ancdata" style="width:100%">
+            <!--This table is to display the data-->
+            <thead ng-if="objtrack_anc_due.length>0">
+                <tr>
+                    <td style="background-color:#FFF1BA"><b>Name</b></td>
+                    <td style="background-color:#FFF1BA"><b>house</b></td>
+                    <td style="background-color:#FFF1BA"><b>Last Visit Date</b></td>
+                    <td style="background-color:#FFF1BA"><b>Due Date</b></td>
+                </tr>
+            </thead>
+
+            <tbody ng-repeat="emp in detail_house_member_anc | filter:searchvale">
+                <tr>
+
+
+                    <td>{{emp.namemember}}</td>
+                    <td>{{emp.house}}</td>
+                    <td>{{emp.lastdate}}</td>
+                    <td>{{emp.duedate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="window2" ng-show="trackkdata">
+        <div class="bar">
+            <span><b>PNC VISIT</b></span>
+        </div>
+        <table class="pncdata" id="pncdata" style="width:100%">
+            <!--This table is to display the data-->
+            <thead ng-if="objtrack_pnc_due.length>0">
+                <tr>
+                    <td style="background-color:#FFF1BA"><b>Name</b></td>
+                    <td style="background-color:#FFF1BA"><b>house</b></td>
+                    <td style="background-color:#FFF1BA"><b>Last Visit Date</b></td>
+                    <td style="background-color:#FFF1BA"><b>Due Date</b></td>
+                </tr>
+            </thead>
+
+            <tbody ng-repeat="emp in detail_house_member_pnc | filter:searchvale">
+                <tr>
+
+
+                    <td>{{emp.namemember}}</td>
+                    <td>{{emp.house}}</td>
+                    <td>{{emp.lastdate}}</td>
+                    <td>{{emp.duedate}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="window3" ng-show="trackkdata">
+        <div class="bar">
+            <span><b>NPCDCS VISIT</b></span>
+        </div>
+        <table class="npcdcsdata" id="npcdcsdata" style="width:100%">
+            <!--This table is to display the data-->
+            <thead ng-if="objtrack_npcdcs.length>0">
+                <tr>
+                    <td style="background-color:#FFF1BA"><b>Name</b></td>
+                    <td style="background-color:#FFF1BA"><b>house</b></td>
+                    <td style="background-color:#FFF1BA"><b>Last Visit Date</b></td>
+                    <td style="background-color:#FFF1BA"><b>Due Date</b></td>
+                </tr>
+            </thead>
+
+            <tbody ng-repeat="emp in detail_house_member_npcdcs | filter:searchvale">
+                <tr>
+
+
+                    <td>{{emp.namemember}}</td>
+                    <td>{{emp.house}}</td>
+                    <td>{{emp.lastdate}}</td>
+                    <td>{{emp.duedate}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="window4" ng-show="trackkdata">
+        <div class="bar">
+            <span><b>Child VISIT</b></span>
+        </div>
+        <table class="childdata" id="childdata" style="width:100%">
+            <!--This table is to display the data-->
+            <thead ng-if="objtrack_child.length>0">
+                <tr>
+                    <td style="background-color:#FFF1BA"><b>Name</b></td>
+                    <td style="background-color:#FFF1BA"><b>house</b></td>
+                    <td style="background-color:#FFF1BA"><b>Last Visit Date</b></td>
+                    <td style="background-color:#FFF1BA"><b>Due Date</b></td>
+
+                </tr>
+            </thead>
+
+            <tbody ng-repeat="emp in detail_house_member_child | filter:searchvale">
+                <tr>
+
+
+                    <td>{{emp.namemember}}</td>
+                    <td>{{emp.house}}</td>
+                    <td>{{emp.lastdate}}</td>
+                    <td>{{emp.duedate}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
