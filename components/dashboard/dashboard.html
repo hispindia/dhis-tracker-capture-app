@@ -84,11 +84,141 @@
             <div ng-if="topBarConfig.settings && topBarConfig.settings.active" ng-include="'program-selector'" style="margin-left:12px;"></div>
             <!-- dashboard bigger widgets begin -->
             <div ng-class="widgetSize.bigger">
-
+				<!-- custom change for INTPART start-->
                 <div id="biggerWidget" class="row connectedSortable empty-dashboard-container" d2-sortable
-                     bigger-widgets={{dashboardWidgets | filter: {parent:
-                'biggerWidget'}}} smaller-widgets={{ dashboardWidgets | filter: {parent: 'smallerWidget'}}}>
-                <div class="col-sm-12 remove-one-pix" id={{biggerWidget.title}}
+                     bigger-widgets={{dashboardWidgets | filter: {parent:'biggerWidget'}}} smaller-widgets={{ dashboardWidgets | filter: {parent: 'smallerWidget'}}}>
+                    <button type="button"
+                        ng-show="selectedProgram.id=='JdZ3gv6cx54'"  id="myBtn" class="btn btn-default" ng-click="eventmodel();">Medical History</button>
+                    <button type="button" ng-show="selectedProgram.id=='jC8Gprj4pWV'" id="myBtnchart"
+                        class="btn btn-default" ng-click="chartmodel();">HTN-Graph</button>
+                    <button type="button" ng-show="selectedProgram.id=='SUCUF657zNe'" id="myBtnchartdm"
+                        class="btn btn-default" ng-click="chartmodeldm();">Hb-Graph</button>
+                    <button type="button" ng-show="selectedProgram.id=='jC8Gprj4pWV'" id="myBtnchartdmm"
+                        class="btn btn-default" ng-click="chartmodeldmm();">DM-Graph</button>
+                    <button type="button" ng-show="selectedProgram.id=='JdZ3gv6cx54'" id="myBtnchartdmm"
+                        class="btn btn-default" ng-click="chartmodelchild();">Vaccination-Graph</button>
+                    <!-- Modal for medical history-->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content for medical history-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h2 class="modal-title">
+                                        <h2><b>Medical History..</b></h2>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p>
+                                        <table id="table1" class="reporttt" style="width:100%"> </table>
+                                    </p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--         modal for chart      --->
+                    <div class="modal fade" id="myModalchart" role="dialog">
+                        <div class="modal-dialog" style="width:800px">
+
+                            <!-- Modal content for chart-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h2 class="modal-title">
+                                        <h2><b>Graph For HTN..</b></h2>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p><canvas id="myChart"></canvas></p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--graph for Hb  -->
+                    <!--         modal for chart      --->
+                    <div class="modal fade" id="myModalchartdm" role="dialog">
+                        <div class="modal-dialog" style="width:800px">
+
+                            <!-- Modal content for chart-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h2 class="modal-title">
+                                        <h2><b>Graph For Hb..</b></h2>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p><canvas id="myChartdm"></canvas></p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--graph for child  -->
+                    <!--         modal for chart      --->
+                    <div class="modal fade" id="myModalchartchild" role="dialog">
+                        <div class="modal-dialog" style="width:800px">
+
+                            <!-- Modal content for chart-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h2 class="modal-title">
+                                        <h2><b>Graph For Childhood Vaccination..</b></h2>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p><canvas id="myChartchild"></canvas></p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModalchartdmm" role="dialog">
+                        <div class="modal-dialog" style="width:800px">
+
+                            <!-- Modal content for chart-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h2 class="modal-title">
+                                        <h2><b>Graph For DM..</b></h2>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p><canvas id="myChartdmm"></canvas></p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+				<!-- custom change for INTPART end-->		
+				<div class="col-sm-12 remove-one-pix" id={{biggerWidget.title}}
                      ng-repeat="biggerWidget in dashboardWidgets | orderBy:'order' | filter: {parent: 'biggerWidget'}">
                     <div ng-show="(!biggerWidget.useAsTopBar && biggerWidget.show && !temporaryHideWidgets[biggerWidget.title]) || temporaryShowWidgets[biggerWidget.title]"
                          ng-include="biggerWidget.view"
@@ -102,8 +232,9 @@
         <!-- dashboard smaller widgets begin -->
         <div ng-class="[!model.stickyDisabled ? 'widgets-sticky' : '', widgetSize.smaller]">
             <div id="smallerWidget" class="row connectedSortable empty-dashboard-container" d2-sortable
-                 bigger-widgets={{dashboardWidgets | filter: {parent:
-            'biggerWidget'}}} smaller-widgets={{dashboardWidgets | filter: {parent: 'smallerWidget'}}}>
+                 bigger-widgets={{dashboardWidgets | filter: {parent:'biggerWidget'}}} smaller-widgets={{dashboardWidgets | filter: {parent: 'smallerWidget'}}}>
+
+
             <div class="col-sm-12 remove-one-pix" id={{smallerWidget.title}}
                  ng-repeat="smallerWidget in dashboardWidgets  | orderBy:'order' | filter: {parent: 'smallerWidget'}">
                 <div ng-show="(!smallerWidget.useAsTopBar && smallerWidget.show && !temporaryHideWidgets[smallerWidget.title]) || temporaryShowWidgets[smallerWidget.title]"

@@ -119,6 +119,7 @@ trackerCapture.controller('DataEntryController',
     });
 
     $scope.userAuthority = AuthorityService.getUserAuthorities(SessionStorageService.get('USER_PROFILE'));
+
     if(!$scope.attributesById){
         $scope.attributesById = [];
         AttributesFactory.getAll().then(function(atts){
@@ -263,6 +264,571 @@ trackerCapture.controller('DataEntryController',
         $scope.printForm = false;
         $scope.printEmptyForm = false;
     };
+
+// custom change for intpart start
+    $scope.printSlip = function (eventvale, printdivname) {
+
+        $.ajaxSetup({
+            async: false
+        });
+
+        var procedureprescribed = ""
+        //printcustomslip(eventvale);
+        $.get("../api/events/" + eventvale + ".json&skipPaging=true", function (data) {
+
+            var trackdata = data;
+            $scope.programname = trackdata.program;
+            $scope.organisationname = trackdata.orgUnit;
+            $scope.trackentityid = trackdata.trackedEntityInstance;
+            $scope.eventdateandtime = trackdata.eventDate.substring(0, 10);
+
+            // $scope.Doctor = "";
+            // $scope.bmi = "";
+            // $scope.investigation = "";
+            // $scope.opddiagnosis = "";
+            // $scope.bodyweight = "";
+            // $scope.bodyheight = "";
+            // $scope.temperature = "";
+            // $scope.systolic = "";
+            // $scope.dystolic = "";
+            // $scope.pulserate = "";
+            // $scope.presenthistory = "";
+            //console.log(trackdata);
+
+            for (var i = 0; i < trackdata.dataValues.length; i++) {
+
+                var id = trackdata.dataValues[i].dataElement;
+
+                if (id == "qnMyYSej1ZK") //Body Weight in Cm
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.bodyweight = vall;
+                } else if (id == "mLwwGErD48L") //Body Height in Cm
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.bodyheight = vall;
+                } else if (id == "X0kPZZMoenf") //Temperature in *F
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.temperature = vall;
+                } else if (id == "HQz8UUWfvo0") //Systolic (mm Hg)
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.systolic = vall;
+                } else if (id == "pTuKCcPRn9k") // Diastolic (mm Hg)
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.dystolic = vall;
+                } else if (id == "iXXTGI1On6M") // Pulse Rate
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.pulserate = vall;
+                } else if (id == "eHFn5Je3TyO") // History of Present illness
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.presenthistory = vall;
+                } else if (id == "TyjTa70SSJq") //OPD-Drug name 1
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug1 = vall;
+                } else if (id == "CGvUQ23S5vE") // OPD-Drug name 2
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug2 = vall;
+                } else if (id == "uwk0dM0wtJW") // OPD-Drug name 3
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug3 = vall;
+                } else if (id == "lC94CnkbOGs") // OPD-Drug name 4
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug4 = vall;
+                } else if (id == "TbiR8vx2OXp") // OPD-Drug name 5
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug5 = vall;
+                } else if (id == "XDbRMS9Sxi3") // OPD-Drug name 6
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug6 = vall;
+                } else if (id == "gBlOM8ikzuA") // OPD-Drug name 7
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug7 = vall;
+                } else if (id == "YXwFyNj37D2") // OPD-Drug name 8
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug8 = vall;
+                } else if (id == "Jx3akc91Xwh") // OPD-Drug name 9
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddrug9 = vall;
+                } else if (id == "bDrj9bio49t") // OPD-Dose 1
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose1 = vall;
+                } else if (id == "A5EqIM4pk4d") // OPD-Dose 2
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose2 = vall;
+                } else if (id == "yeFN33fywYN") //OPD-Dose 3
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose3 = vall;
+                } else if (id == "YX4zezFRROk") // OPD-Dose 4
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose4 = vall;
+                } else if (id == "ZirWJ8OUiKK") // OPD-Dose 5
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose5 = vall;
+                } else if (id == "DLUcEOLpGt6") // OPD-Dose 6
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose6 = vall;
+                } else if (id == "qV5C6poQeu6") //OPD-Dose 7
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose7 = vall;
+                } else if (id == "FrEseFRNabY") // OPD-Dose 8
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose8 = vall;
+                } else if (id == "QUMhIrPSpu7") // OPD-Dose 9
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddose9 = vall;
+                } else if (id == "zC8ogWKNaPM") // OPD-Drug formulation 1
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation1 = vall;
+                } else if (id == "ttb3d5tWOOp") // OPD-Drug formulation 2
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation2 = vall;
+                } else if (id == "fpff3EL6UcM") //OPD-Drug formulation 3
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation3 = vall;
+                } else if (id == "QONbufvKE0Z") // OPD-Drug formulation 4
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation4 = vall;
+                } else if (id == "wsQyonZXqMN") // OPD-Drug formulation 5
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation5 = vall;
+                } else if (id == "dVAcQvOM7dv") // OPD-Drug formulation 6
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation6 = vall;
+                } else if (id == "AkT2g5e7ANT") // OPD-Drug formulation 7
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation7 = vall;
+                } else if (id == "IfloYR7eJgG") //OPD-Drug formulation 8
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation8 = vall;
+                } else if (id == "EpwLuI27hwU") // OPD-Drug formulation 9
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.formulation9 = vall;
+                } else if (id == "dwSMErTpar8") // OPD-Drug Frequency 1
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency1 = vall;
+                } else if (id == "qtCukzYKmZS") // OPD-Drug Frequency 2
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency2 = vall;
+                } else if (id == "tvhWoK0BLb1") // OPD-Drug Frequency 3
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency3 = vall;
+                } else if (id == "Sw73vg4Yjxl") // OPD-Drug Frequency 4
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency4 = vall;
+                } else if (id == "M8Ui2FdNiw6") // OPD-Drug Frequency 5
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency5 = vall;
+                } else if (id == "eXHG8A0G8Tc") // OPD-Drug Frequency 6
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency6 = vall;
+                } else if (id == "enHDrR9XID3") // OPD-Drug Frequency 7
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency7 = vall;
+                } else if (id == "EiTjNJPeWOU") // OPD-Drug Frequency 8
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency8 = vall;
+                } else if (id == "wPYeMtOYzEK") // OPD-Drug Frequency 9
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Frequency9 = vall;
+                } else if (id == "dfzUCsPptuS") // OPD-Drug - days prescribed 1
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed1 = vall;
+                } else if (id == "jhldWs9Qw0j") //OPD-Drug - days prescribed 2
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed2 = vall;
+                } else if (id == "cn3CDIaIyuS") // OPD-Drug - days prescribed 3
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed3 = vall;
+                } else if (id == "CHQ52iv9MEE") // OPD-Drug - days prescribed 4
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed4 = vall;
+                } else if (id == "jJWQnO4CIgY") // OPD-Drug - days prescribed 5
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed5 = vall;
+                } else if (id == "lgBRSIp8UyQ") // OPD-Drug - days prescribed 6
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed6 = vall;
+                }
+                else if (id == "qI7oqt62ZHd") // OPD-Drug - days prescribed 7
+                {
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed7 = vall;
+                } else if (id == "X9hdYWrwu0e") // OPD-Drug - days prescribed 8
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed8 = vall;
+                } else if (id == "DgRKYVEp9Q4") // OPD-Drug - days prescribed 9
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.prescribed9 = vall;
+                } else if (id == "dKFe6B5IQYj") // OPD - diagnosis1
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "OgnHAtwpquC") // OPD - diagnosis2
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "XP2o2kBlreU") // OPD - diagnosis3
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "uFl5KFNyFIj") // OPD - diagnosis4
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "ePEY9h1AaV2") // OPD - diagnosis5
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "XBdRz4Ltofp") // OPD - diagnosis6
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "dz40pEes1EH") // OPD - diagnosis7
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "T2jwDKysRhL") // OPD - diagnosis8
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "bTBnXw52gnJ") // OPD - diagnosis9
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.opddiagnosis = $scope.opddiagnosis + "," + vall;
+                } else if (id == "ihnibt01QTA") // OPD - Investigation1
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "JNVlvJRXOCb") // OPD - Investigation2
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "lPMhjJdBlzF") // OPD - Investigation3
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "czqGaj5QJZG") // OPD - Investigation4
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "C3EdRmAMYhO") // OPD - Investigation5
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "QyAEyu6jmTA") // OPD - Investigation6
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "UPvVPO2ctLj") // OPD - Investigation7
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "h68x1r7fEMp") // OPD - Investigation8
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "FFYzaOjR7Lx") // OPD - Investigation9
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.investigation = $scope.investigation + "," + vall;
+                } else if (id == "CzaHcTqzgPh") // OPD - Procedure prescribed1
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "IwV0jUwEFZx") // OPD - Procedure prescribed2
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "okrqz57YMeS") //OPD - Procedure prescribed3
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "w3SJ3DTNLhM") // OPD - Procedure prescribed4
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "rQ4JVzfPCK0") // OPD - Procedure prescribed5
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "yA7P9zxOTzl") // OPD - Procedure prescribed6
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "pfCGnBhB52s") // OPD - Procedure prescribed7
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "r7njjEZVSM5") //OPD - Procedure prescribed8
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "HYQvQ4uycz5") // OPD - Procedure prescribed9
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    procedureprescribed = procedureprescribed + "," + vall;
+                } else if (id == "cp110jDw81n") // BMI
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.bmi = vall;
+                } else if (id == "hBUR4vzP4G6") // Doctor Name
+                {
+
+                    var vall = trackdata.dataValues[i].value;
+                    $scope.Doctor = vall;
+                }
+            }
+        });
+
+        $.get("../api/trackedEntityInstances.json?ou=" + $scope.organisationname + "&program=" + $scope.programname + "&trackedEntityInstance=" + $scope.trackentityid + "&skipPaging=true", function (data1) {
+            var trackdatavalue = data1;
+
+            for (var i = 0; i < trackdatavalue.trackedEntityInstances.length; i++) {
+
+                var attributepath = trackdatavalue.trackedEntityInstances[i].attributes;
+                // objtrack.push(trackdata.trackedEntityInstances[i].trackedEntityInstance);
+                for (var q = 0; q < attributepath.length; q++) {
+                    var idd = attributepath[q].attribute;
+
+                    if (attributepath[q].attribute == "vbUue5poEcT") //Caste
+                    {
+                        var vall = attributepath[q].value;
+
+                        $scope.Caste = vall;
+                    } else if (attributepath[q].attribute == "xalnzkNfD77") //Name of the person
+                    {
+                        var vall = attributepath[q].value;
+
+                        $scope.Name = vall;
+                    } else if (attributepath[q].attribute == "PbEhJPnon0o") //Sex
+                    {
+                        var vall = attributepath[q].value;
+
+                        $scope.Sex = vall;
+                    } else if (attributepath[q].attribute == "iIf1gJ4FVdR") //Age
+                    {
+                        var vall = attributepath[q].value;
+
+                        $scope.Age = vall;
+                    } else if (attributepath[q].attribute == "Lt9ZrfgAMuw") //Mobile number
+                    {
+                        var vall = attributepath[q].value;
+
+                        $scope.Mobile = vall;
+                    } else if (attributepath[q].attribute == "YFjB0zhySP6") //Household
+                    {
+                        var vall = attributepath[q].value;
+
+                        $scope.Household = vall;
+                    }
+                }
+            }
+        });
+        if ($scope.Household == undefined) {
+
+            $scope.Household = "&nbsp&nbsp";
+        }
+        if ($scope.Mobile == undefined) {
+
+            $scope.Mobile = "&nbsp&nbsp";
+        }
+
+        var printdata = "<span class='boxHeaderslip'>PHC Balarhi</span><table class='box'><tbody><tr><td><strong>Date of the visit:</strong></td><td>" + $scope.eventdateandtime + "</td><td><strong>Patient Category:</strong></td><td>" + $scope.Caste + "</td></tr><tr><td><strong>Patient ID:</strong></td><td>sfsfsdfffs</td><td>Name:</td><td>" + $scope.Name + "</td></tr><tr><td><strong>Gender:</strong></td><td>" + $scope.Sex + "</td><td><strong>Age:</strong></td><td>" + $scope.Age + "</td></tr><tr><td><strong>Address:</strong></td><td>" + $scope.Household + "</td><td><strong>Mob No.</strong></td><td>" + $scope.Mobile + "</td></tr></tbody></table><table class='box'><tbody><span class='boxHeaderslip'>VITAL STATISTIC DETAILS</span><tr><td></td><td></td><td>Range</td><td>Unit</td></tr><tr><td><strong>Weight</strong></td><td>" + $scope.bodyweight + "</td><td></td><td>Kg</td></tr><tr><td><strong>Height</strong></td><td>" + $scope.bodyheight + "</td><td></td><td>Kg</td></tr><tr><td><strong>BMI</strong></td><td>" + $scope.bmi + "</td><td>18.5-24.9</td><td></td></tr><tr><td><strong>Temperature</strong></td><td>" + $scope.temperature + "</td><td>97.7-98.96</td><td>F</td></tr><tr><td><strong>B.P</strong></td><td>" + $scope.systolic + "/" + $scope.dystolic + "</td><td>110/70-140/90</td><td>mm/Hg</td></tr><tr><td><strong>Pulse Rate</strong></td><td>" + $scope.pulserate + "</td><td>60-90</td><td>/min</td></tr><tr><td><strong>LMP</strong></td><td></td><td></td><td></td></tr></tbody></table><table class='box' id='drugtable'><tbody><span class='boxHeaderslip'>CLINICAL SUMMARY</span><tr><td><strong>History of Present Illness:</strong></td><td>" + $scope.presenthistory + "</td></tr><tr><td><strong>Provisional Diagnosis:</strong></td><td>" + $scope.opddiagnosis + "</td></tr><tr><td><strong>Procedure</strong></td><td>" + procedureprescribed + "</td></tr><tr><td><strong>Investigation</strong></td><td>" + $scope.investigation + "</td></tr><tr></tr></tbody></table><table class='box'><tbody><span class='boxHeaderslip'>TREATMENT ADVISED</span><tr align='center'><th><strong>Drug</strong></th><th><strong>Formulation</strong></th><th><strong>Frequency</strong></th><th><strong>No of Days</strong></th><th><strong>Comments</strong></th></tr><tr align='center'><td>" + $scope.opddrug1 + "</td><td>" + $scope.formulation1 + "-" + $scope.opddose1 + "</td><td>" + $scope.Frequency1 + "</td><td>" + $scope.prescribed1 + "</td><td></td></tr><tr align='center'><td>" + $scope.opddrug2 + "</td><td>" + $scope.formulation2 + "-" + $scope.opddose2 + "</td><td>" + $scope.Frequency2 + "</td><td>" + $scope.prescribed2 + "</td><td></td></tr><tr align='center' id='cons'><td>" + $scope.opddrug3 + "</td><td>" + $scope.formulation3 + "-" + $scope.opddose3 + "</td><td>" + $scope.Frequency3 + "</td><td>" + $scope.prescribed3 + "</td><td></td></tr><tr align='center'><td>" + $scope.opddrug4 + "</td><td>" + $scope.formulation4 + "-" + $scope.opddose4 + "</td><td>" + $scope.Frequency4 + "</td><td>" + $scope.prescribed4 + "</td><td></td></tr><tr align='center'><td>" + $scope.opddrug5 + "</td><td>" + $scope.formulation5 + "-" + $scope.opddose5 + "</td><td>" + $scope.Frequency5 + "</td><td>" + $scope.prescribed5 + "</td><td></td></tr><tr align='center'><td>" + $scope.opddrug6 + "</td><td>" + $scope.formulation6 + "-" + $scope.opddose6 + "</td><td>" + $scope.Frequency6 + "</td><td>" + $scope.prescribed6 + "</td><td></td></tr><tr align='center'><td>" + $scope.opddrug + "</td><td>" + $scope.formulation7 + "-" + $scope.opddose7 + "</td><td>" + $scope.Frequency7 + "</td><td>" + $scope.prescribed7 + "</td><td></td></tr><tr align='center'><td>" + $scope.opddrug8 + "</td><td>" + $scope.formulation8 + "-" + $scope.opddose8 + "</td><td>" + $scope.Frequency8 + "</td><td>" + $scope.prescribed8 + "</td><td></td></tr><tr align='center'><td>" + $scope.opddrug9 + "</td><td>" + $scope.formulation9 + "-" + $scope.opddose9 + "</td><td>" + $scope.Frequency9 + "</td><td>" + $scope.prescribed9 + "</td><td></td></tr></tbody></table><br></br><p align='right'>" + $scope.Doctor + "</p>";
+
+        if ($scope.opddrug1 == undefined || $scope.opddrug1 == null || $scope.opddrug1 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center'><td>" + $scope.opddrug1 + "</td><td>" + $scope.formulation1 + "-" + $scope.opddose1 + "</td><td>" + $scope.Frequency1 + "</td><td>" + $scope.prescribed1 + "</td><td></td></tr>", "");
+        }
+        if ($scope.opddrug2 == undefined || $scope.opddrug2 == null || $scope.opddrug2 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center'><td>" + $scope.opddrug2 + "</td><td>" + $scope.formulation2 + "-" + $scope.opddose2 + "</td><td>" + $scope.Frequency2 + "</td><td>" + $scope.prescribed2 + "</td><td></td></tr>", "");
+        }
+        if ($scope.opddrug3 == undefined || $scope.opddrug3 == null || $scope.opddrug3 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center' id='cons'><td>" + $scope.opddrug3 + "</td><td>" + $scope.formulation3 + "-" + $scope.opddose3 + "</td><td>" + $scope.Frequency3 + "</td><td>" + $scope.prescribed3 + "</td><td></td></tr>", "");
+        }
+        if ($scope.opddrug4 == undefined || $scope.opddrug4 == null || $scope.opddrug4 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center'><td>" + $scope.opddrug4 + "</td><td>" + $scope.formulation4 + "-" + $scope.opddose4 + "</td><td>" + $scope.Frequency4 + "</td><td>" + $scope.prescribed4 + "</td><td></td></tr>", "");
+        }
+        if ($scope.opddrug5 == undefined || $scope.opddrug5 == null || $scope.opddrug5 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center'><td>" + $scope.opddrug5 + "</td><td>" + $scope.formulation5 + "-" + $scope.opddose5 + "</td><td>" + $scope.Frequency5 + "</td><td>" + $scope.prescribed5 + "</td><td></td></tr>", "");
+        }
+        if ($scope.opddrug6 == undefined || $scope.opddrug6 == null || $scope.opddrug6 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center'><td>" + $scope.opddrug6 + "</td><td>" + $scope.formulation6 + "-" + $scope.opddose6 + "</td><td>" + $scope.Frequency6 + "</td><td>" + $scope.prescribed6 + "</td><td></td></tr>", "");
+        }
+        if ($scope.opddrug7 == undefined || $scope.opddrug7 == null || $scope.opddrug7 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center'><td>" + $scope.opddrug7 + "</td><td>" + $scope.formulation7 + "-" + $scope.opddose7 + "</td><td>" + $scope.Frequency7 + "</td><td>" + $scope.prescribed7 + "</td><td></td></tr>", "");
+        }
+        if ($scope.opddrug8 == undefined || $scope.opddrug8 == null || $scope.opddrug8 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center'><td>" + $scope.opddrug8 + "</td><td>" + $scope.formulation8 + "-" + $scope.opddose8 + "</td><td>" + $scope.Frequency8 + "</td><td>" + $scope.prescribed8 + "</td><td></td></tr>", "");
+        }
+        if ($scope.opddrug9 == undefined || $scope.opddrug9 == null || $scope.opddrug9 == "") {
+
+            //$("tr.cons").hide();
+            //document.getElementById("drugtable").deleteRow(2);
+            printdata = printdata.replace("<tr align='center'><td>" + $scope.opddrug9 + "</td><td>" + $scope.formulation9 + "-" + $scope.opddose9 + "</td><td>" + $scope.Frequency9 + "</td><td>" + $scope.prescribed9 + "</td><td></td></tr>", "");
+        }
+
+        //  	printcustomform(printdivname);
+
+        //var printContents = document.getElementById(printdata).innerHTML;
+        var w = window.open();
+        w.document.write(printdata);
+        w.document.write('<style>.boxHeaderslip {background-color: #1aac9b;color: white;display: block;padding: 2px;}.box, .boxHeaderslip{border: 1px solid #1aac9b;width: 100%;padding: 5px 2px 5px 2px; text-align: left; margin-left: auto;margin-right: auto;}</style>');
+        w.print();
+        w.close();
+    };
+
+// custom change for intpart end
 
     $scope.toggleForm = function(type) {
         if(type === 'DEFAULT') {
