@@ -218,6 +218,33 @@ trackerCapture.controller('HomeController',function(
         }
         var loadCanRegister = function(){
             if($scope.selectedProgram){
+                // custom change for INTPART show/hide registration button program
+                var hideRegButtonPrg = [];
+                $.ajax({
+                    async: false,
+                    type: "GET",
+                    url: "../api/programs.json?fields=id,name,code,attributeValues[attribute[id,name,code],value]&paging=false",
+                    success: function (data) {
+                        for (var w = 0; w < data.programs.length; w++) {
+                            if (data.programs[w].attributeValues.length != 0) {
+                                for (var w1 = 0; w1 < data.programs[w].attributeValues.length; w1++) {
+                                    if (data.programs[w].attributeValues[w1].attribute.code === 'hide_registration_button' && data.programs[w].attributeValues[w1].value === "true") {
+                                        hideRegButtonPrg.push(data.programs[w].id);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                if( hideRegButtonPrg.indexOf( $scope.selectedProgram.id ) === -1){
+                    $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
+                }
+                else{
+                    $scope.views = [viewsByType.lists, viewsByType.search];
+                }
+                // end
+
                 var tet = $scope.trackedEntityTypesById[$scope.selectedProgram.trackedEntityType.id];
                 var promise;
                 if(tet){
