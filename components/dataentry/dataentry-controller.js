@@ -120,6 +120,21 @@ trackerCapture.controller('DataEntryController',
 
     $scope.userAuthority = AuthorityService.getUserAuthorities(SessionStorageService.get('USER_PROFILE'));
 
+    // custom change for INTPART hide section using user attribute value
+    //get attribute of user
+    ///Assign value to option set
+    $.get("../api/me.json?fields=id,name,attributeValues[attribute[id,code,name],value]", function ( meResponse ) {
+        var apiResponse = meResponse;
+        $scope.showSectionsName = [];
+        for (var i = 0; i < apiResponse.attributeValues.length; i++) {
+            var userAttributevalue = apiResponse.attributeValues[i].value;
+
+            $scope.showSectionsName.push(apiResponse.attributeValues[i].attribute.name);
+        }
+    });
+    //end
+
+
     if(!$scope.attributesById){
         $scope.attributesById = [];
         AttributesFactory.getAll().then(function(atts){
