@@ -29,7 +29,8 @@ trackerCapture.controller('DashboardController',
             AuthorityService,
             OrgUnitFactory,
             NotificationService,
-            TeiAccessApiService) {
+            TeiAccessApiService,
+            MessagingService) {
 
 
     var preAuditCancelled = function(){

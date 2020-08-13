@@ -25,7 +25,8 @@ trackerCapture.controller('HomeController',function(
     orderByFilter,
     TEService,
     AccessUtils,
-    TeiAccessApiService) {
+    TeiAccessApiService,
+    SessionStorageService) {
         TeiAccessApiService.setAuditCancelledSettings(null);
         $scope.trackedEntityTypesById ={};
         var previousProgram = null;
@@ -113,6 +114,7 @@ trackerCapture.controller('HomeController',function(
                 .then(loadPrograms)
                 .then(loadCachedData);
             }
+            SessionStorageService.set('SELECTED_OU', $scope.selectedOrgUnit );
         });
 
         var resetView = function(defaultView){
