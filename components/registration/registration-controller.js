@@ -67,6 +67,7 @@ trackerCapture.controller('RegistrationController',
     $scope.fileNames = CurrentSelection.getFileNames();
     $scope.currentFileNames = $scope.fileNames;
 
+    $scope.generatedCustomId = ''; // custom change for INTPART
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
 
@@ -109,11 +110,24 @@ trackerCapture.controller('RegistrationController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
-    
-    
+
+    // custom change for INTPART Start
+    // update for INTPART  for disable attribute family_unique_id
+    $scope.isDisabled = function (attribute) {
+        if (attribute.code === 'family_unique_id' ) {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
+    // custom change for INTPART end
+
+/*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
+*/
 
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
@@ -650,7 +664,24 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
-        var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+
+        // custom change for custom-id generation for household/member program
+        if ($scope.registrationMode === 'REGISTRATION' ) {
+
+            var selectedOrgUnitCode = $scope.selectedOrgUnit.code;
+            var orgUnitCodeUpperCase = selectedOrgUnitCode.substr(0, 4).toUpperCase();
+            var houseIdentifierValue = "";
+            // 6 digit random number
+            var suffix = Math.floor(Math.random() * 1000000) + 1;
+
+            if ($scope.selectedTei.ZQMF7taSAw8 != undefined) {
+                var tempStr = $scope.selectedTei.ZQMF7taSAw8;
+                houseIdentifierValue = tempStr.substr(0, 4).toUpperCase();
+            }
+            $scope.generatedCustomId = orgUnitCodeUpperCase + "-" + houseIdentifierValue + "-" + suffix;
+        }
+
+        var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.tei = result.tei;
 
