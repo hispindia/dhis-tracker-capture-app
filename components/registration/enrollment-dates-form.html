@@ -43,6 +43,7 @@
                    max-date="selectedProgram.selectEnrollmentDatesInFuture ? '' : 0"
                    ng-change="verifyExpiryDate('selectedEnrollment.enrollmentDate')"
                    ng-disabled="selectedOrgUnit.closedStatus"
+                   blur-or-change="getNepaliDateFromISODate()"
                    ng-required="true"/>
             <input type="text" ng-attr-value={{selectedEnrollment.enrollmentDate}} class="form-control not-for-screen"/>
             <span ng-show="outerForm.submitted && outerForm.enrollmentDate.$invalid" class="error">{{'required'| translate}}</span>

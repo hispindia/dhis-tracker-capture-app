@@ -75,7 +75,7 @@ trackerCapture.controller('DataEntryController',
     $scope.originalDate = '';
 
     $scope.convertedFromNepaliCalEventDate = '';
-    $scope.convertedNepaliDate = '';
+    $scope.convertedEventNepaliDate = '';
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
     
@@ -106,7 +106,7 @@ trackerCapture.controller('DataEntryController',
         }
         //var tempDueDate = $scope.currentEvent.dueDate;
 
-        var nepaliConverter = new DateConverter();
+        //var nepaliConverter = new DateConverter();
         //nepaliConverter.setEnglishDate(tempYear, tempMonth, tempDay);
 
         var nepaliConverter = new DateConverter();
@@ -146,7 +146,7 @@ trackerCapture.controller('DataEntryController',
         var finalNepaliDate = tempYear + "-" + tempMonth + "-" + tempDay;
 
         $('#nepaliEventDatePicker').val(finalNepaliDate);
-        $scope.convertedNepaliDate = finalNepaliDate;
+        $scope.convertedEventNepaliDate = finalNepaliDate;
     };
 
     // add for nepali Calendar start
@@ -154,18 +154,29 @@ trackerCapture.controller('DataEntryController',
 
         $scope.convertISOEventDateToNepaliDate();
 
+        $scope.convertedFromNepaliCalEventDate = '';
+        /*
         var currentDate = new Date();
-        var currentNepaliDate = calenderFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate() - 1);
+        var currentNepaliDate = calenderFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
         var currentConvertedNepaliDate = calenderFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+        */
 
-        $("#nepaliEventDatePicker").nepaliDatePicker({
+        //var currentNepaliDate = calendarFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
+        //var formatedNepaliDate = calendarFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+
+        var currentDate = new Date();
+        var currentNepaliDate = calendarFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
+        var formatedNepaliDate = calendarFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+
+        //$(".nepaliEventDate").val(formatedNepaliDate);
+        $(".nepaliEventDate").nepaliDatePicker({
             dateFormat: "%y-%m-%d",
             closeOnDateSelect: true,
-            //minDate: "२०००-२-१",
-            maxDate: currentConvertedNepaliDate
+            maxDate: formatedNepaliDate
         });
 
-        $("#nepaliEventDatePicker").on("dateChange", function (nepaliCalendarEvent) {
+
+        $(".nepaliEventDate").on("dateChange", function (nepaliCalendarEvent) {
             var finalUpdatedDate = "";
             var date = [];
             var val = nepaliCalendarEvent.datePickerData.formattedDate;
@@ -1711,6 +1722,9 @@ trackerCapture.controller('DataEntryController',
     };
     
     $scope.getDataEntryForm = function () {
+
+        $scope.initiateNepaliEventCalendar();
+
         $scope.showAttributeCategoryOptions = false;
         $scope.currentFileNames = $scope.fileNames ? ($scope.fileNames[$scope.currentEvent.event] ? $scope.fileNames[$scope.currentEvent.event] : []) : [];
         $scope.currentStage = $scope.stagesById[$scope.currentEvent.programStage];
@@ -1946,8 +1960,9 @@ trackerCapture.controller('DataEntryController',
 
     $scope.saveEventDate = function (reOrder) {
         // add for nepali Calendar
-        $scope.initiateNepaliEventCalendar();
+
         $scope.saveEventDateForEvent($scope.currentEvent, reOrder);
+        $scope.initiateNepaliEventCalendar();
     };
 
     $scope.saveEventDateForEvent = function (eventToSave, reOrder) {
@@ -1959,9 +1974,12 @@ trackerCapture.controller('DataEntryController',
         $scope.currentElement = {id: "eventDate", event: eventToSave.event, saved: false};
 
         // add for nepali Calendar start
-        if($scope.convertedFromNepaliCalEventDate) {
+
+        if($scope.convertedFromNepaliCalEventDate != '' ) {
             eventToSave.eventDate = $scope.convertedFromNepaliCalEventDate;
         }
+
+
         // add for nepali Calendar end
 
         var e = {event: eventToSave.event,

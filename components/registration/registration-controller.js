@@ -92,9 +92,16 @@ trackerCapture.controller('RegistrationController',
     $scope.generatedCustomId = ''; // custom change for SAVE-CHILD
     // add for nepali Calendar start
     $scope.initiateNepaliCalendar = function () {
+        /*
         var currentDate = new Date();
         var currentNepaliDate = calenderFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate() - 1);
         var formatedNepaliDate = calenderFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+        */
+
+        var currentDate = new Date();
+        var currentNepaliDate = calendarFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
+        var formatedNepaliDate = calendarFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+        $("#nepali-date-picker").val(formatedNepaliDate);
         $("#nepali-date-picker").nepaliDatePicker({
             dateFormat: "%y-%m-%d",
             closeOnDateSelect: true,
@@ -169,6 +176,7 @@ trackerCapture.controller('RegistrationController',
         });
 
     };
+
      // add for nepali Calendar end
 
     // custom change for SAVE-CHILD for fingerPrint read Start
@@ -311,7 +319,7 @@ trackerCapture.controller('RegistrationController',
     };
 
     // custom change add for nepali Calendar start
-    function  convertDateToISO() {
+    function convertDateToISO() {
 
         var finalUpdatedDate = $("#updatedISODate").val();
         console.log('here is final date',finalUpdatedDate);
@@ -333,8 +341,52 @@ trackerCapture.controller('RegistrationController',
                 orgUnit: $scope.selectedOrgUnit.id,
                 orgUnitName: $scope.selectedOrgUnit ? $scope.selectedOrgUnit.displayName : ""
             };
-
         }
+
+    };
+
+    $scope.getNepaliDateFromISODate = function(){
+        var finalUpdatedDate = $("#updatedISODate").val();
+        //alert( finalUpdatedDate + " -- $scope.selectedEnrollment -- " + $scope.selectedEnrollment.enrollmentDate  );
+        var tempEnrollmentDate = $scope.selectedEnrollment.enrollmentDate;
+
+        var nepaliEnrollmentConverter = new DateConverter();
+
+        nepaliEnrollmentConverter.setEnglishDate( parseInt(tempEnrollmentDate.split("-")[0]), parseInt(tempEnrollmentDate.split("-")[1]), parseInt(tempEnrollmentDate.split("-")[2]) );
+
+        console.log('nepali date', parseInt(tempEnrollmentDate.split("-")[0]), parseInt(tempEnrollmentDate.split("-")[1]), parseInt(tempEnrollmentDate.split("-")[2]) );
+
+        var convertedEnrollmentNepaliDate = nepaliEnrollmentConverter.getNepaliYear()+"-"+ nepaliEnrollmentConverter.getNepaliMonth() +"-"+ nepaliEnrollmentConverter.getNepaliDate();
+
+        var tempEnrollmentArr = [];
+        var l = convertedEnrollmentNepaliDate.length;
+        for(var i=0; i<l; i++){
+            if( convertedEnrollmentNepaliDate[i] == 0 ) { tempEnrollmentArr.push("०") }
+            if( convertedEnrollmentNepaliDate[i] == 1 ) { tempEnrollmentArr.push("१") }
+            if( convertedEnrollmentNepaliDate[i] == 2 ) { tempEnrollmentArr.push("२") }
+            if( convertedEnrollmentNepaliDate[i] == 3 ) { tempEnrollmentArr.push("३") }
+            if( convertedEnrollmentNepaliDate[i] == 4 ) { tempEnrollmentArr.push("४") }
+            if( convertedEnrollmentNepaliDate[i] == 5 ) { tempEnrollmentArr.push("५") }
+            if( convertedEnrollmentNepaliDate[i] == 6 ) { tempEnrollmentArr.push("६") }
+            if( convertedEnrollmentNepaliDate[i] == 7 ) { tempEnrollmentArr.push("७") }
+            if( convertedEnrollmentNepaliDate[i] == 8 ) { tempEnrollmentArr.push("८") }
+            if( convertedEnrollmentNepaliDate[i] == 9 ) { tempEnrollmentArr.push("९") }
+            if( convertedEnrollmentNepaliDate[i] == "-" ) { tempEnrollmentArr.push("-") }
+        }
+
+        var tempEnrollmentString = tempEnrollmentArr.toString();
+        var tempEnrollmentString = tempEnrollmentArr.toString();
+        tempEnrollmentString.replace(/\,/g,"");
+        var tempEnrollmentStr2 = tempEnrollmentString.replace(/\,/g,"");
+        var tempEnrollmentArr = tempEnrollmentStr2.split("-");
+        var tempEnrollmentYear =  tempEnrollmentArr[0];
+        var tempEnrollmentMonth = tempEnrollmentArr[1];
+        var tempEnrollmentDay = tempEnrollmentArr[2];
+        console.log(tempEnrollmentArr, tempEnrollmentYear, tempEnrollmentMonth , tempEnrollmentDay);
+
+        var finalEnrollmentNepaliDate = tempEnrollmentYear + "-" + tempEnrollmentMonth + "-" + tempEnrollmentDay;
+
+        $('#nepali-date-picker').val(finalEnrollmentNepaliDate);
 
     };
     // custom change add for nepali Calendar end
@@ -897,7 +949,9 @@ trackerCapture.controller('RegistrationController',
             var lastName = "";
             var dobYear = "";
             var sex = "";
-            var serviceRegNo = "";
+            //var serviceRegNo = "";
+            var automatedSerialNumber = "";
+
             if ($scope.selectedTei.gVGIL7DJp4b != undefined) {
                 var str = $scope.selectedTei.gVGIL7DJp4b;
                 lastName = str.substr(0, 2).toUpperCase();
@@ -917,12 +971,19 @@ trackerCapture.controller('RegistrationController',
                     sex = "3";
                 }
             }
+            /*
             if ($scope.selectedTei.Fu4LhjNsJZL != undefined) {
                 serviceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
+            }
+            */
 
+            if ($scope.selectedTei.pULhHeN8TUj != undefined) {
+                automatedSerialNumber = $scope.selectedTei.pULhHeN8TUj;
             }
 
-            $scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+
+            $scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
+            //$scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
         }
 
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
@@ -1510,6 +1571,7 @@ trackerCapture.controller('RegistrationController',
     
             if (!DateUtils.verifyExpiryDate(date, $scope.selectedProgram.expiryPeriodType, $scope.selectedProgram.expiryDays, true)) {
                 $scope.currentEvent[field] = $scope.currentEventOriginal[field];
+
                 return;
             }
         }

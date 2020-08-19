@@ -7,7 +7,6 @@ trackerCapture.controller('HomeController',function(
     $location,
     $filter,
     $timeout,
-    $translate,
     $q,
     Paginator,
     MetaDataFactory,
@@ -34,7 +33,7 @@ trackerCapture.controller('HomeController',function(
         
         var viewsByType = {
             registration: {
-                name: $translate.instant('register'),
+                name: "Register",
                 template: "components/registration/registration.html",
                 class: "col-lg-10 col-md-12",
                 shouldReset: false,
@@ -44,14 +43,14 @@ trackerCapture.controller('HomeController',function(
                }
             },
             lists: {
-                name: $translate.instant('lists'),
+                name: "Lists",
                 template: "components/home/lists/lists.html",
                 class: "col-xs-12",
                 shouldReset: true,
                 disabled: false,
             },
             search: {
-                name: $translate.instant('search'),
+                name: "Search",
                 template: "components/home/search/search.html",
                 class: "",
                 shouldReset: true,
