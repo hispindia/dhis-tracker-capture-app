@@ -10,21 +10,18 @@
 
 // old mapping
 
+/*
 const programIds = {
   childProgramId: 'U1xZvvCVWIM',
   motherProgramId: 'qbQ4TP1Yy3K'
 };
-
-
-// new mapping
-/*
-const programIds = {
-  childProgramId: 'c6RvWfvm3wl',
-  motherProgramId: 'ibLaOIQtFDM'
-};
 */
 
+// new mapping for DMC INTPART
 
+const programIds = {
+  childProgramId: 'SSLpOM0r1U7'
+};
 
 /**
  * Here you can change the default event IDs that the program will search for.
@@ -53,17 +50,17 @@ const eventIds = {
 */
 
 
-// new mapping
+// new mapping for DMC-INTPART
 
 
 const eventIds = {
-  muac: 'SnQtKzhwOKw', // Needs to be in centimeters
-  weight: 'JsRev4ChjQq', // Needs to be in kg
-  height: 'GFSN50ohT0E', // Needs to be in cm
-  wfa: "sSbuKXKiYZN",  //z-score of WFA
-  hfa: "Bc19GUIGdI0", //z-score of HFA
-  wfh: "tdI91a7mv4j", //z-score of wfh
-  bmi: "DHd4SEJ27pC", //bmi
+  muac: 'yeeIKaqBxjq', // Needs to be in centimeters
+  weight: 'bCLKDDwmxWe', // Needs to be in kg
+  height: 'zvdn4impwpQ', // Needs to be in cm
+  wfa: "j5RqPPaM7xb",  //z-score of WFA
+  hfa: "qcykjdaSLd0", //z-score of HFA
+  wfh: "CQKiEb71eQP", //z-score of wfh
+  bmi: "cp110jDw81n", //bmi
 };
 
 
@@ -84,10 +81,10 @@ const teiIds = {
 */
 
 const teiIds = {
-  firstname: 's8LMyJZmim8',
-  lastname: 'ZOVsQef0rb8',
-  gender: 'uSIz5uHBMdY', // Corresponding data element needs to be a string value "Male" or "Female"
-  birthdate: 'yj8BaYdkTA6'
+  firstname: 'TfdH5KvFmMy',
+  lastname: 'aW66s2QSosT',
+  gender: 'PbEhJPnon0o', // Corresponding data element needs to be a string value "Male" or "Female"
+  birthdate: 'iIf1gJ4FVdR'
 };
 
 export { programIds, eventIds, teiIds };

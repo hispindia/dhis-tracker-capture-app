@@ -58,10 +58,14 @@ class App extends React.Component {
     const { config } = this.state;
 
     // No valid program found.
+    /*
     if (
       program !== programIds.childProgramId &&
       program !== programIds.motherProgramId
     )
+      return null;
+    */
+    if (program !== programIds.childProgramId)
       return null;
 
     this.addAnimation(
@@ -79,6 +83,7 @@ class App extends React.Component {
       );
     }
 
+    /*
     if (program === programIds.motherProgramId) {
       return (
         <MotherApp
@@ -90,6 +95,7 @@ class App extends React.Component {
         />
       );
     }
+    */
 
     return (
       <ChildApp
