@@ -861,6 +861,107 @@ trackerCapture.controller('TEIAddController',
                                 $scope.selectedEnrollment = enrollment;
                                 var dhis2Events = EventUtils.autoGenerateEvents($scope.tei.trackedEntityInstance, $scope.base.selectedProgramForRelative, $scope.selectedOrgUnit, enrollment, null);
                                 if (dhis2Events.events.length > 0) {
+
+                                    // start custom change for PMTCT Myanmar
+                                    //$scope.selectedTeiForDisplay.orgUnit;
+                                    //$scope.selectedTeiForDisplay.trackedEntityInstance;
+                                    //$scope.selectedTeiForDisplay.enrollments[0].program;
+                                    //$scope.selectedTeiForDisplay.enrollments[0].program;
+                                    let tempProgram = 'B8MqLS47pW6';
+                                    let tempProgramStage = 'hHdZDPXykTP';
+                                    /*
+                                    let tempEventDataValue = [
+                                        { dataElement: 'ZXX1hcFLOxX', value: 'Currently on ART'},
+                                        { dataElement: 'p19c4ST5LeF', value: 'Known negative'},
+                                    ];
+                                    */
+
+                                    let tempEventDataValues = [];
+
+                                    $.ajax({
+                                        async: false,
+                                        type: "GET",
+                                        url: '../api/events.json?trackedEntityInstance=' + $scope.selectedTeiForDisplay.trackedEntityInstance+ '&program=' +tempProgram+ '&programStage=' + tempProgramStage + '&orgUnit=' + $scope.selectedTeiForDisplay.orgUnit +'&order=eventDate:des&paging=false',
+                                        success: function (eventResponseData) {
+                                            $scope.tempLatestEvent = eventResponseData.events[0];
+                                            if ($scope.tempLatestEvent.dataValues.length !== 0) {
+                                                for (let w = 0; w < $scope.tempLatestEvent.dataValues.length; w++) {
+                                                    let tempNewEventDataValue = {};
+                                                    if ($scope.tempLatestEvent.dataValues[w].dataElement !== undefined &&
+                                                        $scope.tempLatestEvent.dataValues[w].dataElement === "ZXX1hcFLOxX") {
+
+                                                        tempNewEventDataValue.dataElement = $scope.tempLatestEvent.dataValues[w].dataElement;
+                                                        tempNewEventDataValue.value = $scope.tempLatestEvent.dataValues[w].value;
+                                                        tempEventDataValues.push(tempNewEventDataValue);
+
+                                                    }
+                                                    else if ($scope.tempLatestEvent.dataValues[w].dataElement !== undefined &&
+                                                        $scope.tempLatestEvent.dataValues[w].dataElement === "TtJ3hy42rNM") {
+
+                                                        tempNewEventDataValue.dataElement = $scope.tempLatestEvent.dataValues[w].dataElement;
+                                                        tempNewEventDataValue.value = $scope.tempLatestEvent.dataValues[w].value;
+                                                        tempEventDataValues.push(tempNewEventDataValue);
+
+                                                    }
+                                                    else if ($scope.tempLatestEvent.dataValues[w].dataElement !== undefined &&
+                                                        $scope.tempLatestEvent.dataValues[w].dataElement === "i7eQQh3L4Xx") {
+
+                                                        tempNewEventDataValue.dataElement = $scope.tempLatestEvent.dataValues[w].dataElement;
+                                                        tempNewEventDataValue.value = $scope.tempLatestEvent.dataValues[w].value;
+                                                        tempEventDataValues.push(tempNewEventDataValue);
+
+                                                    }
+                                                    else if ($scope.tempLatestEvent.dataValues[w].dataElement !== undefined &&
+                                                        $scope.tempLatestEvent.dataValues[w].dataElement === "DDN8wJhPzrR") {
+
+                                                        tempNewEventDataValue.dataElement = $scope.tempLatestEvent.dataValues[w].dataElement;
+                                                        tempNewEventDataValue.value = $scope.tempLatestEvent.dataValues[w].value;
+                                                        tempEventDataValues.push(tempNewEventDataValue);
+
+                                                    }
+                                                    else if ($scope.tempLatestEvent.dataValues[w].dataElement !== undefined &&
+                                                        $scope.tempLatestEvent.dataValues[w].dataElement === "ivWJW2euZFH") {
+
+                                                        tempNewEventDataValue.dataElement = $scope.tempLatestEvent.dataValues[w].dataElement;
+                                                        tempNewEventDataValue.value = $scope.tempLatestEvent.dataValues[w].value;
+                                                        tempEventDataValues.push(tempNewEventDataValue);
+
+                                                    }
+                                                    else if ($scope.tempLatestEvent.dataValues[w].dataElement !== undefined &&
+                                                        $scope.tempLatestEvent.dataValues[w].dataElement === "BjS979WO00N") {
+
+                                                        tempNewEventDataValue.dataElement = $scope.tempLatestEvent.dataValues[w].dataElement;
+                                                        tempNewEventDataValue.value = $scope.tempLatestEvent.dataValues[w].value;
+                                                        tempEventDataValues.push(tempNewEventDataValue);
+
+                                                    }
+                                                    else if ($scope.tempLatestEvent.dataValues[w].dataElement !== undefined &&
+                                                        $scope.tempLatestEvent.dataValues[w].dataElement === "p19c4ST5LeF") {
+
+                                                        tempNewEventDataValue.dataElement = $scope.tempLatestEvent.dataValues[w].dataElement;
+                                                        tempNewEventDataValue.value = $scope.tempLatestEvent.dataValues[w].value;
+                                                        tempEventDataValues.push(tempNewEventDataValue);
+
+                                                    }
+                                                    else if ($scope.tempLatestEvent.dataValues[w].dataElement !== undefined &&
+                                                        $scope.tempLatestEvent.dataValues[w].dataElement === "bMeAudy7eSs") {
+
+                                                        tempNewEventDataValue.dataElement = $scope.tempLatestEvent.dataValues[w].dataElement;
+                                                        tempNewEventDataValue.value = $scope.tempLatestEvent.dataValues[w].value;
+                                                        tempEventDataValues.push(tempNewEventDataValue);
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+
+                                    dhis2Events.events.forEach(tempEvent => {
+                                        if (tempEvent.enrollment) {
+                                            tempEvent.dataValues = tempEventDataValues;
+                                        }
+                                    });
+                                    // end custom change for PMTCT Myanmar
                                     DHIS2EventFactory.create(dhis2Events);
                                 }
                             }
