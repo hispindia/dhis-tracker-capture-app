@@ -113,7 +113,7 @@ trackerCapture.controller('RegistrationController',
 
 
     // custom change for INTPART Start
-    // update for SAVE CHILD  for disable attribute patient_identifier
+    // update for INTPART  for disable attribute family_unique_id
     $scope.isDisabled = function (attribute) {
         if (attribute.code === 'family_unique_id' ) {
             return true;

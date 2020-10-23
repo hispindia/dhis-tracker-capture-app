@@ -279,7 +279,7 @@ trackerCapture.controller('DataEntryController',
         $scope.printEmptyForm = false;
     };
 
-    $scope.printslip = function (eventvale, printdivname) {
+    $scope.printSlip = function (eventvale, printdivname) {
 	
         $.ajaxSetup({
             async: false
