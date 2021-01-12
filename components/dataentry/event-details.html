@@ -1,6 +1,11 @@
 <!-- event dates/scheduling begin -->
-<div class="row" ng-if="displayCustomForm !== 'TABLE' && displayCustomForm !== 'COMPARE'">
-        
+<div class="row" ng-if="displayCustomForm !== 'TABLE' && displayCustomForm !== 'COMPARE'" ng-init="initiateNepaliEventCalendar();">
+    <!-- add for nepali Calendar start -->
+    <div class="col-md-3">
+        <span><b>Nepali Calendar</b></span>
+        <input type="text" class="nepaliEventDate" ng-model="convertedEventNepaliDate" name="nepaliEventDatePicker" id="nepaliEventDatePicker" />
+    </div>
+    <!-- add for nepali Calendar end-->
     <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]">
         {{currentStage.executionDateLabel ? currentStage.executionDateLabel : 'report_date' | translate}}
         <span class="required">*</span>
@@ -27,7 +32,7 @@
         <div ng-messages="outerDataEntryForm.eventDate.$error" ng-if="interacted(outerDataEntryForm.eventDate)" class="required" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">
         </div>
     </div>
-    <div ng-if="!currentStage.hideDueDate && !registrationAndDataEntry && !currentStage.periodType"  class="col-md-6">
+    <div ng-if="!currentStage.hideDueDate && !registrationAndDataEntry && !currentStage.periodType"  class="col-md-3">
         <span ng-if="currentEvent.eventDate || currentEvent.status === 'SKIPPED' || currentEvent.dueDate || registrationMode === 'REGISTRATION'">
             {{currentStage.dueDateLabel ? currentStage.dueDateLabel : 'due_date' | translate}}
         </span>
