@@ -1,4 +1,64 @@
+<!-- custom change for SAVE-CHILD for fingerPrint read Start -->
+<style>
+    #continueRegistrationMain {
+        display: block;
+        width: 80%;
+        height: 90%;
+        opacity: 0.5;
+        top: 10%;
+        left: 20%;
+        position: absolute;
+        background-color: gray;
+        z-index: 10000;
+    }
+
+    #registrationPage {
+        display: block;
+        width: 80%;
+        height: 90%;
+        top: 10%;
+        left: 20%;
+        opacity: 1;
+        position: absolute;
+        z-index: 10000;
+    }
+
+    #continueRegistrationButton {
+        display: block;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        width: 60%;
+        height: 40%;
+        border: 1px solid black;
+        opacity: 1;
+    }
+
+    #continueRegistration {
+        display: none;
+    }
+</style>
+<!-- custom change for SAVE-CHILD for fingerPrint read end -->
+
 <script>
+
+    // custom change for SAVE-CHILD for fingerPrint read Start
+    $(document).ready(function () {
+        var url = window.location.href;
+        console.log(url);
+        //format of url : https://localhost:8080/dhis/dhis-web-tracker-capture/index.html?key=register&fid=1&str=
+        var url2 = url.split("html")[1];
+        console.log(url2);
+        if(url2){
+            var url3 = url2.split("&")[0];
+            if (url3 == "?key=register") {
+                $(".ouhide").hide();
+            }
+        }
+    });
+
+    // custom change for SAVE-CHILD for fingerPrint read end
+
     $(".search-dropdown-button").on('click', function () {
         $("#searchDropDown").width($("#searchDropDownParent").width());
     });

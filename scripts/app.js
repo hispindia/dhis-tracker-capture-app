@@ -10,7 +10,17 @@ import 'd2-tracker/lib/dhis2.angular.controllers.js';
 import 'd2-tracker/lib/dhis2.angular.templates.js';
 import 'd2-tracker/src/styles/style.css';
 
+// add for nepali Calendar start
+import '../styles/nepali.datepicker.v2.1.css';
+import '../styles/nepali.datepicker.v2.2.min.css';
+import '../styles/nepaliDatePicker.min.css';
+
 // App files
+// add for nepali Calendar start
+import '../scripts/nepaliDatePicker/nepaliToEnglishConversion.js';
+import '../scripts/nepaliDatePicker/jquery.nepaliDatePicker.js';
+// add for nepali Calendar end
+
 import '../scripts/services.js';
 import '../scripts/filters.js';
 import '../scripts/directives.js';
