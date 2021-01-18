@@ -68,6 +68,8 @@ trackerCapture.controller('RegistrationController',
     $scope.currentFileNames = $scope.fileNames;
 
     $scope.generatedCustomId = ''; // custom change for INTPART
+    // for NCD program custom ID display on load
+    $scope.ncduniqueID = 'hGntwOmEtFw';
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
 
@@ -115,7 +117,7 @@ trackerCapture.controller('RegistrationController',
     // custom change for INTPART Start
     // update for INTPART  for disable attribute family_unique_id
     $scope.isDisabled = function (attribute) {
-        if (attribute.code === 'family_unique_id' ) {
+        if (attribute.code === 'family_unique_id' || attribute.code === 'patient_unique_id') {
             return true;
         }
         else {
@@ -327,6 +329,40 @@ trackerCapture.controller('RegistrationController',
         if($scope.selectedProgram){
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+
+
+                // change for INTPART NCD Program ID Generation display on load
+                if ($scope.selectedProgram.id === 'sX8imvOrY0R') {
+                    $timeout(function () {
+                        //var date = new Date();
+                        //var year = date.getFullYear();
+                        //var selOrgUnitCode = '';
+                        //var selParentParentOrgUnitCode = '';
+                        $.getJSON("../api/organisationUnits/" + $scope.selectedOrgUnit.id + ".json?fields=id,displayName,code,comment,parent[id,displayName,code,comment,parent[id,displayName,code,comment]]&paging=false", function (responseData) {
+
+                            //selOrgUnitCode = responseData.code;
+                            //selParentParentOrgUnitCode = responseData.parent.parent.code;
+
+                            let selectedOrgUnitComment = responseData.comment;
+                            let selectedOrgUnitCommentUpperCase = selectedOrgUnitComment.substr(0, 4).toUpperCase();
+
+                            let selOrgParentComment = responseData.parent.comment;
+                            let selOrgParentCommentUpperCase = selOrgParentComment.substr(0, 4).toUpperCase();
+
+                            let selOrgParentParentComment = responseData.parent.parent.comment;
+                            let selOrgParentParentCommentUpperCase = selOrgParentParentComment.substr(0, 4).toUpperCase();
+
+                            // 4 digit random number
+                            let suffix = Math.floor(Math.random() * 10000) + 1;
+
+                            let ncdCustomId = selOrgParentParentCommentUpperCase + "-" + selOrgParentCommentUpperCase + "-" + selectedOrgUnitCommentUpperCase + "-" + suffix;
+                            if (!$scope.selectedTei[$scope.ncduniqueID] && $scope.selectedTei[$scope.ncduniqueID] == undefined) {
+                                $scope.selectedTei[$scope.ncduniqueID] = ncdCustomId;//put default value on load for
+                            }
+                        });
+                    }, 0);
+                }
+                // end custom change
                 fetchGeneratedAttributes();
                 if ($scope.selectedProgram && $scope.selectedProgram.id) {
                     if ($scope.selectedProgram.dataEntryForm && $scope.selectedProgram.dataEntryForm.htmlCode) {
@@ -666,7 +702,7 @@ trackerCapture.controller('RegistrationController',
         //registration form comes empty, in this case enforce at least one value
 
         // custom change for custom-id generation for household/member program
-        if ($scope.registrationMode === 'REGISTRATION' ) {
+        if ($scope.registrationMode === 'REGISTRATION' && $scope.selectedProgram.id !== 'sX8imvOrY0R') {
 
             var selectedOrgUnitCode = $scope.selectedOrgUnit.code;
             var orgUnitCodeUpperCase = selectedOrgUnitCode.substr(0, 4).toUpperCase();
@@ -680,6 +716,7 @@ trackerCapture.controller('RegistrationController',
             }
             $scope.generatedCustomId = orgUnitCodeUpperCase + "-" + houseIdentifierValue + "-" + suffix;
         }
+        // custom change for custom-id generation for household/member program end
 
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
