@@ -54,6 +54,9 @@ trackerCapture.controller('DataEntryController',
     $scope.eventPeriods = [];
     $scope.currentPeriod = [];
     $scope.showEventsAsTables = false;
+    $scope.previousData = false;
+    $scope.teiData = {};
+    $scope.allDataValues = [];
     //variable is set while looping through the program stages later.
     $scope.stagesCanBeShownAsTable = false;
     $scope.hiddenFields = [];
@@ -83,7 +86,6 @@ trackerCapture.controller('DataEntryController',
     $scope.useMainMenu = false;
     $scope.mainMenuStages = [];
     $scope.useBottomLine = false; 
-    
     //hideTopLineEventsForFormTypes is only used with main menu
     $scope.hideTopLineEventsForFormTypes = {TABLE: true, COMPARE: true};
     $scope.timelineDataEntryModes = { DATAENTRYFORM: 1, COMPAREPREVIOUSDATAENTRYFORM: 2,COMPAREALLDATAENTRYFORM: 3, TABLEDATAENTRYFORM: 4};
@@ -93,7 +95,6 @@ trackerCapture.controller('DataEntryController',
     
     $scope.attributesById = CurrentSelection.getAttributesById();
     $scope.optionGroupsById = CurrentSelection.getOptionGroupsById();
-
     DashboardLayoutService.get().then(function(response) {
         $scope.dashBoardLayout = response;
         if($scope.dashBoardLayout.customLayout && 
@@ -741,18 +742,20 @@ trackerCapture.controller('DataEntryController',
                     } else if (attributepath[q].attribute == "xalnzkNfD77") //Name of the person
                     {
                         var vall = attributepath[q].value;
-
                         $scope.Name = vall;
+                        $scope.teiData.name=$scope.Name
                     } else if (attributepath[q].attribute == "PbEhJPnon0o") //Sex
                     {
                         var vall = attributepath[q].value;
 
                         $scope.Sex = vall;
+                        $scope.teiData.sex =$scope.Sex
                     } else if (attributepath[q].attribute == "iIf1gJ4FVdR") //Age
                     {
                         var vall = attributepath[q].value;
 
                         $scope.Age = vall;
+                        $scope.teiData.age =$scope.Age
                     } else if (attributepath[q].attribute == "Lt9ZrfgAMuw") //Mobile number
                     {
                         var vall = attributepath[q].value;
@@ -767,6 +770,7 @@ trackerCapture.controller('DataEntryController',
                 }
             }
         });
+
         if ($scope.Household == undefined) {
 
             $scope.Household = "&nbsp&nbsp";
@@ -1443,6 +1447,7 @@ trackerCapture.controller('DataEntryController',
             $scope.selectedEntity = selections.tei;
             $scope.selectedProgram = selections.pr;
             $scope.selectedEnrollment = selections.selectedEnrollment;
+
             
             var ouNames = CurrentSelection.getOrgUnitNames();            
             ouNames[$scope.selectedOrgUnit.id] = $scope.selectedOrgUnit.displayName;
@@ -1473,8 +1478,7 @@ trackerCapture.controller('DataEntryController',
                     }
                 }
                 
-                $scope.programStages = $scope.tabularEntryStages = $scope.selectedProgram.programStages;
-                
+                $scope.programStages = $scope.tabularEntryStages = $scope.selectedProgram.programStages;                
                 angular.forEach($scope.selectedProgram.programStages, function (stage) {
                     if (stage.openAfterEnrollment) {
                         $scope.currentStage = stage;
@@ -1999,11 +2003,45 @@ trackerCapture.controller('DataEntryController',
                                 note.displayDate = DateUtils.formatFromApiToUser(note.storedDate);
                                 note.storedDate = DateUtils.formatToHrsMins(note.storedDate);
                             });
-        
                             if ($scope.currentEvent.notes.length > 0) {
                                 $scope.currentEvent.notes = orderByFilter($scope.currentEvent.notes, '-storedDate');
                             }
                         }
+                        if($scope.currentEvent.programStage == "phcPsdxXKVY"){
+                                $scope.previousData = true,
+                                $.get("../api/events.json?trackedEntityInstance="+$scope.currentEvent.trackedEntityInstance+"&program="+$scope.currentEvent.program+"&programStage=phcPsdxXKVY&orgUnit="+$scope.currentEvent.orgUnit+"&&order=eventDate:des&paging=false", function ( data ) {
+                                    let dataValues= [];
+                                    data.events.forEach( ele =>{
+                                        let eventDate =ele.eventDate.split("T")
+                                        let eventobj = {
+                                            eventDate: eventDate["0"]
+                                        }
+                                        let objArr = ele.dataValues.map( ev =>{
+                                            let obj = {}
+                                            if(ev.dataElement =="HQz8UUWfvo0"){
+                                                obj.sbp= ev.value
+                                            }
+                                            if(ev.dataElement == "pTuKCcPRn9k"){
+                                                obj.dbp= ev.value
+                                            }
+                                            if(ev.dataElement == "FHBrdgsPgDY"){
+                                                obj.rbs= ev.value
+                                            }
+                                            if(ev.dataElement == "F0O5KoEGsIF"){
+                                              obj.weight= ev.value
+                                            }
+                                            return obj
+                                        })
+                                        objArr.push(eventobj)
+                                        dataValues.push(Object.assign({}, ...objArr))
+                                    })
+                                    $scope.allDataValues = dataValues
+                                    console.log('dfdd44', $scope.allDataValues)
+                                });
+                         }else {
+                            $scope.previousData = false
+                         }
+                        console.log('sss',$scope.currentEvent)
                         $scope.getDataEntryForm();
                         $timeout(function(){
                             $scope.showLoadingEventSpinner = false;
@@ -2385,6 +2423,37 @@ trackerCapture.controller('DataEntryController',
         $scope.saveEventDateForEvent($scope.currentEvent, reOrder);        
     };
 
+    // added by gyan
+  
+    $scope.ViewPreviousRecords = function () {  
+        $scope.selectedEntity.attributes.forEach(ele =>  {
+            if(ele.attribute == "TfdH5KvFmMy"){
+               $scope.teiData.firstName =ele.value 
+            }
+            if(ele.attribute == "aW66s2QSosT"){
+                $scope.teiData.lastName =ele.value 
+             }
+             if(ele.attribute == "iIf1gJ4FVdR"){
+                $scope.teiData.dob =ele.value 
+             }
+             if(ele.attribute == "PbEhJPnon0o"){
+                $scope.teiData.gender =ele.value 
+             }
+        })
+        $(".modal").show();
+        $("#myModal").show();    
+    };
+    $scope.closeModal = function () {   
+        $(".modal").hide();
+        $("#myModal").hide();  
+    };
+    $scope.printContent = function (el) {   
+        let restorepage = document.body.innerHTML;
+        let printcontent = document.getElementById(el).innerHTML;
+        document.body.innerHTML = printcontent;
+        window.print();
+        document.body.innerHTML = restorepage;
+    };
     $scope.saveEventDateForEvent = function (eventToSave, reOrder) {
         if(!eventToSave.eventDate) {
             return;

@@ -1,8 +1,7 @@
 <!-- event dates/scheduling begin -->
 <div class="row" ng-if="displayCustomForm !== 'TABLE' && displayCustomForm !== 'COMPARE'">
-        
     <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]">
-        {{currentStage.executionDateLabel ? currentStage.executionDateLabel : 'report_date' | translate}}
+        {{currentStage.executionDateLabel ? currentStage.executionDateLabel : 'report_date' | translate}} 
         <span class="required">*</span>
         <input type="text"
                ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}"
@@ -54,6 +53,47 @@
         </div>
     </div>    
 </div>
+
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content" ng-if="teiData">
+    <!-- <button type="button" class="btn btn-primary btn-sm" style="vertical-align: middle;"
+    ng-click="printContent('dataTable')"><span class="glyphicon glyphicon-print" style="font-size: 15px;"></span> &nbsp;
+    Print
+    </button> -->
+    <span class="close" ng-click="closeModal();">&times;</span>
+    <div class="modal-content-body" id="dataTable" >
+        <div style="font-size: 15px; font-weight: bold;">
+            <span class="col">First Name of Patient: </span><span>{{teiData.firstName}}</span><span class="tcol">Last Name of Patient: </span><span>{{teiData.lastName}}</span><span class="tcol">Date of Birth: </span><span>{{teiData.dob}}</span><span class="tcol">Gender: </span><span>{{teiData.gender}}</span>
+        </div>
+        <br />
+        <table id="table1" class="table" style="width:100%">
+            <tr>
+                <th>SN</th>
+                <th>Event Date</th>
+                <th>Systolic BP</th>
+                <th>Diastolic BP</th>
+                <th>RBS (mg/dl)</th>
+                <th>Weight (kgs)</th>
+            </tr>
+             <tbody>
+                <tr ng-repeat="dataValues in allDataValues">
+                    <td>{{$index + 1}}</td>
+                    <td>{{dataValues.eventDate}}</td>
+                    <td>{{dataValues.sbp}}</td>
+                    <td>{{dataValues.dbp}}</td>
+                    <td>{{dataValues.rbs}}</td>
+                    <td>{{dataValues.weight}}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+     </div>
+  </div>
+  <div ng-if="previousData">
+   <a ng-click="ViewPreviousRecords()">View Previous Records</a>
+</div>
+
 <!-- event dates/scheduling end -->
 <!-- coordinates begin -->
 <div class="row" ng-if="currentStage.featureType && ['POLYGON','POINT'].includes(currentStage.featureType) && (currentEvent.eventDate || registrationMode ==='REGISTRATION')">
