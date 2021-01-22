@@ -353,7 +353,7 @@ trackerCapture.controller('RegistrationController',
                             let selOrgParentParentCommentUpperCase = selOrgParentParentComment.substr(0, 4).toUpperCase();
 
                             // 4 digit random number
-                            let suffix = Math.floor(Math.random() * 10000) + 1;
+                            let suffix = Math.floor(Math.random() * 100000) + 1;
 
                             let ncdCustomId = selOrgParentParentCommentUpperCase + "-" + selOrgParentCommentUpperCase + "-" + selectedOrgUnitCommentUpperCase + "-" + suffix;
                             if (!$scope.selectedTei[$scope.ncduniqueID] && $scope.selectedTei[$scope.ncduniqueID] == undefined) {
