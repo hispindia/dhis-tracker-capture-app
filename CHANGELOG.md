@@ -1,3 +1,157 @@
+## [31.5.1](https://github.com/dhis2/tracker-capture-app/compare/v31.5.0...v31.5.1) (2021-03-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([733d75b](https://github.com/dhis2/tracker-capture-app/commit/733d75bc61b682336d585e68ebcca86fa5f950d8))
+
+# [31.5.0](https://github.com/dhis2/tracker-capture-app/compare/v31.4.0...v31.5.0) (2021-03-23)
+
+
+### Features
+
+* ordering of indicators ([687b65c](https://github.com/dhis2/tracker-capture-app/commit/687b65c74bc3e1be8a350f8d2b3151382ab3e338))
+
+# [31.4.0](https://github.com/dhis2/tracker-capture-app/compare/v31.3.1...v31.4.0) (2021-03-11)
+
+
+### Features
+
+* [TECH-541] download org unit associations ([#981](https://github.com/dhis2/tracker-capture-app/issues/981)) ([46664b9](https://github.com/dhis2/tracker-capture-app/commit/46664b9b7fb67185c2ce869c68ac1bb5aed6ff5f))
+
+## [31.3.1](https://github.com/dhis2/tracker-capture-app/compare/v31.3.0...v31.3.1) (2021-03-08)
+
+
+### Bug Fixes
+
+* program report start- and endDate filter ([#975](https://github.com/dhis2/tracker-capture-app/issues/975)) ([e11fadc](https://github.com/dhis2/tracker-capture-app/commit/e11fadc1499588c4792660f3e33f0becb08721e3))
+
+# [31.3.0](https://github.com/dhis2/tracker-capture-app/compare/v31.2.6...v31.3.0) (2021-02-25)
+
+
+### Features
+
+* [DHIS2-10525] support returnUrl parameter for TEI dashboard ([#974](https://github.com/dhis2/tracker-capture-app/issues/974)) ([138abcb](https://github.com/dhis2/tracker-capture-app/commit/138abcb5ad6d18cdc653c3dda8b501696349b9a5))
+
+## [31.2.6](https://github.com/dhis2/tracker-capture-app/compare/v31.2.5...v31.2.6) (2021-02-22)
+
+
+### Bug Fixes
+
+* [DHIS2-10548] remove hard coded ouMode and unused code ([#972](https://github.com/dhis2/tracker-capture-app/issues/972)) ([ccd0d48](https://github.com/dhis2/tracker-capture-app/commit/ccd0d4828f44ccb7936b2237d62aafed521466f1))
+
+## [31.2.5](https://github.com/dhis2/tracker-capture-app/compare/v31.2.4...v31.2.5) (2021-02-16)
+
+
+### Bug Fixes
+
+* [DHIS2-9628] always load selected program ([#964](https://github.com/dhis2/tracker-capture-app/issues/964)) ([4ac0763](https://github.com/dhis2/tracker-capture-app/commit/4ac07632f033ad89c0d66b68a6a779fb5863e45c))
+
+## [31.2.4](https://github.com/dhis2/tracker-capture-app/compare/v31.2.3...v31.2.4) (2021-02-12)
+
+
+### Bug Fixes
+
+* added null check ([d7a0c9b](https://github.com/dhis2/tracker-capture-app/commit/d7a0c9ba7549d96b8ffbaf795f83d4993e2cc809))
+
+## [31.2.3](https://github.com/dhis2/tracker-capture-app/compare/v31.2.2...v31.2.3) (2021-02-12)
+
+
+### Bug Fixes
+
+*  [DHIS2-9335] allow multiple browser tabs to post relationships for the same TEI ([bd76077](https://github.com/dhis2/tracker-capture-app/commit/bd760770c594a0ceeba67221eb2dd3e5223197c4))
+
+## [31.2.2](https://github.com/dhis2/tracker-capture-app/compare/v31.2.1...v31.2.2) (2021-01-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0595451](https://github.com/dhis2/tracker-capture-app/commit/0595451bee539a436777241ef62e09223fee2ee0))
+
+## [31.2.1](https://github.com/dhis2/tracker-capture-app/compare/v31.2.0...v31.2.1) (2021-01-21)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6a55ee1](https://github.com/dhis2/tracker-capture-app/commit/6a55ee1563197adb40508c557774af6e281866fb))
+
+# [31.2.0](https://github.com/dhis2/tracker-capture-app/compare/v31.1.11...v31.2.0) (2021-01-15)
+
+
+### Features
+
+* [DHIS2-10266] only download orgs in capture scope ([#948](https://github.com/dhis2/tracker-capture-app/issues/948)) ([1c721f9](https://github.com/dhis2/tracker-capture-app/commit/1c721f906e07c56167f96b6d9957041dd4d6f9a9))
+
+## [31.1.11](https://github.com/dhis2/tracker-capture-app/compare/v31.1.10...v31.1.11) (2021-01-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([90a4906](https://github.com/dhis2/tracker-capture-app/commit/90a490613df9c01be5160d7d16c288c0e703da4b))
+
+## [31.1.10](https://github.com/dhis2/tracker-capture-app/compare/v31.1.9...v31.1.10) (2021-01-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f701fb3](https://github.com/dhis2/tracker-capture-app/commit/f701fb3a96217140684f4aebf1890b84020c0822))
+
+## [31.1.9](https://github.com/dhis2/tracker-capture-app/compare/v31.1.8...v31.1.9) (2021-01-09)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1470a2e](https://github.com/dhis2/tracker-capture-app/commit/1470a2eb339605698bd89fd1c876f34f7a4e882d))
+
+## [31.1.8](https://github.com/dhis2/tracker-capture-app/compare/v31.1.7...v31.1.8) (2021-01-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([bb6b56d](https://github.com/dhis2/tracker-capture-app/commit/bb6b56d40bba767a16c2bf8df9f5cce8581c857e))
+
+## [31.1.7](https://github.com/dhis2/tracker-capture-app/compare/v31.1.6...v31.1.7) (2020-12-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c174d5b](https://github.com/dhis2/tracker-capture-app/commit/c174d5b8952ff13fc678bbd5cbdb3a692a3abafa))
+
+## [31.1.6](https://github.com/dhis2/tracker-capture-app/compare/v31.1.5...v31.1.6) (2020-12-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([867e785](https://github.com/dhis2/tracker-capture-app/commit/867e785509cc615c8821e1cfad303d64d1598a8a))
+
+## [31.1.5](https://github.com/dhis2/tracker-capture-app/compare/v31.1.4...v31.1.5) (2020-12-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b889353](https://github.com/dhis2/tracker-capture-app/commit/b889353673d30d2223c3d3eb9936f8f297630dab))
+
+## [31.1.4](https://github.com/dhis2/tracker-capture-app/compare/v31.1.3...v31.1.4) (2020-12-21)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9a216c4](https://github.com/dhis2/tracker-capture-app/commit/9a216c43e8719ddeb3d30af6f031163bc9451497))
+
+## [31.1.3](https://github.com/dhis2/tracker-capture-app/compare/v31.1.2...v31.1.3) (2020-12-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f5c90a7](https://github.com/dhis2/tracker-capture-app/commit/f5c90a72ca16ffa95346cf1422b82f157a7c960c))
+
+## [31.1.2](https://github.com/dhis2/tracker-capture-app/compare/v31.1.1...v31.1.2) (2020-12-15)
+
+
+### Bug Fixes
+
+* include d2-tracker in build ([#872](https://github.com/dhis2/tracker-capture-app/issues/872)) ([f80248d](https://github.com/dhis2/tracker-capture-app/commit/f80248dcad00a7f6ac715639809db11e60c8aa50))
+
 ## [31.1.1](https://github.com/dhis2/tracker-capture-app/compare/v31.1.0...v31.1.1) (2020-12-09)
 
 
