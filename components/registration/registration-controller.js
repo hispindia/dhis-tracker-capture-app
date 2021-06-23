@@ -62,6 +62,26 @@ trackerCapture.controller('RegistrationController',
     $rootScope.ruleeffects = {};
     $scope.userAuthority = AuthorityService.getUserAuthorities(SessionStorageService.get('USER_PROFILE'));
 
+    // custom change for FHI 360 merge hiv-tracker SAVE-CHILD
+    $scope.ImplementingAgency = '';
+    $scope.ImplementingPartner = '';
+    $scope.ImplementingAgencyAttrValue = '';
+    $scope.ImplementingPartnerAttrValue = '';
+
+    $scope.userDetails = SessionStorageService.get('USER_PROFILE');
+
+    if( $scope.userDetails.attributeValues.length !==0 )
+    {
+        for( var i=0; i<$scope.userDetails.attributeValues.length; i++ ){
+            if ( $scope.userDetails.attributeValues[i].attribute.code === 'ImplementingAgency' ){
+                $scope.ImplementingAgency = $scope.userDetails.attributeValues[i].value;
+            }
+            if ( $scope.userDetails.attributeValues[i].attribute.code === 'ImplementingPartner' ){
+                $scope.ImplementingPartner = $scope.userDetails.attributeValues[i].value;
+            }
+        }
+    }
+
     $scope.attributesById = CurrentSelection.getAttributesById();
     $scope.optionGroupsById = CurrentSelection.getOptionGroupsById();
     $scope.fileNames = CurrentSelection.getFileNames();
@@ -231,7 +251,55 @@ trackerCapture.controller('RegistrationController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
-    
+
+    // custom change for FHI 360 merge hiv-tracker SAVE-CHILD
+    // auto populate user-attribute value in tracker-capture attribute value for FHI 360
+    $scope.optionSetDetails = CurrentSelection.getOptionSets();
+
+    if( $scope.optionSets.length !=0 )
+    {
+        for(let key in $scope.optionSets) {
+            if($scope.optionSets[key].code === 'ImplementingAgency' ){
+                for( var j=0; j<$scope.optionSets[key].options.length; j++ ){
+                    if ( $scope.optionSets[key].options[j].id === $scope.ImplementingAgency ){
+                        $scope.ImplementingAgencyAttrValue = $scope.optionSets[key].options[j].displayName;
+                    }
+                }
+            }
+            if ( $scope.optionSets[key].code === 'ImplementingPartner' ){
+                for( var j=0; j<$scope.optionSets[key].options.length; j++ ){
+                    if ( $scope.optionSets[key].options[j].id === $scope.ImplementingPartner ){
+                        $scope.ImplementingPartnerAttrValue = $scope.optionSets[key].options[j].displayName;
+                    }
+                    //else {
+                    //    $scope.ImplementingPartnerAttrValue = '';
+                    //}
+                }
+            }
+        }
+
+        /*
+        for( var i=0; i<$scope.optionSets.length; i++ ){
+            if ( $scope.optionSets[i].code == 'ImplementingAgency' ){
+                for( var j=0; j<$scope.optionSets[i].options.length; j++ ){
+                    if ( $scope.optionSets[i].options[j].id === $scope.ImplementingAgency ){
+                        $scope.ImplementingAgencyAttrValue = $scope.optionSets[i].options[j].code;
+                    }
+                }
+            }
+            if ( $scope.optionSets[i].code == 'ImplementingPartner' ){
+                for( var j=0; j<$scope.optionSets[i].options.length; j++ ){
+                    if ( $scope.optionSets[i].options[j].id === $scope.ImplementingPartner ){
+                        $scope.ImplementingPartnerAttrValue = $scope.optionSets[i].options[j].code;
+                    }
+                }
+            }
+        }
+        */
+    }
+
+
+
     /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
@@ -530,17 +598,17 @@ trackerCapture.controller('RegistrationController',
                     {
                         $scope.selectedTei["uiOMHu4LtAP"] = $scope.fingerprintStr; //put default value on load form
                     }
-                    /*
-                    if( !$scope.selectedTei["PWdxGAN3OCD"] && $scope.selectedTei["PWdxGAN3OCD"] == undefined)
+                    // for FHI-360 merge ( HIV-tracker)
+                    if( !$scope.selectedTei["PWdxGAN3OCD"] && $scope.selectedTei["PWdxGAN3OCD"] === undefined)
                     {
                         $scope.selectedTei["PWdxGAN3OCD"] = $scope.ImplementingAgencyAttrValue; //put default value on load form
                     }
 
-                    if( !$scope.selectedTei["LmgPhZ0JTB3"] && $scope.selectedTei["LmgPhZ0JTB3"] == undefined)
+                    if( !$scope.selectedTei["LmgPhZ0JTB3"] && $scope.selectedTei["LmgPhZ0JTB3"] === undefined)
                     {
                         $scope.selectedTei["LmgPhZ0JTB3"] = $scope.ImplementingPartnerAttrValue; //put default value on load form
                     }
-                    */
+
                 },0);
                 //custom change for SAVE-CHILD fingerPrint read end
 
@@ -887,18 +955,18 @@ trackerCapture.controller('RegistrationController',
             var lastName = "";
             var dobYear = "";
             var sex = "";
-            var serviceRegNo = "";
-            //var automatedSerialNumber = "";
+            var serviceRegNo = ""; // for HIV-tracker
+            var automatedSerialNumber = ""; // for FHI360 merge
 
-            if ($scope.selectedTei.gVGIL7DJp4b != undefined) {
+            if ($scope.selectedTei.gVGIL7DJp4b !== undefined) {
                 var str = $scope.selectedTei.gVGIL7DJp4b;
                 lastName = str.substr(0, 2).toUpperCase();
             }
-            if ($scope.selectedTei.fOVzjBOZdvQ != undefined) {
+            if ($scope.selectedTei.fOVzjBOZdvQ !== undefined) {
                 var dob = $scope.selectedTei.fOVzjBOZdvQ;
                 dobYear = dob.substr(2, 2);
             }
-            if ($scope.selectedTei.TN7r3ws7IG9 != undefined) {
+            if ($scope.selectedTei.TN7r3ws7IG9 !== undefined) {
                 if ($scope.selectedTei.TN7r3ws7IG9 === 'Female') {
                     sex = "1";
                 }
@@ -910,18 +978,24 @@ trackerCapture.controller('RegistrationController',
                 }
             }
 
-            if ($scope.selectedTei.Fu4LhjNsJZL != undefined) {
-                serviceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
-            }
-
+            // for HIV-tracker
             /*
-            if ($scope.selectedTei.pULhHeN8TUj != undefined) {
-                automatedSerialNumber = $scope.selectedTei.pULhHeN8TUj;
+            if ($scope.selectedTei.Fu4LhjNsJZL !== undefined) {
+                serviceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
             }
             */
 
-            //$scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
-            $scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+            // for FHI360 merge
+
+            if ($scope.selectedTei.pULhHeN8TUj !== undefined) {
+                automatedSerialNumber = $scope.selectedTei.pULhHeN8TUj;
+            }
+
+            // for FHI360 merge
+            $scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
+
+            //for HIV-tracker
+            //$scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
         }
 
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
