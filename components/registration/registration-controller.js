@@ -310,12 +310,7 @@ trackerCapture.controller('RegistrationController',
             $scope.selectedEnrollment.coordinate = $scope.selectedEnrollment.coordinate ? $scope.selectedEnrollment.coordinate : {};
         }
 
-        var trackedEntityType = $scope.trackedEntityTypes.selected;
-
         if($scope.selectedProgram){
-            if (!trackedEntityType) {
-                trackedEntityType = $scope.selectedProgram.trackedEntityType;
-            }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
                 fetchGeneratedAttributes();
@@ -366,6 +361,7 @@ trackerCapture.controller('RegistrationController',
             });
         }
 
+        var trackedEntityType = $scope.trackedEntityTypes.selected || $scope.selectedProgram.trackedEntityType;
         if(trackedEntityType){
             AttributesFactory.getByTrackedEntityType(trackedEntityType).then(function (atts) {
                 $scope.teTypeAttributesById = {};
@@ -375,8 +371,8 @@ trackerCapture.controller('RegistrationController',
                 
                 if(!$scope.selectedProgram){
                     $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
-                    fetchGeneratedAttributes();
                 }
+                fetchGeneratedAttributes();
             });
         }
 
@@ -436,7 +432,7 @@ trackerCapture.controller('RegistrationController',
         }
     };
 
-    var setSelectedTei = function() {
+    var reloadProfileWidget = function () {
         var selections = CurrentSelection.get();
         CurrentSelection.set({
             tei: $scope.selectedTei,
@@ -450,10 +446,6 @@ trackerCapture.controller('RegistrationController',
             optionSets: selections.optionSets,
             orgUnit: selections.orgUnit
         });
-    }
-
-    var reloadProfileWidget = function () {
-        setSelectedTei();
         $timeout(function () {
             $rootScope.$broadcast('profileWidget', {});
         }, 200);
@@ -485,9 +477,6 @@ trackerCapture.controller('RegistrationController',
             }
         });
 
-        // Ask backend to delete previously saved polygon if no polygon is selected
-        $scope.tei.featureType = $scope.tei.geometry ? $scope.trackedEntityTypes.selected.featureType : "NONE";
-
         $scope.tei.attributes = tempAttributes;
 
         RegistrationService.registerOrUpdate($scope.tei, $scope.optionSets, $scope.attributesById, $scope.selectedEnrollment.program).then(function (regResponse) {
@@ -507,7 +496,6 @@ trackerCapture.controller('RegistrationController',
                     }
                 }
                 else {
-                    setSelectedTei();
                     if ($scope.selectedProgram) {
 
                         //enroll TEI

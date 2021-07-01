@@ -34,9 +34,17 @@ trackerCapture.controller('DataEntryController',
                 AuthorityService,
                 AccessUtils,
                 TCOrgUnitService,
-                UsersService) {
+                UsersService,
+                EHSUpdateAttributeService,
+                AjaxCalls,
+            // EHSService,
+            // OrganisationUnitService,
+            // EventDataValueService,
+            // utilityService,
+                ) {
     
     //Unique instance id for the controller:
+    $scope.foodsafetyprograms = [];
     $scope.APIURL = DHIS2URL;
     $scope.instanceId = Math.floor(Math.random() * 1000000000);
     $scope.printForm = false;
@@ -94,6 +102,9 @@ trackerCapture.controller('DataEntryController',
     
     $scope.attributesById = CurrentSelection.getAttributesById();
     $scope.optionGroupsById = CurrentSelection.getOptionGroupsById();
+     // added 
+    var selections = CurrentSelection.get();
+    $scope.selectedEntityinstance = selections.tei;
 
     DashboardLayoutService.get().then(function(response) {
         $scope.dashBoardLayout = response;
@@ -174,7 +185,9 @@ trackerCapture.controller('DataEntryController',
     $scope.model.showEventSearch = false;
     $scope.model.eventSearchText = '';
 
-
+  AjaxCalls.getALLTEIBYOperate().then(function(data){
+        $scope.foodsafetyprograms = data;
+     });
     $scope.filterLegend = function(){
         if($scope.mainMenuStageSelected()){
             return {showInEventLegend: true};
@@ -191,7 +204,7 @@ trackerCapture.controller('DataEntryController',
         }
         return $scope.getDescriptionTextForDescription(description, $scope.descriptionTypes.full, useInStage);
     };
-
+  
 
     $scope.verifyEventExpiryDate = function(field) {
         if(!$scope.userAuthority.canEditExpiredStuff){
@@ -264,7 +277,56 @@ trackerCapture.controller('DataEntryController',
         $scope.printForm = false;
         $scope.printEmptyForm = false;
     };
+    $scope.reopenlicense = function(currentEvent1) {
+                var dataelement1 = $scope.licenStatusDeUid;
+                value="";
+                $scope.saveDataValueForEvent(dataelement1, value, null, currentEvent1, false);
+				 location.reload(true);
+            }
+    $scope.issuelicense = function(inTableView, outerDataEntryForm) {
+        $scope.currentEvent1 = $scope.currentEvent;
+        $scope.issuelicensecall = "issue";
+              var dataelement = $scope.licenValidUpToDeUid;
+        var issue = 1;
+        var currentTime = new Date();
+        var year = currentTime.getFullYear();
+        var month = "12";
+        var date1 = "31";
+        var date = year + "-" + month + "-" + date1;
+        // value = date;
+        var dataelement1 = $scope.licenStatusDeUid;
+                var updateResponseStatus = EHSUpdateAttributeService.updateAttributeValue($scope.currentEvent.trackedEntityInstance, $scope.licenStatusAttributeUid, issue, $scope.optionSets, $scope.attributesById);
+        updateResponseStatus.then(function(response) {
+            if (response.status == 'OK') {
 
+             /*   var updateResponseValidity1 = EHSUpdateAttributeService.updateAttributeValue(  $scope.currentEvent.trackedEntityInstance, $scope.licenValidUpToAttributeUid, value, $scope.optionSets, $scope.attributesById);
+                updateResponseValidity1.then(function(response) {
+                    if (response.status == 'OK') {
+                           
+                        
+                    }
+                });*/
+            }
+        });
+        $scope.completeIncompleteEvent(inTableView, outerDataEntryForm, $scope.issuelicensecall, $scope.currentEvent1);
+    }
+
+            $scope.cancellicense = function(inTableView, outerDataEntryForm) {
+                $scope.currentEvent1 = $scope.currentEvent;
+                $scope.issuelicensecall = "cancel";
+				
+				   var dataelement =  $scope.licenValidUpToDeUid;
+                var cancel = -1;
+                var dataelement1 = $scope.licenStatusDeUid;
+				 var updateResponseStatus = EHSUpdateAttributeService.updateAttributeValue( $scope.currentEvent1.trackedEntityInstance, $scope.licenStatusAttributeUid, cancel, $scope.optionSets, $scope.attributesById);
+                updateResponseStatus.then(function(response) {
+                    if (response.status == 'OK') {
+                    }
+                });
+                $scope.completeIncompleteEvent(inTableView, outerDataEntryForm, $scope.issuelicensecall, $scope.currentEvent1);
+
+                //$scope.completeIncompleteEvent (inTableView, outerDataEntryForm) ;
+            }
     $scope.toggleForm = function(type) {
         if(type === 'DEFAULT') {
             $scope.currentStage.timelineDataEntryMode = $scope.timelineDataEntryModes.DATAENTRYFORM;
@@ -344,6 +406,241 @@ trackerCapture.controller('DataEntryController',
             }
         });
     }
+
+
+//    added by gyan  
+$scope.saveDataValueForEvent1 = function(prStDe, buttonvalue, field, eventToSave, backgroundUpdate) {
+    //Do not change the input notification variables for background updates
+    if (!backgroundUpdate) {
+        //Blank out the input-saved class on the last saved due date:
+        $scope.eventDateSaved = false;
+        //check for input validity
+        $scope.updateSuccess = false;
+    }
+
+ /*   for (var i = 0; i < eventToSave.dataValues.length; i++) {
+        $scope.reopen = false;
+        $scope.enableissuebutton = false;
+        $scope.enablecancelbutton = false;
+        if (eventToSave.dataValues[i].dataElement === 'AWprRTJ8phx') {
+
+            if (eventToSave.AWprRTJ8phx == "Valid" || eventToSave.AWprRTJ8phx == "Canceled") {
+                if (eventToSave.AWprRTJ8phx == "Valid") {
+                    $scope.licensestatus2 = true;
+                }
+
+                if ($scope.eventToSave.status == "COMPLETED") {
+                    $scope.reopen = true;
+                }
+
+            } else {
+                $scope.licensestatus2 = false;
+                $scope.reopen = false;
+            }
+
+
+            break;
+
+        }
+    }*/
+    var value = buttonvalue;
+    if (!backgroundUpdate) {
+        $scope.updateSuccess = false;
+        $scope.currentElement = {
+            id: prStDe,
+            event: eventToSave.event,
+            saved: false,
+            failed: false,
+            pending: true
+        };
+    }
+    var ev = {
+        event: eventToSave.event,
+        orgUnit: eventToSave.orgUnit,
+        program: eventToSave.program,
+        programStage: eventToSave.programStage,
+        status: eventToSave.status,
+        trackedEntityInstance: eventToSave.trackedEntityInstance,
+        dataValues: [{
+            dataElement: prStDe,
+            value: value,
+            providedElsewhere: eventToSave.providedElsewhere[prStDe] ? true : false
+        }]
+    };
+
+    return DHIS2EventFactory.updateForSingleValue(ev).then(function(response) {
+
+        if (response.httpStatus === "OK") {
+
+            if (prStDe == "nPcT1HabdNa") {
+                $scope.validto = value;
+            } else {
+                $scope.licensestatus1 = value;
+            }
+        }
+
+
+        $scope.updateFileNames();
+
+        if (!backgroundUpdate) {
+            $scope.currentElement.saved = true;
+            $scope.currentElement.pending = false;
+            $scope.currentElement.failed = false;
+        }
+
+        $scope.currentEventOriginal = angular.copy($scope.currentEvent);
+
+        $scope.currentStageEventsOriginal = angular.copy($scope.currentStageEvents);
+
+        //     $scope.completeIncompleteEvent(msg, outerDataEntryForm);
+
+        //In some cases, the rules execution should be suppressed to avoid the
+        //possibility of infinite loops(rules updating datavalues, that triggers a new
+        //rule execution)
+        if (!backgroundUpdate) {
+            //Run rules on updated data:
+            // $scope.executeRules();
+        }
+
+        //  $scope.completeIncompleteEvent(null, outerDataEntryForm);
+    }, function(error) {
+        //Do not change the input notification variables for background updates
+        if (!backgroundUpdate) {
+            $scope.currentElement.saved = false;
+            $scope.currentElement.pending = false;
+            $scope.currentElement.failed = true;
+        } else {
+            $log.warn("Could not perform background update of " + prStDe.dataElement.id + " with value " +
+                value);
+        }
+    });
+};
+
+
+
+$scope.printLicense = function(divName) {
+    $scope.printForm = true;
+    $scope.printEmptyForm = true;
+    $scope.selectedEntityinstance = selections.tei;
+
+    //  var promise = $http.get('../api/trackedEntityInstances/w8kYzsMDQHa.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true').then(function (response) {
+
+    // for (var i = 0; i < $scope.foodsafetyprograms.attributes.length; i++) {
+    //     if ($scope.foodsafetyprograms.attributes[i].displayName == "Operator/Owner Name") {
+    //         $scope.operatorname = $scope.foodsafetyprograms.attributes[i].value;
+    //     }
+    //     if ($scope.foodsafetyprograms.attributes[i].displayName == "Entity type") {
+    //         $scope.entitytype = $scope.foodsafetyprograms.attributes[i].value;
+    //     }
+    // }
+    if ($scope.selectedEntityinstance) {
+        for (var i = 0; i < $scope.selectedEntityinstance.attributes.length; i++) {
+           /* if ($scope.selectedEntityinstance.attributes[i].displayName == "Operator/Owner Name") {
+                $scope.selectedOperator = $scope.selectedEntityinstance.attributes[i].value;
+            }*/
+               if ($scope.selectedEntityinstance.attributes[i].displayName == "Operator/Owner") {
+                  $scope.selectedOperator = $scope.selectedEntityinstance.attributes[i].value;
+
+                  /*AjaxCalls.getALLTEIBYOperate1($scope.selectedOperator).then(function(data) {
+                    $scope.asstrackedEntityInstances = data;   
+
+                    for (var i = 0; i < $scope.asstrackedEntityInstances.attributes.length; i++) {
+             if ($scope.asstrackedEntityInstances.attributes[i].displayName == "Contact Person Name") {
+                  $scope.selectedcontactperson = $scope.asstrackedEntityInstances.attributes[i].value;
+            }
+
+         }
+
+          });*/
+
+          var idforNameofoperatoe = $scope.selectedOperator;
+
+         $.ajax({
+        async:false,
+        type: "GET",
+        url: '../api/trackedEntityInstances/'+ idforNameofoperatoe + '.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true',
+        success: function(response){
+
+            $scope.asstrackedEntityInstances = response;
+
+            for (var i = 0; i < $scope.asstrackedEntityInstances.attributes.length; i++) {
+             if ($scope.asstrackedEntityInstances.attributes[i].displayName == "Contact Person Name") {
+                  $scope.selectedcontactperson = $scope.asstrackedEntityInstances.attributes[i].value;
+            }
+
+         }
+
+        },
+        error: function(response){
+        }
+
+    });     
+               
+            }
+            if ($scope.selectedEntityinstance.attributes[i].displayName == "Name") {
+                $scope.selectedName = $scope.selectedEntityinstance.attributes[i].value;
+            }
+            if ($scope.selectedEntityinstance.attributes[i].displayName == "Establishment Type - Food service") {
+                $scope.selectedEntytyType = $scope.selectedEntityinstance.attributes[i].value;
+            }
+            if ($scope.selectedEntityinstance.attributes[i].displayName == "Establishment type - Slaughter House") {
+                $scope.selectedEntytyTypeSlaughter = $scope.selectedEntityinstance.attributes[i].value;
+            }
+            if ($scope.selectedEntityinstance.attributes[i].displayName == "Address Line 1") {
+                $scope.selectedAddress1 = $scope.selectedEntityinstance.attributes[i].value;
+            }
+            if ($scope.selectedEntityinstance.attributes[i].displayName == "Address Line 2") {
+                $scope.selectedAddress2 = $scope.selectedEntityinstance.attributes[i].value;
+            }
+
+            if ($scope.selectedEntityinstance.attributes[i].displayName == "City/Community") {
+                $scope.selectedAddress3 = $scope.selectedEntityinstance.attributes[i].value;
+            }
+            if ($scope.selectedEntityinstance.attributes[i].displayName == "District") {
+                $scope.selectedAddress4 = $scope.selectedEntityinstance.attributes[i].value;
+            }
+
+        }
+
+    }    
+   
+    var address = $scope.selectedAddress1 + ", " + $scope.selectedAddress2 + ", " + $scope.selectedAddress3 + ", " + $scope.selectedAddress4;
+    address = address.replace(/undefined,/g, '');
+    address = address.replace(/(^[,\s]+)|([,\s]+$)/g, '');
+
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var date = 12 + "/" + 31 + "/" + year;
+    var printContents = document.getElementById(divName).innerHTML;
+    var heading = "<p style='font-family: 'Times New Roman', Times' align=" + "'center'" + ">SAINT LUCIA PUBLIC HEALTH BOARD</p>" + "<p style='font-family: 'Times New Roman', Times, serif' align=" + "'center'" + ">(Ministry Of Health)</p><br>" + "<h5 style='font-family: 'Times New Roman', Times, serif' align=" + "'center'" + "><strong>LICENCE &nbspTO &nbspOPERATE</strong></h5><br><br><br>";
+
+    var content = "<p style='font-family: 'Times New Roman', Times, serif'>This is to certify that <strong><i>"+ " " + $scope.selectedcontactperson + "</i></strong> is dully registered in accordance with the Public Health Regulations No. " + $scope.regulationnumber + "  and hereby given the permission to operate <strong><i>" + $scope.selectedName + " </i></strong>at<strong><i>" + " " + address +""+"</i></strong> . This permission is valid till <strong><i>" + date + "</i></strong>. </p ><br><p style='font-family: 'Times New Roman', Times, serif'>This Licence is issued with the understanding that the operators will adhere to the rules and Regulations No: " + $scope.regulationnumber + " of the Public Health Regulations Of Saint Lucia 1978 failing which such licence may be revoked by any authorised officer.</p><br><br><br><br>";
+    //  var  content2="<p1>This Licennse is issued with the understanding that the operators will adhere to the rules and Regulations No."+NAME+" of the Public Health Regulatiobs Of Saint Lucia 1978 failing which such licence may be revoked by any authoried oficer</p1>";
+    var footer = "<p style='font-family: 'Times New Roman', Times, serif'  align=" + "'right'" + ">SAINT LUCIA PUBLIC HEALTH BOARD</p><br>" + "<p style=" + "'margin:10'" + "  align=" + "'right'" + ">...............................................................</p>" + "<p style=" + "'margin-right:90'" + "  align=" + "'right'" + ">Board Chair</p><br><br><br>";
+    
+    var footer1 = "<p style='font-family: 'Times New Roman', Times' align=" + "'center'" + "> N.B Licence must be conspicuously displayed  on the premises</p>";
+
+    //var footer2 = "<h1 style='font-size: 25px';'font-family: 'Times New Roman', Times, serif' align=" + "'left'" + "> Receipt No. " + $scope.receiptNo + " </h1><br>";
+    //var footer3 = "<h1 style='font-size: 25px';'font-family: 'Times New Roman', Times, serif' align=" + "'left'" + "> Date of payment. " + $scope.paymentDate + "</h1><br><br>";
+    printContents = heading + content + footer + footer1 /*+ footer2 + footer3*/;
+    var popupWin = window.open('', '_blank', 'fullscreen=1');
+    popupWin.document.open();
+    popupWin.document.write('<html>\n\
+                            <head>\n\
+                                    <link rel="stylesheet" type="text/css" href="../dhis-web-commons/bootstrap/css/bootstrap.min.css" />\n\
+                                    <link type="text/css" rel="stylesheet" href="../dhis-web-commons/javascripts/angular/plugins/select.css">\n\
+                                    <link type="text/css" rel="stylesheet" href="../dhis-web-commons/javascripts/angular/plugins/select2.css">\n\
+                                    <link rel="stylesheet" type="text/css" href="styles/style.css" />\n\
+                                    <link rel="stylesheet" type="text/css" href="styles/print.css" />\n\
+                            </head>\n\
+                            <body onload="window.print()"><table><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + printContents +
+        '</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></table></html>');
+    popupWin.document.close();
+    $scope.printForm = false;
+    $scope.printEmptyForm = false;
+};
+
+
 
     var processRuleEffect = function(event, callerId){
 
@@ -896,7 +1193,7 @@ trackerCapture.controller('DataEntryController',
                 $scope.programStages = $scope.tabularEntryStages = $scope.selectedProgram.programStages;
                 
                 angular.forEach($scope.selectedProgram.programStages, function (stage) {
-                    if (!$scope.currentStage && stage.openAfterEnrollment) {
+                    if (stage.openAfterEnrollment) {
                         $scope.currentStage = stage;
                     }
 
@@ -1036,6 +1333,11 @@ trackerCapture.controller('DataEntryController',
             //There is no events - so loading is finished:
             $scope.eventsLoaded = true;
         }
+    };
+
+    var setEventEditing1 = function(dhis2Event, stage) {
+        //  return dhis2Event.editingNotAllowed = dhis2Event.orgUnit !== $scope.selectedOrgUnit.id && dhis2Event.eventDate || (stage.blockEntryForm && dhis2Event.status === 'COMPLETED') || $scope.selectedEntity.inactive;
+        return dhis2Event.editingNotAllowed = true;
     };
 
     $scope.enableRescheduling = function () {
@@ -1202,7 +1504,6 @@ trackerCapture.controller('DataEntryController',
         newEvent = EventUtils.processEvent(newEvent, $scope.stagesById[newEvent.programStage], $scope.optionSets, $scope.prStDes);
         if(setProgramStage) $scope.currentStage = $scope.stagesById[newEvent.programStage];
         sortEventsByStage('ADD', newEvent);
-        CurrentSelection.setSelectedTeiEvents($scope.allEventsSorted);
         broadcastDataEntryControllerData();
     };
     
@@ -1486,8 +1787,7 @@ trackerCapture.controller('DataEntryController',
         
     };
     
-    $scope.eventRowDblClicked = function(event){
-                
+    $scope.eventRowDblClicked = function(event){      
         if($scope.currentEvent === event &&
            $scope.tableEditMode === $scope.tableEditModes.tableAndForm &&
            $scope.eventRowChanged === false){           
@@ -1645,6 +1945,29 @@ trackerCapture.controller('DataEntryController',
         //Subsequent calls will be made from the "saveDataValue" function.
         $rootScope.$broadcast("dataEntryEventChanged", {event: $scope.currentEvent.event});       
         $scope.executeRules();
+        // added by gyan
+        $scope.Escalate = function(inTableView, outerDataEntryForm) {
+            $scope.escalatebuttonclicked = true;
+           let  value = 1;
+            var dataelement = "oYNscX4WRDk";
+            $scope.saveDataValueForEvent1(dataelement, value, null, $scope.currentEvent, false);
+            setEventEditing1($scope.currentEvent, $scope.currentStage);
+            location.reload(true);
+        }
+        $scope.SendBack = function(inTableView, outerDataEntryForm) {
+            var dataelement = "oYNscX4WRDk";
+            // var issue = 3;
+             $scope.saveDataValueForEvent1(dataelement, null, $scope.currentEvent, false);
+             /* var dataelement1="WggL0QDVcRG";
+             var issue1="";
+              $scope.saveDataValueForEvent1(dataelement1, issue1, null, $scope.currentEvent, false);
+              var dataelement2="obqAPIKe6hs";
+             var issue2="";
+               $scope.saveDataValueForEvent1(dataelement2, issue2, null, $scope.currentEvent, false) */
+              location.reload(true);
+             //$scope.completeIncompleteEvent1(inTableView, outerDataEntryForm, $scope.escalate1, $scope.currentEvent1);
+         }
+
     };
 
     $scope.saveDatavalue = function (prStDe, field) {
@@ -1710,9 +2033,7 @@ trackerCapture.controller('DataEntryController',
             return false;
         }
 
-        //input is valid
         var value = eventToSave[prStDe.dataElement.id];
-
         if (oldValue !== value) {
             
             value = CommonUtils.formatDataValue(eventToSave.event, value, prStDe.dataElement, $scope.optionSets, 'API');
@@ -2504,7 +2825,7 @@ trackerCapture.controller('DataEntryController',
                     }
                 }
 
-            CurrentSelection.setSelectedTeiEvents($scope.allEventsSorted);
+                CurrentSelection.setSelectedTeiEvents();
                 
                 broadcastDataEntryControllerData();
                 

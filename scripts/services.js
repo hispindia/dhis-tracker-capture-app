@@ -2413,7 +2413,7 @@ i
                     return 'alert-warning'; //'stage-executed';
                 }
                 else{
-                    if(moment(eventDate, calendarSetting.momentFormat).isAfter(moment(dhis2Event.dueDate, calendarSetting.momentFormat))){
+                    if(moment(eventDate, calendarSetting.momentFormat).isAfter(dhis2Event.dueDate)){
                         return 'alert-danger';//'stage-overdue';
                     }
                     return 'alert-success';//'stage-on-time';
