@@ -151,6 +151,9 @@ trackerCapture.controller('RegistrationController',
         }else if(currentTet){
             $scope.trackedEntityTypes.selected = $scope.trackedEntityTypes.writable.find(function(t) { return t.id === currentTet });
             $scope.setTrackedEntityType();
+        } else if($location.search().tracked_entity_type) {
+            $scope.trackedEntityTypes.selected = $scope.trackedEntityTypes.writable.find(function(t) { return t.id === $location.search().tracked_entity_type });
+            $scope.setTrackedEntityType();
         }
     }
 
@@ -310,7 +313,12 @@ trackerCapture.controller('RegistrationController',
             $scope.selectedEnrollment.coordinate = $scope.selectedEnrollment.coordinate ? $scope.selectedEnrollment.coordinate : {};
         }
 
+        var trackedEntityType = $scope.trackedEntityTypes.selected;
+
         if($scope.selectedProgram){
+            if (!trackedEntityType) {
+                trackedEntityType = $scope.selectedProgram.trackedEntityType;
+            }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
                 fetchGeneratedAttributes();
@@ -361,7 +369,6 @@ trackerCapture.controller('RegistrationController',
             });
         }
 
-        var trackedEntityType = $scope.trackedEntityTypes.selected || $scope.selectedProgram.trackedEntityType;
         if(trackedEntityType){
             AttributesFactory.getByTrackedEntityType(trackedEntityType).then(function (atts) {
                 $scope.teTypeAttributesById = {};
@@ -371,8 +378,8 @@ trackerCapture.controller('RegistrationController',
                 
                 if(!$scope.selectedProgram){
                     $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+                    fetchGeneratedAttributes();
                 }
-                fetchGeneratedAttributes();
             });
         }
 
@@ -432,7 +439,7 @@ trackerCapture.controller('RegistrationController',
         }
     };
 
-    var reloadProfileWidget = function () {
+    var setSelectedTei = function() {
         var selections = CurrentSelection.get();
         CurrentSelection.set({
             tei: $scope.selectedTei,
@@ -446,6 +453,10 @@ trackerCapture.controller('RegistrationController',
             optionSets: selections.optionSets,
             orgUnit: selections.orgUnit
         });
+    }
+
+    var reloadProfileWidget = function () {
+        setSelectedTei();
         $timeout(function () {
             $rootScope.$broadcast('profileWidget', {});
         }, 200);
@@ -505,6 +516,7 @@ trackerCapture.controller('RegistrationController',
                     }
                 }
                 else {
+                    setSelectedTei();
                     if ($scope.selectedProgram) {
 
                         //enroll TEI
@@ -655,6 +667,7 @@ trackerCapture.controller('RegistrationController',
             $scope.selectedTei.orgUnit = $scope.tei.orgUnit = $scope.selectedOrgUnit.id;
             $scope.selectedTei.attributes = $scope.tei.attributes = [];
         }
+        $scope.tei.featureType = $scope.selectedTei.featureType;
         $scope.tei.geometry = $scope.selectedTei.geometry;
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
