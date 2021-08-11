@@ -8,3 +8,4 @@ build/
 target/
 nbproject/*
 .DS_Store
+package-lock.json
