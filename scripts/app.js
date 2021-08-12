@@ -45,6 +45,8 @@ import '../components/home/lists/lists-controller.js';
 import '../components/home/search/search-controller.js';
 import '../components/topbar/topbar-controller.js';
 import '../components/teiAudit/tei-audit-controller.js';
+import '../components/incoming-referrals/incoming-controller.js';
+import '../components/outgoing-referrals/outgoing-controller.js';
 
 import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;
@@ -104,6 +106,12 @@ angular.module('trackerCapture')
     }).when('/upcoming-events',{
         templateUrl:'components/report/upcoming-events.html',
         controller: 'UpcomingEventsController'
+    }).when('/incoming-referrals',{
+        templateUrl:'components/incoming-referrals/incoming-referrals.html',
+        controller: 'IncomingController'
+    }).when('/outgoing-referrals',{
+        templateUrl:'components/outgoing-referrals/outgoing-referrals.html',
+        controller: 'OutgoingController'
     }).otherwise({
         redirectTo : '../dhis-web-commons/security/login.action'
     });
