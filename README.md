@@ -31,3 +31,9 @@ npm run build
 ```
 > **Note:** If you have problems running the app try running the dhis2-core server with TomCat.
 
+### Custom Changes 
+For displaying images, files Added/Updated: 
+Added: styles/custom.css
+Added: styles/img.css
+Modified: components/dataentry/default-form.html
+Modified: components/dataentry/dataentry-controller.js (Search 'Custom Changes' and commented code can be found )
