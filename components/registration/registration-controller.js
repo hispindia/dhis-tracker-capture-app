@@ -109,11 +109,23 @@ trackerCapture.controller('RegistrationController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
-    
-    
+
+    // change/update for PLAN for disable te-attribute patient_identifier(custom-ID)
+    $scope.isDisabled = function(attribute) {
+        // update for PLAN for disable attribute patient_identifier
+        if( attribute.code === 'patient_identifier') {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
+    /* comment previous one code */
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
+    */
 
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
