@@ -1,0 +1,35 @@
+<div class="panel panel-info">
+    <div class="panel-heading handle bold">
+
+        <span class="nav-pills">{{'invited_list'| translate}}</span>
+
+        <span class="nav-pills" ng-if="selectedEventAttendance && trackedEntityInstanceList.trackedEntityInstances.length > 0">
+            | <label>{{trackedEntityInstanceList.trackedEntityInstances.length}} {{'member_invited'| translate}}</label>
+        </span>
+
+    </div>
+    <div ng-show="trackedEntityInstanceList" class="widgetDiv">
+        <table class="table table-striped dhis2-table-hover table-bordered">
+            <tr>
+                <th align="center"># {{trackedEntityInstanceList.trackedEntityInstances.length}}</th>
+                <th ng-repeat="attr in attendanceAttributes">{{attr.displayName}}</th>
+                <th>{{'select'| translate}}</th>
+            </tr>
+
+            <tbody ng-repeat="TEWise in TEWiseEventTEIs" >
+                <tr ng-repeat="TEI in TEWise.TEIList">
+                    <td align="center">{{$index+1}}</td>
+                    <td ng-repeat="attr in attendanceAttributes">{{teiAttributesMapAttendance[TEI.trackedEntityInstance][attr.id]}}</td>
+                    <td><input  type="checkbox" ng-model="TEI.checkedValue" ng-checked="false"></td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <div class="modal-footer page">
+        <button class="btn btn-danger" data-ng-click="closeWindowAttendance()">{{'close'| translate}}</button>
+        <button class="btn btn-default" data-ng-click="attended()">{{'attended'| translate}}</button>
+    </div>
+
+</div>
