@@ -36,7 +36,9 @@ trackerCapture.controller('RegistrationController',
                 SessionStorageService,
                 AttributeUtils,
                 TCOrgUnitService,
-                ProgramFactory) {
+                ProgramFactory,
+                // for plan custom ID Generation
+                CustomIDGenerationService) {
     var prefilledTet = null;
     $scope.today = DateUtils.getToday();
     $scope.trackedEntityForm = null;
@@ -692,6 +694,81 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
+
+        // update customID while registration/ update profile of TEI with updated project-donor
+        // start
+        $scope.projectDonor = "";
+        var finalGeneratedCustomId = "";
+        if ( ( $scope.selectedProgram.id === "y6lXVg8TdOj"  || $scope.selectedProgram.id === "aYkLHnoPNo5"  || $scope.selectedProgram.id === "VscnMM6g6Ow")  && $scope.selectedTei.KLSVjftH2xS !== undefined )
+        {
+            $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
+        }
+        else if ( $scope.selectedProgram.id  === "Fcyldy4VqSt" && $scope.selectedTei.o94ggG6Mhx8 !== undefined)
+        {
+            $scope.projectDonor = $scope.selectedTei.o94ggG6Mhx8;
+        }
+
+        if ( $scope.registrationMode === 'REGISTRATION' ||
+            ( ( $scope.registrationMode === 'PROFILE' ) && ($scope.selectedTei.L2doMQ7OtUB === undefined)) ) {
+            $scope.model.savingRegistration = true;
+            //alert( "  in " + $scope.model.savingRegistration);
+            CustomIDGenerationService.validateAndCreateCustomId($scope.tei, $scope.selectedProgram.id, $scope.attributes, destination, $scope.optionSets, $scope.attributesById, $scope.selectedEnrollment.enrollmentDate, $scope.projectDonor).then(function (generatedCustomId) {
+                //$scope.model.savingRegistration = true;
+                console.log(" 2 generatedCustomId " + generatedCustomId);
+                if (generatedCustomId !== undefined) {
+                    finalGeneratedCustomId = generatedCustomId;
+                    $scope.selectedTei["L2doMQ7OtUB"] = finalGeneratedCustomId;
+                    //alert( "  out " + $scope.model.savingRegistration);
+                    $scope.model.savingRegistration = false;
+                    var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+                    $scope.formEmpty = result.formEmpty;
+                    $scope.tei = result.tei;
+
+                    if ($scope.formEmpty) {//registration form is empty
+                        NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_is_empty_fill_at_least_one"));
+                        return;
+                    }
+                    if(!destination && $scope.tei) {
+                        TEIService.getRelationships($scope.tei.trackedEntityInstance).then(function(result) {
+                            $scope.tei.relationships = result;
+                            performRegistration(destination);
+                        });
+                    } else {
+                        performRegistration(destination);
+                    }
+                }
+                else{
+                    //$scope.model.savingRegistration = true;
+                }
+            });
+        }
+        else{
+            if ($scope.registrationMode === 'PROFILE' && $scope.selectedTei.L2doMQ7OtUB !== undefined) {
+                var generatedCustomID = $scope.selectedTei.L2doMQ7OtUB;
+                var splitGeneratedCustomID = generatedCustomID.split("-");
+                var updatedCustomId = generatedCustomID.split("-")[0] + "-" + $scope.projectDonor + "-" + splitGeneratedCustomID[splitGeneratedCustomID.length-1];
+                $scope.selectedTei["L2doMQ7OtUB"] = updatedCustomId;
+            }
+            var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+            $scope.formEmpty = result.formEmpty;
+            $scope.tei = result.tei;
+
+            if ($scope.formEmpty) {//registration form is empty
+                NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_is_empty_fill_at_least_one"));
+                return;
+            }
+            if(!destination && $scope.tei) {
+                TEIService.getRelationships($scope.tei.trackedEntityInstance).then(function(result) {
+                    $scope.tei.relationships = result;
+                    performRegistration(destination);
+                });
+            } else {
+                performRegistration(destination);
+            }
+        }
+        //end
+        /* previous one code */
+        /*
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
         $scope.formEmpty = result.formEmpty;
         $scope.tei = result.tei;
@@ -708,6 +785,7 @@ trackerCapture.controller('RegistrationController',
         } else {
             performRegistration(destination);
         }
+         */
     };
 
     $scope.executeRules = function () {
@@ -733,23 +811,23 @@ trackerCapture.controller('RegistrationController',
                 evs.all = [$scope.currentEvent];
                 evs.byStage[$scope.currentStage.id] = [$scope.currentEvent];
             }
-            
+
             TrackerRulesExecutionService.executeRules(
-                $scope.allProgramRules, 
-                eventExists ? $scope.currentEvent : 'registration', 
+                $scope.allProgramRules,
+                eventExists ? $scope.currentEvent : 'registration',
                 evs,
-                $scope.prStDes, 
+                $scope.prStDes,
                 $scope.attributesById,
-                $scope.selectedTei, 
-                $scope.selectedEnrollment, 
-                $scope.optionSets, 
+                $scope.selectedTei,
+                $scope.selectedEnrollment,
+                $scope.optionSets,
                 flag);
         }
     };
 
     //check if field is hidden
     $scope.isHidden = function (id) {
-        
+
         if($scope.currentEvent && $scope.hiddenFields[$scope.currentEvent.event] && $scope.hiddenFields[$scope.currentEvent.event][id]){
             return $scope.hiddenFields[$scope.currentEvent.event][id];
         }
@@ -760,7 +838,7 @@ trackerCapture.controller('RegistrationController',
         if ($scope.teiPreviousValues[field] !== tei[field] && $scope.attributeUniquenessError[field]) {
             $scope.attributeUniquenessError[field] = false;
         }
-        
+
         $scope.teiPreviousValues[field] = tei[field];
         return $scope.executeRules();
     };
@@ -773,7 +851,7 @@ trackerCapture.controller('RegistrationController',
                 if(searchGroups.default){
                     searchGroups.default[field] = tei[field];
                     promises.push(getMatchingTeisCountBySearchGroup(searchGroups.default, field));
-                } 
+                }
                 if(searchGroups.unique){
                     searchGroups.unique[field] = tei[field];
                     promises.push(getMatchingTeisCountBySearchGroup(searchGroups.unique, field));
@@ -800,7 +878,7 @@ trackerCapture.controller('RegistrationController',
                 }
                 $scope.matchingTeisCount = count;
                 $scope.matchingTeisSearchGroup = searchGroup;
-                
+
             });
         }else{
             promise = SearchGroupService.tetScopeSearchCount(searchGroup, $scope.trackedEntityTypes.selected, $scope.selectedOrgUnit).then(function(count){
@@ -897,13 +975,13 @@ trackerCapture.controller('RegistrationController',
                     if(groups){
                         if(groups.default && searchedGroups[groups.default.id]){
                             searchForExistingTeisBySearchGroup(groups.default);
-                            searchedGroups[groups.default.id] = true;  
+                            searchedGroups[groups.default.id] = true;
                         }
                         if(groups.unique && searchedGroups[groups.unique.id]){
                             searchForExistingTeisBySearchGroup(groups.unique);
-                            searchedGroups[groups.unique.id] = true;  
+                            searchedGroups[groups.unique.id] = true;
                         }
-                    }    
+                    }
                 });
             }
         }
@@ -1111,7 +1189,7 @@ trackerCapture.controller('RegistrationController',
                     $scope.registerEntity(res.destination, true);
                 }
             });
-        
+
     }
 
     $scope.getMatchingTeisLength = function(){
@@ -1274,7 +1352,7 @@ trackerCapture.controller('RegistrationController',
                 ModalService.showModal({}, modalOptions);
                 return;
             }
-    
+
             if (!DateUtils.verifyExpiryDate(date, $scope.selectedProgram.expiryPeriodType, $scope.selectedProgram.expiryDays, true)) {
                 $scope.currentEvent[field] = $scope.currentEventOriginal[field];
                 return;
@@ -1299,7 +1377,7 @@ trackerCapture.controller('RegistrationController',
         // Check if currentProgramStage blocks entry form when status is completed
         if($scope.currentStage && $scope.currentStage.blockEntryForm && $scope.currentEvent.status ==='COMPLETED') return false;
         //Check if tei is inactive
-        if($scope.selectedTei.inactive) return false;     
+        if($scope.selectedTei.inactive) return false;
         //Check if event is expired and user can edit expired stuff
         if(($scope.currentEvent.expired && !$scope.userAuthority.canEditExpiredStuff)) return false;
 
@@ -1307,8 +1385,8 @@ trackerCapture.controller('RegistrationController',
     }
 
     $scope.translateWithTETName = function(text, nameToLower){
-        var trackedEntityTypeName = $scope.selectedProgram ? 
-            $scope.selectedProgram.trackedEntityType.displayName : 
+        var trackedEntityTypeName = $scope.selectedProgram ?
+            $scope.selectedProgram.trackedEntityType.displayName :
             ($scope.trackedEntityTypes.selected ? $scope.trackedEntityTypes.selected.displayName : "tracked entity instance");
 
         if(nameToLower) trackedEntityTypeName = trackedEntityTypeName.toLowerCase();
@@ -1324,7 +1402,7 @@ trackerCapture.controller('RegistrationController',
         }
         if(length === 1){
             return $translate.instant(singleText);
-        } 
+        }
         var translated = $translate.instant(multipleText);
         return translated.replace("{count}", length.toString());
     }
@@ -1352,13 +1430,13 @@ trackerCapture.controller('RegistrationController',
         if(!$scope.hasTeiWrite()) return true;
         return false;
     }
-    
+
 
     $scope.dataElementEditable = function(prStDe){
         if($scope.eventEditable()){
             if($scope.assignedFields && $scope.assignedFields[$scope.currentEvent.event] && $scope.assignedFields[$scope.currentEvent.event][prStDe.dataElement.id]){
                 return false;
-            } 
+            }
             return true;
         }
         return false;
@@ -1372,12 +1450,12 @@ trackerCapture.controller('RegistrationController',
     }
 
     $scope.deleteFile = function(tei, attribute){
-        
+
         if( !attribute ){
             NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("missing_file_identifier"));
             return;
         }
-        
+
         var modalOptions = {
             closeButtonText: 'cancel',
             actionButtonText: 'remove',
@@ -1385,19 +1463,19 @@ trackerCapture.controller('RegistrationController',
             bodyText: 'are_you_sure_to_remove'
         };
 
-        ModalService.showModal({}, modalOptions).then(function(result){            
+        ModalService.showModal({}, modalOptions).then(function(result){
             $scope.fileNames[attribute] = "";
             $scope.fileNames["undefined"][attribute] = "";
             tei[attribute] = "";
         });
     };
 
-    $scope.downloadFile = function(tei, attributeId) {      
+    $scope.downloadFile = function(tei, attributeId) {
         if( !tei || !tei.trackedEntityInstance || !attributeId){
             NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("missing_file_identifier"));
             return;
         }
-        
+
         $window.open('../api/trackedEntityInstances/' + tei.trackedEntityInstance + '/' + attributeId + '/image', '_blank', '');
     };
 
