@@ -262,7 +262,7 @@ trackerCapture.controller('RegistrationController',
             $scope.selectedTei = args.selectedTei || {};
             $scope.tei = angular.copy(args.selectedTei);
 
-            
+
         }
 
         if($scope.registrationMode === 'REGISTRATION'){
@@ -530,7 +530,8 @@ trackerCapture.controller('RegistrationController',
                 else {
                     setSelectedTei();
                     if ($scope.selectedProgram) {
-
+                        //add for plan
+                        $scope.model.savingRegistration = true;
                         //enroll TEI
                         var enrollment = {};
                         enrollment.trackedEntityInstance = $scope.tei.trackedEntityInstance;
@@ -549,7 +550,10 @@ trackerCapture.controller('RegistrationController',
                                 var en = enrollmentResponse.response;
                                 if (en.status === 'SUCCESS') {
                                     if($scope.registrationMode !== 'ENROLLMENT') {
-                                        $scope.model.savingRegistration = false;
+                                        // comment previous one
+                                        //$scope.model.savingRegistration = false;
+                                        // update for plan
+                                        $scope.model.savingRegistration = true;
                                     }
                                     enrollment.enrollment = en.importSummaries[0].reference;
                                     $scope.selectedEnrollment = enrollment;
@@ -558,9 +562,13 @@ trackerCapture.controller('RegistrationController',
                                     if (dhis2Events.events.length > 0) {
                                         DHIS2EventFactory.create(dhis2Events).then(function () {
                                             notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                            // add for plan
+                                            $scope.model.savingRegistration = false;
                                         });
                                     } else {
                                         notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                        //add for plan
+                                        $scope.model.savingRegistration = false;
                                     }
                                 }
                                 else {
