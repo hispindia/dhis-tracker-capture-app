@@ -185,9 +185,9 @@ trackerCapture.controller('DataEntryController',
     $scope.model.showEventSearch = false;
     $scope.model.eventSearchText = '';
 
-  AjaxCalls.getALLTEIBYOperate().then(function(data){
-        $scope.foodsafetyprograms = data;
-     });
+//   AjaxCalls.getALLTEIBYOperate().then(function(data){
+//         $scope.foodsafetyprograms = data;
+//      });
     $scope.filterLegend = function(){
         if($scope.mainMenuStageSelected()){
             return {showInEventLegend: true};
@@ -478,10 +478,7 @@ $scope.saveDataValueForEvent1 = function(prStDe, buttonvalue, field, eventToSave
                 $scope.licensestatus1 = value;
             }
         }
-
-
         $scope.updateFileNames();
-
         if (!backgroundUpdate) {
             $scope.currentElement.saved = true;
             $scope.currentElement.pending = false;
@@ -522,6 +519,7 @@ $scope.printLicense = function(divName) {
     $scope.printForm = true;
     $scope.printEmptyForm = true;
     $scope.selectedEntityinstance = selections.tei;
+    let currentTei = selections.tei.trackedEntityInstance
 
     //  var promise = $http.get('../api/trackedEntityInstances/w8kYzsMDQHa.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true').then(function (response) {
 
@@ -558,11 +556,11 @@ $scope.printLicense = function(divName) {
          $.ajax({
         async:false,
         type: "GET",
-        url: '../api/trackedEntityInstances/'+ idforNameofoperatoe + '.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true',
+        // url: '../api/trackedEntityInstances/'+ idforNameofoperatoe + '.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true',
+         url: '../api/relationships.json?tei='+currentTei,
         success: function(response){
-
+            console,log('hey',response)
             $scope.asstrackedEntityInstances = response;
-
             for (var i = 0; i < $scope.asstrackedEntityInstances.attributes.length; i++) {
              if ($scope.asstrackedEntityInstances.attributes[i].displayName == "Contact Person Name") {
                   $scope.selectedcontactperson = $scope.asstrackedEntityInstances.attributes[i].value;
@@ -632,6 +630,7 @@ $scope.printLicense = function(divName) {
                                     <link type="text/css" rel="stylesheet" href="../dhis-web-commons/javascripts/angular/plugins/select2.css">\n\
                                     <link rel="stylesheet" type="text/css" href="styles/style.css" />\n\
                                     <link rel="stylesheet" type="text/css" href="styles/print.css" />\n\
+                                    <title>licence</title\n\
                             </head>\n\
                             <body onload="window.print()"><table><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + printContents +
         '</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></table></html>');
@@ -1947,7 +1946,7 @@ $scope.printLicense = function(divName) {
         $scope.executeRules();
         // added by gyan
         $scope.Escalate = function(inTableView, outerDataEntryForm) {
-            $scope.escalatebuttonclicked = true;
+           $scope.escalatebuttonclicked = true;
            let  value = 1;
             var dataelement = "oYNscX4WRDk";
             $scope.saveDataValueForEvent1(dataelement, value, null, $scope.currentEvent, false);
@@ -1956,8 +1955,8 @@ $scope.printLicense = function(divName) {
         }
         $scope.SendBack = function(inTableView, outerDataEntryForm) {
             var dataelement = "oYNscX4WRDk";
-            // var issue = 3;
-             $scope.saveDataValueForEvent1(dataelement, null, $scope.currentEvent, false);
+             var issue = 3;
+             $scope.saveDataValueForEvent1(dataelement, issue, null, $scope.currentEvent, false);
              /* var dataelement1="WggL0QDVcRG";
              var issue1="";
               $scope.saveDataValueForEvent1(dataelement1, issue1, null, $scope.currentEvent, false);

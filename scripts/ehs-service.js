@@ -28,13 +28,13 @@ trackerCapture.service('AjaxCalls', function($http) {
                 });
                 return promise;
             },
-            getALLTEIBYOperate : function() {
-               var promise= $http.get('../api/trackedEntityInstances/w8kYzsMDQHa.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true').then(function (response) {
-                   return response.data;
+            // getALLTEIBYOperate : function() {
+            //    var promise= $http.get('../api/trackedEntityInstances/w8kYzsMDQHa.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true').then(function (response) {
+            //        return response.data;
 
-                });
-                return promise;
-            },
+            //     });
+            //     return promise;
+            // },
              getALLTEIBYOperate1 : function(idforNameofoperatoe) {
 
 
