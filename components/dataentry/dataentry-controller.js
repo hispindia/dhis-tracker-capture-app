@@ -36,8 +36,8 @@ trackerCapture.controller('DataEntryController',
                 TCOrgUnitService,
                 UsersService,
                 EHSUpdateAttributeService,
-                AjaxCalls,
-            // EHSService,
+                //AjaxCalls,
+               EHSService
             // OrganisationUnitService,
             // EventDataValueService,
             // utilityService,
@@ -120,6 +120,44 @@ trackerCapture.controller('DataEntryController',
             DashboardLayoutService.setProgramStageLayout($scope.dashBoardLayout.defaultLayout[$scope.selectedProgramId].programStageTimeLineLayout);
         }
     });
+
+
+    
+    // add for saint lucia custom change for print regulationNumber in licence
+    // start
+    for (var i = 0; i < $scope.selectedEntityinstance.attributes.length; i++) {
+
+        if ($scope.selectedEntityinstance.attributes[i].displayName === "Food service Type") {
+            $scope.selectedEntytyType = $scope.selectedEntityinstance.attributes[i].value;
+        }
+        if ($scope.selectedEntityinstance.attributes[i].displayName === "Slaughter House Type") {
+            $scope.selectedEntytyTypeSlaughter = $scope.selectedEntityinstance.attributes[i].value;
+        }
+        /*  if ($scope.selectedEntityinstance.attributes[i].displayName === "Current license status") {
+         $scope.licensestatus = $scope.selectedEntityinstance.attributes[i].value;
+         if( $scope.licensestatus =="Valid"|| $scope.licensestatus =="Canceled"){
+         $scope.reopen=true;
+         }*/
+
+
+    }
+    EHSService.getOptionsByOptionSet("eBwuKElhUVy").then(function(optionsetmember) {
+        // console.log(organisationUnit);
+        for (var i = 0; i < optionsetmember.options.length; i++) {
+            if ($scope.selectedEntytyType === optionsetmember.options[i].name)
+                $scope.regulationNumber = optionsetmember.options[i].code;
+        }
+    });
+    EHSService.getOptionsByOptionSet("M2hjIZjxIaq").then(function(optionsetmember) {
+        // console.log(organisationUnit);
+        for (var i = 0; i < optionsetmember.options.length; i++) {
+            if ($scope.selectedEntytyTypeSlaughter === optionsetmember.options[i].name)
+                $scope.regulationNumber = optionsetmember.options[i].code;
+        }
+    });
+
+    console.log( $scope.selectedEntytyType + " --" +  $scope.regulationNumber);
+    // end
 
     DashboardLayoutService.getLockedList().then(function(response){
         if(!response || response === '') {
@@ -315,12 +353,12 @@ trackerCapture.controller('DataEntryController',
                 $scope.currentEvent1 = $scope.currentEvent;
                 $scope.issuelicensecall = "cancel";
 				
-				   var dataelement =  $scope.licenValidUpToDeUid;
+                var dataelement =  $scope.licenValidUpToDeUid;
                 var cancel = -1;
                 var dataelement1 = $scope.licenStatusDeUid;
 				 var updateResponseStatus = EHSUpdateAttributeService.updateAttributeValue( $scope.currentEvent1.trackedEntityInstance, $scope.licenStatusAttributeUid, cancel, $scope.optionSets, $scope.attributesById);
                 updateResponseStatus.then(function(response) {
-                    if (response.status == 'OK') {
+                    if (response.status === 'OK') {
                     }
                 });
                 $scope.completeIncompleteEvent(inTableView, outerDataEntryForm, $scope.issuelicensecall, $scope.currentEvent1);
@@ -513,95 +551,93 @@ $scope.saveDataValueForEvent1 = function(prStDe, buttonvalue, field, eventToSave
     });
 };
 
-
-
+// custom change for saint-lucia for print License
 $scope.printLicense = function(divName) {
     $scope.printForm = true;
     $scope.printEmptyForm = true;
     $scope.selectedEntityinstance = selections.tei;
-    let currentTei = selections.tei.trackedEntityInstance
+    var currentTei = selections.tei.trackedEntityInstance;
+    $scope.selectedcontactperson = "";
+    //$scope.selectedEntytyType = '';
+    //$scope.selectedEntytyTypeSlaughter = '';
+    //$scope.regulationNumber = '';
 
-    //  var promise = $http.get('../api/trackedEntityInstances/w8kYzsMDQHa.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true').then(function (response) {
-
-    // for (var i = 0; i < $scope.foodsafetyprograms.attributes.length; i++) {
-    //     if ($scope.foodsafetyprograms.attributes[i].displayName == "Operator/Owner Name") {
-    //         $scope.operatorname = $scope.foodsafetyprograms.attributes[i].value;
-    //     }
-    //     if ($scope.foodsafetyprograms.attributes[i].displayName == "Entity type") {
-    //         $scope.entitytype = $scope.foodsafetyprograms.attributes[i].value;
-    //     }
-    // }
     if ($scope.selectedEntityinstance) {
+        $.ajax({
+            async:false,
+            type: "GET",
+            url: '../api/relationships.json?tei='+currentTei,
+            success: function(response){
+                var relationShipResponse = response;
+                $scope.asstrackedEntityInstances = relationShipResponse[0].from;
+                for (var i = 0; i < $scope.asstrackedEntityInstances.trackedEntityInstance.attributes.length; i++) {
+                    if ($scope.asstrackedEntityInstances.trackedEntityInstance.attributes[i].displayName === "Contact Person Name") {
+                        $scope.selectedcontactperson = $scope.asstrackedEntityInstances.trackedEntityInstance.attributes[i].value;
+                    }
+                }
+            },
+            error: function(response){
+
+            }
+
+        });
+
         for (var i = 0; i < $scope.selectedEntityinstance.attributes.length; i++) {
-           /* if ($scope.selectedEntityinstance.attributes[i].displayName == "Operator/Owner Name") {
-                $scope.selectedOperator = $scope.selectedEntityinstance.attributes[i].value;
-            }*/
-               if ($scope.selectedEntityinstance.attributes[i].displayName == "Operator/Owner") {
+                /*
+               if ($scope.selectedEntityinstance.attributes[i].displayName === "Operator/Owner") {
                   $scope.selectedOperator = $scope.selectedEntityinstance.attributes[i].value;
 
-                  /*AjaxCalls.getALLTEIBYOperate1($scope.selectedOperator).then(function(data) {
-                    $scope.asstrackedEntityInstances = data;   
+                 $.ajax({
+                async:false,
+                type: "GET",
+                // url: '../api/trackedEntityInstances/'+ idforNameofoperatoe + '.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true',
+                 url: '../api/relationships.json?tei='+currentTei,
+                success: function(response){
+                        console.log('relationships response', response);
+                        var relationShipResponse = response;
+                        $scope.asstrackedEntityInstances = relationShipResponse[0].from;
+                        for (var i = 0; i < $scope.asstrackedEntityInstances.attributes.length; i++) {
+                         if ($scope.asstrackedEntityInstances.attributes[i].displayName === "Contact Person Name") {
+                              $scope.selectedcontactperson = $scope.asstrackedEntityInstances.attributes[i].value;
+                        }
 
-                    for (var i = 0; i < $scope.asstrackedEntityInstances.attributes.length; i++) {
-             if ($scope.asstrackedEntityInstances.attributes[i].displayName == "Contact Person Name") {
-                  $scope.selectedcontactperson = $scope.asstrackedEntityInstances.attributes[i].value;
+                     }
+
+                },
+                error: function(response){
+                }
+
+                });
             }
+            */
 
-         }
-
-          });*/
-
-          var idforNameofoperatoe = $scope.selectedOperator;
-
-         $.ajax({
-        async:false,
-        type: "GET",
-        // url: '../api/trackedEntityInstances/'+ idforNameofoperatoe + '.json?program=ieLe1vT4Vad&ouMode=ALL&skipPaging=true',
-         url: '../api/relationships.json?tei='+currentTei,
-        success: function(response){
-            console,log('hey',response)
-            $scope.asstrackedEntityInstances = response;
-            for (var i = 0; i < $scope.asstrackedEntityInstances.attributes.length; i++) {
-             if ($scope.asstrackedEntityInstances.attributes[i].displayName == "Contact Person Name") {
-                  $scope.selectedcontactperson = $scope.asstrackedEntityInstances.attributes[i].value;
-            }
-
-         }
-
-        },
-        error: function(response){
-        }
-
-    });     
-               
-            }
-            if ($scope.selectedEntityinstance.attributes[i].displayName == "Name") {
+            if ($scope.selectedEntityinstance.attributes[i].displayName === "Name") {
                 $scope.selectedName = $scope.selectedEntityinstance.attributes[i].value;
             }
-            if ($scope.selectedEntityinstance.attributes[i].displayName == "Establishment Type - Food service") {
+            if ($scope.selectedEntityinstance.attributes[i].displayName === "Food service Type") {
                 $scope.selectedEntytyType = $scope.selectedEntityinstance.attributes[i].value;
             }
-            if ($scope.selectedEntityinstance.attributes[i].displayName == "Establishment type - Slaughter House") {
+            if ($scope.selectedEntityinstance.attributes[i].displayName === "Slaughter House Type") {
                 $scope.selectedEntytyTypeSlaughter = $scope.selectedEntityinstance.attributes[i].value;
             }
-            if ($scope.selectedEntityinstance.attributes[i].displayName == "Address Line 1") {
+            if ($scope.selectedEntityinstance.attributes[i].displayName === "Address Line 1") {
                 $scope.selectedAddress1 = $scope.selectedEntityinstance.attributes[i].value;
             }
-            if ($scope.selectedEntityinstance.attributes[i].displayName == "Address Line 2") {
+            if ($scope.selectedEntityinstance.attributes[i].displayName === "Address Line 2") {
                 $scope.selectedAddress2 = $scope.selectedEntityinstance.attributes[i].value;
             }
 
-            if ($scope.selectedEntityinstance.attributes[i].displayName == "City/Community") {
+            if ($scope.selectedEntityinstance.attributes[i].displayName === "City/Community") {
                 $scope.selectedAddress3 = $scope.selectedEntityinstance.attributes[i].value;
             }
-            if ($scope.selectedEntityinstance.attributes[i].displayName == "District") {
+            if ($scope.selectedEntityinstance.attributes[i].displayName === "District") {
                 $scope.selectedAddress4 = $scope.selectedEntityinstance.attributes[i].value;
             }
-
         }
 
-    }    
-   
+        console.log( $scope.selectedEntytyType + " --" +  $scope.regulationNumber);
+        //alert( $scope.selectedEntytyType + " --" +  $scope.regulationNumber );
+    }
     var address = $scope.selectedAddress1 + ", " + $scope.selectedAddress2 + ", " + $scope.selectedAddress3 + ", " + $scope.selectedAddress4;
     address = address.replace(/undefined,/g, '');
     address = address.replace(/(^[,\s]+)|([,\s]+$)/g, '');
@@ -612,7 +648,7 @@ $scope.printLicense = function(divName) {
     var printContents = document.getElementById(divName).innerHTML;
     var heading = "<p style='font-family: 'Times New Roman', Times' align=" + "'center'" + ">SAINT LUCIA PUBLIC HEALTH BOARD</p>" + "<p style='font-family: 'Times New Roman', Times, serif' align=" + "'center'" + ">(Ministry Of Health)</p><br>" + "<h5 style='font-family: 'Times New Roman', Times, serif' align=" + "'center'" + "><strong>LICENCE &nbspTO &nbspOPERATE</strong></h5><br><br><br>";
 
-    var content = "<p style='font-family: 'Times New Roman', Times, serif'>This is to certify that <strong><i>"+ " " + $scope.selectedcontactperson + "</i></strong> is dully registered in accordance with the Public Health Regulations No. " + $scope.regulationnumber + "  and hereby given the permission to operate <strong><i>" + $scope.selectedName + " </i></strong>at<strong><i>" + " " + address +""+"</i></strong> . This permission is valid till <strong><i>" + date + "</i></strong>. </p ><br><p style='font-family: 'Times New Roman', Times, serif'>This Licence is issued with the understanding that the operators will adhere to the rules and Regulations No: " + $scope.regulationnumber + " of the Public Health Regulations Of Saint Lucia 1978 failing which such licence may be revoked by any authorised officer.</p><br><br><br><br>";
+    var content = "<p style='font-family: 'Times New Roman', Times, serif'>This is to certify that <strong><i>"+ " " + $scope.selectedcontactperson + "</i></strong> is dully registered in accordance with the Public Health Regulations No. <strong><i>" + $scope.regulationNumber + " </strong></i> and hereby given the permission to operate <strong><i>" + $scope.selectedName + " </i></strong>at<strong><i>" + " " + address +""+"</i></strong> . This permission is valid till <strong><i>" + date + "</i></strong>. </p ><br><p style='font-family: 'Times New Roman', Times, serif'>This Licence is issued with the understanding that the operators will adhere to the rules and Regulations No: <strong><i>" + $scope.regulationNumber + " </strong></i> of the Public Health Regulations Of Saint Lucia 1978 failing which such licence may be revoked by any authorised officer.</p><br><br><br><br>";
     //  var  content2="<p1>This Licennse is issued with the understanding that the operators will adhere to the rules and Regulations No."+NAME+" of the Public Health Regulatiobs Of Saint Lucia 1978 failing which such licence may be revoked by any authoried oficer</p1>";
     var footer = "<p style='font-family: 'Times New Roman', Times, serif'  align=" + "'right'" + ">SAINT LUCIA PUBLIC HEALTH BOARD</p><br>" + "<p style=" + "'margin:10'" + "  align=" + "'right'" + ">...............................................................</p>" + "<p style=" + "'margin-right:90'" + "  align=" + "'right'" + ">Board Chair</p><br><br><br>";
     
@@ -638,7 +674,7 @@ $scope.printLicense = function(divName) {
     $scope.printForm = false;
     $scope.printEmptyForm = false;
 };
-
+// end
 
 
     var processRuleEffect = function(event, callerId){
