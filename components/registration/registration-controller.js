@@ -757,7 +757,6 @@ trackerCapture.controller('RegistrationController',
         }
         //end
         /* previous one code */
-
         /*
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
         $scope.formEmpty = result.formEmpty;
