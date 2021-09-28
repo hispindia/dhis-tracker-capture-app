@@ -498,8 +498,9 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 TCStorageService.currentStore.open().done(function(){
                     TCStorageService.currentStore.getAll('programs').done(function(prs){
                         var programs = [];
+                        var teiFromURL = ($location.search()).tei;
                         angular.forEach(prs, function(pr){
-                            if( (loadSelectedProgram && selectedProgram && pr.id == selectedProgram.id) || 
+                            if( (loadSelectedProgram && selectedProgram && pr.id == selectedProgram.id && teiFromURL) ||
                                 (pr.organisationUnits.hasOwnProperty( ou.id ) && accesses.programsById[pr.id] && accesses.programsById[pr.id].data.read) ){
                                 if(pr.programTrackedEntityAttributes){
                                     pr.programTrackedEntityAttributes = pr.programTrackedEntityAttributes.filter(function(attr){
@@ -673,7 +674,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
     };
     var errorHeader = $translate.instant("error");
     return {
-        get: function( enrollmentUid,teiUid, programUid){
+        get: function(enrollmentUid, teiUid, programUid){
             var url = DHIS2URL + '/enrollments/' + enrollmentUid;
             return TeiAccessApiService.get(teiUid, programUid, url).then(function(response){
                 return convertFromApiToUser(response.data);
@@ -1444,7 +1445,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
     return {
 
         getEventsByStatus: function(entity, orgUnit, program, programStatus){
-            var promise = TeiAccessApiService.get(entity,program, DHIS2URL + '/events.json?ouMode=ACCESSIBLE&' + 'trackedEntityInstance=' + entity + '&orgUnit=' + orgUnit + '&program=' + program + '&programStatus=' + programStatus  + skipPaging).then(function(response){
+            var promise = TeiAccessApiService.get(entity, program, DHIS2URL + '/events.json?ouMode=ACCESSIBLE&' + 'trackedEntityInstance=' + entity + '&orgUnit=' + orgUnit + '&program=' + program + '&programStatus=' + programStatus  + skipPaging).then(function(response){
                 return response.data.events;
             }, function (response) {
 

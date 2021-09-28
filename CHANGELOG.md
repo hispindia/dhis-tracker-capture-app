@@ -1,3 +1,87 @@
+## [31.6.35](https://github.com/dhis2/tracker-capture-app/compare/v31.6.34...v31.6.35) (2021-09-13)
+
+
+### Bug Fixes
+
+* added app icon image file ([#1245](https://github.com/dhis2/tracker-capture-app/issues/1245)) ([d306071](https://github.com/dhis2/tracker-capture-app/commit/d3060719de8023b874ffd3661a39679a945db342))
+
+## [31.6.34](https://github.com/dhis2/tracker-capture-app/compare/v31.6.33...v31.6.34) (2021-09-13)
+
+
+### Bug Fixes
+
+* check that eventRows is defined ([#1250](https://github.com/dhis2/tracker-capture-app/issues/1250)) ([bba268c](https://github.com/dhis2/tracker-capture-app/commit/bba268c671039c1b60be28d7c28f1b9389715c38))
+
+## [31.6.33](https://github.com/dhis2/tracker-capture-app/compare/v31.6.32...v31.6.33) (2021-09-10)
+
+
+### Bug Fixes
+
+* changed path to app icon ([#1244](https://github.com/dhis2/tracker-capture-app/issues/1244)) ([9ab1c12](https://github.com/dhis2/tracker-capture-app/commit/9ab1c124bd9b2fc1d98937049b727ea89dbde0e1))
+
+## [31.6.32](https://github.com/dhis2/tracker-capture-app/compare/v31.6.31...v31.6.32) (2021-09-06)
+
+
+### Bug Fixes
+
+* inserted pagination for upcoming and overdue events lists ([#1239](https://github.com/dhis2/tracker-capture-app/issues/1239)) ([7b4352c](https://github.com/dhis2/tracker-capture-app/commit/7b4352cc76be2770e296916fa8fd63e9fae521ee))
+
+## [31.6.31](https://github.com/dhis2/tracker-capture-app/compare/v31.6.30...v31.6.31) (2021-08-27)
+
+
+### Bug Fixes
+
+* Search using code, not displayName ([#1213](https://github.com/dhis2/tracker-capture-app/issues/1213)) ([7dd1f88](https://github.com/dhis2/tracker-capture-app/commit/7dd1f88f8d0166b4f8c0c3c0778e022a2fd74bd6))
+
+## [31.6.30](https://github.com/dhis2/tracker-capture-app/compare/v31.6.29...v31.6.30) (2021-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4a47d22](https://github.com/dhis2/tracker-capture-app/commit/4a47d22c738d617d0fdf29b3db3179ce58ab1869))
+
+## [31.6.29](https://github.com/dhis2/tracker-capture-app/compare/v31.6.28...v31.6.29) (2021-08-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e292d36](https://github.com/dhis2/tracker-capture-app/commit/e292d364593f073ae906d0e18cd8bfdbd9d7898f))
+
+## [31.6.28](https://github.com/dhis2/tracker-capture-app/compare/v31.6.27...v31.6.28) (2021-08-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c9cc4c0](https://github.com/dhis2/tracker-capture-app/commit/c9cc4c04ae043c2942c957cb4411640451a9ecfc))
+
+## [31.6.27](https://github.com/dhis2/tracker-capture-app/compare/v31.6.26...v31.6.27) (2021-08-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([860127c](https://github.com/dhis2/tracker-capture-app/commit/860127c6ddfe6d84d3d54b97994c20537e4ac54a))
+
+## [31.6.26](https://github.com/dhis2/tracker-capture-app/compare/v31.6.25...v31.6.26) (2021-08-05)
+
+
+### Bug Fixes
+
+* refined the condition for loading a program through relationships ([#1195](https://github.com/dhis2/tracker-capture-app/issues/1195)) ([421e8d3](https://github.com/dhis2/tracker-capture-app/commit/421e8d389f9312a5b331a020da0db6cf19169fde))
+
+## [31.6.25](https://github.com/dhis2/tracker-capture-app/compare/v31.6.24...v31.6.25) (2021-07-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([603f1c2](https://github.com/dhis2/tracker-capture-app/commit/603f1c293f0689ca9400dadcfc9708ea848b1ba8))
+
+## [31.6.24](https://github.com/dhis2/tracker-capture-app/compare/v31.6.23...v31.6.24) (2021-07-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([aa8875f](https://github.com/dhis2/tracker-capture-app/commit/aa8875f61af0e970d1178f9209b0320b31752e6c))
+
 ## [31.6.23](https://github.com/dhis2/tracker-capture-app/compare/v31.6.22...v31.6.23) (2021-07-05)
 
 
