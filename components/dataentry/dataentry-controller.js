@@ -1983,16 +1983,16 @@ $scope.printLicense = function(divName) {
         // added by gyan
         $scope.Escalate = function(inTableView, outerDataEntryForm) {
            $scope.escalatebuttonclicked = true;
-           let  value = 1;
-            var dataelement = "oYNscX4WRDk";
-            $scope.saveDataValueForEvent1(dataelement, value, null, $scope.currentEvent, false);
+            let  dataValueNew = 1;
+            let dataElementUID = "oYNscX4WRDk";
+            $scope.saveDataValueForEvent1(dataElementUID, dataValueNew, null, $scope.currentEvent, false);
             setEventEditing1($scope.currentEvent, $scope.currentStage);
             location.reload(true);
-        }
+        };
         $scope.SendBack = function(inTableView, outerDataEntryForm) {
-            var dataelement = "oYNscX4WRDk";
-             var issue = 3;
-             $scope.saveDataValueForEvent1(dataelement, issue, null, $scope.currentEvent, false);
+             let dataElementUID = "oYNscX4WRDk";
+             let dataValueReturned = 3;
+             $scope.saveDataValueForEvent1(dataElementUID, dataValueReturned, null, $scope.currentEvent, false);
              /* var dataelement1="WggL0QDVcRG";
              var issue1="";
               $scope.saveDataValueForEvent1(dataelement1, issue1, null, $scope.currentEvent, false);
@@ -2001,8 +2001,35 @@ $scope.printLicense = function(divName) {
                $scope.saveDataValueForEvent1(dataelement2, issue2, null, $scope.currentEvent, false) */
               location.reload(true);
              //$scope.completeIncompleteEvent1(inTableView, outerDataEntryForm, $scope.escalate1, $scope.currentEvent1);
-         }
-
+         };
+        $scope.completeEscalation = function(inTableView, outerDataEntryForm) {
+            let dataElementUID = "oYNscX4WRDk";
+            let closedDataValue = "-1";
+            let escalationEvent = {
+                event: $scope.currentEvent.event,
+                orgUnit: $scope.currentEvent.orgUnit,
+                program: $scope.currentEvent.program,
+                programStage: $scope.currentEvent.programStage,
+                status: $scope.currentEvent.status,
+                trackedEntityInstance: $scope.currentEvent.trackedEntityInstance,
+                dataValues: [{
+                    dataElement: dataElementUID,
+                    value: closedDataValue,
+                    providedElsewhere: $scope.currentEvent.providedElsewhere[dataElementUID] ? true : false
+                }]
+            };
+            DHIS2EventFactory.updateForSingleValue(escalationEvent).then(function(eventSaveResponse) {
+                if (eventSaveResponse.httpStatus === "OK") {
+                    $scope.completeIncompleteEvent(inTableView, outerDataEntryForm);
+                    //location.reload(true);
+                }
+            });
+            //$scope.saveDataValueForEvent1(dataElementUID, closedDataValue, null, $scope.currentEvent, false);
+            //location.reload(true);
+            //$scope.completeIncompleteEvent(inTableView, outerDataEntryForm);
+            //location.reload(true);
+            //$scope.completeIncompleteEvent1(inTableView, outerDataEntryForm, $scope.escalate1, $scope.currentEvent1);
+        };
     };
 
     $scope.saveDatavalue = function (prStDe, field) {
