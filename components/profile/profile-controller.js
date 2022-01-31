@@ -46,7 +46,9 @@ trackerCapture.controller('ProfileController',
         listenToBroadCast();
     });
 
-    $scope.$watch('widget.useAsTopBar', function(event, args){
+    $scope.$watch('widget.useAsTopBar', function(newValue, oldValue){
+        // Omit comparing newValue/oldValue to get an extra update with convenient timing:
+        // see the difference in the profile widget when opening a tracked entity instance.
         listenToBroadCast();
     });
     

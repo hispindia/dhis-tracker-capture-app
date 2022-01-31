@@ -26,6 +26,7 @@ var trackedEntityAttributeIds = [];
 var batchSize = 50;
 var programBatchSize = 50;
 var hasAllAccess = false;
+const reportEntriesLimit = 300;
 
 dhis2.tc.store = null;
 dhis2.tc.metaDataCached = dhis2.tc.metaDataCached || false;
@@ -353,7 +354,7 @@ function getBatchPrograms( programs, batch )
         url: DHIS2URL + '/programs.json',
         type: 'GET',
         data: 'fields=id,displayFormName,version,displayEnrollmentDateLabel,enrollmentDateLabel,maxTeiCountToReturn,selectIncidentDatesInFuture,' +
-        'incidentDateLabel,selectEnrollmentDatesInFuture,registration,favorite,useFirstStageDuringRegistration,displayName,' +
+        'incidentDateLabel,selectEnrollmentDatesInFuture,registration,favorite,useFirstStageDuringRegistration,displayName,onlyEnrollOnce,' +
         'completeEventsExpiryDays,description,displayShortName,externalAccess,withoutRegistration,minAttributesRequiredToSearch,' + 
         'displayFrontPageList,programType,accessLevel,displayIncidentDate,expiryDays,style[*],' +
         'dataEntryForm[*],relatedProgram[id,displayName],relationshipType[id,displayName],featureType,trackedEntityType[id,displayName],categoryCombo[id,displayName,isDefault,categories[id,displayName,categoryOptions[id,displayName,organisationUnits[id]]]],userRoles[id,displayName],programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],programTrackedEntityAttributes[*,trackedEntityAttribute[id,unique,orgunitScope]],minAttributesRequiredToSearch,maxTeiCountToReturn&paging=false&filter=id:in:' + ids
@@ -366,13 +367,13 @@ function getBatchPrograms( programs, batch )
                     type: 'GET',
                     data: 'programs=' + program.id
                 }).done( function( response ){
+                    var ou = {};
                     if( response[program.id] ){
-                        var ou = {};
                         _.each(_.values( response[program.id] ), function(o){
                             ou[o] = {id:o};
                         });
-                        program.organisationUnits = ou;
                     }
+                    program.organisationUnits = ou;
                     
                     if( program.programStages ){
                         program.programStages = _.sortBy( program.programStages, 'sortOrder' );

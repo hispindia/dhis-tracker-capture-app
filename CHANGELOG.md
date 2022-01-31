@@ -1,3 +1,148 @@
+## [31.7.14](https://github.com/dhis2/tracker-capture-app/compare/v31.7.13...v31.7.14) (2022-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-12501] fix "add new" in enrollment widget ([#1357](https://github.com/dhis2/tracker-capture-app/issues/1357)) ([6de906d](https://github.com/dhis2/tracker-capture-app/commit/6de906d991b20c4dd7ad5f82d6b4fabbaae34600))
+
+## [31.7.13](https://github.com/dhis2/tracker-capture-app/compare/v31.7.12...v31.7.13) (2022-01-18)
+
+
+### Bug Fixes
+
+* [DHIS2-12213] load enrollment dashboard correctly for the first TEI ([#1353](https://github.com/dhis2/tracker-capture-app/issues/1353)) ([678f680](https://github.com/dhis2/tracker-capture-app/commit/678f68088d74278900680919827335f70d69cc7e))
+
+## [31.7.12](https://github.com/dhis2/tracker-capture-app/compare/v31.7.11...v31.7.12) (2022-01-13)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([15f47be](https://github.com/dhis2/tracker-capture-app/commit/15f47bea1ff439f73774997dd8e5c0c7a83ff481))
+
+## [31.7.11](https://github.com/dhis2/tracker-capture-app/compare/v31.7.10...v31.7.11) (2022-01-04)
+
+
+### Bug Fixes
+
+* [DHIS2-11529] don't crash if a program doesn't have assigned orgUnits ([#1340](https://github.com/dhis2/tracker-capture-app/issues/1340)) ([b1e14d2](https://github.com/dhis2/tracker-capture-app/commit/b1e14d28fcb5afdecc661b2ab0b3a23035fe4b03))
+
+## [31.7.10](https://github.com/dhis2/tracker-capture-app/compare/v31.7.9...v31.7.10) (2021-12-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5220062](https://github.com/dhis2/tracker-capture-app/commit/52200625bdaa2c5cf7ab629e8caa04e6f4abd1a1))
+
+## [31.7.9](https://github.com/dhis2/tracker-capture-app/compare/v31.7.8...v31.7.9) (2021-12-08)
+
+
+### Reverts
+
+* Revert "chore: copy manifest file" ([79b4348](https://github.com/dhis2/tracker-capture-app/commit/79b43484bc1d7ec1433235bc375b8b4829347723))
+
+## [31.7.8](https://github.com/dhis2/tracker-capture-app/compare/v31.7.7...v31.7.8) (2021-12-07)
+
+
+### Bug Fixes
+
+* resolve $scope.dashBoardLayout race condition ([#1330](https://github.com/dhis2/tracker-capture-app/issues/1330)) ([cf973d0](https://github.com/dhis2/tracker-capture-app/commit/cf973d0d193d873be050a51d0cd9883af05f5ba6))
+
+## [31.7.7](https://github.com/dhis2/tracker-capture-app/compare/v31.7.6...v31.7.7) (2021-12-03)
+
+
+### Bug Fixes
+
+* removed faulty orgunit-attribute operation ([#1328](https://github.com/dhis2/tracker-capture-app/issues/1328)) ([28911f0](https://github.com/dhis2/tracker-capture-app/commit/28911f0692824b82787e972a094777c8180016d5))
+
+## [31.7.6](https://github.com/dhis2/tracker-capture-app/compare/v31.7.5...v31.7.6) (2021-11-29)
+
+
+### Bug Fixes
+
+* update redirection url to capture-app ([#1320](https://github.com/dhis2/tracker-capture-app/issues/1320)) ([094d478](https://github.com/dhis2/tracker-capture-app/commit/094d4788eaf6b5f47dd2a3f03dc6bdfd059e8f4e))
+
+## [31.7.5](https://github.com/dhis2/tracker-capture-app/compare/v31.7.4...v31.7.5) (2021-11-29)
+
+
+### Bug Fixes
+
+* corrected translation key casing ([#1316](https://github.com/dhis2/tracker-capture-app/issues/1316)) ([c05765c](https://github.com/dhis2/tracker-capture-app/commit/c05765c21390cdcb87324e65a5404fdebf1af29a))
+
+## [31.7.4](https://github.com/dhis2/tracker-capture-app/compare/v31.7.3...v31.7.4) (2021-11-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([947f674](https://github.com/dhis2/tracker-capture-app/commit/947f674486b039f19c7ca71e3e9d4b9c6bee131c))
+
+## [31.7.3](https://github.com/dhis2/tracker-capture-app/compare/v31.7.2...v31.7.3) (2021-11-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8b7aa17](https://github.com/dhis2/tracker-capture-app/commit/8b7aa17cfbe4ff2ed178e5e1ff88401297c07d91))
+
+## [31.7.2](https://github.com/dhis2/tracker-capture-app/compare/v31.7.1...v31.7.2) (2021-11-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f0ee41a](https://github.com/dhis2/tracker-capture-app/commit/f0ee41ae7140fae79b543e358308f33c369f8df5))
+
+## [31.7.1](https://github.com/dhis2/tracker-capture-app/compare/v31.7.0...v31.7.1) (2021-11-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5ab457f](https://github.com/dhis2/tracker-capture-app/commit/5ab457fff5b0f93ce23234b662515c7671d80062))
+
+# [31.7.0](https://github.com/dhis2/tracker-capture-app/compare/v31.6.40...v31.7.0) (2021-11-09)
+
+
+### Bug Fixes
+
+* [DHIS2-9345] issues with creating new enrollment ([#1284](https://github.com/dhis2/tracker-capture-app/issues/1284)) ([a64e627](https://github.com/dhis2/tracker-capture-app/commit/a64e627ff2a271dd9e96eacbab20092b979db41f))
+
+
+### Features
+
+* [DHIS2-12040] empty pie chart message ([#1288](https://github.com/dhis2/tracker-capture-app/issues/1288)) ([4beada9](https://github.com/dhis2/tracker-capture-app/commit/4beada9d8a04186a55aebf94aadf1d2862597bfd))
+
+## [31.6.40](https://github.com/dhis2/tracker-capture-app/compare/v31.6.39...v31.6.40) (2021-11-05)
+
+
+### Bug Fixes
+
+* [DHIS2-12068] remove excessive calls to /generate ([#1285](https://github.com/dhis2/tracker-capture-app/issues/1285)) ([238f893](https://github.com/dhis2/tracker-capture-app/commit/238f893fe0b3ead82888f5b5479a680ca5fcd745))
+
+## [31.6.39](https://github.com/dhis2/tracker-capture-app/compare/v31.6.38...v31.6.39) (2021-10-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1244525](https://github.com/dhis2/tracker-capture-app/commit/1244525ec074db9422c380cbac53e583c691bde8))
+
+## [31.6.38](https://github.com/dhis2/tracker-capture-app/compare/v31.6.37...v31.6.38) (2021-10-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7c80631](https://github.com/dhis2/tracker-capture-app/commit/7c80631e2b7f18127e46837a45c37645ce3e3c09))
+
+## [31.6.37](https://github.com/dhis2/tracker-capture-app/compare/v31.6.36...v31.6.37) (2021-10-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12022] limit the number of events/enrollments fetched for reports ([#1269](https://github.com/dhis2/tracker-capture-app/issues/1269)) ([dacab5a](https://github.com/dhis2/tracker-capture-app/commit/dacab5a368be18a361b4e08daf67b852354b35cc))
+
+## [31.6.36](https://github.com/dhis2/tracker-capture-app/compare/v31.6.35...v31.6.36) (2021-10-22)
+
+
+### Bug Fixes
+
+* minor - removed illegal character ([fb61240](https://github.com/dhis2/tracker-capture-app/commit/fb612405ab560d33d2f7021891a65653066335b5))
+
 ## [31.6.35](https://github.com/dhis2/tracker-capture-app/compare/v31.6.34...v31.6.35) (2021-09-13)
 
 

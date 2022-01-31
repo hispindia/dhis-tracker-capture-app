@@ -501,7 +501,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         var teiFromURL = ($location.search()).tei;
                         angular.forEach(prs, function(pr){
                             if( (loadSelectedProgram && selectedProgram && pr.id == selectedProgram.id && teiFromURL) ||
-                                (pr.organisationUnits.hasOwnProperty( ou.id ) && accesses.programsById[pr.id] && accesses.programsById[pr.id].data.read) ){
+                                (pr.organisationUnits && pr.organisationUnits.hasOwnProperty( ou.id ) && accesses.programsById[pr.id] && accesses.programsById[pr.id].data.read) ){
                                 if(pr.programTrackedEntityAttributes){
                                     pr.programTrackedEntityAttributes = pr.programTrackedEntityAttributes.filter(function(attr){
                                         return attr.access && attr.access.read;
@@ -611,9 +611,6 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             tei.attributes = [];
             var formEmpty = true;
             for(var k in attributesById){
-                if(originalTei && formTei[k] !== originalTei[k] && !formTei[k] && !originalTei[k]){
-                    formChanged = true;
-                }
                 if( k in formTei ){
                     var att = attributesById[k];
                     tei.attributes.push({attribute: att.id, value: formTei[k], displayName: att.displayName, valueType: att.valueType});
@@ -624,19 +621,19 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             formTei.attributes = tei.attributes;
 
             var formChanged = false;
-            for(var k in attributesById){
-                if(originalTei && formTei[k] !== originalTei[k]){
-                    if(!formEmpty){
-                        formChanged = true;
-                        break;
-                    }
-                    if(formEmpty && (formTei[k] || originalTei[k]) ){
-                        formChanged = true;
-                        break;
+            if (originalTei) {
+                for (var k in attributesById) {
+                    if (formTei[k] !== originalTei[k]) {
+                        if (!formEmpty) {
+                            formChanged = true;
+                            break;
+                        }
+                        if (formEmpty && (formTei[k] || originalTei[k])) {
+                            formChanged = true;
+                            break;
+                        }
                     }
                 }
-            }
-            if (originalTei) {
                 angular.forEach(originalTei.attributes, function (att) {
                     if (tei[att.attribute]) {
                         delete tei[att.attribute];
@@ -689,8 +686,9 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 return null;
             });
         },
-        getByStartAndEndDate: function( program, orgUnit, ouMode, startDate, endDate ){
-            var promise = $http.get(  DHIS2URL + '/enrollments.json?program=' + program + '&ou=' + orgUnit + '&ouMode='+ ouMode + '&programStartDate=' + startDate + '&programEndDate=' + endDate + '&fields=:all&paging=false').then(function(response){
+        getByStartAndEndDate: function( program, orgUnit, ouMode, startDate, endDate, pageSize ){
+            var paging = pageSize ? '&pageSize=' + pageSize : '&paging=false'
+            var promise = $http.get(  DHIS2URL + '/enrollments.json?program=' + program + '&ou=' + orgUnit + '&ouMode='+ ouMode + '&programStartDate=' + startDate + '&programEndDate=' + endDate + '&fields=:all' + paging).then(function(response){
                 return convertFromApiToUser(response.data);
             }, function(response){
                 var errorBody = $translate.instant('failed_to_fetch_enrollment');
@@ -959,7 +957,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
         return tei;
     }
     return {
-        getWithProgramData: function(entityUid,programUid, optionSets, attributesById, useCached){
+        getWithProgramData: function(entityUid, programUid, optionSets, attributesById, useCached){
             if(useCached && cachedTeiWithProgramData && cachedTeiWithProgramData.entityUid === entityUid && cachedTeiWithProgramData.programUid === programUid){
                 var def = $q.defer();
                 def.resolve(cachedTeiWithProgramData.data);
@@ -993,6 +991,9 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 def.reject(error);
                 return def.promise;
             });
+        },
+        flushCachedTei: function() {
+            cachedTeiWithProgramData = {};
         },
         get: function(entityUid, optionSets, attributesById){
             var promise = $http.get( DHIS2URL + '/trackedEntityInstances/' +  entityUid + '.json').then(function(response){
@@ -1030,35 +1031,16 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             });
             return promise;
         },
-        getPotentialDuplicates: function(uidList) {
-            var uidUrl = "";
-            if(uidList.length > 0)
-            {
-                uidUrl += "?teis=";
-                for(var i = 0; i < uidList.length; i ++){
-                    if(i > 0) uidUrl += ",";
-                    uidUrl += uidList[i];
-                }
-            }
-            var promise = $http.get( DHIS2URL + '/potentialDuplicates' + uidUrl ).then(function(response){
-                return response.data;
-            });
-            return promise;
-        },
         getPotentialDuplicatesForTei: function(uid) {
             var promise = $http.get( DHIS2URL + '/potentialDuplicates?teis=' + uid ).then(function(response){
                 return response.data;
             });
             return promise;
         },
-        markPotentialDuplicate: function(tei) {
-            var promise = $http.post( DHIS2URL + '/potentialDuplicates/',{teiA:tei.id}).then(function(response){
-                return response.data;
-            });
-            return promise;
-        },
-        deletePotentialDuplicate: function(duplicate) {
-            var promise = $http.delete( DHIS2URL + '/potentialDuplicates/' + duplicate.id).then(function(response){
+        markPotentialDuplicate: function(tei, isDuplicate) {
+            tei.potentialDuplicate = isDuplicate;
+            var formattedTei = convertFromUserToApi(angular.copy(tei));
+            var promise = $http.put( DHIS2URL + '/trackedEntityInstances/' + tei.id, formattedTei).then(function(response){
                 return response.data;
             });
             return promise;
@@ -1487,13 +1469,14 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             });
             return promise;
         },
-        getByOrgUnitAndProgram: function(orgUnit, ouMode, program, startDate, endDate){
+        getByOrgUnitAndProgram: function(orgUnit, ouMode, program, startDate, endDate, pageSize){
             var url;
+            var paging = pageSize ? '&pageSize=' + pageSize : skipPaging;
             if(startDate && endDate){
-                url = DHIS2URL + '/events.json?' + 'orgUnit=' + orgUnit + '&ouMode='+ ouMode + '&program=' + program + '&startDate=' + startDate + '&endDate=' + endDate + skipPaging;
+                url = DHIS2URL + '/events.json?' + 'orgUnit=' + orgUnit + '&ouMode='+ ouMode + '&program=' + program + '&startDate=' + startDate + '&endDate=' + endDate + paging;
             }
             else{
-                url = DHIS2URL + '/events.json?' + 'orgUnit=' + orgUnit + '&ouMode='+ ouMode + '&program=' + program + skipPaging;
+                url = DHIS2URL + '/events.json?' + 'orgUnit=' + orgUnit + '&ouMode='+ ouMode + '&program=' + program + paging;
             }
             var promise = $http.get( url ).then(function(response){
                 return response.data.events;
@@ -1624,7 +1607,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 var pg = pager ? pager.page : 1;
                 pgSize = pgSize > 1 ? pgSize  : 1;
                 pg = pg > 1 ? pg : 1;
-                url = url + '&pageSize=' + pgSize + '&page=' + pg + '&totalPages=true';
+                url = url + '&pageSize=' + pgSize + '&page=' + pg;
             }
 
             var promise = $http.get( url ).then(function(response){
@@ -2030,10 +2013,10 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 return;
             }
 
-            //grid.headers[0-6] = Instance, Created, Last updated, OU ID, Ou Name, Tracked entity, Inactive
-            //grid.headers[7..] = Attribute, Attribute,....
+            //grid.headers[0-7] = Instance, Created, Last updated, OU ID, Ou Name, Tracked entity, Inactive, Potential duplicate
+            //grid.headers[8..] = Attribute, Attribute,....
             var attributes = [];
-            for (var i = 6; i < grid.headers.length; i++) {
+            for (var i = 8; i < grid.headers.length; i++) {
                 attributes.push({
                     id: grid.headers[i].name,
                     displayName: grid.headers[i].column,
@@ -2056,10 +2039,11 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                     entity.orgUnit = row[3];
                     entity.orgUnitName = row[4];
                     entity.type = row[5];
-                    entity.inactive = row[6] !== "" ? row[6] : false;
+                    entity.inactive = row[6] === "" ? "" : row[6];
+                    entity.potentialDuplicate = row[7] === "true";
                     entity.followUp = isFollowUp;
 
-                    for (var i = 7; i < row.length; i++) {
+                    for (var i = 8; i < row.length; i++) {
                         if (row[i] && row[i] !== '') {
                             var val = row[i];
 
@@ -2071,13 +2055,8 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                                 val = OptionSetService.getName(optionSets[attributesById[grid.headers[i].name].optionSet.id].options, val);
                             }
                             if (attributesById[grid.headers[i].name] && attributesById[grid.headers[i].name].valueType ) {
-                                switch ( attributesById[grid.headers[i].name].valueType ){
-                                    case "ORGANISATION_UNIT":
-                                        CommonUtils.checkAndSetOrgUnitName( val );
-                                        break;
-                                    case "DATE":
-                                        val = DateUtils.formatFromApiToUser(val);
-                                        break;
+                                if ( attributesById[grid.headers[i].name].valueType === "DATE"){
+                                    val = DateUtils.formatFromApiToUser(val);
                                 }
                             }
 
@@ -2174,7 +2153,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             var columns = [];
 
             var returnAttributes = [];
-i
+
             if ( attributes )
             {
                 if( nonConfidential ) {
