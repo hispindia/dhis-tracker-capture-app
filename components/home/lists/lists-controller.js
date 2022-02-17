@@ -20,10 +20,14 @@ trackerCapture.controller('ListsController',function(
     TEIService,
     UserDataStoreService,
     ProgramWorkingListService,
+    //for Tibet
+    CustomIdService,
     OperatorFactory) {
         var ouModes = [{name: 'SELECTED'}, {name: 'CHILDREN'}, {name: 'DESCENDANTS'}, {name: 'ACCESSIBLE'}];
         var userGridColumns = null;
-        var defaultCustomWorkingListValues = { ouMode: ouModes[0], programStatus: ""};
+        //var defaultCustomWorkingListValues = { ouMode: ouModes[0], programStatus: ""};
+        // custom change in TIBET-v29 set default ouMode DESCENDANTS from SELECTED
+        var defaultCustomWorkingListValues = { ouMode: ouModes[2], programStatus: ""};
         var gridColumnsContainer = "trackerCaptureGridColumns";
 
         $scope.workingListTypes = { NORMAL: "NORMAL", CUSTOM: "CUSTOM"};
@@ -34,7 +38,7 @@ trackerCapture.controller('ListsController',function(
         $scope.boolOperators = OperatorFactory.boolOperators;
 
         var initPager = function(){
-            var pageSize = 25;
+            var pageSize = 50;
             $scope.pager = {
                 pageSize: pageSize,
                 page: 1,
@@ -178,7 +182,22 @@ trackerCapture.controller('ListsController',function(
             if($scope.currentTrackedEntityList.type === $scope.trackedEntityListTypes.WORKINGLIST){
                 $scope.currentTrackedEntityList.loading = true;
                 setPagerRecordsCount(0);
-                ProgramWorkingListService.getWorkingListData($scope.selectedOrgUnit, $scope.currentTrackedEntityList.config, $scope.pager, $scope.currentTrackedEntityList.sortColumn).then(setCurrentTrackedEntityListData);
+
+                // custom change in TIBET-v29 for list TEI based on parent orgUnit of selected orgUnit
+                CustomIdService.getChildren($scope.selectedOrgUnit.id).then(function (res1) {
+                    if(res1.children.length === 0){
+                        CustomIdService.getParentId($scope.selectedOrgUnit.id).then(function (res) {
+                            $scope.parentOrgUnit = res.parent;
+                            ProgramWorkingListService.getWorkingListData($scope.parentOrgUnit, $scope.currentTrackedEntityList.config, $scope.pager, $scope.currentTrackedEntityList.sortColumn).then(setCurrentTrackedEntityListData);
+                        });
+                    }
+                    else{
+                        ProgramWorkingListService.getWorkingListData($scope.selectedOrgUnit, $scope.currentTrackedEntityList.config, $scope.pager, $scope.currentTrackedEntityList.sortColumn).then(setCurrentTrackedEntityListData);
+                    }
+                });
+                // end
+                // initial
+                //ProgramWorkingListService.getWorkingListData($scope.selectedOrgUnit, $scope.currentTrackedEntityList.config, $scope.pager, $scope.currentTrackedEntityList.sortColumn).then(setCurrentTrackedEntityListData);
             }
         }
 
