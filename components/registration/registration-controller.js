@@ -61,7 +61,16 @@ trackerCapture.controller('RegistrationController',
     $scope.attributesById = CurrentSelection.getAttributesById();
     $scope.fileNames = CurrentSelection.getFileNames();
     $scope.currentFileNames = $scope.fileNames;
+    // for tibet-customizations display on load
+    $scope.customeId = 'yeI6AOQjrqg';
+    $scope.parentName = 'iRJYMHN0Rel';
+    $scope.orgUnitCode = '';
+    $scope.parentDisplayName = '';
 
+    $scope.calculatedDOB ='anFTfRZyC1Q';
+    $scope.ageInYears = 'GjdO5wHfmru';
+    $scope.selectedDOB = '';
+    $scope.selectedDOBToBeUsed = '';
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
 
@@ -885,6 +894,50 @@ trackerCapture.controller('RegistrationController',
             return res;
         });
     };
+
+    // custom methods for tibet convert age_in_years to dob
+    $scope.ageInYearToDob = function (inputAge) {
+        if(inputAge !== undefined && inputAge!== ''){
+            let tempCustomDate = new Date();
+            let tempCustomYear = ""+ tempCustomDate.getFullYear();
+
+            let yearOfDob = parseInt( tempCustomYear ) - parseInt( inputAge );
+
+            $scope.selectedTei[$scope.calculatedDOB] = yearOfDob + '-07-01';//put calculated value in month text box
+        }
+        else{
+            $scope.selectedTei[$scope.calculatedDOB] = '';
+        }
+    };
+    //custom method for tibet change from dob to age in year
+    $scope.dobToAge = function (inputDob) {
+        if(inputDob !== undefined && inputDob!== ''){
+
+            let selectedDOBObject = new Date(inputDob);
+            let currentDateObject = new Date();
+
+            let differenceInMonths = (currentDateObject.getFullYear()*12 + currentDateObject.getMonth()) - (selectedDOBObject.getFullYear()*12 + selectedDOBObject.getMonth());
+            let diffYear = differenceInMonths/12;
+
+            let yearInDecimal = ((Math.round(diffYear*100))/100).toFixed(2);
+
+            let year = yearInDecimal.toString().split(".")[0];
+            let ageInMonth = ( yearInDecimal.toString().split(".")[1]*12)/100;
+
+            ageInMonth = Math.round(ageInMonth);
+
+            if( isNaN(ageInMonth)){
+                $scope.selectedTei[$scope.ageInYears] = year + ".0";
+            }
+            else{
+                $scope.selectedTei[$scope.ageInYears] = year + "." + ageInMonth.toString().split(".")[0];//put calculated value in month text box
+            }
+        }
+        else{
+            $scope.selectedTei[$scope.ageInYears] = '';
+        }
+    };
+    // custom methods for tibet  end
 
     $scope.cancelRegistrationWarning = function (cancelFunction, inDashboard) {
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);

@@ -48,7 +48,7 @@
                 </span> 
 
                 <span ng-if="!attribute.optionSetValue" ng-switch="attribute.valueType">
-                    <span ng-switch-when="DATE">
+                    <span ng-switch-when="DATE" && ng-if="attribute.code !== 'dob'">
                         <input type="text"
                                ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}" 
                                name="foo" 
@@ -66,6 +66,27 @@
                                blur-or-change="teiValueUpdated(selectedTei, attribute.id)"
                                ng-required="attribute.mandatory || mandatoryFields[attribute.id]"/>
                     </span>
+                    <!-- custom change for tibet change from dob to age in year -->
+                    <span ng-switch-when="DATE" && ng-if="attribute.code === 'dob'">
+                        <input type="text"
+                               ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}"
+                               name="foo"
+                               class="form-control"
+                               d2-date
+                               d2-date-validator
+                               max-date="attribute.allowFutureDate ? '' : 0"
+                               ng-model="selectedTei[attribute.id]"
+                               ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               selected-tet={{trackedEntityTypes.selected.id}}
+                               attribute-data={{attribute}}
+                               selected-program-id={{selectedProgram.id}}
+                               selected-tei-id={{selectedTei.trackedEntityInstance}}
+                               ng-disabled="attributeFieldDisabled(attribute)"
+                               blur-or-change="teiValueUpdated(selectedTei, attribute.id)"
+                               ng-required="attribute.mandatory || mandatoryFields[attribute.id]"
+                               ng-change="dobToAge(selectedTei[attribute.id])"/>
+                    </span>
+                    <!-- custom change for tibet change from dob to age in year -->
                     <span ng-switch-when="DATETIME">
                         <d2-date-time datetime-model="selectedTei"
                                       datetime-date-placeholder="{{dhis2CalendarFormat.keyDateFormat}}"
@@ -336,7 +357,7 @@
                                 d2-orgunit-names="orgUnitNames">
                         </d2-org-unit-tree>
                     </span>
-                    <span ng-switch-when="TEXT">
+                    <span ng-switch-when="TEXT" && ng-if="attribute.code !== 'age_in_years'">
                         <input type="text"
                                name="foo" 
                                class="form-control"
@@ -350,6 +371,23 @@
                                ng-blur="teiValueUpdated(selectedTei, attribute.id)"
                                ng-required="attribute.mandatory || mandatoryFields[attribute.id]"/>
                     </span>
+                    <!-- custom change for tibet convert age_in_years to dob -->
+                    <span ng-switch-when="TEXT" && ng-if="attribute.code === 'age_in_years'">
+                        <input type="text"
+                               name="foo"
+                               class="form-control"
+                               ng-model="selectedTei[attribute.id]"
+                               ng-model-options="{ updateOn: 'default blur', allowInvalid: true }"
+                               selected-tet={{trackedEntityTypes.selected.id}}
+                               attribute-data={{attribute}}
+                               selected-program-id={{selectedProgram.id}}
+                               selected-tei-id={{selectedTei.trackedEntityInstance}}
+                               ng-disabled="attributeFieldDisabled(attribute)"
+                               ng-blur="teiValueUpdated(selectedTei, attribute.id)"
+                               ng-required="attribute.mandatory || mandatoryFields[attribute.id]"
+                               ng-change="ageInYearToDob(selectedTei[attribute.id])"/>
+                    </span>
+                    <!-- end custom change for tibet convert age_in_years to dob -->
                     <span ng-switch-when="PHONE_NUMBER">
                         <input type="text"
                                name="foo" 
