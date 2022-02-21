@@ -27,7 +27,6 @@ trackerCapture.controller('HomeController',function(
         $scope.trackedEntityTypesById ={};
         var previousProgram = null;
         $scope.base = {};
-
         var viewsByType = {
             registration: {
                 name: "Register",
@@ -55,6 +54,7 @@ trackerCapture.controller('HomeController',function(
             },
 
         }
+
         $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
 
         var mapOuLevelsToId = function(){
@@ -203,6 +203,26 @@ trackerCapture.controller('HomeController',function(
         }
         var loadCanRegister = function(){
             if($scope.selectedProgram){
+                // custom change for Tibet show registration button at facility level === 5
+                //start
+                $scope.selectedOrgUnitLevel = "";
+                $.ajax({
+                    async: false,
+                    type: "GET",
+                    url: '../api/organisationUnits/' + $scope.selectedOrgUnit.id + ".json?fields=id,name,code,level&paging=false",
+                    success: function (responseOrgUnit) {
+                        $scope.selectedOrgUnitLevel = responseOrgUnit.level;
+                    }
+                });
+                if( $scope.selectedOrgUnitLevel === 5){
+                    $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
+                }
+                else{
+                    $scope.views = [viewsByType.lists, viewsByType.search];
+                }
+                // end
+                //alert( $scope.selectedOrgUnitLevel );
+                console.log( " home controller level -- " + $scope.selectedOrgUnitLevel );
                 var tet = $scope.trackedEntityTypesById[$scope.selectedProgram.trackedEntityType.id];
                 var promise;
                 if(tet){
