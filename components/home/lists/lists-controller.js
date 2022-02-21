@@ -42,7 +42,7 @@ trackerCapture.controller('ListsController',function(
             $scope.pager = {
                 pageSize: pageSize,
                 page: 1,
-                skipTotalPages: true,
+                skipTotalPages: false,
                 recordsCount: 0,
                 pageSizeEdit: pageSize,
                 pageEdit: 1
@@ -374,10 +374,13 @@ trackerCapture.controller('ListsController',function(
                 
                 var config = $scope.currentTrackedEntityList.config;
                 var promise;
+                // add for TIBET custom change for downloads teiLIST
+                var programUID = "program=" + $scope.currentTrackedEntityList.config.program.id;
+                console.log( + $scope.currentTrackedEntityList.config.programUrl + " -- programUID -- " + programUID );
                 if($scope.currentTrackedEntityList.type === $scope.trackedEntityListTypes.CUSTOM){
                     promise = TEIService.search($scope.selectedOrgUnit.id, config.ouMode.name, config.queryAndSortUrl, config.programUrl, attrIdList, false, false, format, attrNamesList, attrNamesIdMap, $scope.base.optionSets);
                 }else{
-                    promise = TEIService.search($scope.selectedOrgUnit.id, ouModes[0].name, config.url,null, attrIdList, false, false,format, attrNamesList, attrNamesIdMap,$scope.base.optionSets);
+                    promise = TEIService.search($scope.selectedOrgUnit.id, ouModes[0].name, config.url,programUID, attrIdList, false, false,format, attrNamesList, attrNamesIdMap,$scope.base.optionSets);
                 }
                 promise.then(function(data){    
                     var fileName = "trackedEntityList." + format;// any file name with any extension
