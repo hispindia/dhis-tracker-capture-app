@@ -310,6 +310,22 @@ trackerCapture.controller('RegistrationController',
         if($scope.selectedProgram){
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+                // custom change for tibet to display parent orgUnt name on load
+                $timeout( function (){
+
+                    let org_uid = $scope.selectedOrgUnit.id;
+
+                    $.getJSON("../api/organisationUnits/"+ org_uid +".json?fields=id,displayName,code,parent[id,displayName]", function (data) {
+                        $scope.orgUnitCode = data.code;
+                        $scope.parentDisplayName = data.parent.displayName;
+
+                        if( !$scope.selectedTei[$scope.parentName] && $scope.selectedTei[$scope.parentName] === undefined)
+                        {
+                            $scope.selectedTei[$scope.parentName] = $scope.selectedOrgUnit.displayName;//put default value on load for
+                        }
+                    });
+                },0);
+                // end
                 fetchGeneratedAttributes();
                 if ($scope.selectedProgram && $scope.selectedProgram.id) {
                     if ($scope.selectedProgram.dataEntryForm && $scope.selectedProgram.dataEntryForm.htmlCode) {
