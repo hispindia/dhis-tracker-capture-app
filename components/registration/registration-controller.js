@@ -35,6 +35,8 @@ trackerCapture.controller('RegistrationController',
                 AuthorityService,
                 SessionStorageService,
                 AttributeUtils,
+                 // for tibet
+                CustomIDGenerationService,
                 TCOrgUnitService) {
     var prefilledTet = null;
     $scope.today = DateUtils.getToday();
@@ -106,12 +108,23 @@ trackerCapture.controller('RegistrationController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
-    
-    
+
+    // update for Tibet  for disable attribute patient_identifier /custom-ID
+    $scope.isDisabled = function(attribute) {
+        if( attribute.code === 'doh_id_no')
+        {
+            return true;
+        }
+        else{
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
+
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
-
+    */
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
         incidentDate: $scope.today,
@@ -526,13 +539,17 @@ trackerCapture.controller('RegistrationController',
                                     $scope.selectedEnrollment = enrollment;
                                     var avilableEvent = $scope.currentEvent && $scope.currentEvent.event ? $scope.currentEvent : null;
                                     var dhis2Events = EventUtils.autoGenerateEvents($scope.tei.trackedEntityInstance, $scope.selectedProgram, $scope.selectedOrgUnit, enrollment, avilableEvent);
-                                    if (dhis2Events.events.length > 0) {
-                                        DHIS2EventFactory.create(dhis2Events).then(function () {
+
+                                    // add custom change for tibet generate custom-ID -->
+                                    CustomIDGenerationService.validateAndCreateCustomId($scope.tei,$scope.selectedProgram.id,$scope.attributes,destination,$scope.optionSets,$scope.attributesById,$scope.selectedEnrollment.enrollmentDate).then(function(){
+                                        if (dhis2Events.events.length > 0) {
+                                            DHIS2EventFactory.create(dhis2Events).then(function () {
+                                                notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                            });
+                                        } else {
                                             notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
-                                        });
-                                    } else {
-                                        notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
-                                    }
+                                        }
+                                    });
                                 }
                                 else {
                                     //enrollment has failed
