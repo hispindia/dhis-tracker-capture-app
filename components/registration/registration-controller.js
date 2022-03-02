@@ -979,23 +979,23 @@ trackerCapture.controller('RegistrationController',
             }
 
             // for HIV-tracker
-            /*
+
             if ($scope.selectedTei.Fu4LhjNsJZL !== undefined) {
                 serviceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
             }
-            */
+
 
             // for FHI360 merge
-
+            /*
             if ($scope.selectedTei.pULhHeN8TUj !== undefined) {
                 automatedSerialNumber = $scope.selectedTei.pULhHeN8TUj;
             }
-
+            */
             // for FHI360 merge
-            $scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
+            //$scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
 
             //for HIV-tracker
-            //$scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+            $scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
         }
 
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
