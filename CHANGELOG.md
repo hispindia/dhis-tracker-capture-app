@@ -1,3 +1,26 @@
+# [31.9.0](https://github.com/dhis2/tracker-capture-app/compare/v31.8.0...v31.9.0) (2022-03-01)
+
+
+### Features
+
+* [DHIS2-12996] support program rule variable types ([#1379](https://github.com/dhis2/tracker-capture-app/issues/1379)) ([276fb21](https://github.com/dhis2/tracker-capture-app/commit/276fb2168dfb06789b3e852f0781c99384f3b32d))
+
+# [31.8.0](https://github.com/dhis2/tracker-capture-app/compare/v31.7.15...v31.8.0) (2022-03-01)
+
+
+### Features
+
+* [DHIS2-12365] add d2:extractDataMatrixValue ([#1376](https://github.com/dhis2/tracker-capture-app/issues/1376)) ([760676d](https://github.com/dhis2/tracker-capture-app/commit/760676de4c91a973539a1bdf82af79fee4144c59))
+* support translation of program rule actions ([#1378](https://github.com/dhis2/tracker-capture-app/issues/1378)) ([c15112d](https://github.com/dhis2/tracker-capture-app/commit/c15112d0d638f5fd88136542055d1e3164db02ad))
+
+## [31.7.15](https://github.com/dhis2/tracker-capture-app/compare/v31.7.14...v31.7.15) (2022-02-08)
+
+
+### Bug Fixes
+
+* [DHIS2-12527] various errors in the profile widget ([#1362](https://github.com/dhis2/tracker-capture-app/issues/1362)) ([e2399b3](https://github.com/dhis2/tracker-capture-app/commit/e2399b32d9ca6480fafc4b80fc7e8b1946c74db7))
+* owningOrgUnit is undefined until TEI is enrolled in program ([#1361](https://github.com/dhis2/tracker-capture-app/issues/1361)) ([a044aba](https://github.com/dhis2/tracker-capture-app/commit/a044abaa5653cf29dce34a2ee678156118385851))
+
 ## [31.7.14](https://github.com/dhis2/tracker-capture-app/compare/v31.7.13...v31.7.14) (2022-01-26)
 
 

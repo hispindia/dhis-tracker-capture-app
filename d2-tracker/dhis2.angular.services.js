@@ -1,5 +1,6 @@
 /* Pagination service */
 /* global angular, dhis2, moment */
+import { extractDataMatrixValue } from './dhis2.d2GS1DataMatrix.js';
 
 var d2Services = angular.module('d2Services', ['ngResource'])
 
@@ -1562,6 +1563,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                                         displayName:variableName,
                                         programRuleVariableSourceType:'DATAELEMENT_CURRENT_EVENT',
                                         dataElement:variableNameParts[1],
+                                        valueType:'TEXT',
                                         program:programUid,
                                         useCodeForOptionSet:true
                                     };
@@ -1573,6 +1575,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                                         displayName:variableName,
                                         programRuleVariableSourceType:'TEI_ATTRIBUTE',
                                         trackedEntityAttribute:variableNameParts[0],
+                                        valueType:'TEXT',
                                         program:programUid,
                                         useCodeForOptionSet:true
                                     };
@@ -1891,16 +1894,16 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                             variables = pushVariable(variables, programVariable.displayName, "", null, dataElement.dataElement.valueType, false, '#', '', programVariable.useCodeForOptionSet );
                         }
                         else {
-                            variables = pushVariable(variables, programVariable.displayName, "", null, "TEXT",false, '#', '', programVariable.useCodeForOptionSet );
+                            variables = pushVariable(variables, programVariable.displayName, "", null, programVariable.valueType,false, '#', '', programVariable.useCodeForOptionSet );
                         }
                     }
                     else if (programVariable.trackedEntityAttribute) {
                         //The variable is an attribute, set correct prefix and a blank value
-                        variables = pushVariable(variables, programVariable.displayName, "", null, "TEXT",false, 'A', '', programVariable.useCodeForOptionSet );
+                        variables = pushVariable(variables, programVariable.displayName, "", null, programVariable.valueType,false, 'A', '', programVariable.useCodeForOptionSet );
                     }
                     else {
                         //Fallback for calculated(assigned) values:
-                        variables = pushVariable(variables, programVariable.displayName, "", null, "TEXT",false, '#', '', programVariable.useCodeForOptionSet );
+                        variables = pushVariable(variables, programVariable.displayName, "", null, programVariable.valueType,false, '#', '', programVariable.useCodeForOptionSet );
                     }
                 }
             });
@@ -2735,7 +2738,8 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 {name:"d2:length",parameters:1},
                 {name:"d2:inOrgUnitGroup",parameters:1},
                 {name:"d2:hasUserRole",parameters:1},
-                {name:"d2:condition",parameters:3}];
+                {name:"d2:condition",parameters:3},
+                {name:"d2:extractDataMatrixValue",parameters:2}];
             var continueLooping = true;
             //Safety harness on 10 loops, in case of unanticipated syntax causing unintencontinued looping
             for(var i = 0; i < 10 && continueLooping; i++ ) {
@@ -3187,6 +3191,10 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                             expression = expression.replace(callToThisFunction, valueFound);
                             expressionUpdated = true;
                         }
+                        else if(dhisFunction.name === "d2:extractDataMatrixValue") {
+                            expression = expression.replace(callsToThisFunction, extractDataMatrixValue( parameters[0], parameters[1] ) );
+                            expressionUpdated = true;
+                        }
                     });
                 });
 
@@ -3459,7 +3467,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                                     programStage: action.programStage,
                                     programIndicator: action.programIndicator,
                                     programStageSection: action.programStageSection && action.programStageSection.id ? action.programStageSection.id : null,
-                                    content:action.content,
+                                    content:action.displayContent,
                                     data:action.data,
                                     ineffect:undefined
                                 };
@@ -3536,7 +3544,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                                 if(variablesHash[variabletoassign]){
                                     var updatedValue = $rootScope.ruleeffects[ruleEffectKey][action.id].data;
 
-                                    var valueType = determineValueType(updatedValue);
+                                    var valueType = variablesHash[variabletoassign].variableType || determineValueType(updatedValue);
 
                                     if($rootScope.ruleeffects[ruleEffectKey][action.id].dataElement) {
                                         updatedValue = VariableService.getDataElementValueOrCodeForValue(variablesHash[variabletoassign].useCodeForOptionSet, updatedValue, $rootScope.ruleeffects[ruleEffectKey][action.id].dataElement.id, allDataElements, optionSets);
