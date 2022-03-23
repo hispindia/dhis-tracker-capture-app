@@ -1320,15 +1320,15 @@ trackerCapture.controller('RegistrationController',
     }
 
     $scope.saveAttributedDisabledButton = function(){
-        if($scope.selectedOrgUnit && $scope.selectedOrgUnit.id !== $scope.selectedTei.orgUnit && $scope.registrationMode === 'PROFILE') return true;
-        if($scope.isDisabled(attribute)) return true;
+        //if($scope.selectedOrgUnit && $scope.selectedOrgUnit.id !== $scope.selectedTei.orgUnit && $scope.registrationMode === 'PROFILE') return true;
+        //if($scope.isDisabled(attribute)) return true;
         if($scope.selectedOrgUnit.closedStatus) return true;
         if(!$scope.hasTeiWrite()) return true;
         return false;
     }
 
     $scope.attributeFieldDisabled = function(attribute){
-        if($scope.selectedOrgUnit && $scope.selectedOrgUnit.id !== $scope.selectedTei.orgUnit && $scope.registrationMode === 'PROFILE') return true;
+        //if($scope.selectedOrgUnit && $scope.selectedOrgUnit.id !== $scope.selectedTei.orgUnit && $scope.registrationMode === 'PROFILE') return true;
         if($scope.isDisabled(attribute)) return true;
         if($scope.selectedOrgUnit.closedStatus) return true;
         if(!$scope.hasTeiWrite()) return true;
