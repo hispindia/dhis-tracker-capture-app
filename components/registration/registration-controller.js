@@ -36,7 +36,10 @@ trackerCapture.controller('RegistrationController',
                 SessionStorageService,
                 AttributeUtils,
                 TCOrgUnitService,
-                ProgramFactory) {
+                ProgramFactory,
+                // For ICMR Leprosy
+                OrganisationUnitService,
+                CustomIDGenerationService) {
     var prefilledTet = null;
     $scope.today = DateUtils.getToday();
     $scope.trackedEntityForm = null;
@@ -110,11 +113,21 @@ trackerCapture.controller('RegistrationController',
         });
     }
     
-    
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
+    */
 
+    $scope.isDisabled = function (attribute) {
+        //return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        if (attribute.code === 'patient_identifier') {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
         incidentDate: $scope.today,
@@ -518,7 +531,8 @@ trackerCapture.controller('RegistrationController',
                 else {
                     setSelectedTei();
                     if ($scope.selectedProgram) {
-
+                        //add For ICMR Leprosy
+                        $scope.model.savingRegistration = true;
                         //enroll TEI
                         var enrollment = {};
                         enrollment.trackedEntityInstance = $scope.tei.trackedEntityInstance;
@@ -537,12 +551,33 @@ trackerCapture.controller('RegistrationController',
                                 var en = enrollmentResponse.response;
                                 if (en.status === 'SUCCESS') {
                                     if($scope.registrationMode !== 'ENROLLMENT') {
-                                        $scope.model.savingRegistration = false;
+                                        // comment previous one
+                                        //$scope.model.savingRegistration = false;
+                                        // update For ICMR Leprosy
+                                        $scope.model.savingRegistration = true;
                                     }
                                     enrollment.enrollment = en.importSummaries[0].reference;
                                     $scope.selectedEnrollment = enrollment;
                                     var avilableEvent = $scope.currentEvent && $scope.currentEvent.event ? $scope.currentEvent : null;
                                     var dhis2Events = EventUtils.autoGenerateEvents($scope.tei.trackedEntityInstance, $scope.selectedProgram, $scope.selectedOrgUnit, enrollment, avilableEvent);
+                                    // custom id add For ICMR Leprosy
+                                    CustomIDGenerationService.validateAndCreateCustomId($scope.tei,$scope.selectedProgram.id,$scope.attributes,destination,$scope.optionSets,$scope.attributesById,$scope.selectedEnrollment.enrollmentDate).then(function(){
+                                        if (dhis2Events.events.length > 0) {
+                                            DHIS2EventFactory.create(dhis2Events).then(function () {
+                                                notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                                // add For ICMR Leprosy
+                                                $scope.model.savingRegistration = false;
+                                            });
+                                        } else {
+                                            notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
+                                            // add For ICMR Leprosy
+                                            $scope.model.savingRegistration = false;
+                                        }
+
+                                        // custom id close For ICMR Leprosy
+
+                                    });
+                                    /*// comment previous one
                                     if (dhis2Events.events.length > 0) {
                                         DHIS2EventFactory.create(dhis2Events).then(function () {
                                             notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
@@ -550,6 +585,8 @@ trackerCapture.controller('RegistrationController',
                                     } else {
                                         notifyRegistrtaionCompletion(destination, $scope.tei.trackedEntityInstance);
                                     }
+                                    */
+
                                 }
                                 else {
                                     //enrollment has failed

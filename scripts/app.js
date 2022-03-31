@@ -46,8 +46,8 @@ import '../components/home/lists/lists-controller.js';
 import '../components/home/search/search-controller.js';
 import '../components/topbar/topbar-controller.js';
 import '../components/teiAudit/tei-audit-controller.js';
-import '../components/incoming-referrals/incoming-controller.js';
-import '../components/outgoing-referrals/outgoing-controller.js';
+import '../components/incoming-referrals/incoming-controller.js'; // for local service
+import '../components/outgoing-referrals/outgoing-controller.js'; // for local service
 
 import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;

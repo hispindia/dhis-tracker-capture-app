@@ -28,13 +28,13 @@ angular.module('trackerCaptureServices')
                 promise.then(function (ou) {
 
                     for (var i = 0; i < ou.attributeValues.length; i++) {
-                        if (ou.attributeValues[i].attribute.code == "facilityCode") {
+                        if (ou.attributeValues[i].attribute.code === "facilityCode") {
                             result = ou.attributeValues[i].value + result;
                         }
                     }
                     result = ":" + result;
 
-                    if (ou.parent == undefined) {
+                    if (ou.parent === undefined) {
                         def.resolve(result);
                         return;
                     } else {
@@ -44,21 +44,15 @@ angular.module('trackerCaptureServices')
                 return def.promise();
             },
 
-            createCustomId: function (regDate, totalTeiCount, orgUnitCode, orgUnitUid, sQLViewNameToUidMap, programUID, idd) {
+            createCustomId: function (customMonthYear, totalTeiCount, orgUnitCode, orgUnitUid, sQLViewNameToUidMap, programUID, customCode) {
                 var thisDef = $.Deferred();
 
-                var mon = regDate;
+                var tempMonthYear = customMonthYear;
                 var sqlview = [];
                 var attributeValueList = [];
                 var prefix = "";
 
-
-                var cusid = idd;
-
-
-
-
-
+                var customOrgCode = customCode;
 
 
                 //console.log( "total Count -- " + response.data.height);
@@ -90,69 +84,63 @@ angular.module('trackerCaptureServices')
                     //prefix=Math.floor(Math.random()*(9999-1000) + 1000);
                     //def.resolve(constant + prefix + totalTei );
 
-                    var finalCustomId = cusid + "-" + mon + "-" + prefix + totalTei;
+                    var finalCustomId = customOrgCode + "-" + tempMonthYear + "-" + prefix + totalTei;
 
                     CustomIdService.getUniqueCustomId(finalCustomId, attributeValueList, prefix).then(function (uniqueCustomId) {
                         finalCustomId = uniqueCustomId;
 
                         thisDef.resolve(finalCustomId);
-
                     });
                 });
 
                 //});
 
                 return thisDef;
-
             },
 
-            createCustomIdAndSave: function (tei, customIDAttribute, optionSets, attributesById, regDate, totalTeiCount, orgUnitCode, sQLViewNameToUidMap, programUid) {
+            createCustomIdAndSave: function (tei, customIDAttribute, optionSets, attributesById, customMonthYear, totalTeiCount, orgUnitCode, sQLViewNameToUidMap, programUid) {
                 var def = $.Deferred();
 
+                let stateName = "";
+                let districtName = "";
+                let blockName = "";
+                for (let i = 0; i < tei.attributes.length; i++) {
 
-                for (var i = 0; i < tei.attributes.length; i++) {
-
-
-                    var disAttributeID = tei.attributes[i].attribute;
-                    if (disAttributeID == 'Tr6RBBnWOUG') {
-                        var disName = tei.attributes[i].value;
-                        console.log("attrName" + disName);
+                    //var disAttributeID = tei.attributes[i].attribute;
+                    if (tei.attributes[i].attribute === 'VN05fxaf6m8') {
+                        stateName = tei.attributes[i].value;
+                        console.log("stateName " + stateName);
                     }
-                    if (disAttributeID == 'VN05fxaf6m8') {
-                        var stateName = tei.attributes[i].value;
-                        console.log(stateName);
+                    if (tei.attributes[i].attribute === 'Tr6RBBnWOUG') {
+                        districtName = tei.attributes[i].value;
+                        console.log("districtName " + districtName);
                     }
-                    if (disAttributeID == 'W8XfjsulErT') {
-                        var blockName = tei.attributes[i].value;
-                        console.log(blockName);
+                    if (tei.attributes[i].attribute === 'W8XfjsulErT') {
+                        blockName = tei.attributes[i].value;
+                        console.log( "blockName " + blockName);
                     }
-
                 }
-
+                /*
                 var sta = stateName.slice(0, 2);
-
                 console.log(sta);
-
                 var dis = disName.slice(0, 3);
                 console.log(dis);
                 var blo = blockName.slice(0, 3);
                 console.log(blo);
+                */
 
-                var customidd = sta + "-" + dis + "-" + blo;
-                var idd = customidd.toUpperCase();
-                console.log(idd);
+                //var tempCustomCode = sta + "-" + dis + "-" + blo;
+                let tempCustomCode = stateName.slice(0, 2) + "-" + districtName.slice(0, 3) + "-" + blockName.slice(0, 3);
+                var customCode = tempCustomCode.toUpperCase();
+                console.log("customCode " + customCode);
 
-
-                console.log(regDate + "--" + totalTeiCount + "--" + orgUnitCode);
+                console.log(customMonthYear + "--" + totalTeiCount + "--" + orgUnitCode);
                 var orgUnitUid = tei.orgUnit;
-                this.createCustomId(regDate, totalTeiCount, orgUnitCode, orgUnitUid, sQLViewNameToUidMap, programUid, idd).then(function (customId) {
+                this.createCustomId(customMonthYear, totalTeiCount, orgUnitCode, orgUnitUid, sQLViewNameToUidMap, programUid, customCode).then(function (customId) {
                     var attributeExists = false;
                     angular.forEach(tei.attributes, function (attribute) {
 
-
-
-
-                        if (attribute.attribute == customIDAttribute.id) {
+                        if (attribute.attribute === customIDAttribute.id) {
                             attribute.value = customId;
                             attributeExists = true;
                         }
@@ -169,7 +157,7 @@ angular.module('trackerCaptureServices')
                         "attributes": tei.attributes
                     }
                     RegistrationService.registerOrUpdate(tei, optionSets, attributesById).then(function (response) {
-                        if (response.response.status == "SUCCESS") {
+                        if (response.response.status === "SUCCESS") {
                             //alert("Beneficiary Id : " + customId);
                         }
                         def.resolve(response.data);
@@ -186,26 +174,26 @@ angular.module('trackerCaptureServices')
                 var customIDAttribute;
                 var isValidProgram = false;
                 var isValidAttribute = false;
-                if (destination == 'PROFILE' || !destination || !programUid) {
+                if (destination === 'PROFILE' || !destination || !programUid) {
                     def.resolve("Not Needed");
                     return def;
                 }
                 //ProgramFactory.get(programUid).then(function(program) {
                 CustomIdService.getProgramAttributeAndValue(programUid).then(function (data) {
-                    if (data.attributeValues != undefined) {
+                    if (data.attributeValues !== undefined) {
                         for (var i = 0; i < data.attributeValues.length; i++) {
-                            if (data.attributeValues[i].attribute.code == 'allowRegistration' && data.attributeValues[i].value == "true") {
+                            if (data.attributeValues[i].attribute.code === 'allowRegistration' && data.attributeValues[i].value === "true") {
                                 isValidProgram = true; break;
                             }
                         }
                     }
 
                     CustomIdService.getTEAttributesAttributeAndValue().then(function (tea) {
-                        if (tea.trackedEntityAttributes != undefined) {
+                        if (tea.trackedEntityAttributes !== undefined) {
                             for (var j = 0; j < tea.trackedEntityAttributes.length; j++) {
-                                if (tea.trackedEntityAttributes[j].attributeValues != undefined) {
+                                if (tea.trackedEntityAttributes[j].attributeValues !== undefined) {
                                     for (var k = 0; k < tea.trackedEntityAttributes[j].attributeValues.length; k++) {
-                                        if (tea.trackedEntityAttributes[j].attributeValues[k].attribute.code == 'toBeUsedForCustomID' && tea.trackedEntityAttributes[j].attributeValues[k].value == "true") {
+                                        if (tea.trackedEntityAttributes[j].attributeValues[k].attribute.code === 'toBeUsedForCustomID' && tea.trackedEntityAttributes[j].attributeValues[k].value === "true") {
                                             isValidAttribute = true;
                                             customIDAttribute = {
                                                 attribute: tea.trackedEntityAttributes[j].id,
@@ -221,51 +209,50 @@ angular.module('trackerCaptureServices')
                         }
 
                         if (isValidAttribute && isValidProgram) {
-                            var regDate = enrolmentdate;
-                            var customRegDate = regDate.split("-");
+                            var registrationDate = enrolmentdate;
+                            var customRegDate = registrationDate.split("-");
                             var year = customRegDate[0];
                             var month = customRegDate[1];
-                            var mon = '';
+                            var tempMonth = '';
 
-                            if (month == 1) {
-                                mon = 'JAN';
+                            if (month === '01') {
+                                tempMonth = 'JAN';
                             }
-                            if (month == 2) {
-                                mon = 'FEB';
+                            if (month === '02') {
+                                tempMonth = 'FEB';
                             }
-                            if (month == 3) {
-                                mon = 'MAR';
+                            if (month === '03') {
+                                tempMonth = 'MAR';
                             }
-                            if (month == 4) {
-                                mon = 'APR';
+                            if (month === '04') {
+                                tempMonth = 'APR';
                             }
-                            if (month == 5) {
-                                mon = 'MAY';
+                            if (month === '05') {
+                                tempMonth = 'MAY';
                             }
-                            if (month == 6) {
-                                mon = 'JUN';
+                            if (month === '06') {
+                                tempMonth = 'JUN';
                             }
-                            if (month == 7) {
-                                mon = 'JUL';
+                            if (month === '07') {
+                                tempMonth = 'JUL';
                             }
-                            if (month == 8) {
-                                mon = 'AUG';
+                            if (month === '08') {
+                                tempMonth = 'AUG';
+                            }
+                            if (month === '09') {
+                                tempMonth = 'SEP';
+                            }
+                            if (month === '10') {
+                                tempMonth = 'OCT';
+                            }
+                            if (month === '11') {
+                                tempMonth = 'NOV';
+                            }
+                            if (month === '12') {
+                                tempMonth = 'DEC';
+                            }
 
-                            }
-                            if (month == 9) {
-                                mon = 'SEP';
-                            }
-                            if (month == 10) {
-                                mon = 'OCT';
-                            }
-                            if (month == 11) {
-                                mon = 'NOV';
-                            }
-                            if (month == 12) {
-                                mon = 'DEC';
-                            }
-
-                            var customdate = mon + year;
+                            var customMonthYear = tempMonth + year;
 
 
 
@@ -284,8 +271,6 @@ angular.module('trackerCaptureServices')
                             //    sqlview[responseSQLViews.sqlViews[i].displayName]=responseSQLViews.sqlViews[i].id;
                             //}
 
-
-
                             CustomIdService.getALLSQLView().then(function (responseSQLViews) {
                                 var sqlViewNameToUIDMap = [];
                                 for (var i = 0; i < responseSQLViews.sqlViews.length; i++) {
@@ -296,13 +281,18 @@ angular.module('trackerCaptureServices')
                                     var countTeiByOrgUnit = teiResponse.rows[0];
 
                                     var totalTei = countTeiByOrgUnit[0];
-
+                                    var orgUnitCode = "";
                                     //var totalTei = teiResponse.trackedEntityInstances.length;
+                                    /*
                                     CustomIdService.getOrgunitCode(tei.orgUnit).then(function (orgUnitCodeResponse) {
-                                        var orgUnitCode = orgUnitCodeResponse.code;
-                                        thiz.createCustomIdAndSave(tei, customIDAttribute, optionSets, attributesById, customdate, totalTei, orgUnitCode, sqlViewNameToUIDMap, programUid).then(function (response) {
+                                        orgUnitCode = orgUnitCodeResponse.code;
+                                        thiz.createCustomIdAndSave(tei, customIDAttribute, optionSets, attributesById, customMonthYear, totalTei, orgUnitCode, sqlViewNameToUIDMap, programUid).then(function (response) {
                                             def.resolve(response);
                                         });
+                                    });
+                                    */
+                                    thiz.createCustomIdAndSave(tei, customIDAttribute, optionSets, attributesById, customMonthYear, totalTei, orgUnitCode, sqlViewNameToUIDMap, programUid).then(function (response) {
+                                        def.resolve(response);
                                     });
 
                                 });
@@ -775,7 +765,8 @@ angular.module('trackerCaptureServices')
                     contentType: "application/json",
                     url: '../api/sqlViews/' + sqlViewUID + "/data?" + param + "&paging=false",
                     success: function (data) {
-                        def.resolve(data);
+                        //def.resolve(data);
+                        def.resolve(data.listGrid);
                     }
                 });
                 return def;
@@ -848,7 +839,8 @@ angular.module('trackerCaptureServices')
                     contentType: "application/json",
                     url: '../api/sqlViews/' + sqlViewUID + "/data?" + param + "&paging=false",
                     success: function (data) {
-                        def.resolve(data);
+                        //def.resolve(data);
+                        def.resolve(data.listGrid);
                     }
                 });
                 return def;
