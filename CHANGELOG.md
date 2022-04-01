@@ -1,3 +1,24 @@
+## [31.10.2](https://github.com/dhis2/tracker-capture-app/compare/v31.10.1...v31.10.2) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12364] use correct fixed length aicode ([#1390](https://github.com/dhis2/tracker-capture-app/issues/1390)) ([4b26c65](https://github.com/dhis2/tracker-capture-app/commit/4b26c652098a352c97759459744b692e1ecb2ed8))
+
+## [31.10.1](https://github.com/dhis2/tracker-capture-app/compare/v31.10.0...v31.10.1) (2022-03-25)
+
+
+### Bug Fixes
+
+* display rule effects in feedback widget based on selected event ([#1385](https://github.com/dhis2/tracker-capture-app/issues/1385)) ([485d536](https://github.com/dhis2/tracker-capture-app/commit/485d5366cf6b5fb23e573e66d10f399d0ded0f43))
+
+# [31.10.0](https://github.com/dhis2/tracker-capture-app/compare/v31.9.0...v31.10.0) (2022-03-14)
+
+
+### Features
+
+* [DHIS2-12298] diacritics insensitive option group search ([#1381](https://github.com/dhis2/tracker-capture-app/issues/1381)) ([96e84c6](https://github.com/dhis2/tracker-capture-app/commit/96e84c6a9f53fdc084e2bebcffdcbae6a8b4f84c))
+
 # [31.9.0](https://github.com/dhis2/tracker-capture-app/compare/v31.8.0...v31.9.0) (2022-03-01)
 
 
