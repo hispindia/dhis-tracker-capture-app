@@ -1,3 +1,45 @@
+## [31.10.9](https://github.com/dhis2/tracker-capture-app/compare/v31.10.8...v31.10.9) (2022-05-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([86d3c4a](https://github.com/dhis2/tracker-capture-app/commit/86d3c4a56c253fdf4077613101529690dba05bdd))
+
+## [31.10.8](https://github.com/dhis2/tracker-capture-app/compare/v31.10.7...v31.10.8) (2022-05-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([cdac543](https://github.com/dhis2/tracker-capture-app/commit/cdac543f4de021fee4988aa34691af74f31e9039))
+
+## [31.10.7](https://github.com/dhis2/tracker-capture-app/compare/v31.10.6...v31.10.7) (2022-05-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([aa7c281](https://github.com/dhis2/tracker-capture-app/commit/aa7c281137acc4498d5f53e21981f21196115ab3))
+
+## [31.10.6](https://github.com/dhis2/tracker-capture-app/compare/v31.10.5...v31.10.6) (2022-05-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3a0b85c](https://github.com/dhis2/tracker-capture-app/commit/3a0b85c651619458670bdfa9fda1535eb3ff5c9e))
+
+## [31.10.5](https://github.com/dhis2/tracker-capture-app/compare/v31.10.4...v31.10.5) (2022-05-09)
+
+
+### Bug Fixes
+
+* remove RulesFactory from list of dependencies ([#1413](https://github.com/dhis2/tracker-capture-app/issues/1413)) ([16bc818](https://github.com/dhis2/tracker-capture-app/commit/16bc818e8fd940480e37815bbc6ee36a66ceba73))
+
+## [31.10.4](https://github.com/dhis2/tracker-capture-app/compare/v31.10.3...v31.10.4) (2022-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-12188] filter program indicators by displayInForm=true ([#1408](https://github.com/dhis2/tracker-capture-app/issues/1408)) ([f5b5265](https://github.com/dhis2/tracker-capture-app/commit/f5b5265c51db4c746b1007288f685956363ecc21))
+
 ## [31.10.3](https://github.com/dhis2/tracker-capture-app/compare/v31.10.2...v31.10.3) (2022-04-22)
 
 
