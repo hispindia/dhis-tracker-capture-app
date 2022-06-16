@@ -20,6 +20,26 @@ trackerCapture.controller('EnrollmentController',
     
         var selections;
         $scope.userAuthority = AuthorityService.getUserAuthorities(SessionStorageService.get('USER_PROFILE'));
+
+        // custom change for hide delete/print button based on user-role
+        $scope.currentUserRoleEnrollment = "";
+        $scope.userDetails = SessionStorageService.get('USER_PROFILE');
+        if( $scope.userDetails.userCredentials.userRoles.length !==0 )
+        {
+            for( var i=0; i<$scope.userDetails.userCredentials.userRoles.length; i++ ){
+
+                if ( $scope.userDetails.userCredentials.userRoles[i].name === 'Superuser' ){
+                    $scope.currentUserRoleEnrollment = $scope.userDetails.userCredentials.userRoles[i].name;
+                }
+                else{
+                    $scope.currentUserRoleEnrollment = "NOT_SUPERUSER";
+                }
+            }
+        }
+        else{
+            $scope.currentUserRoleEnrollment = "NOT_SUPERUSER";
+        }
+        //end
         var currentReportDate;
         var inputNotificationClasses = { pending: 'input-pending', saved:'input-success', error: 'input-error', none: ''};
         var getDefaultReportDateState = function(){
@@ -83,6 +103,9 @@ trackerCapture.controller('EnrollmentController',
             OrgUnitFactory.getFromStoreOrServer(owningOrgUnitId).then(function(orgUnit){
                 $scope.owningOrgUnitName = orgUnit.displayName;
             });
+
+
+
         }
 
         $scope.$on('ownerUpdated', function(event, args){

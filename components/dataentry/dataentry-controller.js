@@ -95,6 +95,26 @@ trackerCapture.controller('DataEntryController',
     $scope.attributesById = CurrentSelection.getAttributesById();
     $scope.optionGroupsById = CurrentSelection.getOptionGroupsById();
 
+    // custom change for hide delete/print button based on user-role
+    $scope.currentUserRole = "";
+    $scope.userDetails = SessionStorageService.get('USER_PROFILE');
+    if( $scope.userDetails.userCredentials.userRoles.length !==0 )
+    {
+        for( var i=0; i<$scope.userDetails.userCredentials.userRoles.length; i++ ){
+
+            if ( $scope.userDetails.userCredentials.userRoles[i].name === 'Superuser' ){
+                $scope.currentUserRole = $scope.userDetails.userCredentials.userRoles[i].name;
+            }
+            else{
+                $scope.currentUserRole = "NOT_SUPERUSER";
+            }
+        }
+    }
+    else{
+        $scope.currentUserRole = "NOT_SUPERUSER";
+    }
+    //end
+    //alert( " currentUserRole " + $scope.currentUserRole );
     // add for nepali Calendar start implements methods
     $scope.convertISOEventDateToNepaliDate = function () {
         var tempEventDate = $scope.currentEvent.eventDate;
