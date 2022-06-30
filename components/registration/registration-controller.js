@@ -987,7 +987,7 @@ trackerCapture.controller('RegistrationController',
         //registration form comes empty, in this case enforce at least one value
 
         // custom-code for SAVE CHILD for generate Custom-Id start
-        if ($scope.registrationMode === 'REGISTRATION' || $scope.registrationMode === 'PROFILE' ) {
+        if ($scope.registrationMode === 'REGISTRATION' ) {
             var lastName = "";
             var dobYear = "";
             var sex = "";
@@ -1019,21 +1019,77 @@ trackerCapture.controller('RegistrationController',
             if ($scope.selectedTei.Fu4LhjNsJZL !== undefined) {
                 serviceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
             }
-
-
             // for FHI360 merge
-            /*
+
             if ($scope.selectedTei.pULhHeN8TUj !== undefined) {
                 automatedSerialNumber = $scope.selectedTei.pULhHeN8TUj;
             }
-            */
+
+            if ($scope.selectedTei.PWdxGAN3OCD === "NCASC" ){
+                $scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+            }
+            else if($scope.selectedTei.PWdxGAN3OCD !== "NCASC"){
+                $scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
+            }
+
             // for FHI360 merge
             //$scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
 
             //for HIV-tracker
-            $scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+            //$scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
         }
+        else if ($scope.registrationMode === 'PROFILE' ) {
+            let lastNameProfile = "";
+            let dobYearProfile = "";
+            let sexProfile = "";
+            let regServiceRegNo = ""; // for HIV-tracker
+            //var automatedSerialNumber = ""; // for FHI360 merge
+            let regClientCode = "";
 
+            if ($scope.selectedTei.gVGIL7DJp4b !== undefined) {
+                let strP = $scope.selectedTei.gVGIL7DJp4b;
+                lastNameProfile = strP.substr(0, 2).toUpperCase();
+            }
+            if ($scope.selectedTei.fOVzjBOZdvQ !== undefined) {
+                let dobP = $scope.selectedTei.fOVzjBOZdvQ;
+                dobYearProfile = dobP.substr(2, 2);
+            }
+            if ($scope.selectedTei.TN7r3ws7IG9 !== undefined) {
+                if ($scope.selectedTei.TN7r3ws7IG9 === 'Female') {
+                    sexProfile = "1";
+                }
+                else if ($scope.selectedTei.TN7r3ws7IG9 === 'Male') {
+                    sexProfile = "2";
+                }
+                else if ($scope.selectedTei.TN7r3ws7IG9 === 'Other') {
+                    sexProfile = "3";
+                }
+            }
+            // check for generated client-code while registration
+            if ($scope.selectedTei.drKkLxaGFwv !== undefined) {
+                let clientCode = $scope.selectedTei.drKkLxaGFwv;
+                regServiceRegNo = clientCode.substr(5, clientCode.length);
+            }
+            else {
+                if ($scope.selectedTei.PWdxGAN3OCD === "NCASC" ){
+                    if ($scope.selectedTei.Fu4LhjNsJZL !== undefined) {
+                        regServiceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
+                    }
+                }
+                else if($scope.selectedTei.PWdxGAN3OCD !== "NCASC"){
+                    if ($scope.selectedTei.pULhHeN8TUj !== undefined) {
+                        regServiceRegNo = $scope.selectedTei.pULhHeN8TUj;
+                    }
+                }
+            }
+            $scope.generatedCustomId = lastNameProfile + dobYearProfile + sexProfile + regServiceRegNo;
+
+            // for FHI360 merge
+            //$scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
+
+            //for HIV-tracker
+            //$scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+        }
         //var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
