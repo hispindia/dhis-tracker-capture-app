@@ -1,3 +1,36 @@
+## [31.10.13](https://github.com/dhis2/tracker-capture-app/compare/v31.10.12...v31.10.13) (2022-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-12298] make option group search case insensitive ([#1480](https://github.com/dhis2/tracker-capture-app/issues/1480)) ([49017b0](https://github.com/dhis2/tracker-capture-app/commit/49017b0e452e1a91fbba354f6c649a1861a65a7a))
+
+
+### Performance Improvements
+
+* [DHIS2-11438] download and chache organisation units on demand ([#1490](https://github.com/dhis2/tracker-capture-app/issues/1490)) ([1fc15f3](https://github.com/dhis2/tracker-capture-app/commit/1fc15f362f0c4af0f129a694b0c5f314ac2a0fa8))
+
+## [31.10.12](https://github.com/dhis2/tracker-capture-app/compare/v31.10.11...v31.10.12) (2022-06-09)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([249cca2](https://github.com/dhis2/tracker-capture-app/commit/249cca2263ec855f92d7222e8288f73023bb2576))
+
+## [31.10.11](https://github.com/dhis2/tracker-capture-app/compare/v31.10.10...v31.10.11) (2022-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([cbed566](https://github.com/dhis2/tracker-capture-app/commit/cbed5666e7b084cf58cea811d2d05279d6b16b0a))
+
+## [31.10.10](https://github.com/dhis2/tracker-capture-app/compare/v31.10.9...v31.10.10) (2022-05-31)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6f97db4](https://github.com/dhis2/tracker-capture-app/commit/6f97db4820a4086123ce078a1ed391ad20b6fdd4))
+
 ## [31.10.9](https://github.com/dhis2/tracker-capture-app/compare/v31.10.8...v31.10.9) (2022-05-27)
 
 
