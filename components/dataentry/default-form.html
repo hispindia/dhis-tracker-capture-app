@@ -1,118 +1,311 @@
 <form name="outerDataEntryForm" novalidate class="remove-default-padding">
-    <table class="dhis2-list-table-striped default-form-table" ng-if='currentEvent && !currentStage.programStageSections.length'>
-        <tr ng-repeat="prStDe in currentStage.programStageDataElements" ng-if="!isHidden(prStDe.dataElement.id, currentEvent)">
+    <table class="dhis2-list-table-striped default-form-table"
+        ng-if='currentEvent && !currentStage.programStageSections.length'>
+        <tr ng-repeat="prStDe in currentStage.programStageDataElements"
+            ng-if="!isHidden(prStDe.dataElement.id, currentEvent)">
             <td>
-                <span d2-pop-over
-                    class="popover-label hideInPrint small-horizontal-spacing"
-                    details="{{'details'| translate}}"
-                    content="prStDe.dataElement"
-                    template="dataelement-details.html"
-                    trigger="click"
-                    placement="right">
-                    <a href ng-attr-title="{{'details'| translate}}" class="wrap-text" tabindex="-1">{{prStDe.dataElement.displayFormName}} <img class="icon-program" ng-style="{'background-color': (prStDe.dataElement.style.color ? prStDe.dataElement.style.color : 'none')}" ng-if="prStDe.dataElement.style.icon" ng-src="{{APIURL}}/icons/{{prStDe.dataElement.style.icon}}/icon.svg"></a>
+                <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
+                    details="{{'details'| translate}}" content="prStDe.dataElement" template="dataelement-details.html"
+                    trigger="click" placement="right">
+                    <a href ng-attr-title="{{'details'| translate}}" class="wrap-text"
+                        tabindex="-1">{{prStDe.dataElement.displayFormName}} <img class="icon-program"
+                            ng-style="{'background-color': (prStDe.dataElement.style.color ? prStDe.dataElement.style.color : 'none')}"
+                            ng-if="prStDe.dataElement.style.icon"
+                            ng-src="{{APIURL}}/icons/{{prStDe.dataElement.style.icon}}/icon.svg"></a>
                 </span>
                 <span class="not-for-screen">
                     {{prStDe.dataElement.displayFormName}}
                 </span>
                 <span ng-if="prStDe.compulsory" class="required">*</span>
-                <span class="hideInPrint">                    
-                    <span ng-if="otherValuesLists[prStDe.dataElement.id]" ng-repeat="altValue in otherValuesLists[prStDe.dataElement.id] track by $index">
+                <span class="hideInPrint">
+                    <span ng-if="otherValuesLists[prStDe.dataElement.id]"
+                        ng-repeat="altValue in otherValuesLists[prStDe.dataElement.id] track by $index">
                         <span class="label label-default">{{altValue | translate}}</span>
-                   </span>
+                    </span>
                 </span>
-            </td>            
-            <td class="absorbing-column" dhis2-compiled-include="components/dataentry/inner-form.html">                
+            </td>
+            <td class="absorbing-column" dhis2-compiled-include="components/dataentry/inner-form.html">
             </td>
             <td ng-if="allowProvidedElsewhereExists[currentStage.id]">
                 <div class="align-center" ng-show="prStDe.allowProvidedElsewhere">
                     <span>
-                        <input type="checkbox"
-                           class="form-control-checkbox"
-                           ng-model="currentEvent.providedElsewhere[prStDe.dataElement.id]"
-                           ng-disabled="!eventEditable()"
-                           ng-change="saveDatavalueLocation(prStDe)"/>
+                        <input type="checkbox" class="form-control-checkbox"
+                            ng-model="currentEvent.providedElsewhere[prStDe.dataElement.id]"
+                            ng-disabled="!eventEditable()" ng-change="saveDatavalueLocation(prStDe)" />
                     </span>
                 </div>
             </td>
         </tr>
         <tr ng-if="registrationMode === 'REGISTRATION'">
             <td>
-                <span d2-pop-over
-                    class="popover-label hideInPrint small-horizontal-spacing"
-                    details="{{'details'| translate}}"
-                    content="completeStageInfo"
-                    template="dataelement-details.html"
-                    trigger="click"
-                    placement="right">
-                    <a href ng-attr-title="{{'details'| translate}}" class="wrap-text" tabindex="-1">{{'complete_stage'|translate}}</a>
+                <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
+                    details="{{'details'| translate}}" content="completeStageInfo" template="dataelement-details.html"
+                    trigger="click" placement="right">
+                    <a href ng-attr-title="{{'details'| translate}}" class="wrap-text"
+                        tabindex="-1">{{'complete_stage'|translate}}</a>
                 </span>
                 <span class="required">*</span>
-            </td>            
+            </td>
             <td class="absorbing-column">
                 <div class="hideInPrint">
-                    <d2-radio-button
-                        class="form-control"
-                        dh-required="true"
-                        dh-value="completeEventOnRegistration"
-                        dh-name="completeStage"
-                        dh-click="setCompleteStage(value)"
-                        dh-field="innerForm.foo">
+                    <d2-radio-button class="form-control" dh-required="true" dh-value="completeEventOnRegistration"
+                        dh-name="completeStage" dh-click="setCompleteStage(value)" dh-field="innerForm.foo">
                     </d2-radio-button>
-                    <div ng-messages="outerDataEntryForm.completeStage.$error" ng-if="interacted(outerDataEntryForm.completeStage, outerDataEntryForm)" class="error-text" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">
-                    </div> 
-                </div>        
+                    <div ng-messages="outerDataEntryForm.completeStage.$error"
+                        ng-if="interacted(outerDataEntryForm.completeStage, outerDataEntryForm)" class="error-text"
+                        ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">
+                    </div>
+                </div>
             </td>
         </tr>
     </table>
-    
+
     <div ng-if='currentEvent && currentStage.programStageSections.length'>
         <accordion close-others='false'>
             <!-- The inline style was needed to override overflow:hidden in the css. Can possibly be replaced with a CSS update. -->
-            <accordion-group is-open="section.open" ng-repeat="section in currentStage.programStageSections | orderBy: 'sortOrder'" ng-if="!hiddenSections[currentEvent.event][section.id]" style="overflow:visible">
+            <accordion-group is-open="section.open"
+                ng-repeat="section in currentStage.programStageSections | orderBy: 'sortOrder'"
+                ng-if="!hiddenSections[currentEvent.event][section.id]" style="overflow:visible">
                 <accordion-heading>
                     {{section.displayName}}
                 </accordion-heading>
                 <div class="alert alert-info" ng-if="section.description">
-					{{section.description}}
-				</div>
+                    {{section.description}}
+                </div>
                 <div class="vertical-spacing" ng-if="!section.dataElements || section.dataElements.length === 0">
-                    <div class="alert alert-warning">{{'section'| translate}} {{section.displayName}} {{'has_no_dataelements'| translate}}</div>
+                    <div class="alert alert-warning">{{'section'| translate}} {{section.displayName}}
+                        {{'has_no_dataelements'| translate}}</div>
+                </div>
+                <!-- Custom section starts here  -->
+                <div class="row" ng-if='section.displayName==="2.0 Health Facility Management Meetings"'>
+                    <table class="dhis2-list-table-striped default-form-table"
+                        ng-if="section.dataElements && section.dataElements.length > 0">
+                        <tr>
+                            <td>Questions</td>
+                            <td>Meeting 1</td>
+                            <td>Meeting 2</td>
+                            <td>Meeting 3</td>
+                        </tr>
+                        <tr ng-repeat="deName in CustomDataElements.healthFacilityMeetings">
+                            <td>{{deName}}</td>
+                            <td ng-if="!isHidden(de.id)"
+                                ng-repeat="de in rangeDE($index,section.dataElements,3) track by de.id">
+                                <span class="absorbing-column"
+                                    dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                </span>
+
+                                <span ng-if="allowProvidedElsewhereExists[currentStage.id]">
+                                    <div class="align-center" ng-show="prStDes[de.id].allowProvidedElsewhere">
+                                        <input type="checkbox" class="form-control-checkbox"
+                                            ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
+                                            ng-disabled="!eventEditable()"
+                                            ng-change="saveDatavalueLocation(prStDes[de.id])" />
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="row" ng-if='section.displayName==="5.0 Cleanliness of Wards"'>
+                    <table class="dhis2-list-table-striped default-form-table"
+                        ng-if="section.dataElements && section.dataElements.length > 0">
+                        <tr>
+                            <td></td>
+                            <td>OPD</td>
+                            <td>Delivery Room</td>
+                            <td>Male Ward</td>
+                            <td>Female Ward</td>
+                        </tr>
+                        <tr ng-repeat="deName in CustomDataElements.cleanlinessWard">
+                            <td>{{deName}}</td>
+                            <td colspan="{{ deName== 'Calculated Value - Cleanliness of Wards' ? '4' : '0'}}"
+                                ng-if="!isHidden(de.id)"
+                                ng-repeat="de in rangeDE($index,section.dataElements,4) track by de.id">
+                                <span class="absorbing-column"
+                                    dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                </span>
+
+                                <span ng-if="allowProvidedElsewhereExists[currentStage.id]">
+                                    <div class="align-center" ng-show="prStDes[de.id].allowProvidedElsewhere">
+                                        <input type="checkbox" class="form-control-checkbox"
+                                            ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
+                                            ng-disabled="!eventEditable()"
+                                            ng-change="saveDatavalueLocation(prStDes[de.id])" />
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="row" ng-if='section.displayName==="6.0 Hand-washing"'>
+                    <table class="dhis2-list-table-striped default-form-table"
+                        ng-if="section.dataElements && section.dataElements.length > 0">
+                        <tr>
+                            <td></td>
+                            <td>OPD</td>
+                            <td>Delivery Room</td>
+                            <td>ANC </td>
+                            <td>Laboratory</td>
+                        </tr>
+                        <tr ng-repeat="deName in CustomDataElements.handWashing">
+                            <td>{{deName}}</td>
+                            <td colspan="{{ deName== 'Calculated Value - Hand-washing' ? '4' : '0'}}"
+                                ng-if="!isHidden(de.id)"
+                                ng-repeat="de in rangeDE($index,section.dataElements,4) track by de.id">
+                                <span class="absorbing-column"
+                                    dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                </span>
+
+                                <span ng-if="allowProvidedElsewhereExists[currentStage.id]">
+                                    <div class="align-center" ng-show="prStDes[de.id].allowProvidedElsewhere">
+                                        <input type="checkbox" class="form-control-checkbox"
+                                            ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
+                                            ng-disabled="!eventEditable()"
+                                            ng-change="saveDatavalueLocation(prStDes[de.id])" />
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="row" ng-if='section.displayName==="7.0 Toilets"'>
+                    <table class="dhis2-list-table-striped default-form-table"
+                        ng-if="section.dataElements && section.dataElements.length > 0">
+                        <tr>
+                            <td></td>
+                            <td>Male Ward</td>
+                            <td>Female Ward</td>
+                            <td>Delivery Room</td>
+                            <td>OPD</td>
+                        </tr>
+                        <tr ng-repeat="deName in CustomDataElements.toilets">
+                            <td>{{deName}}</td>
+                            <td colspan="{{ deName== 'Calculated Value - Toilets' ? '4' : '0'}}"
+                                ng-if="!isHidden(de.id)"
+                                ng-repeat="de in rangeDE($index,section.dataElements,4) track by de.id">
+                                <span class="absorbing-column"
+                                    dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                </span>
+
+                                <span ng-if="allowProvidedElsewhereExists[currentStage.id]">
+                                    <div class="align-center" ng-show="prStDes[de.id].allowProvidedElsewhere">
+                                        <input type="checkbox" class="form-control-checkbox"
+                                            ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
+                                            ng-disabled="!eventEditable()"
+                                            ng-change="saveDatavalueLocation(prStDes[de.id])" />
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="row" ng-if='section.displayName==="8.0 Shower Facilities for Patients"'>
+                    <table class="dhis2-list-table-striped default-form-table"
+                        ng-if="section.dataElements && section.dataElements.length > 0">
+                        <tr>
+                            <td></td>
+                            <td>Male Ward</td>
+                            <td>Female Ward</td>
+                        </tr>
+                        <tr ng-repeat="deName in CustomDataElements.showerFacilities">
+                            <td>{{deName}}</td>
+                            <td colspan="{{ deName== 'Calculated Value - Shower Facilities for Patients' ? '2' : '0'}}"
+                                ng-if="!isHidden(de.id)"
+                                ng-repeat="de in rangeDE($index,section.dataElements,2) track by de.id">
+                                <span class="absorbing-column"
+                                    dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                </span>
+
+                                <span ng-if="allowProvidedElsewhereExists[currentStage.id]">
+                                    <div class="align-center" ng-show="prStDes[de.id].allowProvidedElsewhere">
+                                        <input type="checkbox" class="form-control-checkbox"
+                                            ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
+                                            ng-disabled="!eventEditable()"
+                                            ng-change="saveDatavalueLocation(prStDes[de.id])" />
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
                 </div>
 
-                <div class="row">
-                   <table class="dhis2-list-table-striped default-form-table" ng-if="section.dataElements && section.dataElements.length > 0">                        
+                <div class="row" ng-if='section.displayName==="9.0 Medical Waste Handling"'>
+                    <table class="dhis2-list-table-striped default-form-table"
+                        ng-if="section.dataElements && section.dataElements.length > 0">
+                        <tr>
+                            <td></td>
+                            <td>OPD</td>
+                            <td>Delivery Room</td>
+                            <td>Injection Room</td>
+                            <td>Laboratory</td>
+                        </tr>
+                        <tr ng-repeat="deName in CustomDataElements.medicalWaste">
+                            <td>{{deName}}</td>
+                            <td colspan="{{ deName== 'Calculated Value - Medical Waste Handling' ? '4' : '0'}}"
+                                ng-if="!isHidden(de.id)"
+                                ng-repeat="de in rangeDE($index,section.dataElements,4) track by de.id">
+                                <span class="absorbing-column"
+                                    dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                </span>
+
+                                <span ng-if="allowProvidedElsewhereExists[currentStage.id]">
+                                    <div class="align-center" ng-show="prStDes[de.id].allowProvidedElsewhere">
+                                        <input type="checkbox" class="form-control-checkbox"
+                                            ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
+                                            ng-disabled="!eventEditable()"
+                                            ng-change="saveDatavalueLocation(prStDes[de.id])" />
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <!-- Custom section ends here -->
+                <div class="row"
+                    ng-if='section.displayName!=="2.0 Health Facility Management Meetings" && section.displayName!=="5.0 Cleanliness of Wards" && section.displayName!=="6.0 Hand-washing" && section.displayName!=="7.0 Toilets" && section.displayName!=="8.0 Shower Facilities for Patients" && section.displayName!=="9.0 Medical Waste Handling"'>
+                    <table class="dhis2-list-table-striped default-form-table"
+                        ng-if="section.dataElements && section.dataElements.length > 0">
                         <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id)">
                             <td>
-                                <span d2-pop-over
-                                    class="popover-label hideInPrint small-horizontal-spacing"
-                                    details="{{'details'| translate}}"
-                                    content="prStDes[de.id].dataElement"
-                                    template="dataelement-details.html"
-                                    trigger="click"
-                                    placement="right">
-                                    <a href ng-attr-title="{{'details'| translate}}" class="wrap-text" tabindex="-1">{{prStDes[de.id].dataElement.displayFormName}} <img class="icon-program" ng-style="{'background-color': (prStDes[de.id].dataElement.style.color ? prStDes[de.id].dataElement.style.color : 'none')}" ng-if="prStDes[de.id].dataElement.style.icon" ng-src="{{APIURL}}/icons/{{prStDes[de.id].dataElement.style.icon}}/icon.svg"></a>
+                                <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
+                                    details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
+                                    template="dataelement-details.html" trigger="click" placement="right">
+                                    <a href ng-attr-title="{{'details'| translate}}" class="wrap-text"
+                                        tabindex="-1">{{prStDes[de.id].dataElement.displayFormName}} <img
+                                            class="icon-program"
+                                            ng-style="{'background-color': (prStDes[de.id].dataElement.style.color ? prStDes[de.id].dataElement.style.color : 'none')}"
+                                            ng-if="prStDes[de.id].dataElement.style.icon"
+                                            ng-src="{{APIURL}}/icons/{{prStDes[de.id].dataElement.style.icon}}/icon.svg"></a>
                                 </span>
                                 <span class="not-for-screen">
                                     {{prStDes[de.id].dataElement.displayFormName}}
                                 </span>
                                 <span ng-if="prStDes[de.id].compulsory" class="required">*</span>
                                 <span class="hideInPrint">
-                                    <d2-info ng-if="prStDes[de.id].dataElement.description" data-content='[{"name":"{{"description" | translate}}", "data":"{{prStDes[de.id].dataElement.description}}"}]'>
+                                    <d2-info ng-if="prStDes[de.id].dataElement.description"
+                                        data-content='[{"name":"{{"description" | translate}}", "data":"{{prStDes[de.id].dataElement.description}}"}]'>
                                     </d2-info>
-                                    <span ng-if="otherValuesLists[de.id] && showOtherValuesLists" ng-repeat="altValue in otherValuesLists[de.id]">
+                                    <span ng-if="otherValuesLists[de.id] && showOtherValuesLists"
+                                        ng-repeat="altValue in otherValuesLists[de.id]">
                                         <span class="label label-default">{{altValue | translate}}</span>
                                     </span>
                                 </span>
                             </td>
-                            <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                            <td class="absorbing-column"
+                                dhis2-compiled-include="components/dataentry/section-inner-form.html">
                             </td>
                             <td ng-if="allowProvidedElsewhereExists[currentStage.id]">
                                 <div class="align-center" ng-show="prStDes[de.id].allowProvidedElsewhere">
-                                    <input type="checkbox"
-                                           class="form-control-checkbox"
-                                           ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
-                                           ng-disabled="!eventEditable()"
-                                           ng-change="saveDatavalueLocation(prStDes[de.id])"/>
+                                    <input type="checkbox" class="form-control-checkbox"
+                                        ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
+                                        ng-disabled="!eventEditable()"
+                                        ng-change="saveDatavalueLocation(prStDes[de.id])" />
                                 </div>
                             </td>
                         </tr>
@@ -123,29 +316,25 @@
             <table class="dhis2-list-table-striped default-form-table" ng-if="registrationMode === 'REGISTRATION'">
                 <tr ng-if="registrationMode === 'REGISTRATION'">
                     <td>
-                        <span d2-pop-over
-                            class="popover-label hideInPrint small-horizontal-spacing"
-                            details="{{'details'| translate}}"
-                            content="completeStageInfo"
-                            template="dataelement-details.html"
-                            trigger="click"
-                            placement="right">
-                            <a href ng-attr-title="{{'details'| translate}}" class="wrap-text" tabindex="-1">{{'complete_stage'|translate}}</a>
+                        <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
+                            details="{{'details'| translate}}" content="completeStageInfo"
+                            template="dataelement-details.html" trigger="click" placement="right">
+                            <a href ng-attr-title="{{'details'| translate}}" class="wrap-text"
+                                tabindex="-1">{{'complete_stage'|translate}}</a>
                         </span>
                         <span class="required">*</span>
-                    </td>            
+                    </td>
                     <td class="absorbing-column">
                         <div class="hideInPrint">
-                            <d2-radio-button
-                                class="form-control"
-                                dh-required="true"
-                                dh-value="completeEventOnRegistration"
-                                dh-name="completeStage"
-                                dh-click="setCompleteStage(value)"
-                                dh-field="innerForm.foo">
+                            <d2-radio-button class="form-control" dh-required="true"
+                                dh-value="completeEventOnRegistration" dh-name="completeStage"
+                                dh-click="setCompleteStage(value)" dh-field="innerForm.foo">
                             </d2-radio-button>
-                            <div ng-messages="outerDataEntryForm.completeStage.$error" ng-if="interacted(outerDataEntryForm.completeStage, outerDataEntryForm)" class="error-text" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html"></div>
-                        </div>             
+                            <div ng-messages="outerDataEntryForm.completeStage.$error"
+                                ng-if="interacted(outerDataEntryForm.completeStage, outerDataEntryForm)"
+                                class="error-text"
+                                ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html"></div>
+                        </div>
                     </td>
                 </tr>
             </table>
