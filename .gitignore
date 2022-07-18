@@ -8,5 +8,7 @@ build/
 target/
 nbproject/*
 .DS_Store
+yarn.lock
 package-lock.json
 yarn.lock
+*.lock
