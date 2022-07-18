@@ -77,7 +77,8 @@
                         {{'has_no_dataelements'| translate}}</div>
                 </div>
                 <!-- Custom section starts here  -->
-                <div class="row" ng-if='section.displayName==="2.0 Health Facility Management Meetings"'>
+                <div class="row" ng-if='section.displayName==="2.0 Health Facility Management Meetings" || section.displayName==="SHT 04. Monthly Joint Quality Assessment Meeting for State Directorates (DHS AND DHME)" || section.displayName==="DHT 02. Monthly Management Team Meetings"' >
+
                     <table class="dhis2-list-table-striped default-form-table"
                         ng-if="section.dataElements && section.dataElements.length > 0">
                         <tr>
@@ -268,7 +269,7 @@
                 </div>
                 <!-- Custom section ends here -->
                 <div class="row"
-                    ng-if='section.displayName!=="2.0 Health Facility Management Meetings" && section.displayName!=="5.0 Cleanliness of Wards" && section.displayName!=="6.0 Hand-washing" && section.displayName!=="7.0 Toilets" && section.displayName!=="8.0 Shower Facilities for Patients" && section.displayName!=="9.0 Medical Waste Handling"'>
+                    ng-if='section.displayName!=="2.0 Health Facility Management Meetings" && section.displayName!=="SHT 04. Monthly Joint Quality Assessment Meeting for State Directorates (DHS AND DHME)" && section.displayName!=="DHT 02. Monthly Management Team Meetings" && section.displayName!=="5.0 Cleanliness of Wards" && section.displayName!=="6.0 Hand-washing" && section.displayName!=="7.0 Toilets" && section.displayName!=="8.0 Shower Facilities for Patients" && section.displayName!=="9.0 Medical Waste Handling"'>
                     <table class="dhis2-list-table-striped default-form-table"
                         ng-if="section.dataElements && section.dataElements.length > 0">
                         <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id)">

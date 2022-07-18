@@ -102,7 +102,7 @@ trackerCapture
           "In each issue section there is a responsible named",
           "Each month the monthly financial balance is discussed (monthly income and expense statements are available)",
           "Minutes of the meetings are signed by the chairperson",
-          "Calculated Value - HFM Team Meeting I",
+          "Calculated Value - HFM Team Meeting",
         ],
         cleanlinessWard: [
           "Floors, ceiling, walls, and doors are clean and there is no litter on the floor",
