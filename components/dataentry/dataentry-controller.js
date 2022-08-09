@@ -85,6 +85,39 @@ trackerCapture.controller('DataEntryController',
     $scope.mainMenuStages = [];
     $scope.useBottomLine = false; 
     
+    $scope.CustomDataElements = {
+        symptoms: [
+          "Date of the Meeting",
+          "Agenda",
+          "Signed list of participants",
+          "Follow-up of the decisions taken during the previous meeting",
+          "Implementation of recommendations or decisions adopted at the previous meeting",
+          "In each issue section there is a description of the problem",
+          "In each issue section there is a list of developed recommendations or decisions taken",
+          "In each issue section there is a deadline to solve the issue",
+          "In each issue section there is a responsible named",
+          "Each month the monthly financial balance is discussed (monthly income and expense statements are available)",
+          "Minutes of the meetings are signed by the chairperson",
+          "Calculated Value - HFM Team Meeting",
+        ]
+    }
+    
+    $scope.rowLength = 0;
+    $scope.rangeDE = function (index, de, rowLength) {
+        let count = 0;
+        if (index == 0) {
+          $scope.rowLength = 0;
+          count = index;
+        } else count = $scope.rowLength;
+
+        var arr = [];
+        for (let i = count; i < count + rowLength; i++) {
+          if (de[i]) arr.push(de[i]);
+        }
+        $scope.rowLength += rowLength;
+        return arr;
+    };
+
     //hideTopLineEventsForFormTypes is only used with main menu
     $scope.hideTopLineEventsForFormTypes = {TABLE: true, COMPARE: true};
     $scope.timelineDataEntryModes = { DATAENTRYFORM: 1, COMPAREPREVIOUSDATAENTRYFORM: 2,COMPAREALLDATAENTRYFORM: 3, TABLEDATAENTRYFORM: 4};

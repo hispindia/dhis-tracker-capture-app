@@ -79,7 +79,39 @@
                     <div class="alert alert-warning">{{'section'| translate}} {{section.displayName}} {{'has_no_dataelements'| translate}}</div>
                 </div>
 
-                <div class="row">
+                <!-- Custom section starts here -->
+                <div class="row" ng-if='section.id==="WNILnFrHloG"'>
+                    <table class="dhis2-list-table-striped default-form-table"
+                        ng-if="section.dataElements && section.dataElements.length > 0">
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>Case Details</td>
+                            <td>CHO</td>
+                        </tr>
+                        <tr ng-repeat="deName in CustomDataElements.symptoms">
+                            <td>{{deName}}</td>
+                            <td 
+                                ng-if="!isHidden(de.id)"
+                                ng-repeat="de in rangeDE($index,section.dataElements,2) track by de.id">
+                                <span class="absorbing-column"
+                                    dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                </span>
+
+                                <span ng-if="allowProvidedElsewhereExists[currentStage.id]">
+                                    <div class="align-center" ng-show="prStDes[de.id].allowProvidedElsewhere">
+                                        <input type="checkbox" class="form-control-checkbox"
+                                            ng-model="currentEvent.providedElsewhere[prStDes[de.id].dataElement.id]"
+                                            ng-disabled="!eventEditable()"
+                                            ng-change="saveDatavalueLocation(prStDes[de.id])" />
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <!-- Custom Section ends here -->
+                <div class="row"  ng-if='section.id!=="WNILnFrHloG"' >
                    <table class="dhis2-list-table-striped default-form-table" ng-if="section.dataElements && section.dataElements.length > 0">                        
                         <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id)">
                             <td>
