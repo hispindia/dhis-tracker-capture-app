@@ -87,21 +87,25 @@ trackerCapture.controller('DataEntryController',
     
     $scope.CustomDataElements = {
         symptoms: [
-          "Date of the Meeting",
-          "Agenda",
-          "Signed list of participants",
-          "Follow-up of the decisions taken during the previous meeting",
-          "Implementation of recommendations or decisions adopted at the previous meeting",
-          "In each issue section there is a description of the problem",
-          "In each issue section there is a list of developed recommendations or decisions taken",
-          "In each issue section there is a deadline to solve the issue",
-          "In each issue section there is a responsible named",
-          "Each month the monthly financial balance is discussed (monthly income and expense statements are available)",
-          "Minutes of the meetings are signed by the chairperson",
-          "Calculated Value - HFM Team Meeting",
+            "Fever / बुखार",
+            "Cough / खांसी", 
+            "Rash / चकत्ता", 
+            "Loose motions / दस्त", 
+            "Bleeding / खून बहना",
+            "Disorientation / भटकाव",
+            "Jaundice / पीलिया", 
+            "Pain - Abdomen / पेट दर्द",
+            "Pain - Bones / हड्डियों का दर्द",
+            "Pain - Eyes / आँखों का दर्द",
+            "Pain - Forehead / सिरदर्द",
+            "Pain - Muscles / मांसपेशियों में दर्द",
+            "Floppiness or looseness in the muscles / मांसपेशियों में ढीलापन",
+            "Animal bite / जानवर का काटना",
+            "Animal bite - Other animal / जानवर का काटना - अन्य जानवर",
+            "Other Symptoms"
         ]
     }
-    
+
     $scope.rowLength = 0;
     $scope.rangeDE = function (index, de, rowLength) {
         let count = 0;
