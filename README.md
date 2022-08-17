@@ -7,6 +7,14 @@ DHIS2 Tracker Capture App
 
 > **Note:** The setup has been tested with yarn. You can install yarn through npm by running `npm install -g yarn`. For more info > on yarn check out https://yarnpkg.com/.
 
+### build the application
+
+```
+yarn install
+
+yarn build
+```
+
 ### Running the devevelopment server
 
 To run the development server you can run the following command.
