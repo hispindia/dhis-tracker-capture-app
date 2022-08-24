@@ -1,4 +1,5 @@
 <!-- event dates/scheduling begin -->
+<div class="row" ng-show="showEventCoordinate === 'YES'">
 <div class="row" ng-if="displayCustomForm !== 'TABLE' && displayCustomForm !== 'COMPARE'">
         
     <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]">
@@ -113,7 +114,7 @@
                 </tr>
             </table>
         </div>
-    </div>    
-    
+    </div>
+</div>
 </div>
 <!-- attribute category options end -->

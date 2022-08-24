@@ -88,6 +88,9 @@ trackerCapture
       $scope.mainMenuStages = [];
       $scope.useBottomLine = false;
 
+      $scope.userGroupName = '';
+      $scope.showEventCoordinate = '';
+
       //Custom section row names
       $scope.CustomDataElements = {
         healthFacilityMeetings: [
@@ -159,6 +162,7 @@ trackerCapture
         $scope.rowLength += rowLength;
         return arr;
       };
+
 
       //hideTopLineEventsForFormTypes is only used with main menu
       $scope.hideTopLineEventsForFormTypes = { TABLE: true, COMPARE: true };
@@ -1431,6 +1435,44 @@ trackerCapture
       }
 
       $scope.getEvents = function () {
+        // custom change for hide hide/un-hide events based on user-role, user-group and data-element value
+        // find user-group
+        $scope.userDetails = SessionStorageService.get('USER_PROFILE');
+        if( $scope.userDetails.userGroups.length !==0 )
+        {
+          for( var i=0; i<$scope.userDetails.userGroups.length; i++ ){
+            if ( $scope.userDetails.userGroups[i].displayName === 'Self Assessment' || $scope.userDetails.userGroups[i].displayName === 'Ex-Ante Assessment' || $scope.userDetails.userGroups[i].displayName === 'Ex-Post Assessment'){
+              $scope.userGroupName = $scope.userDetails.userGroups[i].displayName;
+            }
+          }
+        }
+        // find user-role
+        $scope.currentUserRole = "";
+        if( $scope.userDetails.userCredentials.userRoles.length !==0 )
+        {
+          for( var x=0; x<$scope.userDetails.userCredentials.userRoles.length; x++ ){
+
+            if ( $scope.userDetails.userCredentials.userRoles[x].name === 'Superuser' ){
+              $scope.currentUserRole = $scope.userDetails.userCredentials.userRoles[x].name;
+            }
+            else{
+              $scope.currentUserRole = "NOT_SUPERUSER";
+            }
+          }
+        }
+        else{
+          $scope.currentUserRole = "NOT_SUPERUSER";
+        }
+        // program list for filter
+        $scope.filterProgramList =
+            ["clexs6sWeOl","SH5rbquuI7L","mXBbntd7peT","NStri4nXf16",
+              "yisMZUE85x5","E5Iai5pZBOI","JFK9VveNM4O","OoVJA33zyQY",
+              "cGtwxqmhkYZ","TfuRfuCgDLc","KyQyV0soBML","Bihax2WaaSW",
+              "CZLfL0vYlpl","CWnOYfNLiZY","K3RTdecwL0s","uzuhOnhCO0O"];
+        // end custom change for hide hide/un-hide events based on user-role, user-group and data-element value
+
+        //alert( "user-role -- "  + $scope.currentUserRole  + " user-group -- "  + $scope.userGroupName );
+        //
         $scope.allEventsSorted = [];
         var events = CurrentSelection.getSelectedTeiEvents();
         events = $filter("filter")(events, {
@@ -1512,8 +1554,20 @@ trackerCapture
                   $scope.currentEvent = dhis2Event;
                 }
               }
-
-              $scope.allEventsSorted.push(dhis2Event);
+              // custom change for hide hide/un-hide events based on user-role, user-group and data-element value
+              if( $scope.filterProgramList.indexOf( dhis2Event.program ) !== -1 && $scope.currentUserRole === "NOT_SUPERUSER" && dhis2Event.dataValues.length !==0 )
+              {
+                for( var j=0; j < dhis2Event.dataValues.length; j++ ){
+                  if ( dhis2Event.dataValues[j].dataElement === 'hqDoSMfLh8F' && dhis2Event.dataValues[j].value === $scope.userGroupName ){
+                      $scope.allEventsSorted.push(dhis2Event);
+                  }
+                }
+              }
+              else{
+                $scope.allEventsSorted.push(dhis2Event);
+              }
+              // end
+              //$scope.allEventsSorted.push(dhis2Event);
             }
           });
 
@@ -1524,8 +1578,30 @@ trackerCapture
             "-sortingDate"
           ).reverse();
           sortEventsByStage(null);
-          $scope.showDataEntry($scope.currentEvent, true, true);
-          $scope.eventsLoaded = true;
+          // custom change for hide hide/un-hide events based on user-role, user-group and data-element value
+          if( $scope.filterProgramList.indexOf( $scope.currentEvent.program ) !== -1 && $scope.currentUserRole === "NOT_SUPERUSER" && $scope.currentEvent.dataValues.length !==0 )
+          {
+            for( var k=0; k < $scope.currentEvent.dataValues.length; k++ ){
+              if ( $scope.currentEvent.dataValues[k].dataElement === 'hqDoSMfLh8F' && $scope.currentEvent.dataValues[k].value === $scope.userGroupName ){
+                $scope.showEventCoordinate = 'YES';
+                $scope.showDataEntry($scope.currentEvent, true, true);
+                $scope.eventsLoaded = true;
+              }
+              else{
+                $scope.showEventCoordinate = 'NO';
+              }
+            }
+          }
+          else{
+            $scope.showEventCoordinate = 'YES';
+            $scope.showDataEntry($scope.currentEvent, true, true);
+            $scope.eventsLoaded = true;
+          }
+          //alert( "show Event Coordinate -- "  + $scope.showEventCoordinate );
+          // end
+
+          //$scope.showDataEntry($scope.currentEvent, true, true);
+          //$scope.eventsLoaded = true;
         } else {
           //There is no events - so loading is finished:
           $scope.eventsLoaded = true;
