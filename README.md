@@ -24,3 +24,14 @@ yarn start
 ```
 
 This starts the development server on port `8081`.
+
+### Custom Changes for WHO-LEP-Nikushta-v38 for Display images in Dataentry Screen 
+```
+For displaying images, files Added/Updated: 
+Added: styles/custom.css
+Added: styles/img.css
+added : inside index.ejs line no 20 -- <link type="text/css" rel="stylesheet" media="screen" href="./styles/custom.css" />
+Modified: components/dataentry/default-form.html add for sections start from line 83 to 461
+Modified: components/dataentry/dataentry-controller.js start from line 607 to 905 (Search 'Custom Changes' and commented code can be found )
+
+```

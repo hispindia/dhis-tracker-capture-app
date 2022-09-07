@@ -603,7 +603,307 @@ trackerCapture.controller('DataEntryController',
                }
         });
     };
-    
+
+    //Custom Changes for WHO-LEP-Nikushta-v38 for Display images in Dataentry Screen start
+
+    // $scope.show = function ($event) {
+    //     var theThing = document.getElementsByClassName('lhthing');
+    //     var container = document.getElementsByClassName("lefthandContainer");
+    //     var xPosition = $event.clientX - container[0].getBoundingClientRect().left - theThing[1].clientWidth / 2;
+    //     var yPosition = $event.clientY - container[0].getBoundingClientRect().top - theThing[1].clientHeight / 2;
+    //     console.log(xPosition);
+    //     console.log(yPosition);
+    // };
+
+    // // Function called when Single click is triggred
+    // $scope.thing = function (x, y) {
+
+    //     var classcolor = document.getElementsByClassName(x);
+    //     classcolor[1].style.backgroundColor = 'lightblue';
+
+    //     var rowColor = document.getElementsByClassName(y);
+    //     for (var i = 0; i < rowColor.length; i++) {
+    //         rowColor[i].style.backgroundColor = "lightblue";
+    //     }
+    // };
+
+    // // Function When Double clock is triggred
+
+    // $scope._thing = function (x, y) {
+
+    //     var classcolor = document.getElementsByClassName(x);
+    //     classcolor[1].style.backgroundColor = 'red';
+
+    //     var rowColor = document.getElementsByClassName(y);
+    //     for (var i = 0; i < rowColor.length; i++) {
+    //         rowColor[i].style.backgroundColor = "";
+    //     }
+    // };
+
+    // $scope.pointerLocation = function () {
+
+    // left Hand palm Location
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lhthing');
+    //     var container = document.getElementsByClassName("lefthandContainer");
+    //     var xPosition = 170 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 40 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lhthing1');
+    //     var container = document.getElementsByClassName("lefthandContainer");
+    //     var xPosition = 190 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 320 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lhthing2');
+    //     var container = document.getElementsByClassName("lefthandContainer");
+    //     var xPosition = 225 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 380 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lhthing3');
+    //     var container = document.getElementsByClassName("lefthandContainer");
+    //     var xPosition = 250 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 200 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+
+    // Right hand palm Location
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rhthing');
+    //     var container = document.getElementsByClassName("righthandContainer");
+    //     var xPosition = 205 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 98 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rhthing1');
+    //     var container = document.getElementsByClassName("righthandContainer");
+    //     var xPosition = 190 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 320 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rhthing2');
+    //     var container = document.getElementsByClassName("righthandContainer");
+    //     var xPosition = 225 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 380 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rhthing3');
+    //     var container = document.getElementsByClassName("righthandContainer");
+    //     var xPosition = 250 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 200 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+
+    //Left sole pointer locations
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lsthing');
+    //     var container = document.getElementsByClassName("leftsoleContainer");
+    //     var xPosition = 205 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 98 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lsthing1');
+    //     var container = document.getElementsByClassName("leftsoleContainer");
+    //     var xPosition = 190 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 320 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lsthing2');
+    //     var container = document.getElementsByClassName("leftsoleContainer");
+    //     var xPosition = 225 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 380 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lsthing3');
+    //     var container = document.getElementsByClassName("leftsoleContainer");
+    //     var xPosition = 250 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 200 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('lsthing4');
+    //     var container = document.getElementsByClassName("leftsoleContainer");
+    //     var xPosition = 300 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 180 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+
+    //Right sole container location
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rsthing');
+    //     var container = document.getElementsByClassName("rightsoleContainer");
+    //     var xPosition = 205 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 98 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rsthing1');
+    //     var container = document.getElementsByClassName("rightsoleContainer");
+    //     var xPosition = 190 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 320 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rsthing2');
+    //     var container = document.getElementsByClassName("rightsoleContainer");
+    //     var xPosition = 225 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 380 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rsthing3');
+    //     var container = document.getElementsByClassName("rightsoleContainer");
+    //     var xPosition = 250 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 200 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('rsthing4');
+    //     var container = document.getElementsByClassName("rightsoleContainer");
+    //     var xPosition = 300 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 180 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+
+    // Front body drop locations
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('Fbdcthing');
+    //     var container = document.getElementsByClassName("FrontBodyContainer");
+    //     var xPosition = 150 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 320 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('Fbdcthing1');
+    //     var container = document.getElementsByClassName("FrontBodyContainer");
+    //     var xPosition = 200 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 350 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('Fbdcthing2');
+    //     var container = document.getElementsByClassName("FrontBodyContainer");
+    //     var xPosition = 100 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 200 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+
+    // Back body drop locations
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('bbthing');
+    //     var container = document.getElementsByClassName("BackBodyContainer");
+    //     var xPosition = 190 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 320 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('bbthing1');
+    //     var container = document.getElementsByClassName("BackBodyContainer");
+    //     var xPosition = 250 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 200 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('bbthing2');
+    //     var container = document.getElementsByClassName("BackBodyContainer");
+    //     var xPosition = 120 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 200 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // Side body drop locations
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('sbthing');
+    //     var container = document.getElementsByClassName("BackBodyContainer");
+    //     var xPosition = 190 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 320 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('sbthing1');
+    //     var container = document.getElementsByClassName("BackBodyContainer");
+    //     var xPosition = 200 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 330 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // setTimeout(() => {
+    //     var theThing = document.getElementsByClassName('sbthing2');
+    //     var container = document.getElementsByClassName("BackBodyContainer");
+    //     var xPosition = 210 - container[0].getBoundingClientRect().left - (theThing[1].clientWidth / 2);
+    //     var yPosition = 350 - container[0].getBoundingClientRect().top - (theThing[1].clientHeight / 2);
+    //     theThing[1].style.left = xPosition + "px";
+    //     theThing[1].style.top = yPosition + "px";
+    // }, 3000);
+
+    // };
+
+   //Custom Changes for WHO-LEP-Nikushta-v38 for Display images in Dataentry Screen end
+
     $scope.openStageFromMenu = function(stage){    
         
         $scope.deSelectCurrentEvent();        

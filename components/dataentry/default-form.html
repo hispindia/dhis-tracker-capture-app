@@ -80,7 +80,380 @@
                 </div>
 
                 <div class="row">
-                   <table class="dhis2-list-table-striped default-form-table" ng-if="section.dataElements && section.dataElements.length > 0">                        
+                    <!-- *********************************************************************************************************************************************** -->
+                    <!-- Custom Changes for WHO-LEP-Nikushta-v38 for Display images in Dataentry Screen start -->
+					<!-- Start of left plam Desgin  Format -->
+					<!-- gAkjKEitHrU -->
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'j1u6ase0X3G'" style="text-align:center">
+                        <tr>
+                            <td ng-if="section.id == 'j1u6ase0X3G'" ng-init="pointerLocation()">
+                                <div class="lefthandContainer" ng-click="show($event)">
+
+                                </div>
+                            </td>
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: right;">
+                                            <Strong>Disability </Strong>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td>
+                                            <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing" details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
+                                                template="dataelement-details.html" trigger="click" placement="right">
+                                                <a href title="{{'details'| translate}}" class="wrap-text" tabindex="-1">
+                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                </a>
+                                            </span>
+                                            <span class="not-for-screen">
+                                                {{prStDes[de.id].dataElement.displayFormName}}
+                                            </span>
+                                            <span ng-if="prStDes[de.id].compulsory" class="required">*</span>
+                                            <span class="hideInPrint">
+                                                <d2-info ng-if="prStDes[de.id].dataElement.description" data-content='[{"name":"{{"description" | translate}}", "data":"{{prStDes[de.id].dataElement.description}}"}]'>
+                                                </d2-info>
+                                                <span ng-if="otherValuesLists[de.id] && showOtherValuesLists" ng-repeat="altValue in otherValuesLists[de.id]">
+                                                    <span class="label label-default">{{altValue | translate}}</span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white; text-align: left">
+                                            <Strong>Status</Strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                            <p ng-init></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- End of Left Plam Desgin Format -->
+
+                    <!-- ************************************************************************************************************************************************* -->
+
+                    <!-- Right Plam Design format -->
+                    <!-- QSl2krdBWLO -->
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'QSl2krdBWLO'" style="text-align:center">
+                        <tr>
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: right">
+                                            <Strong>Disability </Strong>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td>
+                                            <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing" details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
+                                                template="dataelement-details.html" trigger="click" placement="right">
+                                                <a href title="{{'details'| translate}}" class="wrap-text" tabindex="-1">
+                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                </a>
+                                            </span>
+                                            <span class="not-for-screen">
+                                                {{prStDes[de.id].dataElement.displayFormName}}
+                                            </span>
+                                            <span ng-if="prStDes[de.id].compulsory" class="required">*</span>
+                                            <span class="hideInPrint">
+                                                <d2-info ng-if="prStDes[de.id].dataElement.description" data-content='[{"name":"{{"description" | translate}}", "data":"{{prStDes[de.id].dataElement.description}}"}]'>
+                                                </d2-info>
+                                                <span ng-if="otherValuesLists[de.id] && showOtherValuesLists" ng-repeat="altValue in otherValuesLists[de.id]">
+                                                    <span class="label label-default">{{altValue | translate}}</span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white; text-align: left;">
+                                            <Strong>Status</Strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                            <p ng-init></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td ng-if="section.id == 'QSl2krdBWLO'" ng-init="pointerLocation()">
+                                <div class="righthandContainer">
+
+                                </div>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <!-- End of right Plam desgin Format -->
+                    <!-- ************************************************************************************************************************************************* -->
+                    <!-- Design Format for left sole  -->
+                    <!-- "JRDmB5WCYbJ" -->
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'JRDmB5WCYbJ'" style="text-align:center">
+                        <tr>
+                            <td ng-if="section.id == 'JRDmB5WCYbJ'" ng-init="pointerLocation()">
+                                <div class="leftsoleContainer">
+                                </div>
+                            </td>
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: right">
+                                            <Strong>Disability </Strong>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td>
+                                            <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing" details="{{'details '| translate}}" content="prStDes[de.id].dataElement"
+                                                template="dataelement-details.html" trigger="click" placement="right">
+                                                <a href title="{{'details '| translate}}" class="wrap-text" tabindex="-1">
+                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                </a>
+                                            </span>
+                                            <span class="not-for-screen">
+                                                {{prStDes[de.id].dataElement.displayFormName}}
+                                            </span>
+                                            <span ng-if="prStDes[de.id].compulsory" class="required">*</span>
+                                            <span class="hideInPrint">
+                                                <d2-info ng-if="prStDes[de.id].dataElement.description" data-content='[{
+                                        "name": "{{"description " | translate}}", "data":
+                                        "{{prStDes[de.id].dataElement.description}}"}] '>
+                                                </d2-info>
+                                                <span ng-if="otherValuesLists[de.id] && showOtherValuesLists" ng-repeat="altValue in otherValuesLists[de.id]">
+                                                    <span class="label label-default">{{altValue | translate}}</span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: left">
+                                            <Strong>Status</Strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                            <p ng-init></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- End of design format for left sole -->
+                    <!-- Degin format for right sole -->
+                    <!-- c2QJ8q8xPDI -->
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'c2QJ8q8xPDI'" style="text-align:center">
+                        <tr>
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: right">
+                                            <Strong>Disability </Strong>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td>
+                                            <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing" details="{{'details '| translate}}" content="prStDes[de.id].dataElement"
+                                                template="dataelement-details.html" trigger="click" placement="right">
+                                                <a href title="{{'details '| translate}}" class="wrap-text" tabindex="-1">
+                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                </a>
+                                            </span>
+                                            <span class="not-for-screen">
+                                                {{prStDes[de.id].dataElement.displayFormName}}
+                                            </span>
+                                            <span ng-if="prStDes[de.id].compulsory" class="required">*</span>
+                                            <span class="hideInPrint">
+                                                <d2-info ng-if="prStDes[de.id].dataElement.description" data-content='[{
+                                        "name": "{{"description " | translate}}", "data":
+                                        "{{prStDes[de.id].dataElement.description}}"}] '>
+                                                </d2-info>
+                                                <span ng-if="otherValuesLists[de.id] && showOtherValuesLists" ng-repeat="altValue in otherValuesLists[de.id]">
+                                                    <span class="label label-default">{{altValue | translate}}</span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: left">
+                                            <Strong>Status</Strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                            <p ng-init></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td ng-if="section.id == 'c2QJ8q8xPDI'" ng-init="pointerLocation()">
+                                <div class="rightsoleContainer">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- End of Design format for right sole -->
+
+                    <!-- Design For left Eye -->
+
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'GRwzAqiTye8'" style="text-align:center">
+                        <tr>
+                            <td ng-if="section.id == 'GRwzAqiTye8'" ng-init="pointerLocation()">
+                                <div class="leftEyeContainer">
+                                </div>
+                            </td>
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: right;">
+                                            <Strong>Disability </Strong>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td>
+                                            <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing" details="{{'details '| translate}}" content="prStDes[de.id].dataElement"
+                                                template="dataelement-details.html" trigger="click" placement="right">
+                                                <a href title="{{'details '| translate}}" class="wrap-text" tabindex="-1">
+                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                </a>
+                                            </span>
+                                            <span class="not-for-screen">
+                                                {{prStDes[de.id].dataElement.displayFormName}}
+                                            </span>
+                                            <span ng-if="prStDes[de.id].compulsory" class="required">*</span>
+                                            <span class="hideInPrint">
+                                                <d2-info ng-if="prStDes[de.id].dataElement.description" data-content='[{
+                                        "name": "{{"description " | translate}}", "data":
+                                        "{{prStDes[de.id].dataElement.description}}"}] '>
+                                                </d2-info>
+                                                <span ng-if="otherValuesLists[de.id] && showOtherValuesLists" ng-repeat="altValue in otherValuesLists[de.id]">
+                                                    <span class="label label-default">{{altValue | translate}}</span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: left;">
+                                            <Strong>Status</Strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                            <p ng-init></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!--End of design for left Eye-->
+                    <!-- Design For Right Eye -->
+                    <table ng-if="currentStage.id == 'gAkjKEitHrU' && section.id == 'PppoXWwOWi1'" style="text-align:center">
+                        <tr>
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white; text-align: right">
+                                            <Strong>Disability </Strong>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td>
+                                            <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing" details="{{'details '| translate}}" content="prStDes[de.id].dataElement"
+                                                template="dataelement-details.html" trigger="click" placement="right">
+                                                <a href title="{{'details '| translate}}" class="wrap-text" tabindex="-1">
+                                                    <strong>{{prStDes[de.id].dataElement.displayFormName}}</strong>
+                                                </a>
+                                            </span>
+                                            <span class="not-for-screen">
+                                                {{prStDes[de.id].dataElement.displayFormName}}
+                                            </span>
+                                            <span ng-if="prStDes[de.id].compulsory" class="required">*</span>
+                                            <span class="hideInPrint">
+                                                <d2-info ng-if="prStDes[de.id].dataElement.description" data-content='[{
+                                        "name": "{{"description " | translate}}", "data":
+                                        "{{prStDes[de.id].dataElement.description}}"}] '>
+                                                </d2-info>
+                                                <span ng-if="otherValuesLists[de.id] && showOtherValuesLists" ng-repeat="altValue in otherValuesLists[de.id]">
+                                                    <span class="label label-default">{{altValue | translate}}</span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+
+                            <td style="padding: 0%">
+                                <table class="dhis2-list-table-striped default-form-table" style="text-align:center" ng-if="section.dataElements && section.dataElements.length > 0">
+                                    <tr>
+                                        <td style="background:#276696; color:white;text-align: left;">
+                                            <Strong>Status</Strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="{{section.id + 1}}" ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id) && $index < 8">
+                                        <td class="absorbing-column" dhis2-compiled-include="components/dataentry/section-inner-form.html">
+                                            <p ng-init></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td ng-if="section.id == 'PppoXWwOWi1'" ng-init="pointerLocation()">
+                                <div class="rightEyeContainer">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Design For Right Eye -->
+
+                    <!-- End of Design For Right Eye  -->
+					<!-- Custom Changes for WHO-LEP-Nikushta-v38 for Display images in Dataentry Screen end -->
+					<!-- For Default form change in default form for other sections -->
+					<div ng-if="section.id != 'j1u6ase0X3G' && section.id != 'QSl2krdBWLO' && section.id != 'JRDmB5WCYbJ' && section.id  != 'c2QJ8q8xPDI' && section.id != 'GRwzAqiTye8' && section.id != 'PppoXWwOWi1'">
+						<table class="dhis2-list-table-striped default-form-table" ng-if="section.dataElements && section.dataElements.length > 0">                        
                         <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id)">
                             <td>
                                 <span d2-pop-over
@@ -116,7 +489,8 @@
                                 </div>
                             </td>
                         </tr>
-                    </table>
+						</table>
+					</div>
                 </div>
             </accordion-group>
             <br ng-if="registrationMode === 'REGISTRATION'">
