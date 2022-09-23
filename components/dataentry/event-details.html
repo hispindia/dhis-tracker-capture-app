@@ -1,6 +1,11 @@
 <!-- event dates/scheduling begin -->
-<div class="row" ng-if="displayCustomForm !== 'TABLE' && displayCustomForm !== 'COMPARE'">
-        
+<div class="row" ng-if="displayCustomForm !== 'TABLE' && displayCustomForm !== 'COMPARE'" ng-init="initiateNepaliEventCalendar();">
+    <!-- add for nepali Calendar start -->
+    <div class="col-md-3">
+        <span><b>Nepali Calendar</b></span>
+        <input type="text" class="nepaliEventDate" ng-model="convertedEventNepaliDate" name="nepaliEventDatePicker" id="nepaliEventDatePicker" />
+    </div>
+    <!-- add for nepali Calendar end-->
     <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]">
         {{currentStage.executionDateLabel ? currentStage.executionDateLabel : 'report_date' | translate}}
         <span class="required">*</span>

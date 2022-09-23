@@ -74,6 +74,125 @@ trackerCapture.controller('RegistrationController',
 
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
+    // <!-- custom change for styles SAVE-CHILD css for nepali calendar new start  -->
+    $scope.generatedCustomId = ''; // custom change for SAVE-CHILD
+    $scope.nepaliDatePicker = "";
+    $scope.initiateNepaliCalendar = function () {
+        /*
+        var currentDate = new Date();
+        var currentNepaliDate = calenderFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate() - 1);
+        var formatedNepaliDate = calenderFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+        */
+        var currentDate = new Date();
+        var currentNepaliDate = calendarFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
+        var formatedNepaliDate = calendarFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+        $("#nepali-date-picker").val(formatedNepaliDate);
+        $("#nepali-date-picker").nepaliDatePicker({
+            dateFormat: "%y-%m-%d",
+            closeOnDateSelect: true,
+            //minDate: "२०००-२-१",
+            maxDate: formatedNepaliDate
+        });
+
+        $("#nepali-date-picker").on("dateChange", function (event) {
+            var finalUpdatedDate = "";
+            var date = [];
+            var val = $("#nepali-date-picker").val();
+            console.log('here is date', val);
+            //alert( val );
+            var arr = [];
+            var l = val.length;
+            for(var i=0; i<l; i++){
+                if( val[i] === "०") { arr.push(0) }
+                if( val[i] === "१") { arr.push(1) }
+                if( val[i] === "२") { arr.push(2) }
+                if( val[i] === "३") { arr.push(3) }
+                if( val[i] === "४") { arr.push(4) }
+                if( val[i] === "५") { arr.push(5) }
+                if( val[i] === "६") { arr.push(6) }
+                if( val[i] === "७") { arr.push(7) }
+                if( val[i] === "८") { arr.push(8) }
+                if( val[i] === "९") { arr.push(9) }
+                if( val[i] === "-") { arr.push("-") }
+                // console.log(l, arr);
+            }
+            var s = arr.toString();
+            s.replace(/\,/g,"");
+            var str2 = s.replace(/\,/g,"");
+            var arr = str2.split("-");
+            var year =  arr[0];
+            var month = arr[1];
+            var day = arr[2];
+            console.log(year, month, day , arr);
+            try{
+                var isoMonth = "";
+                var isoDate = "";
+                var converter = new DateConverter();
+                converter.setNepaliDate(year, month, day)
+                var convertedDate = converter.getEnglishYear()+"-"+converter.getEnglishMonth()+"-"+converter.getEnglishDate();
+
+                var IsoMonth = "";
+                var IsoDate = "";
+
+                if( parseInt(convertedDate.split("-")[1]) >=1 && parseInt(convertedDate.split("-")[1]) < 10 ){
+                    IsoMonth = "0" + parseInt(convertedDate.split("-")[1])
+                }
+                else{
+                    IsoMonth = parseInt(convertedDate.split("-")[1]);
+                }
+
+                if( parseInt(convertedDate.split("-")[2]) >=1 && parseInt(convertedDate.split("-")[2]) < 10 ){
+                    IsoDate = "0" + parseInt(convertedDate.split("-")[2])
+                }
+                else{
+                    IsoDate = parseInt(convertedDate.split("-")[2]);
+                }
+
+                finalUpdatedDate = parseInt(convertedDate.split("-")[0]) + "-" + IsoMonth + "-" + IsoDate;
+
+                console.log( "Final " + convertedDate + ' finalUpdatedDate ' + finalUpdatedDate );
+                console.log('date valooo', finalUpdatedDate);
+                $('#updatedISODate').val(finalUpdatedDate);
+                convertDateToISO();
+            }catch(err)
+            {
+                alert(err.message);
+            }
+        });
+
+    };
+    // <!-- custom change for styles SAVE-CHILD css for nepali calendar new end  -->
+
+    // custom change for SAVE-CHILD for fingerPrint string and id read Start
+    var url = $location.absUrl();
+    console.log(url);
+    var key = false;
+    var fidKey = "fid", fsKey = "string";
+    $scope.fingerprintID = "";
+    $scope.fingerprintStr = "";
+    var urll = url.split("html");
+    if (urll.length > 1) {
+        var url2 = urll[1];
+        var url3 = url2.split("&");
+        if (url3[0] === "?key=register") { key = true; }
+        if (key) {
+            var keyfs = url3[1];
+            var keyfid = url3[2];
+            if (fsKey === keyfs.split("=")[0]) {
+                var stringFs = keyfs.split("=")[1];
+                $scope.fingerprintStr = stringFs;
+                console.log($scope.fingerprintStr);
+
+            }
+            if (fidKey === keyfid.split("=")[0]) {
+                var numFid = keyfid.split("=")[1];
+                var anumFid = numFid.split("#")[0];
+                $scope.fingerprintID = anumFid;
+                console.log($scope.fingerprintID);
+            }
+        }
+    }
+    // custom change for SAVE-CHILD for fingerPrint string and id read end
 
     if(!$scope.attributesById){
         $scope.attributesById = [];
@@ -115,10 +234,24 @@ trackerCapture.controller('RegistrationController',
         });
     }
     
-    
+    // comment previous code
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
+    */
+
+    // custom change for SAVE-CHILD for disable attribute name client code finger print id and String Start
+    // update for SAVE CHILD  for disable attribute patient_identifier
+    $scope.isDisabled = function (attribute) {
+        if (attribute.code === 'Client_code' || attribute.code === 'fingerprint_id' || attribute.code === 'fingerprint_str') {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
+    // custom change for SAVE-CHILD for disable attribute name client code finger print id and String end
 
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
@@ -126,6 +259,74 @@ trackerCapture.controller('RegistrationController',
         orgUnit: $scope.selectedOrgUnit.id,
         orgUnitName: $scope.selectedOrgUnit ? $scope.selectedOrgUnit.displayName : ""
     };
+
+    // <!-- custom change for styles SAVE-CHILD css for nepali calendar new end  -->
+    function convertDateToISO() {
+        var finalUpdatedDate = $("#updatedISODate").val();
+        console.log('here is final date',finalUpdatedDate);
+        if (finalUpdatedDate) {
+            $scope.selectedEnrollment = {
+                enrollmentDate: finalUpdatedDate,
+                incidentDate: finalUpdatedDate,
+                orgUnit: $scope.selectedOrgUnit.id,
+                orgUnitName: $scope.selectedOrgUnit ? $scope.selectedOrgUnit.displayName : ""
+            };
+        }
+        else{
+
+            $scope.selectedEnrollment = {
+                enrollmentDate: $scope.today,
+                incidentDate: $scope.today,
+                orgUnit: $scope.selectedOrgUnit.id,
+                orgUnitName: $scope.selectedOrgUnit ? $scope.selectedOrgUnit.displayName : ""
+            };
+        }
+    }
+    $scope.getNepaliDateFromISODate = function(){
+        var finalUpdatedDate = $("#updatedISODate").val();
+        //alert( finalUpdatedDate + " -- $scope.selectedEnrollment -- " + $scope.selectedEnrollment.enrollmentDate  );
+        var tempEnrollmentDate = $scope.selectedEnrollment.enrollmentDate;
+
+        var nepaliEnrollmentConverter = new DateConverter();
+
+        nepaliEnrollmentConverter.setEnglishDate( parseInt(tempEnrollmentDate.split("-")[0]), parseInt(tempEnrollmentDate.split("-")[1]), parseInt(tempEnrollmentDate.split("-")[2]) );
+
+        console.log('nepali date', parseInt(tempEnrollmentDate.split("-")[0]), parseInt(tempEnrollmentDate.split("-")[1]), parseInt(tempEnrollmentDate.split("-")[2]) );
+
+        var convertedEnrollmentNepaliDate = nepaliEnrollmentConverter.getNepaliYear()+"-"+ nepaliEnrollmentConverter.getNepaliMonth() +"-"+ nepaliEnrollmentConverter.getNepaliDate();
+
+        var tempEnrollmentArr = [];
+        var l = convertedEnrollmentNepaliDate.length;
+        for(var i=0; i<l; i++){
+            if( convertedEnrollmentNepaliDate[i] === "0" ) { tempEnrollmentArr.push("०") }
+            if( convertedEnrollmentNepaliDate[i] === "1" ) { tempEnrollmentArr.push("१") }
+            if( convertedEnrollmentNepaliDate[i] === "2" ) { tempEnrollmentArr.push("२") }
+            if( convertedEnrollmentNepaliDate[i] === "3" ) { tempEnrollmentArr.push("३") }
+            if( convertedEnrollmentNepaliDate[i] === "4" ) { tempEnrollmentArr.push("४") }
+            if( convertedEnrollmentNepaliDate[i] === "5" ) { tempEnrollmentArr.push("५") }
+            if( convertedEnrollmentNepaliDate[i] === "6" ) { tempEnrollmentArr.push("६") }
+            if( convertedEnrollmentNepaliDate[i] === "7" ) { tempEnrollmentArr.push("७") }
+            if( convertedEnrollmentNepaliDate[i] === "8" ) { tempEnrollmentArr.push("८") }
+            if( convertedEnrollmentNepaliDate[i] === "9" ) { tempEnrollmentArr.push("९") }
+            if( convertedEnrollmentNepaliDate[i] === "-" ) { tempEnrollmentArr.push("-") }
+        }
+
+        //var tempEnrollmentString = tempEnrollmentArr.toString();
+        var tempEnrollmentString = tempEnrollmentArr.toString();
+        tempEnrollmentString.replace(/\,/g,"");
+        var tempEnrollmentStr2 = tempEnrollmentString.replace(/\,/g,"");
+        tempEnrollmentArr = tempEnrollmentStr2.split("-");
+        var tempEnrollmentYear =  tempEnrollmentArr[0];
+        var tempEnrollmentMonth = tempEnrollmentArr[1];
+        var tempEnrollmentDay = tempEnrollmentArr[2];
+        console.log(tempEnrollmentArr, tempEnrollmentYear, tempEnrollmentMonth , tempEnrollmentDay);
+
+        var finalEnrollmentNepaliDate = tempEnrollmentYear + "-" + tempEnrollmentMonth + "-" + tempEnrollmentDay;
+
+        $('#nepali-date-picker').val(finalEnrollmentNepaliDate);
+
+    };
+    // <!-- custom change for styles SAVE-CHILD css for nepali calendar new end  -->
 
     $scope.trackedEntityTypes = {available: []};
     var trackedEntityTypesById = {};
@@ -331,6 +532,32 @@ trackerCapture.controller('RegistrationController',
             }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+
+                //custom change for SAVE-CHILD fingerPrintID/string auto-populate when page load read start
+                $timeout( function (){
+                    if( !$scope.selectedTei["UHoTGT1dtjj"] && $scope.selectedTei["UHoTGT1dtjj"] === undefined)
+                    {
+                        $scope.selectedTei["UHoTGT1dtjj"] = $scope.fingerprintID; //put value on load form biometric application
+                    }
+                    if( !$scope.selectedTei["uiOMHu4LtAP"] && $scope.selectedTei["uiOMHu4LtAP"] === undefined)
+                    {
+                        $scope.selectedTei["uiOMHu4LtAP"] = $scope.fingerprintStr; //put value on load form biometric application
+                    }
+                    // for FHI-360 merge ( HIV-tracker)
+                    /*
+                    if( !$scope.selectedTei["PWdxGAN3OCD"] && $scope.selectedTei["PWdxGAN3OCD"] === undefined)
+                    {
+                        $scope.selectedTei["PWdxGAN3OCD"] = $scope.ImplementingAgencyAttrValue; //put default value on load form
+                    }
+
+                    if( !$scope.selectedTei["LmgPhZ0JTB3"] && $scope.selectedTei["LmgPhZ0JTB3"] === undefined)
+                    {
+                        $scope.selectedTei["LmgPhZ0JTB3"] = $scope.ImplementingPartnerAttrValue; //put default value on load form
+                    }
+                    */
+                },0);
+                //custom change for SAVE-CHILD fingerPrint read end
+
                 if (generateAttributes) {
                     fetchGeneratedAttributes();
                 }
@@ -694,7 +921,113 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
-        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+
+        // custom-change for SAVE CHILD for generate Custom-Id start in registration and update/profile
+        if ($scope.registrationMode === 'REGISTRATION' ) {
+            var lastName = "";
+            var dobYear = "";
+            var sex = "";
+            var serviceRegNo = ""; // for HIV-tracker
+            var automatedSerialNumber = ""; // for FHI360 merge
+
+            if ($scope.selectedTei.gVGIL7DJp4b !== undefined) {
+                var str = $scope.selectedTei.gVGIL7DJp4b;
+                lastName = str.substr(0, 2).toUpperCase();
+            }
+            if ($scope.selectedTei.fOVzjBOZdvQ !== undefined) {
+                var dob = $scope.selectedTei.fOVzjBOZdvQ;
+                dobYear = dob.substr(2, 2);
+            }
+            if ($scope.selectedTei.TN7r3ws7IG9 !== undefined) {
+                if ($scope.selectedTei.TN7r3ws7IG9 === 'Female') {
+                    sex = "1";
+                }
+                else if ($scope.selectedTei.TN7r3ws7IG9 === 'Male') {
+                    sex = "2";
+                }
+                else if ($scope.selectedTei.TN7r3ws7IG9 === 'Other') {
+                    sex = "3";
+                }
+            }
+            // for HIV-tracker
+
+            if ($scope.selectedTei.Fu4LhjNsJZL !== undefined) {
+                serviceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
+            }
+            // for FHI360 merge
+
+            if ($scope.selectedTei.pULhHeN8TUj !== undefined) {
+                automatedSerialNumber = $scope.selectedTei.pULhHeN8TUj;
+            }
+
+            if ($scope.selectedTei.PWdxGAN3OCD === "NCASC" ){
+                $scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+            }
+            else if($scope.selectedTei.PWdxGAN3OCD !== "NCASC"){
+                $scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
+            }
+
+            // for FHI360 merge
+            //$scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
+
+            //for HIV-tracker
+            //$scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+        }
+        else if ($scope.registrationMode === 'PROFILE' ) {
+            let lastNameProfile = "";
+            let dobYearProfile = "";
+            let sexProfile = "";
+            let regServiceRegNo = ""; // for HIV-tracker
+            //var automatedSerialNumber = ""; // for FHI360 merge
+            let regClientCode = "";
+
+            if ($scope.selectedTei.gVGIL7DJp4b !== undefined) {
+                let strP = $scope.selectedTei.gVGIL7DJp4b;
+                lastNameProfile = strP.substr(0, 2).toUpperCase();
+            }
+            if ($scope.selectedTei.fOVzjBOZdvQ !== undefined) {
+                let dobP = $scope.selectedTei.fOVzjBOZdvQ;
+                dobYearProfile = dobP.substr(2, 2);
+            }
+            if ($scope.selectedTei.TN7r3ws7IG9 !== undefined) {
+                if ($scope.selectedTei.TN7r3ws7IG9 === 'Female') {
+                    sexProfile = "1";
+                }
+                else if ($scope.selectedTei.TN7r3ws7IG9 === 'Male') {
+                    sexProfile = "2";
+                }
+                else if ($scope.selectedTei.TN7r3ws7IG9 === 'Other') {
+                    sexProfile = "3";
+                }
+            }
+            // check for generated client-code while registration
+            if ($scope.selectedTei.drKkLxaGFwv !== undefined) {
+                let clientCode = $scope.selectedTei.drKkLxaGFwv;
+                regServiceRegNo = clientCode.substr(5, clientCode.length);
+            }
+            else {
+                if ($scope.selectedTei.PWdxGAN3OCD === "NCASC" ){
+                    if ($scope.selectedTei.Fu4LhjNsJZL !== undefined) {
+                        regServiceRegNo = $scope.selectedTei.Fu4LhjNsJZL;
+                    }
+                }
+                else if($scope.selectedTei.PWdxGAN3OCD !== "NCASC"){
+                    if ($scope.selectedTei.pULhHeN8TUj !== undefined) {
+                        regServiceRegNo = $scope.selectedTei.pULhHeN8TUj;
+                    }
+                }
+            }
+            $scope.generatedCustomId = lastNameProfile + dobYearProfile + sexProfile + regServiceRegNo;
+
+            // for FHI360 merge
+            //$scope.generatedCustomId = lastName + dobYear + sex + automatedSerialNumber;
+
+            //for HIV-tracker
+            //$scope.generatedCustomId = lastName + dobYear + sex + serviceRegNo;
+        }
+        // end // custom-change for SAVE CHILD for generate Custom-Id start in registration and update/profile
+
+        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById,$scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.apiFormattedTei = result.tei;
 
