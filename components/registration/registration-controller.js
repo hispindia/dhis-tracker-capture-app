@@ -688,7 +688,7 @@ trackerCapture.controller('RegistrationController',
         // start
         $scope.projectDonor = "";
         var finalGeneratedCustomId = "";
-        if ( ( $scope.selectedProgram.id === "y6lXVg8TdOj"  || $scope.selectedProgram.id === "aYkLHnoPNo5"  || $scope.selectedProgram.id === "VscnMM6g6Ow")  && $scope.selectedTei.KLSVjftH2xS !== undefined )
+        if ( ( $scope.selectedProgram.id === "y6lXVg8TdOj"  || $scope.selectedProgram.id === "aYkLHnoPNo5" || $scope.selectedProgram.id === "VscnMM6g6Ow" || $scope.selectedProgram.id === "ulfc9uQTQoi"  )  && $scope.selectedTei.KLSVjftH2xS !== undefined )
         {
             $scope.projectDonor = $scope.selectedTei.KLSVjftH2xS;
         }
