@@ -1443,6 +1443,10 @@ trackerCapture
           for( var i=0; i<$scope.userDetails.userGroups.length; i++ ){
             if ( $scope.userDetails.userGroups[i].displayName === 'Self Assessment' || $scope.userDetails.userGroups[i].displayName === 'Ex-Ante Assessment' || $scope.userDetails.userGroups[i].displayName === 'Ex-Post Assessment'){
               $scope.userGroupName = $scope.userDetails.userGroups[i].displayName;
+              break;
+            }
+            else {
+              $scope.userGroupName = $scope.userDetails.userGroups[i].displayName;
             }
           }
         }
@@ -1555,7 +1559,7 @@ trackerCapture
                 }
               }
               // custom change for hide hide/un-hide events based on user-role, user-group and data-element value
-              if( $scope.filterProgramList.indexOf( dhis2Event.program ) !== -1 && $scope.currentUserRole === "NOT_SUPERUSER" && dhis2Event.dataValues.length !==0 )
+              if( $scope.filterProgramList.indexOf( dhis2Event.program ) !== -1 && $scope.userGroupName !== "Superuser" && dhis2Event.dataValues.length !==0 )
               {
                 for( var j=0; j < dhis2Event.dataValues.length; j++ ){
                   if ( dhis2Event.dataValues[j].dataElement === 'hqDoSMfLh8F' && dhis2Event.dataValues[j].value === $scope.userGroupName ){
@@ -1574,12 +1578,12 @@ trackerCapture
           $scope.orgUnitNames = CurrentSelection.getOrgUnitNames();
           $scope.fileNames = CurrentSelection.getFileNames();
           $scope.allEventsSorted = orderByFilter(
-            $scope.allEventsSorted,
-            "-sortingDate"
-          ).reverse();
+          $scope.allEventsSorted, "-sortingDate").reverse();
           sortEventsByStage(null);
+
           // custom change for hide hide/un-hide events based on user-role, user-group and data-element value
-          if( $scope.filterProgramList.indexOf( $scope.currentEvent.program ) !== -1 && $scope.currentUserRole === "NOT_SUPERUSER" && $scope.currentEvent.dataValues.length !==0 )
+
+          if( $scope.filterProgramList.indexOf( $scope.currentEvent.program ) !== -1 && $scope.userGroupName !== "Superuser"&& $scope.currentEvent.dataValues.length !==0 )
           {
             for( var k=0; k < $scope.currentEvent.dataValues.length; k++ ){
               if ( $scope.currentEvent.dataValues[k].dataElement === 'hqDoSMfLh8F' && $scope.currentEvent.dataValues[k].value === $scope.userGroupName ){
