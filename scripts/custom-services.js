@@ -64,14 +64,15 @@ angular.module('trackerCaptureServices')
                         }
 
                         var totalTei = totalTeiCount;
-                        totalTei = totalTei%10000;
+                        totalTei = totalTei%100000;
 
                         if( totalTei === 0 ) totalTei = 1;
 
-                        if( totalTei <10) prefix="0000";
-                        else if (totalTei >9 && totalTei<100) prefix="000";
-                        else if(totalTei>99 && totalTei<1000) prefix="00";
-                        else if(totalTei>999 && totalTei<10000) prefix="0";
+                        if( totalTei <10) prefix="00000";
+                        else if (totalTei >9 && totalTei<100) prefix="0000";
+                        else if(totalTei>99 && totalTei<1000) prefix="000";
+                        else if(totalTei>999 && totalTei<10000) prefix="00";
+                        else if(totalTei>9999 && totalTei<100000) prefix="0";
                         // change in requirement - adding random number
                         //prefix=Math.floor(Math.random()*(9999-1000) + 1000);
                         //def.resolve(constant + prefix + totalTei );

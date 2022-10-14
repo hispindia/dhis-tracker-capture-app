@@ -72,7 +72,7 @@
                                             {{selectedProgram.incidentDateLabel}}
                                         </td>
                                         <td class="absorbing-column" ng-if="!incidentDateState.editable">
-                                            <input type="text" ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}" class="form-control" d2-date ng-model="selectedEnrollment.incidentDate" ng-disabled="true"/>
+                                            <input type="text" ng-attr-placeholder="{{dhis2CalendarFormat.keyDateFormat}}" class="form-control" d2-date ng-model="selectedEnrollment.incidentDate" ng-disabled="!userAuthority.ALL"/>
                                         </td>
                                         <td class="absorbing-column" ng-if="incidentDateState.editable">
                                             <ng-form name="incidentDateForm" novalidate>
