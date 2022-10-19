@@ -1582,7 +1582,7 @@ trackerCapture
           sortEventsByStage(null);
 
           // custom change for hide hide/un-hide events based on user-role, user-group and data-element value
-
+          /*
           if( $scope.filterProgramList.indexOf( $scope.currentEvent.program ) !== -1 && $scope.userGroupName !== "Superuser"&& $scope.currentEvent.dataValues.length !==0 )
           {
             for( var k=0; k < $scope.currentEvent.dataValues.length; k++ ){
@@ -1603,9 +1603,10 @@ trackerCapture
           }
           //alert( "show Event Coordinate -- "  + $scope.showEventCoordinate );
           // end
+          */
 
-          //$scope.showDataEntry($scope.currentEvent, true, true);
-          //$scope.eventsLoaded = true;
+          $scope.showDataEntry($scope.currentEvent, true, true);
+          $scope.eventsLoaded = true;
         } else {
           //There is no events - so loading is finished:
           $scope.eventsLoaded = true;

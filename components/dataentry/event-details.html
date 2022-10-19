@@ -1,7 +1,7 @@
 <!-- event dates/scheduling begin -->
-<div class="row" ng-show="showEventCoordinate === 'YES'">
+<!-- <div class="row" ng-show="showEventCoordinate === 'YES'"> -->
 <div class="row" ng-if="displayCustomForm !== 'TABLE' && displayCustomForm !== 'COMPARE'">
-        
+
     <div ng-class="{true: 'col-md-12', false: 'col-md-6'} [currentStage.hideDueDate || currentStage.periodType !== undefined]">
         {{currentStage.executionDateLabel ? currentStage.executionDateLabel : 'report_date' | translate}}
         <span class="required">*</span>
@@ -50,10 +50,10 @@
         <input type="text"
                class="form-control not-for-screen"
                ng-class="{'input-success': dueDateSaved}"
-               ng-attr-value={{currentEvent.dueDate}}>        
-        <div ng-messages="outerDataEntryForm.dueDate.$error" ng-if="interacted(outerDataEntryForm.dueDate)" class="required" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">                        
+               ng-attr-value={{currentEvent.dueDate}}>
+        <div ng-messages="outerDataEntryForm.dueDate.$error" ng-if="interacted(outerDataEntryForm.dueDate)" class="required" ng-messages-include="../dhis-web-commons/angular-forms/error-messages.html">
         </div>
-    </div>    
+    </div>
 </div>
 <!-- event dates/scheduling end -->
 <!-- coordinates begin -->
@@ -66,9 +66,9 @@
                 d2-callback-function="saveGeometry()"
                 d2-disabled="selectedOrgUnit.closedStatus || currentEvent.editingNotAllowed || selectedEnrollment.status !== 'ACTIVE'"
                 d2-geometry-type="currentStage.featureType"
-                >
+        >
         </d2-geometry>
-    </div>   
+    </div>
 </div>
 <!-- coordinates end -->
 
@@ -76,9 +76,9 @@
     <div class="col-sm-12">
         {{'assigned_user' | translate}}
         <d2-assign-users-input d2-model="currentEvent"
-                        d2-disabled="!eventEditable()"
-                        d2-save-method="saveAssignedUser"
-                        d2-saved="assignedUserSaved">
+                               d2-disabled="!eventEditable()"
+                               d2-save-method="saveAssignedUser"
+                               d2-saved="assignedUserSaved">
         </d2-assign-users-input>
     </div>
 </div>
@@ -86,13 +86,13 @@
 <!-- attribute category options begin -->
 <div class="row" ng-if="selectedProgram.categoryCombo && !selectedProgram.categoryCombo.isDefault && currentEvent && currentEvent.attributeCategoryOptions && currentEvent.attributeOptionCombo">
     <div class="col-sm-12">
-        
-        <a href 
-           ng-click="editAttributeCategoryOptions()" 
+
+        <a href
+           ng-click="editAttributeCategoryOptions()"
            ng-attr-title="{{'edit' | translate}}">
             {{selectedProgram.categoryCombo.displayName}}  <i class="fa fa-pencil-square-o"></i>
-        </a>        
-        
+        </a>
+
         <div ng-if="showAttributeCategoryOptions">
             <table class="table table-striped table-bordered">
                 <tr ng-repeat="category in selectedProgram.categoryCombo.categories">
@@ -101,13 +101,13 @@
                     </td>
                     <td>
                         <ui-select ng-model="category.selectedOption"
-                                theme="select2"
-                                name="foo"
-                                on-select="saveAttributeCategoryOptions()"
-                                style="width: 100%">
+                                   theme="select2"
+                                   name="foo"
+                                   on-select="saveAttributeCategoryOptions()"
+                                   style="width: 100%">
                             <ui-select-match allow-clear="false" ng-class="getOptionSaveNotifcationClass(category.id)"  class="form-control-ui-select"  ng-attr-placeholder="{{'select_or_search' | translate}}">{{$select.selected.displayName  || $select.selected}}</ui-select-match>
                             <ui-select-choices  repeat="option in category.categoryOptions | filter:{displayName:$select.search} | limitTo:maxOptionSize">
-                              <span ng-bind-html="option.displayName | highlight: $select.search"></span>
+                                <span ng-bind-html="option.displayName | highlight: $select.search"></span>
                             </ui-select-choices>
                         </ui-select>
                     </td>
@@ -115,6 +115,7 @@
             </table>
         </div>
     </div>
-</div>
+
 </div>
 <!-- attribute category options end -->
+<!--</div>-->
