@@ -33,6 +33,7 @@ trackerCapture.controller('EventCreationController',
                 ModalService,
                 CurrentSelection,
                 TEIService,
+                DHIS2URL,
                 TCOrgUnitService) {
     $scope.selectedOrgUnit = orgUnit;
     $scope.selectedEnrollment = enrollment;      
@@ -328,6 +329,61 @@ trackerCapture.controller('EventCreationController',
 
     $scope.onetimeReferral = function(){
         $scope.save();
+        /*
+        TEIService.sendEmail().then(function(emailSendResponse){
+            console.log( emailSendResponse.message );
+        });
+
+        TEIService.sendSMSSingleRecipient().then(function(smsSendResponse){
+            console.log( smsSendResponse.message );
+        });
+
+        TEIService.sendSMSMultipleRecipient().then(function(multipleSmsSendResponse){
+            console.log( multipleSmsSendResponse.message );
+        });
+        */
+        var currSelections = CurrentSelection.get();
+        $scope.tei = currSelections.tei;
+        TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit )
+        
+        console.log( "Email and SMS send" );
+
+        /*
+        var tempRecipients = [];
+        tempRecipients.push( "mithilesh.thakur@hispindia.org" );
+        tempRecipients.push( "mithilesh.hisp@gmail.com" );
+        tempRecipients.push( "swasthyakawach@hispindia.org" );
+        var emailParam = {
+            "recipients":tempRecipients,
+            "subject": "HIV Referal message",
+            "message": "this is HIV-Tracker Referal message"
+        };
+        var aaa = {};
+        aaa.recipients = tempRecipients;
+        aaa.subject = "HIV Referal message";
+        aaa.message = "this is HIV-Tracker Referal message";
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            //data: JSON.stringify(emailParam),
+            url: '../api/email/notification?recipients=mithilesh.hisp@gmail.com&subject=HIV Referal message&message=this is HIV-Tracker Referal message',
+
+            success: function (response) {
+                //console.log( __rowNum__ + " -- "+ row.event + "Event updated with " + row.value + "response: " + response );
+                console.log(  " response: " + JSON.stringify(response) );
+            },
+            error: function (response) {
+                console.log(  " response: " + JSON.stringify(response) );
+            },
+            warning: function (response) {
+                console.log(  " response: " + JSON.stringify(response) );
+            }
+
+        });
+        */
     };
     
     $scope.movePermanently = function(){
@@ -345,6 +401,11 @@ trackerCapture.controller('EventCreationController',
             TEIService.changeTeiProgramOwner($scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit).then(function(response){
                 $scope.save();
                 $rootScope.$broadcast('ownerUpdated', {programExists: true});
+                /*
+                TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit ).then(function(emailSendResponse){
+                    console.log( emailSendResponse.message );
+                });
+                */
             });
         });
     };
