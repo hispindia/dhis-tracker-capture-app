@@ -1234,6 +1234,8 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             var url =  DHIS2URL+'/tracker/ownership/transfer?trackedEntityInstance='+tei+'&program='+program+'&ou='+ou;
             return $http.put(url,{});
         },
+
+        // add methods for send SMS and E-mail when TEI move One-time referal and Move permanently start
         sendEmail: function(){
             //DHIS2URL + '/email/test'
             //var emailParam = "recipients=mithilesh.thakur@hispindia.org&subject=HIV Referal message&message=this is HIV-Tracker Referal message"
@@ -1348,6 +1350,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             return deferred.promise;
         }
     };
+    // end methods for send SMS and E-mail when TEI move One-time referal and Move permanently
 })
 
 /* Factory for getting tracked entity attributes */

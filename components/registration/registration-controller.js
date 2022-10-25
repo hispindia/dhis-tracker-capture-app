@@ -260,6 +260,14 @@ trackerCapture.controller('RegistrationController',
         orgUnitName: $scope.selectedOrgUnit ? $scope.selectedOrgUnit.displayName : ""
     };
 
+    $scope.enrollmentDateState = {
+        date: $scope.selectedEnrollment.enrollmentDate,
+    };
+
+    $scope.incidentDateState = {
+        date: $scope.selectedEnrollment.incidentDate,
+    };
+
     // <!-- custom change for styles SAVE-CHILD css for nepali calendar new end  -->
     function convertDateToISO() {
         var finalUpdatedDate = $("#updatedISODate").val();
@@ -561,7 +569,7 @@ trackerCapture.controller('RegistrationController',
                 if (generateAttributes) {
                     fetchGeneratedAttributes();
                 }
-                if ($scope.selectedProgram && $scope.selectedProgram.id) {
+                if ($scope.selectedProgram.id) {
                     if ($scope.selectedProgram.dataEntryForm && $scope.selectedProgram.dataEntryForm.htmlCode) {
                         $scope.customRegistrationFormExists = true;
                         $scope.trackedEntityForm = $scope.selectedProgram.dataEntryForm;
@@ -605,6 +613,9 @@ trackerCapture.controller('RegistrationController',
                         $scope.customDataEntryForm = CustomFormService.getForProgramStage($scope.currentStage, $scope.prStDes);
                     }
                 }
+                $scope.attributeSections = ($scope.selectedProgram.programSections.length)
+                    ? AttributeUtils.userDefinedAttributeSections($scope.attributes, $scope.selectedProgram.programSections)
+                    : AttributeUtils.defaultAttributeSections($scope.attributes, $scope.widgetTitle);
             });
         }
 
@@ -620,6 +631,7 @@ trackerCapture.controller('RegistrationController',
                     if (generateAttributes) {
                         fetchGeneratedAttributes();
                     }
+                    $scope.attributeSections = AttributeUtils.defaultAttributeSections($scope.attributes, $scope.widgetTitle);
                 }
             });
         }
@@ -1771,5 +1783,24 @@ trackerCapture.controller('RegistrationController',
 
     var showTetRegistrationButtons = function(){
         return $scope.trackedEntityTypes.selected && $scope.attributes && $scope.attributes.length > 3;
+    }
+
+    $scope.updateEnrollmentDate = function(){
+        if(!DateUtils.isValid($scope.enrollmentDateState.date) || !$scope.selectedProgram.selectEnrollmentDatesInFuture && DateUtils.isAfterToday($scope.enrollmentDateState.date)){
+            $scope.enrollmentDateState.date = $scope.selectedEnrollment.enrollmentDate;
+            return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.enrollmentDateLabel + ' ' + $translate.instant('invalid'));
+        } else {
+            $scope.selectedEnrollment.enrollmentDate = $scope.enrollmentDateState.date;
+        }
+    }
+
+    $scope.updateIncidentDate = function(){
+        if(!DateUtils.isValid($scope.incidentDateState.date) || !$scope.selectedProgram.selectIncidentDatesInFuture && DateUtils.isAfterToday($scope.incidentDateState.date)){
+            $scope.incidentDateState.date = $scope.selectedEnrollment.incidentDate;
+            return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.incidentDateLabel + ' ' + $translate.instant('invalid'));
+        }
+        else {
+            $scope.selectedEnrollment.incidentDate = $scope.incidentDateState.date;
+        }
     }
 });

@@ -217,7 +217,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             if (!dateValue) {
                 return;
             }
-            dateValue = moment(dateValue, "YYYY-MM-DD");
+            dateValue = moment(dateValue, CalendarService.getSetting().momentFormat);
             if (dateValue.isBefore(moment())) {
                 return true;
             }
@@ -227,7 +227,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             if (!dateValue) {
                 return;
             }
-            dateValue = moment(dateValue, "YYYY-MM-DD");
+            dateValue = moment(dateValue, CalendarService.getSetting().momentFormat);
             if (dateValue.isAfter(moment())) {
                 return true;
             }
@@ -1684,14 +1684,14 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             if(processedValue === "Yes") {
             processedValue = true;
             }
-            else if(processedValue === "No") {
+            else if(processedValue === "No" || processedValue === "false") {
                 processedValue = false;
             }
             else if(processedValue && eval(processedValue)) {
                 processedValue = true;
             }
             else {
-                processedValue = false;
+                processedValue = "''";
             }
         }
         else if( valueType === "INTEGER" || valueType === "NUMBER" || valueType === "INTEGER_POSITIVE"
@@ -3096,7 +3096,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         },
         "d2:inOrgUnitGroup": {
             parameters: 1,
-            execute: function(parameters) {
+            execute: function(parameters, _, selectedOrgUnit) {
                 var group = parameters[0];
                 var isInGroup = "false";
                 var orgUnitGroups = (selectedOrgUnit && selectedOrgUnit.g) || [];
@@ -3201,7 +3201,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         return false;
     };
 
-    function internalExecuteExpression(applicableDhisFunctions, expression, expressionModuloStrings, variablesHash) {
+    function internalExecuteExpression(applicableDhisFunctions, expression, expressionModuloStrings, variablesHash, selectedOrgUnit) {
         // Find all d2-functions appearing in the given expression
         const includedDhisFunctions = applicableDhisFunctions
             .filter(({ name }) => expressionModuloStrings.includes(`${name}`));
@@ -3234,7 +3234,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             accExpression += expression.substring(currentExpressionIndex, functionCall.index);
             const { args, closingIndex } = extractArguments(expression, expressionModuloStrings, functionCall.index);
             const evaluatedArguments = args.map(({ argument, argumentModuloStrings }) =>
-                internalExecuteExpression(includedDhisFunctions, argument, argumentModuloStrings, variablesHash));
+                internalExecuteExpression(includedDhisFunctions, argument, argumentModuloStrings, variablesHash, selectedOrgUnit));
             const functionName = functionCall[0];
             const dhisFunction = dhisFunctions[functionName];
             if (isFunctionSignatureBroken(dhisFunction.parameters, evaluatedArguments)) {
@@ -3242,7 +3242,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 // Function call is not possible to evaluate, remove the call
                 accExpression += 'false';
             } else {
-                const dhisFunctionResult = dhisFunction.execute(evaluatedArguments, variablesHash);
+                const dhisFunctionResult = dhisFunction.execute(evaluatedArguments, variablesHash, selectedOrgUnit);
                 accExpression += dhisFunctionResult;
             }
 
@@ -3263,7 +3263,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         try {
             const expressionModuloStrings = expression.replace(/'[^']*'|"[^"]*"/g, match => ' '.repeat(match.length));
             const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
-            answer = internalExecuteExpression(applicableDhisFunctions, expression, expressionModuloStrings, variablesHash);
+            answer = internalExecuteExpression(applicableDhisFunctions, expression, expressionModuloStrings, variablesHash, selectedOrgUnit);
 
             if(flag.verbose) {
                 $log.info("Expression with id " + identifier + " was successfully run. Original condition was: " + beforereplacement + " - Evaluation ended up as:" + expression + " - Result of evaluation was:" + answer);
@@ -4511,7 +4511,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         }
     };
 })
-.factory("AttributeUtils", function($http,DHIS2URL){
+.factory("AttributeUtils", function($http,DHIS2URL,$translate){
     var getValueUrl = function(valueToSet, selectedTei, program, orgUnit, required){
         var valueUrlBase = valueToSet+"=";
         var valueUrl = null;
@@ -4567,6 +4567,32 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                     return response.data;
                 });
             });
+        },
+        defaultAttributeSections: function(attributes, widgetTitle) {
+            const attributeSections = [{ displayName: widgetTitle === 'profile' ? '' : $translate.instant('profile'), attributes }];
+            return { [true]: attributeSections, [false]: attributeSections };
+        },
+        userDefinedAttributeSections: function(attributes, programSections) {
+            var programTrackedEntityAttributes = attributes.reduce(function(acc, attribute){
+                if (attribute.programTrackedEntityAttribute) {
+                    acc[attribute.programTrackedEntityAttribute.trackedEntityAttribute.id] = attribute;
+                }
+                return acc;
+            }, {});
+
+            // `true`: all attributes combined into a single section
+            // `false`: attributes distributed into multiple sections
+            return programSections.reduce(function(acc, programSection) {
+                const attributeList = acc[false][0].attributes;
+                acc[true].push({
+                    displayName: programSection.displayName,
+                    attributes: programSection.trackedEntityAttributes.map(({id}) => {
+                        attributeList.push(programTrackedEntityAttributes[id])
+                        return programTrackedEntityAttributes[id];
+                    }),
+                });
+                return acc;
+            }, { [true]: [], [false]: [{ attributes: [] }] });
         }
     }
 

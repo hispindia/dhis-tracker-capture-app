@@ -329,6 +329,8 @@ trackerCapture.controller('EventCreationController',
 
     $scope.onetimeReferral = function(){
         $scope.save();
+
+        // start methods for send SMS and E-mail when TEI move One-time referal and Move permanently
         /*
         TEIService.sendEmail().then(function(emailSendResponse){
             console.log( emailSendResponse.message );
@@ -384,6 +386,7 @@ trackerCapture.controller('EventCreationController',
 
         });
         */
+        // end methods for send SMS and E-mail when TEI move One-time referal and Move permanently
     };
     
     $scope.movePermanently = function(){
@@ -401,11 +404,13 @@ trackerCapture.controller('EventCreationController',
             TEIService.changeTeiProgramOwner($scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit).then(function(response){
                 $scope.save();
                 $rootScope.$broadcast('ownerUpdated', {programExists: true});
+                // start methods for send SMS and E-mail when TEI move One-time referal and Move permanently
                 /*
                 TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit ).then(function(emailSendResponse){
                     console.log( emailSendResponse.message );
                 });
                 */
+                // end methods for send SMS and E-mail when TEI move One-time referal and Move permanently
             });
         });
     };
