@@ -163,6 +163,9 @@ trackerCapture
         return arr;
       };
 
+      $scope.restDE = function(de) {
+        return de.slice($scope.rowLength)
+      }
 
       //hideTopLineEventsForFormTypes is only used with main menu
       $scope.hideTopLineEventsForFormTypes = { TABLE: true, COMPARE: true };
