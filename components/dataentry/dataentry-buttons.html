@@ -13,13 +13,17 @@
             class="btn btn-warning" 
             ng-disabled="!eventEditable(true)"
             ng-if="!currentEvent.eventDate">{{currentEvent.status === 'SKIPPED' ? 'unskip' : 'skip'| translate}}</a>
-    
-        <div class="pull-right">
+
+        <!-- custom change for hide delete/print button based on user-role -->
+        <!--<div class="pull-right">-->
+        <div class="pull-right" ng-show="currentUserRole === 'Superuser'">
             <a href ng-click="deleteEvent()" 
                 ng-disabled="!eventEditable(true)"
                 class="btn btn-danger horizontal-spacing">{{'delete'| translate}}</a>
-            <a href class="btn btn-info" ng-click="print('print-div');">{{'print_form'| translate}}</a>
+            <!--<a href class="btn btn-info" ng-click="print('print-div');">{{'print_form'| translate}}</a>-->
         </div>
+        <div class="pull-right"><a href class="btn btn-info" ng-click="print('print-div');">{{'print_form'| translate}}</a></div>
+        <!-- end -->
     </div>
 </div>
  <!-- data entry/event buttons end -->     

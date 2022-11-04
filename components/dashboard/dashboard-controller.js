@@ -741,4 +741,26 @@ trackerCapture.controller('DashboardController',
     $scope.showManageTeiDropdown = function(){
         return $scope.trackedEntityType && $scope.trackedEntityType.access.data.write && $scope.selectedProgram && $scope.selectedProgram.access.data.write;
     }
+
+    // custom change for hide delete/deactivate TEI dropdown based on user-role
+    $scope.currentUserRoleDashboard = "";
+    $scope.userDetails = SessionStorageService.get('USER_PROFILE');
+    if( $scope.userDetails.userCredentials.userRoles.length !==0 )
+    {
+        for( var i=0; i<$scope.userDetails.userCredentials.userRoles.length; i++ ){
+
+            if ( $scope.userDetails.userCredentials.userRoles[i].name === 'Superuser' ){
+                $scope.currentUserRoleDashboard = $scope.userDetails.userCredentials.userRoles[i].name;
+            }
+            else{
+                $scope.currentUserRoleDashboard = "NOT_SUPERUSER";
+            }
+        }
+    }
+    else{
+        $scope.currentUserRoleDashboard = "NOT_SUPERUSER";
+    }
+    //end
+
+
 });

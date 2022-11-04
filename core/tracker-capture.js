@@ -209,7 +209,10 @@ function getUserProfile()
        return; 
     }
     
-    return dhis2.tracker.getTrackerObject(null, 'USER_PROFILE', DHIS2URL + '/me.json', 'fields=id,displayName,userCredentials[username,userRoles[id,programs,authorities]],organisationUnits[id,displayName,programs[id],level,code,path,children[id,displayName,programs[id],level,children[id]]],dataViewOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]],teiSearchOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]]', 'sessionStorage', dhis2.tc.store);
+    //return dhis2.tracker.getTrackerObject(null, 'USER_PROFILE', DHIS2URL + '/me.json', 'fields=id,displayName,userCredentials[username,userRoles[id,programs,authorities]],organisationUnits[id,displayName,programs[id],level,code,path,children[id,displayName,programs[id],level,children[id]]],dataViewOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]],teiSearchOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]]', 'sessionStorage', dhis2.tc.store);
+
+    // change done for FHI-360-Save-CHILD and add user-role-name for hide event/enrollment delete button
+    return dhis2.tracker.getTrackerObject(null, 'USER_PROFILE', DHIS2URL + '/me.json', 'fields=id,displayName,attributeValues[value,attribute[id,code,name]],userCredentials[username,userRoles[id,name,programs,authorities]],organisationUnits[id,displayName,programs[id],level,code,path,children[id,displayName,programs[id],level,children[id]]],dataViewOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]],teiSearchOrganisationUnits[id,displayName,programs[id],level,path,code,children[id,displayName,programs[id],level,children[id]]]', 'sessionStorage', dhis2.tc.store);
 }
 
 function getConstants()
