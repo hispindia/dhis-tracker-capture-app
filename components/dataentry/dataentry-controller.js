@@ -1003,7 +1003,7 @@ trackerCapture.controller('DataEntryController',
                 $scope.currentStage.rulesExecuted = true;
             });
         } else {
-            TrackerRulesExecutionService.executeRules($scope.allProgramRules, $scope.currentEvent, evs, $scope.prStDes, $scope.attributesById, $scope.selectedTei, $scope.selectedEnrollment, $scope.optionSets, flag);
+            return TrackerRulesExecutionService.executeRules($scope.allProgramRules, $scope.currentEvent, evs, $scope.prStDes, $scope.attributesById, $scope.selectedTei, $scope.selectedEnrollment, $scope.optionSets, flag);
         }
     };
 
@@ -1028,6 +1028,7 @@ trackerCapture.controller('DataEntryController',
         $scope.tabularEntryStages = [];
         $rootScope.ruleeffects = {};        
         $scope.prStDes = [];
+        $scope.prStDesInStage = {};
         $scope.allProgramRules = [];
         $scope.allowProvidedElsewhereExists = [];
         $scope.optionsReady = false;
@@ -1075,11 +1076,13 @@ trackerCapture.controller('DataEntryController',
                     }
 
                     stage.programStageDataElementsCollection = {};
+                    $scope.prStDesInStage[stage.id] = {};
 
                     stage.executionDateLabel = stage.executionDateLabel ? stage.executionDateLabel : $translate.instant('report_date');
                     stage.dueDateLabel = stage.dueDateLabel ? stage.dueDateLabel : $translate.instant('due_date');
                     angular.forEach(stage.programStageDataElements, function (prStDe) {
                         $scope.prStDes[prStDe.dataElement.id] = prStDe;
+                        $scope.prStDesInStage[stage.id][prStDe.dataElement.id] = prStDe;
                         if(prStDe.allowProvidedElsewhere){
                             $scope.allowProvidedElsewhereExists[stage.id] = true;
                         }
@@ -2006,15 +2009,20 @@ trackerCapture.controller('DataEntryController',
         
         $scope.currentElement = {id: "eventDate", event: eventToSave.event, saved: false};
 
+
         // add for nepali Calendar start
         if($scope.convertedFromNepaliCalEventDate !== '' ) {
             eventToSave.eventDate = $scope.convertedFromNepaliCalEventDate;
         }
         // add for nepali Calendar end
+
+        const isScheduleEvent = eventToSave.status === 'SCHEDULE';
+        
+
         var e = {event: eventToSave.event,
             enrollment: eventToSave.enrollment,
             dueDate: DateUtils.formatFromUserToApi(eventToSave.dueDate),
-            status: eventToSave.status === 'SCHEDULE' ? 'ACTIVE' : eventToSave.status,
+            status: isScheduleEvent ? 'ACTIVE' : eventToSave.status,
             program: eventToSave.program,
             programStage: eventToSave.programStage,
             orgUnit: eventToSave.dataValues && eventToSave.dataValues.length > 0 ? eventToSave.orgUnit : $scope.selectedOrgUnit.id,
@@ -2047,7 +2055,11 @@ trackerCapture.controller('DataEntryController',
             $scope.currentElement = {id: "eventDate", event: eventToSave.event, saved: true};
             $scope.currentEventOriginal = angular.copy($scope.currentEvent);
             $scope.currentStageEventsOriginal = angular.copy($scope.currentStageEvents);
-            $scope.executeRules();
+            $scope.executeRules().then(function(result) {
+                if (isScheduleEvent && !(result && result.ruleeffectsupdated)) {
+                    processRuleEffect(result.event, result.callerId);
+                }
+            });
         });
     };
 
@@ -3641,13 +3653,6 @@ trackerCapture.controller('DataEntryController',
         var width = angular.element(document.getElementById('tabelContainer'))[0].clientWidth;
         return width;
     };
-
-    $scope.setDateOnFocus = function(currentValue) {
-        if(!currentValue) {
-            $scope.currentEvent.eventDate = DateUtils.getToday();
-        }
-    };
-    
 })
 .controller('EventOptionsInTableController', function($scope, $translate){
     
