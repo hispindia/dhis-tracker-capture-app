@@ -1324,6 +1324,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         }
                     }
                     console.log( " phone no " + tempRecipientsPhoneNumber  );
+
                     var smsParam = {
                         //"recipients":tempRecipients,
                         "message": "Sms Text",
@@ -1348,6 +1349,24 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             });
 
             return deferred.promise;
+        },
+
+        sendEnrollmentSMS: function( mobileNumber, smsTextMessage){
+            "नमस्ते , तपाई सफलतापूर्वक यस V{org_unit_name} को  सेवामा भर्ना हुनु भएको छ। V{enrollment_date}. तपाइको ID A{drKkLxaGFwv}."
+            var tempRecipientsPhoneNumber = [];
+            tempRecipientsPhoneNumber.push( mobileNumber );
+            var smsParam = {
+                //"recipients":tempRecipients,
+                "message": smsTextMessage,
+                "recipients": tempRecipientsPhoneNumber
+            };
+
+            var promise = $http.post( DHIS2URL + '/sms/outbound', smsParam ).then(function(response){
+                return response.data;
+            }, function(response){
+                return response.data;
+            });
+            return promise;
         }
     };
     // end methods for send SMS and E-mail when TEI move One-time referal and Move permanently
