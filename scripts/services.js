@@ -1309,11 +1309,11 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                             var tempMessage = "this is HIV-Tracker Referal message";
 
                             console.log( " to user " + orgUnitUsers.users[i].username + " email : " + tempEmail );
-                            /*
+
                             var sendTempEmail = $http.post( DHIS2URL + '/email/notification?recipients=' + tempEmail + '&subject=' + tempSubject + '&message=' + tempMessage).then(function(emailSendResponse){
                                 console.log( emailSendResponse.message + " to user " + orgUnitUsers.users[i].username + " email : " + tempEmail );
                             });
-                            */
+
                         }
                     }
                     // collect phoneNumbers of users
@@ -1331,12 +1331,12 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         "recipients": tempRecipientsPhoneNumber
                     };
 
-                    /*
+
                     var sendTempSMS = $http.post( DHIS2URL + '/sms/outbound', smsParam ).then(function(multipleSmsSendResponse){
                         console.log( multipleSmsSendResponse.message );
 
                     });
-                     */
+
                 },
                 error: function (orgUnitUsers) {
                     console.log(  " response: " + JSON.stringify(orgUnitUsers) );
@@ -1352,7 +1352,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
         },
 
         sendEnrollmentSMS: function( mobileNumber, smsTextMessage){
-            "नमस्ते , तपाई सफलतापूर्वक यस V{org_unit_name} को  सेवामा भर्ना हुनु भएको छ। V{enrollment_date}. तपाइको ID A{drKkLxaGFwv}."
+            //"नमस्ते , तपाई सफलतापूर्वक यस V{org_unit_name} को  सेवामा भर्ना हुनु भएको छ। V{enrollment_date}. तपाइको ID A{drKkLxaGFwv}."
             var tempRecipientsPhoneNumber = [];
             tempRecipientsPhoneNumber.push( mobileNumber );
             var smsParam = {
@@ -1367,6 +1367,49 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 return response.data;
             });
             return promise;
+        },
+
+        sendEnrollmentEmail: function( ou, mobileNumber, smsTextMessage){
+            var deferred = $q.defer();
+            //organisationUnits/vXdngpv3PzI.json?fields=id,users[id,username,email,phoneNumber]
+            $.ajax({
+                type: "GET",
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                //data: JSON.stringify(emailParam),
+                url: DHIS2URL + '/organisationUnits/' +ou + '.json?fields=id,users[id,username,email,phoneNumber]',
+
+                success: function (orgUnitUsers) {
+                    //console.log( __rowNum__ + " -- "+ row.event + "Event updated with " + row.value + "response: " + response );
+                    //console.log(  " response: " + JSON.stringify(orgUnitUsers) );
+                    var tempRecipientsPhoneNumber = [];
+                    for( var i=0; i < orgUnitUsers.users.length; i++ ){
+
+                        if( orgUnitUsers.users[i].email !== undefined ){
+                            var tempEmail = orgUnitUsers.users[i].email;
+                            var tempSubject = "New TEI Registered";
+                            //var tempMessage = "this is HIV-Tracker Referal message";
+
+                            console.log( " to user " + orgUnitUsers.users[i].username + " email : " + tempEmail );
+
+                            var sendTempEmail = $http.post( DHIS2URL + '/email/notification?recipients=' + tempEmail + '&subject=' + tempSubject + '&message=' + smsTextMessage).then(function(emailSendResponse){
+                                console.log( emailSendResponse.message + " to user " + orgUnitUsers.users[i].username + " email : " + tempEmail );
+                            });
+                        }
+                    }
+                },
+                error: function (orgUnitUsers) {
+                    console.log(  " response: " + JSON.stringify(orgUnitUsers) );
+                    deferred.resolve(orgUnitUsers);
+                },
+                warning: function (orgUnitUsers) {
+                    console.log(  " response: " + JSON.stringify(orgUnitUsers) );
+                    deferred.resolve(orgUnitUsers);
+                }
+            });
+
+            return deferred.promise;
         }
     };
     // end methods for send SMS and E-mail when TEI move One-time referal and Move permanently

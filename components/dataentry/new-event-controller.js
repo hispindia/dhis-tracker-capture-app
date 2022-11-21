@@ -405,11 +405,10 @@ trackerCapture.controller('EventCreationController',
                 $scope.save();
                 $rootScope.$broadcast('ownerUpdated', {programExists: true});
                 // start methods for send SMS and E-mail when TEI move One-time referal and Move permanently
-                /*
+
                 TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit ).then(function(emailSendResponse){
                     console.log( emailSendResponse.message );
                 });
-                */
                 // end methods for send SMS and E-mail when TEI move One-time referal and Move permanently
             });
         });
