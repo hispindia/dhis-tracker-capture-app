@@ -299,6 +299,10 @@ trackerCapture.controller('EnrollmentController',
 
         $scope.activateDeactivateEnrollment = function () {
             
+            if (isInvalidEnrollmentDate() || isInvalidIncidentDate()) {
+                return;
+            }
+
             if($scope.enrollmentForm && $scope.enrollmentForm.$invalid){
                 NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_invalid"));
                 return;
@@ -327,6 +331,10 @@ trackerCapture.controller('EnrollmentController',
 
         $scope.completeReopenEnrollment = function () {
             
+            if (isInvalidEnrollmentDate() || isInvalidIncidentDate()) {
+                return;
+            }
+
             if($scope.enrollmentForm && $scope.enrollmentForm.$invalid){
                 NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_invalid"));
                 return;
@@ -400,6 +408,10 @@ trackerCapture.controller('EnrollmentController',
 
         $scope.markForFollowup = function () {
             
+            if (isInvalidEnrollmentDate() || isInvalidIncidentDate()) {
+                return;
+            }
+
             if($scope.enrollmentForm && $scope.enrollmentForm.$invalid){
                 NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_invalid"));
                 return;
@@ -410,13 +422,8 @@ trackerCapture.controller('EnrollmentController',
         };
 
         $scope.updateEnrollmentDate = function(){
-            if($scope.enrollmentForm && $scope.enrollmentForm.enrollmentDateForm && $scope.enrollmentForm.enrollmentDateForm.$invalid){
-                $scope.enrollmentDateState.date = $scope.selectedEnrollment.enrollmentDate;
-                return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.enrollmentDateLabel + ' ' + $translate.instant('invalid'));
-            }
-            else if(!$scope.userAuthority.canEditExpiredStuff && !DateUtils.verifyExpiryDate($scope.enrollmentDateState.date, $scope.selectedProgram.expiryPeriodType, $scope.selectedProgram.expiryDays)){
-                $scope.enrollmentDateState.date = $scope.selectedEnrollment.enrollmentDate;
-                return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.enrollmentDateLabel + ' ' + $translate.instant('expired'));
+            if (isInvalidEnrollmentDate()) {
+                return;
             }
             else if($scope.enrollmentDateState.warnIfEdit ) {
                 $scope.askUserToConfirmDateChange($scope.selectedProgram.enrollmentDateLabel).then(function(result){
@@ -425,20 +432,31 @@ trackerCapture.controller('EnrollmentController',
                 }, function(cancelResult){
                     $scope.enrollmentDateState.date = $scope.selectedEnrollment.enrollmentDate;
                 });
-            } else {
+            }
+            else {
                 $scope.selectedEnrollment.enrollmentDate = $scope.enrollmentDateState.date;
                 updateReportDate('enrollmentdate');
             }
         }
 
-        $scope.updateIncidentDate = function(){
-            if($scope.enrollmentForm && $scope.enrollmentForm.incidentDateForm && $scope.enrollmentForm.incidentDateForm.$invalid){
-                $scope.incidentDateState.date = $scope.selectedEnrollment.incidentDate;
-                return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.incidentDateLabel + ' ' + $translate.instant('invalid'));
+        var isInvalidEnrollmentDate = function(){
+            if($scope.enrollmentForm && $scope.enrollmentForm.enrollmentDateForm && $scope.enrollmentForm.enrollmentDateForm.$invalid
+                || !DateUtils.isValid($scope.enrollmentDateState.date)
+                || !$scope.selectedProgram.selectEnrollmentDatesInFuture && DateUtils.isAfterToday($scope.enrollmentDateState.date)){
+                $scope.enrollmentDateState.date = $scope.selectedEnrollment.enrollmentDate;
+                NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.enrollmentDateLabel + ' ' + $translate.instant('invalid'));
+                return true;
+            } else if(!$scope.userAuthority.canEditExpiredStuff && !DateUtils.verifyExpiryDate($scope.enrollmentDateState.date, $scope.selectedProgram.expiryPeriodType, $scope.selectedProgram.expiryDays)){
+                $scope.enrollmentDateState.date = $scope.selectedEnrollment.enrollmentDate;
+                NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.enrollmentDateLabel + ' ' + $translate.instant('expired'));
+                return true;
             }
-            else if(!$scope.userAuthority.canEditExpiredStuff && !DateUtils.verifyExpiryDate($scope.incidentDateState.date, $scope.selectedProgram.expiryPeriodType, $scope.selectedProgram.expiryDays)){
-                $scope.incidentDateState.date = $scope.selectedEnrollment.incidentDate;
-                return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.incidentDateLabel + ' ' + $translate.instant('expired'));
+            return false;
+        }
+
+        $scope.updateIncidentDate = function(){
+            if (isInvalidIncidentDate()){
+                return;
             }
             else if($scope.incidentDateState.warnIfEdit ) {
                 $scope.askUserToConfirmDateChange($scope.selectedProgram.incidentDateLabel).then(function(result){
@@ -454,6 +472,21 @@ trackerCapture.controller('EnrollmentController',
             }
         }
 
+        var isInvalidIncidentDate = function(){
+            if($scope.enrollmentForm && $scope.enrollmentForm.incidentDateForm && $scope.enrollmentForm.incidentDateForm.$invalid
+                || !DateUtils.isValid($scope.incidentDateState.date)
+                || !$scope.selectedProgram.selectIncidentDatesInFuture && DateUtils.isAfterToday($scope.incidentDateState.date)){
+                $scope.incidentDateState.date = $scope.selectedEnrollment.incidentDate;
+                NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.incidentDateLabel + ' ' + $translate.instant('invalid'));
+                return true;
+            } else if(!$scope.userAuthority.canEditExpiredStuff && !DateUtils.verifyExpiryDate($scope.incidentDateState.date, $scope.selectedProgram.expiryPeriodType, $scope.selectedProgram.expiryDays)){
+                $scope.incidentDateState.date = $scope.selectedEnrollment.incidentDate;
+                NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.incidentDateLabel + ' ' + $translate.instant('expired'));
+                return true;
+            }
+            return false;
+        }
+
         $scope.askUserToConfirmDateChange = function(dateName){
             var modalOptions = {
                 closeButtonText: 'cancel',
@@ -466,6 +499,9 @@ trackerCapture.controller('EnrollmentController',
         }
 
         $scope.updateEnrollmentGeometry = function(){
+            if (isInvalidEnrollmentDate() || isInvalidIncidentDate()) {
+                return;
+            }
             if($scope.enrollmentForm && $scope.enrollmentForm.geometryForm && $scope.enrollmentForm.geometryForm.$invalid){
                 $scope.enrollmentGeometryState.geometry = $scope.selectedEnrollment.geometry;
                 return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.featureType.toLowerCase() + ' ' + $translate.instant('invalid'));
@@ -480,6 +516,9 @@ trackerCapture.controller('EnrollmentController',
 
 
         var updateReportDate = function(type){
+            if (type === 'enrollmentdate' && isInvalidIncidentDate() || type === 'incidentdate' && isInvalidEnrollmentDate()) {
+                return;
+            }
             currentReportDate = {type: type, status: 'pending'};
             EnrollmentService.update($scope.selectedEnrollment).then(function(){
                 currentReportDate.status = 'saved';
@@ -515,7 +554,10 @@ trackerCapture.controller('EnrollmentController',
             return true;
         };
         
-        $scope.saveCoordinate = function(param){            
+        $scope.saveCoordinate = function(param){
+            if (isInvalidEnrollmentDate() || isInvalidIncidentDate()) {
+                return;
+            }
             var en = angular.copy( $scope.currentEnrollment );            
             $scope.enrollmentLatSaved = false;
             $scope.enrollmentLngSaved = false;            

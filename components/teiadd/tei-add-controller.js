@@ -37,19 +37,15 @@ trackerCapture.controller('TEIAddController',
     $scope.base = {};
     $scope.selectedConstraints = { currentTei: null, related: null};
     $scope.tempSelectedConstraints = { currentTei: null, related: null};
-    $scope.attributesById = CurrentSelection.getAttributesById();
-    $scope.base.attributesById = $scope.attributesById;
-    if(!$scope.attributesById){
-        $scope.attributesById = [];
-        AttributesFactory.getAll().then(function(atts){
-            angular.forEach(atts, function(att){
-                $scope.attributesById[att.id] = att;
-            });
-            
-            CurrentSelection.setAttributesById($scope.attributesById);
-            
+    
+    $scope.attributesById = [];
+    AttributesFactory.getAll().then(function(atts){
+        angular.forEach(atts, function(att){
+            $scope.attributesById[att.id] = att;
         });
-    }    
+        $scope.base.attributesById = $scope.attributesById;
+    });
+    
     
     $scope.optionSets = CurrentSelection.getOptionSets();        
     if(!$scope.optionSets){
@@ -164,7 +160,6 @@ trackerCapture.controller('TEIAddController',
     $scope.selectedProgram = selectedProgram;
     $scope.relatedProgramRelationship = relatedProgramRelationship;
     $scope.mainTei = selectedTei;    
-    $scope.attributesById = CurrentSelection.getAttributesById();
     $scope.addingTeiAssociate = false;
     
     $scope.searchOuTree = false;
@@ -193,6 +188,7 @@ trackerCapture.controller('TEIAddController',
     $scope.selectedTeiForDisplay = angular.copy($scope.mainTei);
     $scope.ouModes = [{name: 'SELECTED'}, {name: 'CHILDREN'}, {name: 'DESCENDANTS'}, {name: 'ACCESSIBLE'}];
     $scope.selectedOuMode = $scope.ouModes[0];
+    $scope.selectedCategoryOptions = {};
 
     //Paging
     $scope.pager = {pageSize: 50, page: 1, toolBarDisplay: 5};
@@ -667,8 +663,9 @@ trackerCapture.controller('TEIAddController',
                 TEIGridService,
                 AttributeUtils) {
     $scope.selectedOrgUnit = SessionStorageService.get('SELECTED_OU');
-    $scope.enrollment = {enrollmentDate: '', incidentDate: ''};    
-    $scope.attributesById = CurrentSelection.getAttributesById();
+    $scope.enrollment = {enrollmentDate: '', incidentDate: ''};
+    $scope.enrollmentDateState = { date: $scope.selectedEnrollment && $scope.selectedEnrollment.enrollmentDate || '' };
+    $scope.incidentDateState = { date: $scope.selectedEnrollment && $scope.selectedEnrollment.incidentDate || '' };
     $scope.today = DateUtils.getToday();
     $scope.trackedEntityForm = null;
     $scope.customRegistrationForm = null;
@@ -683,17 +680,12 @@ trackerCapture.controller('TEIAddController',
     var selections = CurrentSelection.get();
     $scope.selectedOrgUnit = selections.orgUnit;
 
-    $scope.attributesById = CurrentSelection.getAttributesById();
-    if(!$scope.attributesById){
-        $scope.attributesById = [];
-        AttributesFactory.getAll().then(function(atts){
-            angular.forEach(atts, function(att){
-                $scope.attributesById[att.id] = att;
-            });
-            
-            CurrentSelection.setAttributesById($scope.attributesById);
+    $scope.attributesById = [];
+    AttributesFactory.getAll().then(function(atts){
+        angular.forEach(atts, function(att){
+            $scope.attributesById[att.id] = att;
         });
-    }    
+    });  
 
     $scope.getTrackerAssociate = function(selectedAttribute, existingAssociateUid){
         return $scope.getTrackerAssociateInternal(selectedAttribute, existingAssociateUid, $scope.selectedTei).then(function(res){
@@ -770,16 +762,22 @@ trackerCapture.controller('TEIAddController',
         $scope.trackedEntityForm = null;
         $scope.customRegistrationForm = null;
         $scope.customFormExists = false;        
+        $scope.selectedCategoryOptions = {};
         AttributesFactory.getByProgram($scope.base.selectedProgramForRelative).then(function(atts){
-            $scope.attributes = TEIGridService.generateGridColumns(atts, null,false).columns;                      
-            if($scope.base.selectedProgramForRelative && $scope.base.selectedProgramForRelative.id && $scope.base.selectedProgramForRelative.dataEntryForm && $scope.base.selectedProgramForRelative.dataEntryForm.htmlCode){
-                $scope.customFormExists = true;
-                $scope.trackedEntityForm = $scope.base.selectedProgramForRelative.dataEntryForm;  
-                $scope.trackedEntityForm.attributes = $scope.attributes;
-                $scope.trackedEntityForm.selectIncidentDatesInFuture = $scope.base.selectedProgramForRelative.selectIncidentDatesInFuture;
-                $scope.trackedEntityForm.selectEnrollmentDatesInFuture = $scope.base.selectedProgramForRelative.selectEnrollmentDatesInFuture;
-                $scope.trackedEntityForm.displayIncidentDate = $scope.base.selectedProgramForRelative.displayIncidentDate;
-                $scope.customRegistrationForm = CustomFormService.getForTrackedEntity($scope.trackedEntityForm, 'RELATIONSHIP');
+            $scope.attributes = TEIGridService.generateGridColumns(atts, null,false).columns;        
+            if($scope.base.selectedProgramForRelative) {
+                if($scope.base.selectedProgramForRelative.id && $scope.base.selectedProgramForRelative.dataEntryForm && $scope.base.selectedProgramForRelative.dataEntryForm.htmlCode){
+                    $scope.customFormExists = true;
+                    $scope.trackedEntityForm = $scope.base.selectedProgramForRelative.dataEntryForm;
+                    $scope.trackedEntityForm.attributes = $scope.attributes;
+                    $scope.trackedEntityForm.selectIncidentDatesInFuture = $scope.base.selectedProgramForRelative.selectIncidentDatesInFuture;
+                    $scope.trackedEntityForm.selectEnrollmentDatesInFuture = $scope.base.selectedProgramForRelative.selectEnrollmentDatesInFuture;
+                    $scope.trackedEntityForm.displayIncidentDate = $scope.base.selectedProgramForRelative.displayIncidentDate;
+                    $scope.customRegistrationForm = CustomFormService.getForTrackedEntity($scope.trackedEntityForm, 'RELATIONSHIP');
+                }
+                $scope.attributeSections = ($scope.base.selectedProgramForRelative.programSections.length)
+                    ? AttributeUtils.userDefinedAttributeSections($scope.attributes, $scope.base.selectedProgramForRelative.programSections)
+                    : AttributeUtils.defaultAttributeSections($scope.attributes);
             }
             assignInheritance();
             fetchGeneratedAttributes(); 
@@ -808,13 +806,36 @@ trackerCapture.controller('TEIAddController',
         $scope.trackedEntityTypes.available = entities;   
         $scope.trackedEntityTypes.selected = $scope.trackedEntityTypes.available[0];
     });
-    
+
+    $scope.categoryRequiredDuringTEIRegistration = function() {
+        const selectedProgram = $scope.base.selectedProgramForRelative;
+        if (selectedProgram && selectedProgram.categoryCombo && !selectedProgram.categoryCombo.isDefault && selectedProgram.categoryCombo.categories) {
+            return selectedProgram.programStages.find(stage => stage.autoGenerateEvent) !== undefined;
+        }
+        return false;
+    }
+
+    $scope.selectCategoryOption = function(item, category) {
+        $scope.selectedCategoryOptions[category.id] = item.id;
+    }
+
     $scope.registerEntity = function(){
         
         //check for form validity
         $scope.outerForm.submitted = true;
         if( $scope.outerForm.$invalid ){
             return false;
+        }
+
+        //check that categories have been selected
+        var selectedCategoryOptions = null;
+        if ($scope.categoryRequiredDuringTEIRegistration()) {
+            if ($scope.selectedProgram.categoryCombo.categories.find(category => !$scope.selectedCategoryOptions[category.id])) {
+                NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("fill_all_category_options"));
+                return;
+            }
+            selectedCategoryOptions = $scope.selectedProgram.categoryCombo.categories
+                .map(category => $scope.selectedCategoryOptions[category.id]).join(';');
         }
         
         //form is valid, continue the registration
@@ -829,6 +850,7 @@ trackerCapture.controller('TEIAddController',
         //registration form comes empty, in this case enforce at least one value
         $scope.selectedTei.trackedEntityType = $scope.tei.trackedEntityType = selectedTrackedEntity; 
         $scope.selectedTei.orgUnit = $scope.tei.orgUnit = $scope.selectedOrgUnit.id;
+        $scope.tei.geometry = $scope.selectedTei.geometry;
         $scope.selectedTei.attributes = $scope.tei.attributes = [];
         
         var result = RegistrationService.processForm($scope.tei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
@@ -838,6 +860,8 @@ trackerCapture.controller('TEIAddController',
         if($scope.formEmpty){//registration form is empty
             return false;
         }
+
+        $rootScope.showAddRelationshipDiv = false;
         
         RegistrationService.registerOrUpdate($scope.tei, $scope.optionSets, $scope.attributesById).then(function(registrationResponse){
             var reg = registrationResponse.response.responseType ==='ImportSummaries' ? registrationResponse.response.importSummaries[0] : registrationResponse.response.responseType === 'ImportSummary' ? registrationResponse.response : {};
@@ -860,7 +884,7 @@ trackerCapture.controller('TEIAddController',
                             if (en.reference && en.status === 'SUCCESS') {
                                 enrollment.enrollment = en.reference;
                                 $scope.selectedEnrollment = enrollment;
-                                var dhis2Events = EventUtils.autoGenerateEvents($scope.tei.trackedEntityInstance, $scope.base.selectedProgramForRelative, $scope.selectedOrgUnit, enrollment, null);
+                                var dhis2Events = EventUtils.autoGenerateEvents($scope.tei.trackedEntityInstance, $scope.base.selectedProgramForRelative, $scope.selectedOrgUnit, enrollment, null, selectedCategoryOptions);
                                 if (dhis2Events.events.length > 0) {
                                     DHIS2EventFactory.create(dhis2Events);
                                 }
@@ -952,7 +976,15 @@ trackerCapture.controller('TEIAddController',
         $scope.assignedFields = effectResult.assignedFields;
         $scope.warningMessages = effectResult.warningMessages;
     });
-    
+
+    $scope.saveDataValueForRadio = function(field, context, value){
+        // Minimal working implementation for executing program rules based on changes in Yes/No attributes.
+        // The more complex implementation in registration-controller.js may contain the solution in case
+        // this contains shortcomings.
+        context[field.id] = value;
+        return $scope.executeRules();
+    }
+
     $scope.interacted = function(field) {
         var status = false;
         if(field){            
@@ -960,4 +992,23 @@ trackerCapture.controller('TEIAddController',
         }
         return status;        
     };
+
+    $scope.updateEnrollmentDate = function(){
+        if(!DateUtils.isValid($scope.enrollmentDateState.date) || !$scope.selectedProgram.selectEnrollmentDatesInFuture && DateUtils.isAfterToday($scope.enrollmentDateState.date)){
+            $scope.enrollmentDateState.date = $scope.selectedEnrollment.enrollmentDate;
+            return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.enrollmentDateLabel + ' ' + $translate.instant('invalid'));
+        } else {
+            $scope.selectedEnrollment.enrollmentDate = $scope.enrollmentDateState.date;
+        }
+    }
+
+    $scope.updateIncidentDate = function(){
+        if(!DateUtils.isValid($scope.incidentDateState.date) || !$scope.selectedProgram.selectIncidentDatesInFuture && DateUtils.isAfterToday($scope.incidentDateState.date)){
+            $scope.incidentDateState.date = $scope.selectedEnrollment.incidentDate;
+            return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.incidentDateLabel + ' ' + $translate.instant('invalid'));
+        }
+        else {
+            $scope.selectedEnrollment.incidentDate = $scope.incidentDateState.date;
+        }
+    }
 });

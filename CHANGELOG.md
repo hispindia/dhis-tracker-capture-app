@@ -1,3 +1,193 @@
+## [31.12.15](https://github.com/dhis2/tracker-capture-app/compare/v31.12.14...v31.12.15) (2022-12-22)
+
+
+### Bug Fixes
+
+* [DHIS2-14352] remove merge conflict artifact ([#1646](https://github.com/dhis2/tracker-capture-app/issues/1646)) ([5602931](https://github.com/dhis2/tracker-capture-app/commit/5602931b70002086d357f516ee05948b16064e37))
+
+## [31.12.14](https://github.com/dhis2/tracker-capture-app/compare/v31.12.13...v31.12.14) (2022-12-22)
+
+
+### Bug Fixes
+
+* [DHIS2-14265] period change when periodOffset undefined ([#1634](https://github.com/dhis2/tracker-capture-app/issues/1634)) ([4911bc7](https://github.com/dhis2/tracker-capture-app/commit/4911bc7d37586039903b96e0d5eeab731fe70eb0))
+
+## [31.12.13](https://github.com/dhis2/tracker-capture-app/compare/v31.12.12...v31.12.13) (2022-12-22)
+
+
+### Bug Fixes
+
+* [DHIS2-14352] d2:oizp ([#1645](https://github.com/dhis2/tracker-capture-app/issues/1645)) ([ca2d47f](https://github.com/dhis2/tracker-capture-app/commit/ca2d47f1ce7b2a32fcce90b7fa6b08055366dce2))
+
+## [31.12.12](https://github.com/dhis2/tracker-capture-app/compare/v31.12.11...v31.12.12) (2022-12-16)
+
+
+### Bug Fixes
+
+* [DHIS2-14352] `d2:oizp` ([#1636](https://github.com/dhis2/tracker-capture-app/issues/1636)) ([56af33c](https://github.com/dhis2/tracker-capture-app/commit/56af33cc41a143bcc75af63e659b94fe74763958))
+
+## [31.12.11](https://github.com/dhis2/tracker-capture-app/compare/v31.12.10...v31.12.11) (2022-12-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([575db8b](https://github.com/dhis2/tracker-capture-app/commit/575db8bb962c37c8c6b6cb5dc7e1bc7d1d496b9a))
+
+## [31.12.10](https://github.com/dhis2/tracker-capture-app/compare/v31.12.9...v31.12.10) (2022-11-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([32dc6a5](https://github.com/dhis2/tracker-capture-app/commit/32dc6a59e93d8fcc0e92fde9efd7d9f86662733c))
+
+## [31.12.9](https://github.com/dhis2/tracker-capture-app/compare/v31.12.8...v31.12.9) (2022-11-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f73353a](https://github.com/dhis2/tracker-capture-app/commit/f73353af311c895bf567c79045561b611e7d7245))
+
+## [31.12.8](https://github.com/dhis2/tracker-capture-app/compare/v31.12.7...v31.12.8) (2022-11-11)
+
+
+### Bug Fixes
+
+* [DHIS2-13832] data element assignment in scheduled events ([#1567](https://github.com/dhis2/tracker-capture-app/issues/1567)) ([02a4c26](https://github.com/dhis2/tracker-capture-app/commit/02a4c26abad0003d3f83cb99ab3dbc32e5c7b080))
+* [DHIS2-7778] program stage-wise compulsory DE setting ([#1586](https://github.com/dhis2/tracker-capture-app/issues/1586)) ([8e014de](https://github.com/dhis2/tracker-capture-app/commit/8e014de5cb85963882ac1bd726a6575f66d5b77c))
+
+## [31.12.7](https://github.com/dhis2/tracker-capture-app/compare/v31.12.6...v31.12.7) (2022-11-11)
+
+
+### Bug Fixes
+
+* [DHIS2-12649] support auto-generated events in programs using category options ([#1598](https://github.com/dhis2/tracker-capture-app/issues/1598)) ([fc5bf02](https://github.com/dhis2/tracker-capture-app/commit/fc5bf02d4531a146c9122b307dca4b620dd2ac54))
+
+## [31.12.6](https://github.com/dhis2/tracker-capture-app/compare/v31.12.5...v31.12.6) (2022-11-11)
+
+
+### Bug Fixes
+
+* [DHIS2-14104] make sure deselected checkboxes evaluate `d2:hasValue` to `false` ([#1602](https://github.com/dhis2/tracker-capture-app/issues/1602)) ([d999b0f](https://github.com/dhis2/tracker-capture-app/commit/d999b0f8cc3d6c9fba50e9664f88ade2298f26e8))
+
+## [31.12.5](https://github.com/dhis2/tracker-capture-app/compare/v31.12.4...v31.12.5) (2022-10-14)
+
+
+### Bug Fixes
+
+* [DHIS2-13944] d2:inOrgUnitGroup ([#1593](https://github.com/dhis2/tracker-capture-app/issues/1593)) ([bf6d0c1](https://github.com/dhis2/tracker-capture-app/commit/bf6d0c153167d706b13392fdcd3aa6e033d00ff5))
+
+## [31.12.4](https://github.com/dhis2/tracker-capture-app/compare/v31.12.3...v31.12.4) (2022-10-11)
+
+
+### Bug Fixes
+
+* [DHIS2-13145] enable coordinate selection button in profile widget ([#1585](https://github.com/dhis2/tracker-capture-app/issues/1585)) ([19d462e](https://github.com/dhis2/tracker-capture-app/commit/19d462ea6c598510e2982b861d5a165e9a609ff1))
+
+## [31.12.3](https://github.com/dhis2/tracker-capture-app/compare/v31.12.2...v31.12.3) (2022-10-11)
+
+
+### Bug Fixes
+
+* [DHIS2-13889] distinguish between "No/false" and empty selection ([#1580](https://github.com/dhis2/tracker-capture-app/issues/1580)) ([8c62663](https://github.com/dhis2/tracker-capture-app/commit/8c626637efb2666cf5cd95518b12137bde3da6f2))
+
+## [31.12.2](https://github.com/dhis2/tracker-capture-app/compare/v31.12.1...v31.12.2) (2022-10-10)
+
+
+### Bug Fixes
+
+* [DHIS2-13889] distinguish between "No/false" and empty selection ([#1572](https://github.com/dhis2/tracker-capture-app/issues/1572)) ([23d6523](https://github.com/dhis2/tracker-capture-app/commit/23d6523b622b1cffdc33ea7f5463b6bb100fc5d7))
+
+## [31.12.1](https://github.com/dhis2/tracker-capture-app/compare/v31.12.0...v31.12.1) (2022-10-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([867d8e6](https://github.com/dhis2/tracker-capture-app/commit/867d8e607d8ec70166a095fbbe61e2c7622434dc))
+
+# [31.12.0](https://github.com/dhis2/tracker-capture-app/compare/v31.11.0...v31.12.0) (2022-09-29)
+
+
+### Features
+
+* [DHIS2-13680] optional decimal places argument for d2:round ([#1566](https://github.com/dhis2/tracker-capture-app/issues/1566)) ([af8a847](https://github.com/dhis2/tracker-capture-app/commit/af8a847d36d184d3a7f1f0ec28881dcccdf5f9d4))
+
+# [31.11.0](https://github.com/dhis2/tracker-capture-app/compare/v31.10.23...v31.11.0) (2022-09-27)
+
+
+### Features
+
+* [DHIS2-8210] TEA sections in TEI registration forms ([#1529](https://github.com/dhis2/tracker-capture-app/issues/1529)) ([675bff4](https://github.com/dhis2/tracker-capture-app/commit/675bff40277d23509d74bf83afd24922ee465a01))
+
+## [31.10.23](https://github.com/dhis2/tracker-capture-app/compare/v31.10.22...v31.10.23) (2022-09-26)
+
+
+### Bug Fixes
+
+* [DHIS2-11080] validate manually typed enrollment dates and incident dates ([#1544](https://github.com/dhis2/tracker-capture-app/issues/1544)) ([6439a3a](https://github.com/dhis2/tracker-capture-app/commit/6439a3abdf2cdc890db43f950da140838e3f3387))
+
+## [31.10.22](https://github.com/dhis2/tracker-capture-app/compare/v31.10.21...v31.10.22) (2022-09-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([251e089](https://github.com/dhis2/tracker-capture-app/commit/251e08929967865666aeae26fcf6af1c2db4b12d))
+
+## [31.10.21](https://github.com/dhis2/tracker-capture-app/compare/v31.10.20...v31.10.21) (2022-09-19)
+
+
+### Bug Fixes
+
+* [DHIS2-13635] return extracted GS1 datamatrix values directly ([#1531](https://github.com/dhis2/tracker-capture-app/issues/1531)) ([7c15d3a](https://github.com/dhis2/tracker-capture-app/commit/7c15d3ae750240cf4b651e4d7b7812395162519d))
+
+## [31.10.20](https://github.com/dhis2/tracker-capture-app/compare/v31.10.19...v31.10.20) (2022-09-12)
+
+
+### Bug Fixes
+
+* [DHIS2-13712] run rules engine when changing yes/no fields in add relationship ([#1528](https://github.com/dhis2/tracker-capture-app/issues/1528)) ([8516a97](https://github.com/dhis2/tracker-capture-app/commit/8516a979c4a59357a0d824cd8fbc5cb316deda58))
+
+## [31.10.19](https://github.com/dhis2/tracker-capture-app/compare/v31.10.18...v31.10.19) (2022-09-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13617] show warnings and errors on non-empty fields ([#1515](https://github.com/dhis2/tracker-capture-app/issues/1515)) ([5f41692](https://github.com/dhis2/tracker-capture-app/commit/5f41692c98663ab35a3d96109d1d66625f31dbbb))
+
+## [31.10.18](https://github.com/dhis2/tracker-capture-app/compare/v31.10.17...v31.10.18) (2022-08-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0965b21](https://github.com/dhis2/tracker-capture-app/commit/0965b21a17fa4edc7db1af900b4cff8786488b5e))
+
+## [31.10.17](https://github.com/dhis2/tracker-capture-app/compare/v31.10.16...v31.10.17) (2022-08-25)
+
+
+### Bug Fixes
+
+* use only the first two characters of `ai` to determine fixed length ([#1506](https://github.com/dhis2/tracker-capture-app/issues/1506)) ([7d2c8aa](https://github.com/dhis2/tracker-capture-app/commit/7d2c8aa09f8515c35edcf2c29d0e19afe3bd663c))
+
+## [31.10.16](https://github.com/dhis2/tracker-capture-app/compare/v31.10.15...v31.10.16) (2022-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1942ecf](https://github.com/dhis2/tracker-capture-app/commit/1942ecf49e3ffe1c60102ec6ae8bac5d83884c75))
+
+## [31.10.15](https://github.com/dhis2/tracker-capture-app/compare/v31.10.14...v31.10.15) (2022-08-09)
+
+
+### Bug Fixes
+
+* allow complex expressions in d2-function arguments ([#1502](https://github.com/dhis2/tracker-capture-app/issues/1502)) ([8113502](https://github.com/dhis2/tracker-capture-app/commit/81135021750caf6483225aea83809b6267fed535))
+
+## [31.10.14](https://github.com/dhis2/tracker-capture-app/compare/v31.10.13...v31.10.14) (2022-07-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([60f7477](https://github.com/dhis2/tracker-capture-app/commit/60f7477b47e3a82cddd90fd1d3681cc08a8fad6f))
+
 ## [31.10.13](https://github.com/dhis2/tracker-capture-app/compare/v31.10.12...v31.10.13) (2022-07-04)
 
 
