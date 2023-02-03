@@ -1334,16 +1334,25 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             });
             return promise;
         },
-        sendEmailAndSMS: function(tei, program,ou){
+        sendEmailAndSMS: function(tei,ou,fromOUName,toOUName,teiClientCode){
             var deferred = $q.defer();
             //organisationUnits/vXdngpv3PzI.json?fields=id,users[id,username,email,phoneNumber]
+
+            console.log( tei + " - " + ou + " - " + fromOUName + " - " + toOUName + " - " + teiClientCode );
+            //नमस्ते , मिती {2023-01-31} मा CLIENT ID: {MU982110}, {SUKRARAJ TROPICAL HOSPITAL_KATHMANDU} सेवाबाट , सफलतापूर्वक  यस  {DISTRICT HOSPITAL_ SINDHULI } मा Transfer-Out हुनु भएको छ।
+
+            var today  = new Date();
+            var todayDate= today.getFullYear() + "-" +("00" + (today.getMonth() + 1)).slice(-2) + "-" + ("00" + (today.getDate())).slice(-2);
+            var smsEmailText = "नमस्ते , मिती :  " + todayDate + " मा CLIENT ID: " + teiClientCode + ", " + fromOUName + " सेवाबाट , सफलतापूर्वक  यस  " + toOUName + " मा Transfer-Out हुनु भएको छ।";
+            console.log( " smsEmailText " + smsEmailText  );
+
             $.ajax({
                 type: "GET",
                 async: false,
                 dataType: "json",
                 contentType: "application/json",
                 //data: JSON.stringify(emailParam),
-                url: DHIS2URL + '/organisationUnits/' +ou + '.json?fields=id,users[id,username,email,phoneNumber]',
+                url: DHIS2URL + '/organisationUnits/' +ou + '.json?fields=id,users[id,displayName,userName,firstName,email,phoneNumber]',
 
                 success: function (orgUnitUsers) {
                     //console.log( __rowNum__ + " -- "+ row.event + "Event updated with " + row.value + "response: " + response );
@@ -1353,13 +1362,13 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
 
                         if( orgUnitUsers.users[i].email !== undefined ){
                             var tempEmail = orgUnitUsers.users[i].email;
-                            var tempSubject = "HIV Referal message";
-                            var tempMessage = "this is HIV-Tracker Referal message";
+                            var tempSubject = smsEmailText;
+                            var tempMessage = smsEmailText;
 
-                            console.log( " to user " + orgUnitUsers.users[i].username + " email : " + tempEmail );
+                            console.log( " to user " + orgUnitUsers.users[i].displayName + " email : " + tempEmail );
 
                             var sendTempEmail = $http.post( DHIS2URL + '/email/notification?recipients=' + tempEmail + '&subject=' + tempSubject + '&message=' + tempMessage).then(function(emailSendResponse){
-                                console.log( emailSendResponse.message + " to user " + orgUnitUsers.users[i].username + " email : " + tempEmail );
+                                console.log( emailSendResponse.message + " to user " + orgUnitUsers.users[i].displayName + " email : " + tempEmail );
                             });
 
                         }
@@ -1368,14 +1377,14 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                     for( var j=0; j < orgUnitUsers.users.length; j++ ){
                         if( orgUnitUsers.users[j].phoneNumber !== undefined ){
                             tempRecipientsPhoneNumber.push( orgUnitUsers.users[j].phoneNumber );
-                            console.log( " user " + orgUnitUsers.users[j].username + " phoneNo : " + orgUnitUsers.users[j].phoneNumber );
+                            console.log( " user " + orgUnitUsers.users[j].displayName + " phoneNo : " + orgUnitUsers.users[j].phoneNumber );
                         }
                     }
                     console.log( " phone no " + tempRecipientsPhoneNumber  );
 
                     var smsParam = {
                         //"recipients":tempRecipients,
-                        "message": "Sms Text",
+                        "message": smsEmailText,
                         "recipients": tempRecipientsPhoneNumber
                     };
 
