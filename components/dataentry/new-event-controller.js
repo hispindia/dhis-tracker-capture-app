@@ -350,9 +350,11 @@ trackerCapture.controller('EventCreationController',
             console.log( emailSMSSendToReferedOrgUnitResponse.message );
         });
         // email SMS Send to Parent orgUnit
+        /*
         TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, $scope.selectedOrgUnit.id, $scope.selectedOrgUnit.displayName, dummyEvent.orgUnitName, tempCustomClientCode ).then(function(emailSMSSendResponseToParent){
             console.log( emailSMSSendResponseToParent.message );
         });
+         */
         // end methods for send SMS and E-mail when TEI move One-time referal and Move permanently
     };
     
@@ -384,9 +386,12 @@ trackerCapture.controller('EventCreationController',
                     console.log( emailSMSSendToReferedOrgUnitResponse.message );
                 });
                 // email SMS Send to Parent orgUnit
+                /*
                 TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, dummyEvent.orgUnit, $scope.selectedOrgUnit.displayName, dummyEvent.orgUnitName, tempCustomClientCode ).then(function(emailSMSSendResponseToParent){
                     console.log( emailSMSSendResponseToParent.message );
                 });
+
+                 */
                 // end methods for send SMS and E-mail when TEI move One-time referral and Move permanently
             });
         });
