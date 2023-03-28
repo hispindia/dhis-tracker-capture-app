@@ -16,3 +16,11 @@ yarn start
 ```
 
 This starts the development server on port `8081`.
+
+### build the application
+
+```
+yarn install
+
+yarn build
+```
