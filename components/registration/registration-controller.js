@@ -68,6 +68,9 @@ trackerCapture.controller('RegistrationController',
     $scope.fileNames = CurrentSelection.getFileNames();
     $scope.currentFileNames = $scope.fileNames;
 
+    $scope.generatedCustomId = ''; // custom change for ippf_she_maldives-v38
+    $scope.parentOrgUnitCode = '' ;
+
     // Slow connection fix: this signal is emitted after all listeners on the enrollment dashboard has been set up
     $timeout(function() {
         $scope.$emit('registrationControllerReady', {});
@@ -341,6 +344,35 @@ trackerCapture.controller('RegistrationController',
             }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+
+                // custom change for custom-ID get parent orgUnit code
+                // and TEI count based on orgUnit and enrollment Date(SQL-View -- CLFhvw5bXhl) for ippf_she_maldives-v38
+                $timeout( function (){
+                    let org_uid = $scope.selectedOrgUnit.id;
+
+                    $.getJSON("../api/organisationUnits/"+ org_uid +".json?fields=id,name,code,parent[id,name,code,parent[id,name,code,parent[id,name,code]]]", function (data) {
+                        $scope.orgUnitCode = data.code;
+                        $scope.parentOrgUnitName = data.parent.name;
+                        $scope.parentOrgUnitCode = data.parent.code;
+                        $scope.finalTEICount = '';
+                        let param = "var=orgUnitUid:" + org_uid + "&var=enrollmentDate:" + $scope.selectedEnrollment.enrollmentDate;
+                        $.getJSON("../api/sqlViews/CLFhvw5bXhl/data?"+param+"&paging=false", function (teiCountResponse) {
+                            let count = teiCountResponse.listGrid.rows[0];
+                            let countTeiByOrgUnit = count[0];
+                            let teiCount = countTeiByOrgUnit;
+                            var prefix = "";
+                            let totalTei = parseInt(teiCount) + 1;
+                            if( totalTei <10) prefix="00";
+                            else if (totalTei >9 && totalTei<100) prefix="0";
+
+                            $scope.finalTEICount = prefix + totalTei;
+                        });
+
+                    });
+                },0);
+                // end
+
+
                 if (generateAttributes) {
                     fetchGeneratedAttributes();
                 }
@@ -738,7 +770,39 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
-        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+
+        // custom change for custom-ID generation for ippf_she_maldives-v38 Assign attribute value before save
+
+        if ($scope.registrationMode === 'REGISTRATION' ) {
+
+            let serviceDeliveryPoint = "";
+            let strParentName = "";
+            let selOrgUnitName = $scope.selectedOrgUnit.displayName;
+            let customEnrollmentDate = $scope.selectedEnrollment.enrollmentDate.split("-")[2]+$scope.selectedEnrollment.enrollmentDate.split("-")[1]+$scope.selectedEnrollment.enrollmentDate.split("-")[0];
+            if( selOrgUnitName === 'Associate Clinic') serviceDeliveryPoint = 'AC';
+            else if( selOrgUnitName === 'CBD' ) serviceDeliveryPoint = 'CB';
+            if( selOrgUnitName === 'Static Clinic') serviceDeliveryPoint = 'SC';
+            else if( selOrgUnitName === 'Mobile Clinic' ) serviceDeliveryPoint = 'MC';
+
+            if ($scope.parentOrgUnitName !== undefined) {
+                strParentName = $scope.parentOrgUnitName.substr(0, 2).toUpperCase();
+            }
+
+            let firstNameProfile = "";
+            if ($scope.selectedTei.tsBbDQe3sGo !== undefined) {
+                let strP = $scope.selectedTei.tsBbDQe3sGo;
+                firstNameProfile = strP.substr(0, 2).toUpperCase();
+            }
+
+            let firstString = strParentName + serviceDeliveryPoint + $scope.parentOrgUnitCode;
+            let secondString = firstNameProfile;
+            let thirdString = customEnrollmentDate;
+            let fourthString = $scope.finalTEICount;
+            $scope.generatedCustomId =  firstString+ "/" + secondString + "/" + thirdString + "/" + fourthString;
+        }
+        // end
+
+        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.apiFormattedTei = result.tei;
 
