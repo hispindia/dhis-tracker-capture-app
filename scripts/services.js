@@ -621,7 +621,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                     if(  attributesById[k].code === 'custom_id' )
                     {
                         formTei[k] = generatedCustomId;
-                        console.log( " Final Custome Id -- " + generatedCustomId );
+                        console.log( " Final Custom Id -- " + generatedCustomId );
                     }
                 }
                 // end

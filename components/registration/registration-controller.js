@@ -69,6 +69,8 @@ trackerCapture.controller('RegistrationController',
     $scope.currentFileNames = $scope.fileNames;
 
     $scope.generatedCustomId = ''; // custom change for myanmar_mis
+    $scope.parentParentParentOrgUnitCode = '' ;
+
     // Slow connection fix: this signal is emitted after all listeners on the enrollment dashboard has been set up
     $timeout(function() {
         $scope.$emit('registrationControllerReady', {});
@@ -353,6 +355,20 @@ trackerCapture.controller('RegistrationController',
             }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+
+                // custom change for custom-ID get parent parent parent orgUnit code for myanmar_mis
+                $timeout( function (){
+                    let org_uid = $scope.selectedOrgUnit.id;
+
+                    $.getJSON("../api/organisationUnits/"+ org_uid +".json?fields=id,name,code,parent[id,name,code,parent[id,name,code,parent[id,name,code]]]", function (data) {
+                        $scope.orgUnitCode = data.code;
+                        $scope.parentOrgUnitName = data.parent.name;
+                        $scope.parentParentParentOrgUnitCode = data.parent.parent.parent.code;
+                        $scope.parentOrgUnitCode = data.parent.code;
+                    });
+                },0);
+                // end
+
                 if (generateAttributes) {
                     fetchGeneratedAttributes();
                 }
@@ -753,7 +769,9 @@ trackerCapture.controller('RegistrationController',
 
         // custom change for custom-ID generation for myanmar_mis Assign attribute value before save
         if ($scope.registrationMode === 'REGISTRATION' && $scope.selectedProgram.id === 'qDkgAbB5Jlk') {
-            let orgUnitCode = $scope.selectedOrgUnit.code;
+
+            //let orgUnitCode = $scope.selectedOrgUnit.code;
+            let orgUnitCodeForCustomID = $scope.parentParentParentOrgUnitCode;
             let enrollmentDate = $scope.selectedEnrollment.enrollmentDate;
             let automatedSerialNumber = ""; //
 
@@ -762,9 +780,10 @@ trackerCapture.controller('RegistrationController',
             if ($scope.selectedTei.HAZ7VQ730yn !== undefined) {
                 automatedSerialNumber = $scope.selectedTei.HAZ7VQ730yn;
             }
-            $scope.generatedCustomId = orgUnitCode + "_" + enrollmentDate + "_" + automatedSerialNumber;
+            $scope.generatedCustomId = orgUnitCodeForCustomID + "_" + enrollmentDate + "_" + automatedSerialNumber;
         }
         // end
+
         var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.apiFormattedTei = result.tei;
