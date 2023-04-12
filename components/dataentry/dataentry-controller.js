@@ -147,25 +147,28 @@ trackerCapture
         ],
       };
       //Sort data elements for custom sections
-      $scope.rowLength = 0;
-      $scope.rangeDE = function (index, de, rowLength) {
+      //Sort data elements for custom sections
+      $scope.rowLength = {};
+      $scope.rangeDE = function (index, de, rowLength,name) {
         let count = 0;
         if (index == 0) {
-          $scope.rowLength = 0;
+          $scope.rowLength[name] = 0;
           count = index;
-        } else count = $scope.rowLength;
+        } else count = $scope.rowLength[name];
 
         var arr = [];
         for (let i = count; i < count + rowLength; i++) {
           if (de[i]) arr.push(de[i]);
         }
-        $scope.rowLength += rowLength;
+        $scope.rowLength[name] += rowLength;
         return arr;
       };
 
-      $scope.restDE = function(de) {
-        return de.slice($scope.rowLength)
-      }
+      $scope.restDE = function(de, name) {
+        if($scope.rowLength[name])
+          return de.slice($scope.rowLength[name])
+        return null;
+      };
 
       //hideTopLineEventsForFormTypes is only used with main menu
       $scope.hideTopLineEventsForFormTypes = { TABLE: true, COMPARE: true };

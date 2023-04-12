@@ -77,7 +77,7 @@
                         {{'has_no_dataelements'| translate}}</div>
                 </div>
                 <!-- Custom section starts here  -->
-                <div class="row" ng-if='section.displayName==="2.0 Health Facility Management Meetings" || section.displayName==="SHT 04. Monthly Joint Quality Assessment Meeting for State Directorates (DHS AND DHME)" || section.displayName==="DHT 02. Monthly Management Team Meetings"' >
+                <div class="row" ng-if='section.displayName==="2.0 Health Facility Management Meetings" || section.displayName==="SHT 01. Monthly Joint Quality Assessment Meeting for State Directorates (DHS AND DHME)" || section.displayName==="DHT 1. Monthly Management Team Meetings"' >
 
                     <table class="dhis2-list-table-striped default-form-table"
                         ng-if="section.dataElements && section.dataElements.length > 0">
@@ -90,7 +90,7 @@
                         <tr ng-repeat="deName in CustomDataElements.healthFacilityMeetings">
                             <td>{{deName}}</td>
                             <td ng-if="!isHidden(de.id)"
-                                ng-repeat="de in rangeDE($index,section.dataElements,3) track by de.id">
+                                ng-repeat="de in rangeDE($index,section.dataElements,3,'healthFacilityMeetings') track by de.id">
                                 <span class="absorbing-column"
                                     dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                 </span>
@@ -105,7 +105,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr ng-repeat="de in restDE(section.dataElements)" ng-if="!isHidden(de.id)">
+                        <tr ng-repeat="de in restDE(section.dataElements,'healthFacilityMeetings')" ng-if="!isHidden(de.id)">
                             <td>
                                 <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                     details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
@@ -160,7 +160,7 @@
                             <td>{{deName}}</td>
                             <td colspan="{{ deName== 'Calculated Value - Cleanliness of Wards' ? '4' : '0'}}"
                                 ng-if="!isHidden(de.id)"
-                                ng-repeat="de in rangeDE($index,section.dataElements,4) track by de.id">
+                                ng-repeat="de in rangeDE($index,section.dataElements,4,'cleanliness') track by de.id">
                                 <span class="absorbing-column"
                                     dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                 </span>
@@ -175,7 +175,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr ng-repeat="de in restDE(section.dataElements)" ng-if="!isHidden(de.id)">
+                        <tr ng-repeat="de in restDE(section.dataElements,'cleanliness')" ng-if="!isHidden(de.id)">
                             <td>
                                 <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                     details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
@@ -230,7 +230,7 @@
                             <td>{{deName}}</td>
                             <td colspan="{{ deName== 'Calculated Value - Hand-washing' ? '4' : '0'}}"
                                 ng-if="!isHidden(de.id)"
-                                ng-repeat="de in rangeDE($index,section.dataElements,4) track by de.id">
+                                ng-repeat="de in rangeDE($index,section.dataElements,4,'handwashing') track by de.id">
                                 <span class="absorbing-column"
                                     dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                 </span>
@@ -245,7 +245,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr ng-repeat="de in restDE(section.dataElements)" ng-if="!isHidden(de.id)">
+                        <tr ng-repeat="de in restDE(section.dataElements,'handwashing')" ng-if="!isHidden(de.id)">
                             <td>
                                 <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                     details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
@@ -299,7 +299,7 @@
                             <td>{{deName}}</td>
                             <td colspan="{{ deName== 'Calculated Value - Toilets' ? '4' : '0'}}"
                                 ng-if="!isHidden(de.id)"
-                                ng-repeat="de in rangeDE($index,section.dataElements,4) track by de.id">
+                                ng-repeat="de in rangeDE($index,section.dataElements,4,'toilets') track by de.id">
                                 <span class="absorbing-column"
                                     dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                 </span>
@@ -313,7 +313,7 @@
                                     </div>
                                 </span>
                             </td>
-                        </tr><tr ng-repeat="de in restDE(section.dataElements)" ng-if="!isHidden(de.id)">
+                        </tr><tr ng-repeat="de in restDE(section.dataElements,'toilets')" ng-if="!isHidden(de.id)">
                             <td>
                                 <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                     details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
@@ -366,7 +366,7 @@
                             <td>{{deName}}</td>
                             <td colspan="{{ deName== 'Calculated Value - Shower Facilities for Patients' ? '2' : '0'}}"
                                 ng-if="!isHidden(de.id)"
-                                ng-repeat="de in rangeDE($index,section.dataElements,2) track by de.id">
+                                ng-repeat="de in rangeDE($index,section.dataElements,2,'shower') track by de.id">
                                 <span class="absorbing-column"
                                     dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                 </span>
@@ -381,7 +381,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr ng-repeat="de in restDE(section.dataElements)" ng-if="!isHidden(de.id)">
+                        <tr ng-repeat="de in restDE(section.dataElements,'shower')" ng-if="!isHidden(de.id)">
                             <td>
                                 <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                     details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
@@ -422,7 +422,7 @@
                     </table>
                 </div>
 
-                <div class="row" ng-if='section.displayName==="9.0 Medical Waste Handling"'>
+                <div class="row" ng-if='section.displayName==="8.0 Medical Waste Handling"'>
                     <table class="dhis2-list-table-striped default-form-table"
                         ng-if="section.dataElements && section.dataElements.length > 0">
                         <tr>
@@ -436,7 +436,7 @@
                             <td>{{deName}}</td>
                             <td colspan="{{ deName== 'Calculated Value - Medical Waste Handling' ? '4' : '0'}}"
                                 ng-if="!isHidden(de.id)"
-                                ng-repeat="de in rangeDE($index,section.dataElements,4) track by de.id">
+                                ng-repeat="de in rangeDE($index,section.dataElements,4,'wasteHandling') track by de.id">
                                 <span class="absorbing-column"
                                     dhis2-compiled-include="components/dataentry/section-inner-form.html">
                                 </span>
@@ -451,7 +451,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr ng-repeat="de in restDE(section.dataElements)" ng-if="!isHidden(de.id)">
+                        <tr ng-repeat="de in restDE(section.dataElements,'wasteHandling')" ng-if="!isHidden(de.id)">
                             <td>
                                 <span d2-pop-over class="popover-label hideInPrint small-horizontal-spacing"
                                     details="{{'details'| translate}}" content="prStDes[de.id].dataElement"
@@ -493,7 +493,7 @@
                 </div>
                 <!-- Custom section ends here -->
                 <div class="row"
-                    ng-if='section.displayName!=="2.0 Health Facility Management Meetings" && section.displayName!=="SHT 04. Monthly Joint Quality Assessment Meeting for State Directorates (DHS AND DHME)" && section.displayName!=="DHT 02. Monthly Management Team Meetings" && section.displayName!=="5.0 Cleanliness of Wards" && section.displayName!=="6.0 Hand-washing" && section.displayName!=="7.0 Toilets" && section.displayName!=="8.0 Shower Facilities for Patients" && section.displayName!=="9.0 Medical Waste Handling"'>
+                    ng-if='section.displayName!=="2.0 Health Facility Management Meetings" && section.displayName!=="SHT 01. Monthly Joint Quality Assessment Meeting for State Directorates (DHS AND DHME)" && section.displayName!=="DHT 1. Monthly Management Team Meetings" && section.displayName!=="5.0 Cleanliness of Wards" && section.displayName!=="6.0 Hand-washing" && section.displayName!=="7.0 Toilets" && section.displayName!=="8.0 Shower Facilities for Patients" && section.displayName!=="8.0 Medical Waste Handling"'>
                     <table class="dhis2-list-table-striped default-form-table"
                         ng-if="section.dataElements && section.dataElements.length > 0">
                         <tr ng-repeat="de in section.dataElements" ng-if="!isHidden(de.id)">
