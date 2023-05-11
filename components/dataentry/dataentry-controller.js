@@ -1474,11 +1474,13 @@ trackerCapture
           $scope.currentUserRole = "NOT_SUPERUSER";
         }
         // program list for filter
+        /*
         $scope.filterProgramList =
             ["clexs6sWeOl","SH5rbquuI7L","mXBbntd7peT","NStri4nXf16",
               "yisMZUE85x5","E5Iai5pZBOI","JFK9VveNM4O","OoVJA33zyQY",
               "cGtwxqmhkYZ","TfuRfuCgDLc","KyQyV0soBML","Bihax2WaaSW",
               "CZLfL0vYlpl","CWnOYfNLiZY","K3RTdecwL0s","uzuhOnhCO0O"];
+         */
         // end custom change for hide hide/un-hide events based on user-role, user-group and data-element value
 
         //alert( "user-role -- "  + $scope.currentUserRole  + " user-group -- "  + $scope.userGroupName );
@@ -1490,95 +1492,190 @@ trackerCapture
         });
         if (angular.isObject(events) && events.length > 0) {
           angular.forEach(events, function (dhis2Event) {
-            if (
-              $scope.selectedEnrollment &&
-              $scope.selectedEnrollment.enrollment === dhis2Event.enrollment &&
-              dhis2Event.orgUnit
-            ) {
-              dhis2Event.expired = EventUtils.isExpired(
-                $scope.selectedProgram,
-                dhis2Event
-              );
-              if (dhis2Event.notes) {
-                dhis2Event.notes = orderByFilter(
-                  dhis2Event.notes,
-                  "-storedDate"
-                );
-                angular.forEach(dhis2Event.notes, function (note) {
-                  note.displayDate = DateUtils.formatFromApiToUser(
-                    note.storedDate
-                  );
-                  note.storedDate = DateUtils.formatToHrsMins(note.storedDate);
-                });
-              }
-              var eventStage = $scope.stagesById[dhis2Event.programStage];
-              if (angular.isObject(eventStage)) {
-                dhis2Event.name = eventStage.displayName;
-                dhis2Event.executionDateLabel = eventStage.executionDateLabel
-                  ? eventStage.executionDateLabel
-                  : $translate.instant("report_date");
-                dhis2Event.dueDateLabel = eventStage.dueDateLabel
-                  ? eventStage.dueDateLabel
-                  : $translate.instant("due_date");
-                dhis2Event.dueDate = DateUtils.formatFromApiToUser(
-                  dhis2Event.dueDate
-                );
-                dhis2Event.sortingDate = DateUtils.formatFromUserToApi(
-                  dhis2Event.dueDate
-                );
-                dhis2Event.style = eventStage.style;
+            if( $scope.currentUserRole !== "Superuser" && dhis2Event.dataValues.length !==0 ){
 
-                if (dhis2Event.eventDate) {
-                  dhis2Event.eventDate = DateUtils.formatFromApiToUser(
-                    dhis2Event.eventDate
-                  );
-                  dhis2Event.sortingDate = DateUtils.formatFromUserToApi(
-                    dhis2Event.eventDate
-                  );
-                }
+              for( var j=0; j < dhis2Event.dataValues.length; j++ ){
 
-                dhis2Event.editingNotAllowed = EventUtils.getEditingStatus(
-                  dhis2Event,
-                  eventStage,
-                  $scope.selectedOrgUnit,
-                  $scope.selectedTei,
-                  $scope.selectedEnrollment,
-                  $scope.selectedProgram,
-                  userSearchOrgUnits
-                );
+                if ( dhis2Event.dataValues[j].dataElement === 'hqDoSMfLh8F' && dhis2Event.dataValues[j].value === $scope.userGroupName ){
+                  if (
+                      $scope.selectedEnrollment &&
+                      $scope.selectedEnrollment.enrollment === dhis2Event.enrollment &&
+                      dhis2Event.orgUnit
+                  ) {
+                    dhis2Event.expired = EventUtils.isExpired(
+                        $scope.selectedProgram,
+                        dhis2Event
+                    );
+                    if (dhis2Event.notes) {
+                      dhis2Event.notes = orderByFilter(
+                          dhis2Event.notes,
+                          "-storedDate"
+                      );
+                      angular.forEach(dhis2Event.notes, function (note) {
+                        note.displayDate = DateUtils.formatFromApiToUser(
+                            note.storedDate
+                        );
+                        note.storedDate = DateUtils.formatToHrsMins(note.storedDate);
+                      });
+                    }
+                    var eventStage = $scope.stagesById[dhis2Event.programStage];
+                    if (angular.isObject(eventStage)) {
+                      dhis2Event.name = eventStage.displayName;
+                      dhis2Event.executionDateLabel = eventStage.executionDateLabel
+                          ? eventStage.executionDateLabel
+                          : $translate.instant("report_date");
+                      dhis2Event.dueDateLabel = eventStage.dueDateLabel
+                          ? eventStage.dueDateLabel
+                          : $translate.instant("due_date");
+                      dhis2Event.dueDate = DateUtils.formatFromApiToUser(
+                          dhis2Event.dueDate
+                      );
+                      dhis2Event.sortingDate = DateUtils.formatFromUserToApi(
+                          dhis2Event.dueDate
+                      );
+                      dhis2Event.style = eventStage.style;
 
-                dhis2Event.statusColor =
-                  EventUtils.getEventStatusColor(dhis2Event);
-                dhis2Event = EventUtils.processEvent(
-                  dhis2Event,
-                  eventStage,
-                  $scope.optionSets,
-                  $scope.prStDes
-                );
-                $scope.eventsByStage[dhis2Event.programStage].push(dhis2Event);
+                      if (dhis2Event.eventDate) {
+                        dhis2Event.eventDate = DateUtils.formatFromApiToUser(
+                            dhis2Event.eventDate
+                        );
+                        dhis2Event.sortingDate = DateUtils.formatFromUserToApi(
+                            dhis2Event.eventDate
+                        );
+                      }
 
-                if (
-                  $scope.currentStage &&
-                  $scope.currentStage.id === dhis2Event.programStage
-                ) {
-                  $scope.currentEvent = dhis2Event;
-                }
-              }
-              // custom change for hide hide/un-hide events based on user-role, user-group and data-element value
-              if( $scope.filterProgramList.indexOf( dhis2Event.program ) !== -1 && $scope.userGroupName !== "Superuser" && dhis2Event.dataValues.length !==0 )
-              {
-                for( var j=0; j < dhis2Event.dataValues.length; j++ ){
-                  if ( dhis2Event.dataValues[j].dataElement === 'hqDoSMfLh8F' && dhis2Event.dataValues[j].value === $scope.userGroupName ){
-                      $scope.allEventsSorted.push(dhis2Event);
+                      dhis2Event.editingNotAllowed = EventUtils.getEditingStatus(
+                          dhis2Event,
+                          eventStage,
+                          $scope.selectedOrgUnit,
+                          $scope.selectedTei,
+                          $scope.selectedEnrollment,
+                          $scope.selectedProgram,
+                          userSearchOrgUnits
+                      );
+
+                      dhis2Event.statusColor =
+                          EventUtils.getEventStatusColor(dhis2Event);
+                      dhis2Event = EventUtils.processEvent(
+                          dhis2Event,
+                          eventStage,
+                          $scope.optionSets,
+                          $scope.prStDes
+                      );
+                      $scope.eventsByStage[dhis2Event.programStage].push(dhis2Event);
+
+                      if (
+                          $scope.currentStage &&
+                          $scope.currentStage.id === dhis2Event.programStage
+                      ) {
+                        $scope.currentEvent = dhis2Event;
+                      }
+                    }
+
+                    $scope.allEventsSorted.push(dhis2Event);
                   }
                 }
               }
-              else{
+
+            }
+            else {
+
+              if (
+                  $scope.selectedEnrollment &&
+                  $scope.selectedEnrollment.enrollment === dhis2Event.enrollment &&
+                  dhis2Event.orgUnit
+              ) {
+                dhis2Event.expired = EventUtils.isExpired(
+                    $scope.selectedProgram,
+                    dhis2Event
+                );
+                if (dhis2Event.notes) {
+                  dhis2Event.notes = orderByFilter(
+                      dhis2Event.notes,
+                      "-storedDate"
+                  );
+                  angular.forEach(dhis2Event.notes, function (note) {
+                    note.displayDate = DateUtils.formatFromApiToUser(
+                        note.storedDate
+                    );
+                    note.storedDate = DateUtils.formatToHrsMins(note.storedDate);
+                  });
+                }
+                var eventStage = $scope.stagesById[dhis2Event.programStage];
+                if (angular.isObject(eventStage)) {
+                  dhis2Event.name = eventStage.displayName;
+                  dhis2Event.executionDateLabel = eventStage.executionDateLabel
+                      ? eventStage.executionDateLabel
+                      : $translate.instant("report_date");
+                  dhis2Event.dueDateLabel = eventStage.dueDateLabel
+                      ? eventStage.dueDateLabel
+                      : $translate.instant("due_date");
+                  dhis2Event.dueDate = DateUtils.formatFromApiToUser(
+                      dhis2Event.dueDate
+                  );
+                  dhis2Event.sortingDate = DateUtils.formatFromUserToApi(
+                      dhis2Event.dueDate
+                  );
+                  dhis2Event.style = eventStage.style;
+
+                  if (dhis2Event.eventDate) {
+                    dhis2Event.eventDate = DateUtils.formatFromApiToUser(
+                        dhis2Event.eventDate
+                    );
+                    dhis2Event.sortingDate = DateUtils.formatFromUserToApi(
+                        dhis2Event.eventDate
+                    );
+                  }
+
+                  dhis2Event.editingNotAllowed = EventUtils.getEditingStatus(
+                      dhis2Event,
+                      eventStage,
+                      $scope.selectedOrgUnit,
+                      $scope.selectedTei,
+                      $scope.selectedEnrollment,
+                      $scope.selectedProgram,
+                      userSearchOrgUnits
+                  );
+
+                  dhis2Event.statusColor =
+                      EventUtils.getEventStatusColor(dhis2Event);
+                  dhis2Event = EventUtils.processEvent(
+                      dhis2Event,
+                      eventStage,
+                      $scope.optionSets,
+                      $scope.prStDes
+                  );
+                  $scope.eventsByStage[dhis2Event.programStage].push(dhis2Event);
+
+                  if (
+                      $scope.currentStage &&
+                      $scope.currentStage.id === dhis2Event.programStage
+                  ) {
+                    $scope.currentEvent = dhis2Event;
+                  }
+                }
+                // custom change for hide hide/un-hide events based on user-role, user-group and data-element value
+                //if( $scope.filterProgramList.indexOf( dhis2Event.program ) !== -1 && $scope.userGroupName !== "Superuser" && dhis2Event.dataValues.length !==0 )
+                /*
+                if( $scope.userGroupName !== "Superuser" && dhis2Event.dataValues.length !==0 )
+                {
+                  for( var j=0; j < dhis2Event.dataValues.length; j++ ){
+                    if ( dhis2Event.dataValues[j].dataElement === 'hqDoSMfLh8F' && dhis2Event.dataValues[j].value === $scope.userGroupName ){
+                        $scope.allEventsSorted.push(dhis2Event);
+                    }
+                  }
+                }
+                else{
+                  $scope.allEventsSorted.push(dhis2Event);
+                }
+                // end
+
+                 */
                 $scope.allEventsSorted.push(dhis2Event);
               }
-              // end
-              //$scope.allEventsSorted.push(dhis2Event);
+
             }
+
           });
 
           $scope.orgUnitNames = CurrentSelection.getOrgUnitNames();
