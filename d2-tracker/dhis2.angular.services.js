@@ -132,13 +132,21 @@ var d2Services = angular.module('d2Services', ['ngResource'])
 })
 
 /* service for getting calendar setting */
-.service('CalendarService', function (storage, $rootScope) {
+.service('CalendarService', function (storage, SessionStorageService, $rootScope) {
+    // The following array should be manually kept in sync with the one in `index.ejs`
+    const supportedCalendarLocales = ['ar', 'ar-EG', 'zh-CN', 'cs', 'da', 'nl', 'fr', 'km', 'lo', 'nb', 'pt-BR', 'ro', 'ru', 'es', 'sv', 'uk', 'ur', 'vi'];
 
     return {
         getSetting: function () {
 
             var dhis2CalendarFormat = {keyDateFormat: 'yyyy-MM-dd', keyCalendar: 'gregorian', momentFormat: 'YYYY-MM-DD'};
             var storedFormat = storage.get('SYSTEM_SETTING');
+            var userSettings = SessionStorageService.get('USER_SETTING');
+
+            dhis2CalendarFormat.locale = userSettings.keyUiLocale.replace('_', '-');
+            if (!supportedCalendarLocales.find(locale => locale === dhis2CalendarFormat.locale)) {
+                dhis2CalendarFormat.locale = 'en';
+            }
             
             if (angular.isObject(storedFormat) && storedFormat.keyDateFormat && storedFormat.keyCalendar) {
                 if (storedFormat.keyCalendar === 'iso8601') {
@@ -439,22 +447,48 @@ var d2Services = angular.module('d2Services', ['ngResource'])
     return {
         getCode: function(options, key){
             if(options){
+                // for comparison with the option values, which are always represented as strings
+                const keyString = String(key);
+
+                // is key a name?
                 for(var i=0; i<options.length; i++){
-                    if( key === options[i].displayName){
+                    if( keyString === options[i].displayName){
                         return options[i].code;
                     }
                 }
+                // is key a code?
+                for(var i=0; i<options.length; i++){
+                    if( keyString === options[i].code){
+                        return key;
+                    }
+                }
+                // not a part of the option set
+                return null;
             }
+
             return key;
         },
         getName: function(options, key){
             if(options){
+                // for comparison with the option values, which are always represented as strings
+                const keyString = String(key);
+
+                // is key a code?
                 for(var i=0; i<options.length; i++){
-                    if( key === options[i].code){
+                    if( keyString === options[i].code){
                         return options[i].displayName;
                     }
                 }
+                // is key a name?
+                for(var i=0; i<options.length; i++){
+                    if( keyString === options[i].displayName){
+                        return key;
+                    }
+                }
+                // not a part of the option set
+                return null;
             }
+
             return key;
         }
     };
@@ -1510,10 +1544,8 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         if(valueType === 'LONG_TEXT' || valueType === 'TEXT' || valueType === 'DATE' || valueType === 'AGE' || valueType === 'OPTION_SET' ||
             valueType === 'URL' || valueType === 'DATETIME' || valueType === 'TIME' || valueType === 'PHONE_NUMBER' || 
             valueType === 'ORGANISATION_UNIT' || valueType === 'USERNAME') {
-            if(processedValue) {
-                processedValue = "'" + processedValue + "'";
-            } else {
-                processedValue = "''";
+            if(!processedValue) {
+                processedValue = "";
             }
         }
         else if(valueType === 'BOOLEAN' || valueType === 'TRUE_ONLY') {
@@ -1527,7 +1559,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 processedValue = true;
             }
             else {
-                processedValue = "''";
+                processedValue = "";
             }
         }
         else if( valueType === "INTEGER" || valueType === "NUMBER" || valueType === "INTEGER_POSITIVE"
@@ -1789,6 +1821,24 @@ var d2Services = angular.module('d2Services', ['ngResource'])
     var lastEventDate = null;
     var lastProgramId = null;
     var eventScopeExceptCurrent = false;
+    var passOnTypes = ['number', 'boolean'];
+
+    var getInjectionValue = (rawValue) => {
+        const nonEmptyValue = rawValue != null ? rawValue : '';
+
+        const typeOfValue = typeof nonEmptyValue;
+
+        if (typeOfValue === 'string') {
+            // we will sanitize and encapsulate string values
+            return `"${nonEmptyValue.replace(/"/g, '\'')}"`;
+        }
+
+        if (passOnTypes.includes(typeOfValue)) {
+            return nonEmptyValue.toString();
+        }
+
+        return false.toString();
+    };
 
     var replaceVariables = function(expression, variablesHash){
         //replaces the variables in an expression with actual variable values.
@@ -1812,7 +1862,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 if(angular.isDefined(variablesHash[variablepresent])) {
                     //Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp( variablesHash[variablepresent].variablePrefix + "\\{" + variablepresent + "\\}", 'g'),
-                        variablesHash[variablepresent].variableValue);
+                        getInjectionValue(variablesHash[variablepresent].variableValue));
                 }
                 else {
                     $log.warn("Expression " + expression + " contains variable " + variablepresent
@@ -1834,7 +1884,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                     variablesHash[variablepresent].variablePrefix === 'V') {
                     //Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp("V{" + variablepresent + "}", 'g'),
-                        variablesHash[variablepresent].variableValue);
+                        getInjectionValue(variablesHash[variablepresent].variableValue));
                 }
                 else {
                     $log.warn("Expression " + expression + " conains context variable " + variablepresent
@@ -1856,7 +1906,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                     variablesHash[variablepresent].variablePrefix === 'A') {
                     //Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp("A{" + variablepresent + "}", 'g'),
-                        variablesHash[variablepresent].variableValue);
+                        getInjectionValue(variablesHash[variablepresent].variableValue));
                 }
                 else {
                     $log.warn("Expression " + expression + " conains attribute " + variablepresent
@@ -1878,7 +1928,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                     variablesHash[variablepresent].variablePrefix === 'C') {
                     //Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp("C{" + variablepresent + "}", 'g'),
-                        variablesHash[variablepresent].variableValue);
+                        getInjectionValue(variablesHash[variablepresent].variableValue));
                 }
                 else {
                     $log.warn("Expression " + expression + " conains constant " + variablepresent
@@ -2769,7 +2819,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         },
         "d2:lastEventDate": {
             parameters: 1,
-            execute: function(parameters, variablesHash) {z
+            execute: function(parameters, variablesHash) {
                 var variableName = parameters[0];
                 var variableObject = variablesHash[variableName];
                 var valueFound = "''";
@@ -2979,7 +3029,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
      * @returns {*}
      */
     function evaluate(code) {
-        const func = new Function(`"use strict";return ${code}`);
+        const func = new Function(`"use strict";return ${code.replace(/\n/g, '\\n')}`);
         return func();
     }
 
@@ -3103,12 +3153,31 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         return evaluate(expressionToEvaluate);
     };
 
+    function removeNewLinesFromNonStrings(expression, expressionModuloStrings) {
+        const fragments = expressionModuloStrings.split(/\n+/g);
+        const result = fragments.reduce(({ reducedExpression, remainder }, fragment) => {
+            remainder = remainder.replace(/^\n*/, '');
+            reducedExpression += remainder.substring(0, fragment.length);
+
+            return {
+                reducedExpression,
+                remainder: remainder.substring(fragment.length),
+            };
+        }, { reducedExpression: '', remainder: expression });
+
+        return {
+            reducedExpression: result.reducedExpression,
+            reducedExpressionModuloStrings: fragments.join(''),
+        };
+    };
+
     var runExpression = function(expression, beforereplacement, identifier, flag, variablesHash, selectedOrgUnit) {
         let answer = false;
         try {
             const expressionModuloStrings = expression.replace(/'[^']*'|"[^"]*"/g, match => ' '.repeat(match.length));
             const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
-            answer = internalExecuteExpression(applicableDhisFunctions, expression, expressionModuloStrings, variablesHash, selectedOrgUnit);
+            const { reducedExpression, reducedExpressionModuloStrings } = removeNewLinesFromNonStrings(expression, expressionModuloStrings);
+            answer = internalExecuteExpression(applicableDhisFunctions, reducedExpression, reducedExpressionModuloStrings, variablesHash, selectedOrgUnit);
 
             if(flag.verbose) {
                 $log.info("Expression with id " + identifier + " was successfully run. Original condition was: " + beforereplacement + " - Evaluation ended up as:" + expression + " - Result of evaluation was:" + answer);
@@ -3248,7 +3317,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
      * @param {*} flag execution flags
      */
     var internalFetchContextData = function(selectedEnrollment,executingEvent){
-        return OrgUnitFactory.getFromStoreOrServer( selectedEnrollment ? selectedEnrollment.orgUnit : executingEvent.orgUnit )
+        return OrgUnitFactory.getFromStoreOrServer(executingEvent && executingEvent.orgUnit ? executingEvent.orgUnit : selectedEnrollment.orgUnit)
             .then(function (orgUnit) {
                 var data = { selectedOrgUnit: orgUnit, selectedProgramStage: null};
                 if(executingEvent && executingEvent.program && executingEvent.programStage){
@@ -3532,7 +3601,8 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             var assignedFields = {};
             var hiddenSections = {};
             var mandatoryFields = {};
-            var warningMessages = [];
+            var errorMessages = {};
+            var warningMessages = {};
             var optionVisibility = { showOnly: null, hidden: {}};
             
             var attributeOptionsChanged = [];
@@ -3558,25 +3628,11 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                         hiddenFields[effect.trackedEntityAttribute.id] = true;
                     } else if (effect.action === "SHOWERROR" && effect.trackedEntityAttribute) {
                         if(effect.ineffect) {
-                            var headerText =  $translate.instant('validation_error');
-                            var bodyText = effect.content + (effect.data ? effect.data : "");
-
-                            NotificationService.showNotifcationDialog(headerText, bodyText);
-                            if( effect.trackedEntityAttribute ) {
-                                currentTei[effect.trackedEntityAttribute.id] = teiOriginalValues[effect.trackedEntityAttribute.id];
-                            }
+                            errorMessages[effect.trackedEntityAttribute.id] = effect.content + (effect.data ? effect.data : "");
                         }
                     } else if (effect.action === "SHOWWARNING" && effect.trackedEntityAttribute) {
                         if(effect.ineffect) {
-                            var message = effect.content + (angular.isDefined(effect.data) ? effect.data : "");
-                            
-                            if( effect.trackedEntityAttribute ) {
-                                warningMessages[effect.trackedEntityAttribute.id] = message;
-                            }
-                            else
-                            {
-                                warningMessages.push(message);
-                            }
+                            warningMessages[effect.trackedEntityAttribute.id] = effect.content + (effect.data ? effect.data : "");
                         }
                     }
                     else if (effect.action === "ASSIGN" && effect.trackedEntityAttribute) {
@@ -3634,14 +3690,15 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 }
             });
             clearAttributeValueForShowHideOptionActions(attributeOptionsChanged, currentTei,optionVisibility,attributesById,optionSets);
-            return {currentTei: currentTei, hiddenFields: hiddenFields, hiddenSections: hiddenSections, warningMessages: warningMessages, assignedFields: assignedFields, mandatoryFields: mandatoryFields, optionVisibility: optionVisibility};
+            return { currentTei, hiddenFields, hiddenSections, errorMessages, warningMessages, assignedFields, mandatoryFields, optionVisibility };
         },
         processRuleEffectsForEvent: function(eventId, currentEvent, currentEventOriginalValues, prStDes, optionSets,optionGroupsById) {
             var hiddenFields = {};
             var assignedFields = {};
             var mandatoryFields = {};
             var hiddenSections = {};
-            var warningMessages = [];
+            var errorMessages = {};
+            var warningMessages = {};
             var optionVisibility = { showOnly: null, hidden: {}};
 
             var dataElementOptionsChanged = [];
@@ -3668,15 +3725,11 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                             hiddenSections[effect.programStageSection] = effect.programStageSection;
                         }
                     }
-                    else if(effect.action === "SHOWERROR" && effect.dataElement.id){
-                        var headerTxt =  $translate.instant('validation_error');
-                        var bodyTxt = effect.content + (effect.data ? effect.data : "");
-                        NotificationService.showNotifcationDialog(headerTxt, bodyTxt);
-
-                        currentEvent[effect.dataElement.id] = currentEventOriginalValues[effect.dataElement.id];
+                    else if(effect.action === "SHOWERROR" && effect.dataElement && effect.dataElement.id){
+                        errorMessages[effect.dataElement.id] = effect.content + (effect.data ? effect.data : "");
                     }
-                    else if(effect.action === "SHOWWARNING"){
-                        warningMessages.push(effect.content + (effect.data ? effect.data : ""));
+                    else if(effect.action === "SHOWWARNING" && effect.dataElement && effect.dataElement.id){
+                        warningMessages[effect.dataElement.id] = effect.content + (effect.data ? effect.data : "");
                     }
                     else if (effect.action === "ASSIGN" && effect.dataElement) {
                         var processedValue = $filter('trimquotes')(effect.data);
@@ -3733,7 +3786,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 }
             });
             clearDataElementValueForShowHideOptionActions(dataElementOptionsChanged, currentEvent,optionVisibility,prStDes,optionSets);
-            return {currentEvent: currentEvent, hiddenFields: hiddenFields, hiddenSections: hiddenSections, warningMessages: warningMessages, assignedFields: assignedFields, mandatoryFields: mandatoryFields, optionVisibility: optionVisibility};
+            return { currentEvent, hiddenFields, hiddenSections, errorMessages, warningMessages, assignedFields, mandatoryFields, optionVisibility };
         },
         processRuleEffectAttribute: function(context, selectedTei, tei, currentEvent, currentEventOriginialValue, affectedEvent, attributesById, prStDes,optionSets,optionGroupsById){
             //Function used from registration controller to process effects for the tracked entity instance and for the events in the same operation
@@ -3742,7 +3795,8 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             
             if(context === "SINGLE_EVENT" && currentEvent && prStDes ) {
                 var eventEffects = this.processRuleEffectsForEvent("SINGLE_EVENT", currentEvent, currentEventOriginialValue, prStDes, optionSets,optionGroupsById);
-                teiAttributesEffects.warningMessages = angular.extend(teiAttributesEffects.warningMessages,eventEffects.warningMessages);
+                angular.extend(teiAttributesEffects.errorMessages, eventEffects.errorMessages);
+                angular.extend(teiAttributesEffects.warningMessages, eventEffects.warningMessages);
                 teiAttributesEffects.hiddenFields[context] = eventEffects.hiddenFields;
                 teiAttributesEffects.hiddenSections[context] = eventEffects.hiddenSections;
                 teiAttributesEffects.assignedFields[context] = eventEffects.assignedFields;
@@ -3829,7 +3883,6 @@ var d2Services = angular.module('d2Services', ['ngResource'])
     this.attributesById = null;
     this.ouLevels = null;
     this.sortedTeiIds = [];
-    this.selectedTeiEvents = null;
     this.relationshipOwner = {};
     this.selectedTeiEvents = [];
     this.fileNames = {};
@@ -3840,6 +3893,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
     this.frontPageData = null;
     this.trackedEntityTypes = null;
     this.optionGroupsById = null;
+    this.ruleEngineEvents = null;
 
     this.set = function(currentSelection){
         this.currentSelection = currentSelection;
@@ -3948,6 +4002,14 @@ var d2Services = angular.module('d2Services', ['ngResource'])
 
     this.setOptionGroupsById = function(optionGroupsById){
         this.optionGroupsById = optionGroupsById;
+    }
+
+    this.getRuleEngineEvents = function(){
+        return this.ruleEngineEvents;
+    }
+
+    this.setRuleEngineEvents = function(evs) {
+        this.ruleEngineEvents = evs;
     }
 })
 

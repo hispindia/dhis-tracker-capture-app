@@ -1,3 +1,130 @@
+## [31.13.14](https://github.com/dhis2/tracker-capture-app/compare/v31.13.13...v31.13.14) (2023-05-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([920695e](https://github.com/dhis2/tracker-capture-app/commit/920695ee54542c3e5ab9baee2662b31c4133ff44))
+
+## [31.13.13](https://github.com/dhis2/tracker-capture-app/compare/v31.13.12...v31.13.13) (2023-05-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([523da88](https://github.com/dhis2/tracker-capture-app/commit/523da8867fafcf25ad636f154ca394ef85d74458))
+
+## [31.13.12](https://github.com/dhis2/tracker-capture-app/compare/v31.13.11...v31.13.12) (2023-05-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([59b5cba](https://github.com/dhis2/tracker-capture-app/commit/59b5cba240887d7353d199911ed94b86e3a892bc))
+
+## [31.13.11](https://github.com/dhis2/tracker-capture-app/compare/v31.13.10...v31.13.11) (2023-05-25)
+
+
+### Bug Fixes
+
+* [DHIS2-15340] use orgunit of selected event before owning orgunit ([#1742](https://github.com/dhis2/tracker-capture-app/issues/1742)) ([82aee94](https://github.com/dhis2/tracker-capture-app/commit/82aee94202bb685343d437ecd3cdd0909e5bdc43))
+
+## [31.13.10](https://github.com/dhis2/tracker-capture-app/compare/v31.13.9...v31.13.10) (2023-05-24)
+
+
+### Bug Fixes
+
+* [DHI2-15089] program rule execution error during TEI registration ([#1725](https://github.com/dhis2/tracker-capture-app/issues/1725)) ([70b863a](https://github.com/dhis2/tracker-capture-app/commit/70b863ad0fc8782a01ef4c410309e16979c748c5))
+
+## [31.13.9](https://github.com/dhis2/tracker-capture-app/compare/v31.13.8...v31.13.9) (2023-05-24)
+
+
+### Bug Fixes
+
+* [DHIS2-15089] show data in feedback widget when no event is selected ([#1714](https://github.com/dhis2/tracker-capture-app/issues/1714)) ([cec70c8](https://github.com/dhis2/tracker-capture-app/commit/cec70c85dd7ac46c66eb9e17a630b696ca288454))
+
+## [31.13.8](https://github.com/dhis2/tracker-capture-app/compare/v31.13.7...v31.13.8) (2023-05-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3c571bf](https://github.com/dhis2/tracker-capture-app/commit/3c571bfe9afab830d2d7c13cda61fc196207e750))
+
+## [31.13.7](https://github.com/dhis2/tracker-capture-app/compare/v31.13.6...v31.13.7) (2023-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-11345] support newline in program rule expressions ([#1713](https://github.com/dhis2/tracker-capture-app/issues/1713)) ([171b106](https://github.com/dhis2/tracker-capture-app/commit/171b1062fdf2dc6c425600b84ba0bcadcee068cd))
+
+## [31.13.6](https://github.com/dhis2/tracker-capture-app/compare/v31.13.5...v31.13.6) (2023-05-12)
+
+
+### Bug Fixes
+
+* [DHIS2-14357] support single quotes in program rule expressions ([#1712](https://github.com/dhis2/tracker-capture-app/issues/1712)) ([7883618](https://github.com/dhis2/tracker-capture-app/commit/7883618f9814c3c230eba7e004e2009a3a852508))
+
+## [31.13.5](https://github.com/dhis2/tracker-capture-app/compare/v31.13.4...v31.13.5) (2023-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-14104] make sure deselected checkboxes evaluate `d2:hasValue` to `false` ([#1692](https://github.com/dhis2/tracker-capture-app/issues/1692)) ([0954cf2](https://github.com/dhis2/tracker-capture-app/commit/0954cf290b0fa68f2b8bdfe316b17ef20aba3542))
+* [DHIS2-14599] adapt to the new response format of /potentialDuplicates ([#1701](https://github.com/dhis2/tracker-capture-app/issues/1701)) ([b0f5408](https://github.com/dhis2/tracker-capture-app/commit/b0f5408534688f02d6d5a9eb00f5f8e2feffd235))
+
+## [31.13.4](https://github.com/dhis2/tracker-capture-app/compare/v31.13.3...v31.13.4) (2023-04-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13679] show error and warning messages on TEAs ([#1687](https://github.com/dhis2/tracker-capture-app/issues/1687)) ([445e0bd](https://github.com/dhis2/tracker-capture-app/commit/445e0bdcc4b9e9fc422a8ea6852d49c153702a9b))
+
+## [31.13.3](https://github.com/dhis2/tracker-capture-app/compare/v31.13.2...v31.13.3) (2023-03-30)
+
+
+### Bug Fixes
+
+* [DHIS2-9190] use `displayFormName` instead of `formName` for TEAs ([#1681](https://github.com/dhis2/tracker-capture-app/issues/1681)) ([eb2ce94](https://github.com/dhis2/tracker-capture-app/commit/eb2ce946f71317faa28515368106f0e150ee52c9))
+
+## [31.13.2](https://github.com/dhis2/tracker-capture-app/compare/v31.13.1...v31.13.2) (2023-03-22)
+
+
+### Bug Fixes
+
+* [DHIS2-14190] assign null instead of non-existing option ([#1677](https://github.com/dhis2/tracker-capture-app/issues/1677)) ([37a6cdd](https://github.com/dhis2/tracker-capture-app/commit/37a6cdd724e920296c4a7047a448a6301709f220))
+
+## [31.13.1](https://github.com/dhis2/tracker-capture-app/compare/v31.13.0...v31.13.1) (2023-03-07)
+
+
+### Bug Fixes
+
+* [DHIS2-14596] use English as fallback in date picker ([#1672](https://github.com/dhis2/tracker-capture-app/issues/1672)) ([bb81315](https://github.com/dhis2/tracker-capture-app/commit/bb8131528e20e71e2ab98460a00f54519866ceb2))
+
+# [31.13.0](https://github.com/dhis2/tracker-capture-app/compare/v31.12.19...v31.13.0) (2023-03-06)
+
+
+### Features
+
+* [DHIS2-14597] add translations in calendar picker ([#1663](https://github.com/dhis2/tracker-capture-app/issues/1663)) ([57a42d2](https://github.com/dhis2/tracker-capture-app/commit/57a42d23056262b5f1ec36f21eb9bb2142cfb672))
+
+## [31.12.19](https://github.com/dhis2/tracker-capture-app/compare/v31.12.18...v31.12.19) (2023-02-16)
+
+
+### Bug Fixes
+
+* [DHIS2-14733] prevent assignment of data elements outside current program stage ([#1662](https://github.com/dhis2/tracker-capture-app/issues/1662)) ([0fe86b1](https://github.com/dhis2/tracker-capture-app/commit/0fe86b1e5f5211557adbe6e2e96361a02aad0d01))
+
+## [31.12.18](https://github.com/dhis2/tracker-capture-app/compare/v31.12.17...v31.12.18) (2023-02-10)
+
+
+### Bug Fixes
+
+* [DHIS2-14266] minor corrections in the periodic events-code ([#1658](https://github.com/dhis2/tracker-capture-app/issues/1658)) ([f200274](https://github.com/dhis2/tracker-capture-app/commit/f200274ed1a928d26fa6a9a8d0fabb256ff74538))
+
+## [31.12.17](https://github.com/dhis2/tracker-capture-app/compare/v31.12.16...v31.12.17) (2023-02-09)
+
+
+### Bug Fixes
+
+* [DHIS2-14698] remove unintended character ([#1656](https://github.com/dhis2/tracker-capture-app/issues/1656)) ([fb05862](https://github.com/dhis2/tracker-capture-app/commit/fb058623fdc2d6f2e8990212785f489c791e01ab))
+
 ## [31.12.16](https://github.com/dhis2/tracker-capture-app/compare/v31.12.15...v31.12.16) (2023-01-17)
 
 

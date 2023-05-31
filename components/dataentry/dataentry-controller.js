@@ -466,7 +466,7 @@ trackerCapture.controller('DataEntryController',
                 if(affectedEvent.status !== 'SCHEDULE' &&
                         affectedEvent.status !== 'SKIPPED' &&
                         !affectedEvent.editingNotAllowed) {
-                    if(effect.ineffect && effect.dataElement) {
+                    if(effect.ineffect && effect.dataElement && $scope.prStDesInStage[$scope.currentStage.id][effect.dataElement.id]) {
                         //For "ASSIGN" actions where we have a dataelement, we save the calculated value to the dataelement:
                         //Blank out the value:
                         var processedValue = $filter('trimquotes')(effect.data);
@@ -991,7 +991,7 @@ trackerCapture.controller('DataEntryController',
             executeRules: $scope.executeRules
         });
     }
-    
+
     $scope.getEvents = function () {
 
         $scope.allEventsSorted = [];
@@ -2650,7 +2650,13 @@ trackerCapture.controller('DataEntryController',
                 $rootScope.$broadcast('tei-report-widget', {events: $scope.allEventsSorted});
             }, 200);
         }        
-        $scope.allEventsSorted = orderByFilter($scope.allEventsSorted, '-sortingDate').reverse();         
+        $scope.allEventsSorted = orderByFilter($scope.allEventsSorted, '-sortingDate').reverse();
+
+        CurrentSelection.setRuleEngineEvents({
+            programStages: $scope.programStages,
+            eventsByStage: $scope.eventsByStage,
+            prStDes: $scope.prStDes,
+        });
     };
 
     $scope.showLastEventInStage = function (stageId) {

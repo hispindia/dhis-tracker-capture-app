@@ -43,10 +43,10 @@ trackerCapture.controller('RegistrationController',
     $scope.customRegistrationForm = null;    
     $scope.selectedTei = {};       // Attribute values in the current form
     $scope.apiFormattedTei = {};   // API formatted version of $scope.selectedTei; see $scope.registerEntity(...) for details
-    $scope.warningMessages = [];
+    $scope.errorMessages = {};
+    $scope.warningMessages = {};
     $scope.hiddenFields = [];    
     $scope.assignedFields = [];
-    $scope.errorMessages = {};
     $scope.attributeUniquenessError = {};
     $scope.hiddenSections = [];
     $scope.mandatoryFields = [];
@@ -726,6 +726,28 @@ trackerCapture.controller('RegistrationController',
             }
         }
 
+        var context = $scope.registrationAndDataEntry ? 'SINGLE_EVENT' : 'registration';
+
+        if(angular.isDefined($scope.errorMessages[context]) && Object.keys($scope.errorMessages[context]).length > 0) {
+            //There are unresolved program rule errors - show error message.
+            $scope.validatingRegistration = false;
+            var sections = [
+                {
+                    bodyList: Object.values($scope.errorMessages[context]),
+                    itemType:'danger'
+                }
+            ];
+
+            var dialogOptions = {
+                headerText: 'errors',
+                bodyText: 'please_fix_errors_before_saving',
+                sections: sections
+            };
+
+            NotificationService.showNotifcationWithOptions({}, dialogOptions);
+            return false;
+        }
+
         //form is valid, continue the registration
         //get selected entity
         if (!$scope.selectedTei.trackedEntityInstance) {
@@ -773,22 +795,35 @@ trackerCapture.controller('RegistrationController',
 
         if ($scope.selectedProgram && $scope.selectedProgram.id) {
             var eventExists = $scope.currentEvent && $scope.currentEvent.event;
-            var enrollment = $scope.selectedEnrollment && $scope.selectedEnrollment.orgUnit ? $scope.selectedEnrollment : null;
             var evs = null;
+            var prStDes = null;
+
             if( eventExists ){
                 evs = {all: [], byStage: {}};
                 evs.all = [$scope.currentEvent];
                 evs.byStage[$scope.currentStage.id] = [$scope.currentEvent];
+            } else if ($scope.registrationMode === 'PROFILE' && CurrentSelection.ruleEngineEvents) {
+                const { programStages, eventsByStage } = CurrentSelection.ruleEngineEvents;
+                prStDes = CurrentSelection.ruleEngineEvents.prStDes;
+                var allSorted = [];
+                for(var ps = 0; ps < programStages.length; ps++ ) {
+                    for(var e = 0; e < eventsByStage[programStages[ps].id].length; e++) {
+                        allSorted.push(eventsByStage[programStages[ps].id][e]);
+                    }
+                }
+                allSorted = orderByFilter(allSorted, '-sortingDate').reverse();
+
+                evs = {all: allSorted, byStage: eventsByStage};
             }
-            if (eventExists || enrollment) {
+            if (evs) {
                 TrackerRulesExecutionService.executeRules(
                 $scope.allProgramRules, 
                 eventExists ? $scope.currentEvent : 'registration', 
                 evs,
-                $scope.prStDes, 
+                prStDes || $scope.prStDes,
                 $scope.attributesById,
                 $scope.selectedTei, 
-                enrollment,
+                $scope.selectedEnrollment,
                 $scope.optionSets, 
                 flag);
             }
@@ -922,11 +957,10 @@ trackerCapture.controller('RegistrationController',
 
     //listen for rule effect changes
     $scope.$on('ruleeffectsupdated', function (event, args) {
-        if (args.event === "registration" || args.event === 'SINGLE_EVENT') {
-            $scope.warningMessages = [];
+        var context = args.event;
+        if (context === "registration" || context === 'SINGLE_EVENT') {
             $scope.hiddenFields = [];
             $scope.assignedFields = [];
-            $scope.errorMessages = {};
             $scope.hiddenSections = [];
 
             var effectResult = TrackerRulesExecutionService.processRuleEffectAttribute(args.event, $scope.selectedTei, $scope.apiFormattedTei, $scope.currentEvent, {}, $scope.currentEvent, $scope.attributesById, $scope.prStDes,$scope.optionSets, $scope.optionGroupsById);
@@ -935,9 +969,14 @@ trackerCapture.controller('RegistrationController',
             $scope.hiddenFields = effectResult.hiddenFields;
             $scope.hiddenSections = effectResult.hiddenSections;
             $scope.assignedFields = effectResult.assignedFields;
-            $scope.warningMessages = effectResult.warningMessages;
+            $scope.errorMessages['registration'] = effectResult.errorMessages;
+            $scope.warningMessages['registration'] = effectResult.warningMessages;
             $scope.mandatoryFields = effectResult.mandatoryFields;
             $scope.optionVisibility = effectResult.optionVisibility;
+            if ($scope.registrationAndDataEntry) {
+                $scope.errorMessages['SINGLE_EVENT'] = effectResult.errorMessages;
+                $scope.warningMessages['SINGLE_EVENT'] = effectResult.warningMessages;
+            }
             if($scope.assignedFields){
                 var searchedGroups = {};
                 angular.forEach($scope.assignedFields, function(field){
