@@ -110,9 +110,19 @@ trackerCapture.controller('RegistrationController',
         });
     }
     
-    
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+    };
+     */
+    // custom change for ippf for disable custom-ID
+    $scope.isDisabled = function (attribute) {
+        if (attribute.code === 'custom_id' ) {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
     };
 
     $scope.selectedEnrollment = {
@@ -321,6 +331,27 @@ trackerCapture.controller('RegistrationController',
             }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+
+                // custom change for custom-ID get parent orgUnit code
+                // and TEI count based on orgUnit and enrollment Date(SQL-View -- CLFhvw5bXhl) for ippf_v34
+                $timeout( function (){
+                    $scope.finalTEICount = '';
+                    var org_uid = $scope.selectedOrgUnit.id;
+                    var param = "var=orgUnitUid:" + org_uid + "&var=programUid:" + $scope.selectedProgram.id + "&var=enrollmentDate:" + $scope.selectedEnrollment.enrollmentDate;
+                    $.getJSON("../api/sqlViews/CLFhvw5bXhl/data?"+param+"&paging=false", function (teiCountResponse) {
+                        var count = teiCountResponse.listGrid.rows[0];
+                        var teiCountByOrgUnitAndProgram = count[0];
+                        var teiCount = teiCountByOrgUnitAndProgram;
+                        var prefix = "";
+                        var totalTei = parseInt(teiCount) + 1;
+                        if( totalTei <10) prefix="00";
+                        else if (totalTei >9 && totalTei<100) prefix="0";
+
+                        $scope.finalTEICount = prefix + totalTei;
+                    });
+
+                },0);
+
                 if (generateAttributes) {
                     fetchGeneratedAttributes();
                 }
@@ -684,7 +715,27 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
-        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+
+        // custom change for custom-ID generation for ippf_v34 Assign attribute value before save
+
+        if ($scope.registrationMode === 'REGISTRATION' ) {
+            let firstNameProfile = "";
+            if ($scope.selectedTei.tsBbDQe3sGo !== undefined) {
+                let strP = $scope.selectedTei.tsBbDQe3sGo;
+                firstNameProfile = strP.substr(0, 2).toUpperCase();
+            }
+
+            let customEnrollmentDate = $scope.selectedEnrollment.enrollmentDate.split("-")[2]+$scope.selectedEnrollment.enrollmentDate.split("-")[1]+$scope.selectedEnrollment.enrollmentDate.split("-")[0];
+            //let firstString = strParentName + serviceDeliveryPoint + $scope.parentOrgUnitCode;
+            let firstString = $scope.selectedOrgUnit.code;
+            let secondString = firstNameProfile;
+            let thirdString = customEnrollmentDate;
+            let fourthString = $scope.finalTEICount;
+            $scope.generatedCustomId =  firstString+ "/" + secondString + "/" + thirdString + "/" + fourthString;
+        }
+        // end
+
+        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.apiFormattedTei = result.tei;
 
