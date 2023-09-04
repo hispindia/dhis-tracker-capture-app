@@ -126,13 +126,16 @@
                                 </table>
 
                                 <div class="vertical-spacing">
-                                    <button type="button" 
+                                    <!-- hide complete  button from enrollment widget -->
+                                    <!--
+                                    <button type="button"
                                             class="btn btn-primary"
                                             ng-if="selectedProgram.access.data.write && selectedEnrollment.status !== 'CANCELLED'"
                                             ng-disabled="!canUseEnrollment() || selectedOrgUnit.closedStatus"
                                             ng-click="completeReopenEnrollment()">
                                         {{selectedEnrollment.status === 'ACTIVE' ? 'complete' : 'reopen' | translate}}
                                     </button>
+                                    -->
                                     <button type="button" 
                                             class="btn btn-warning"
                                             ng-if="selectedProgram.access.data.write && selectedEnrollment.status !== 'COMPLETED'"

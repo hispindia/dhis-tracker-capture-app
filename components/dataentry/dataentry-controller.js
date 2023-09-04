@@ -3289,13 +3289,14 @@ trackerCapture
                 class: "btn btn-primary",
               },
             ];
-
+            /* hide complete and exit button while complete the event */
+            /*
             modalOptions.actionButtons.push({
               text: "complete_and_exit",
               action: modalCompleteIncompleteActions.completeAndExit,
               class: "btn btn-primary",
             });
-
+            */
             if ($scope.currentStage.remindCompleted) {
               modalOptions.bodyText =
                 "are_you_sure_to_complete_event_and_enrollment";

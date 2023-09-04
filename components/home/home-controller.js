@@ -59,8 +59,9 @@ trackerCapture.controller('HomeController',function(
             },
 
         }
-        $scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
-
+        // hide new/registration button in home page of tracker-capture
+        //$scope.views = [viewsByType.lists, viewsByType.search, viewsByType.registration];
+        $scope.views = [viewsByType.lists, viewsByType.search];
         var mapOuLevelsToId = function(){
             $scope.base.ouLevelsByLevel = {};
             angular.forEach(ouLevels, function(ouLevel){
