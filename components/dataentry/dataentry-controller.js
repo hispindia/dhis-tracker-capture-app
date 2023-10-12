@@ -34,7 +34,8 @@ trackerCapture.controller('DataEntryController',
                 AuthorityService,
                 AccessUtils,
                 TCOrgUnitService,
-                UsersService) {
+                UsersService,
+                AssignmentQueue) {
     
     //Unique instance id for the controller:
     $scope.APIURL = DHIS2URL;
@@ -825,11 +826,11 @@ trackerCapture.controller('DataEntryController',
         //If the events is displayed in a table, it is necessary to run the rules for all visible events.        
         if ($scope.currentStage && $scope.currentStage.displayEventsInTable && angular.isUndefined($scope.currentStage.rulesExecuted)) {
             angular.forEach($scope.currentStageEvents, function (event) {
-                TrackerRulesExecutionService.executeRules($scope.allProgramRules, event, evs, $scope.prStDes, $scope.attributesById, $scope.selectedTei, $scope.selectedEnrollment, $scope.optionSets, flag);
+                TrackerRulesExecutionService.executeRules($scope.allProgramRules, event, evs, $scope.prStDes, $scope.attributesById, $scope.selectedTei, $scope.selectedEnrollment, null, $scope.optionSets, flag);
                 $scope.currentStage.rulesExecuted = true;
             });
         } else {
-            return TrackerRulesExecutionService.executeRules($scope.allProgramRules, $scope.currentEvent, evs, $scope.prStDes, $scope.attributesById, $scope.selectedTei, $scope.selectedEnrollment, $scope.optionSets, flag);
+            return TrackerRulesExecutionService.executeRules($scope.allProgramRules, $scope.currentEvent, evs, $scope.prStDes, $scope.attributesById, $scope.selectedTei, $scope.selectedEnrollment, null, $scope.optionSets, flag);
         }
     };
 
@@ -1750,7 +1751,7 @@ trackerCapture.controller('DataEntryController',
                     }
                 ]
             };
-            return DHIS2EventFactory.updateForSingleValue(ev).then(function (response) {
+            return AssignmentQueue.insertAssignment(() => DHIS2EventFactory.updateForSingleValue(ev)).then(function (response) {
                 if(!response) {
                     if(!backgroundUpdate) {
                         $scope.currentElement.saved = false;
@@ -1787,7 +1788,6 @@ trackerCapture.controller('DataEntryController',
                 }
 
             });
-
         }
     };
 

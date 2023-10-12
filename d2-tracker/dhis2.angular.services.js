@@ -451,16 +451,13 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 const keyString = String(key);
 
                 // is key a name?
-                for(var i=0; i<options.length; i++){
-                    if( keyString === options[i].displayName){
-                        return options[i].code;
-                    }
+                const option = options.find(option => keyString === option.displayName);
+                if (option) {
+                    return option.code;
                 }
                 // is key a code?
-                for(var i=0; i<options.length; i++){
-                    if( keyString === options[i].code){
-                        return key;
-                    }
+                if (options.find(option => keyString === option.code)) {
+                    return key;
                 }
                 // not a part of the option set
                 return null;
@@ -474,16 +471,13 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 const keyString = String(key);
 
                 // is key a code?
-                for(var i=0; i<options.length; i++){
-                    if( keyString === options[i].code){
-                        return options[i].displayName;
-                    }
+                const option = options.find(option => keyString === option.code);
+                if (option) {
+                    return option.displayName;
                 }
                 // is key a name?
-                for(var i=0; i<options.length; i++){
-                    if( keyString === options[i].displayName){
-                        return key;
-                    }
+                if (options.find(option => keyString === option.displayName)) {
+                    return key;
                 }
                 // not a part of the option set
                 return null;
@@ -1779,21 +1773,21 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             variables = pushVariable(variables, 'environment', 'WebClient',null,'TEXT',true,'V','',false);
             variables = pushVariable(variables, 'current_date', DateUtils.getToday(), null, 'DATE', true, 'V', '', false );
 
-            variables = pushVariable(variables, 'event_date', executingEvent.eventDate, null, 'DATE', true, 'V', '', false );
-            variables = pushVariable(variables, 'due_date', executingEvent.dueDate, null, 'DATE', true, 'V', '' );
+            variables = pushVariable(variables, 'event_date', executingEvent.eventDate, null, 'DATE', !!executingEvent.eventDate, 'V', '', false );
+            variables = pushVariable(variables, 'due_date', executingEvent.dueDate, null, 'DATE', !!executingEvent.dueDate, 'V', '' );
             variables = pushVariable(variables, 'event_count', evs ? evs.all.length : 0, null, 'INTEGER', true, 'V', '', false );
 
-            variables = pushVariable(variables, 'enrollment_date', selectedEnrollment ? selectedEnrollment.enrollmentDate : '', null, 'DATE', selectedEnrollment ? selectedEnrollment.enrollmentDate ? true : false : false, 'V', '', false );
-            variables = pushVariable(variables, 'enrollment_id', selectedEnrollment ? selectedEnrollment.enrollment : '', null, 'TEXT',  selectedEnrollment ? true : false, 'V', '', false );
-            variables = pushVariable(variables, 'event_id', executingEvent ? executingEvent.event : '', null, 'TEXT',  executingEvent ? true : false, 'V', executingEvent ? executingEvent.eventDate : false, false);
-            variables = pushVariable(variables, 'event_status', executingEvent ? executingEvent.status : '', null, 'TEXT',  executingEvent ? true : false, 'V', executingEvent ? executingEvent.eventDate : false, false);
+            variables = pushVariable(variables, 'enrollment_date', selectedEnrollment ? selectedEnrollment.enrollmentDate : '', null, 'DATE', !!(selectedEnrollment && selectedEnrollment.enrollmentDate), 'V', '', false );
+            variables = pushVariable(variables, 'enrollment_id', selectedEnrollment ? selectedEnrollment.enrollment : '', null, 'TEXT',  !!selectedEnrollment, 'V', '', false );
+            variables = pushVariable(variables, 'event_id', executingEvent ? executingEvent.event : '', null, 'TEXT', !!executingEvent, 'V', executingEvent ? executingEvent.eventDate : false, false);
+            variables = pushVariable(variables, 'event_status', executingEvent ? executingEvent.status : '', null, 'TEXT', !!executingEvent, 'V', executingEvent ? executingEvent.eventDate : false, false);
 
-            variables = pushVariable(variables, 'incident_date', selectedEnrollment ? selectedEnrollment.incidentDate : '', null, 'DATE',  selectedEnrollment ? true : false, 'V', '', false);
+            variables = pushVariable(variables, 'incident_date', selectedEnrollment ? selectedEnrollment.incidentDate : '', null, 'DATE', !!selectedEnrollment, 'V', '', false);
             variables = pushVariable(variables, 'enrollment_count', selectedEnrollment ? 1 : 0, null, 'INTEGER', true, 'V', '', false);
             variables = pushVariable(variables, 'tei_count', selectedEnrollment ? 1 : 0, null, 'INTEGER', true, 'V', '', false);
             
-            variables = pushVariable(variables, 'program_stage_id',(selectedProgramStage && selectedProgramStage.id) || '', null, 'TEXT', selectedProgramStage && selectedProgramStage.id ? true : false, 'V', '', false);
-            variables = pushVariable(variables, 'program_stage_name',(selectedProgramStage && selectedProgramStage.name) || '', null, 'TEXT', selectedProgramStage && selectedProgramStage.name ? true : false, 'V', '', false);
+            variables = pushVariable(variables, 'program_stage_id',(selectedProgramStage && selectedProgramStage.id) || '', null, 'TEXT', !!(selectedProgramStage && selectedProgramStage.id), 'V', '', false);
+            variables = pushVariable(variables, 'program_stage_name',(selectedProgramStage && selectedProgramStage.name) || '', null, 'TEXT', !!(selectedProgramStage && selectedProgramStage.name), 'V', '', false);
 
 
             //Push all constant values:
@@ -1802,7 +1796,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             });
 
             if(selectedOrgUnit){
-                variables = pushVariable(variables, 'orgunit_code', selectedOrgUnit.code, null, 'TEXT', selectedOrgUnit.code ? true : false, 'V', '', false);
+                variables = pushVariable(variables, 'orgunit_code', selectedOrgUnit.code, null, 'TEXT', !!selectedOrgUnit.code, 'V', '', false);
             }
 
             return variables;
@@ -1847,7 +1841,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         //d2:hasValue('variableName') to avoid the further replacement, and make sure the correct input is fed into d2:hasValue.
         var avoidReplacementFunctions = ['d2:hasValue','d2:lastEventDate', 'd2:count', 'd2:countIfZeroPos', 'd2:countIfValue'];
         avoidReplacementFunctions.forEach(avoidReplaceFunction => {
-            expression = expression.replace( new RegExp("(" + avoidReplaceFunction + "\\() *[A#CV]\\{([\\w \\-\\_\\.]+)\\}(.*)\\)" ), "$1'$2'$3\)");
+            expression = expression.replaceAll( new RegExp("(" + avoidReplaceFunction + "\\() *[A#CV]\\{([\\w \\-\\_\\.]+)\\}", 'g'), "$1'$2'");
         });
 
         //Check if the expression contains program rule variables at all(any curly braces):
@@ -2646,12 +2640,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
         },
         "d2:concatenate": {
             execute: function(parameters) {
-                var returnString = "'";
-                for (var i = 0; i < parameters.length; i++) {
-                    returnString += parameters[i];
-                }
-                returnString += "'";
-                return returnString;
+                return parameters.join('');
             },
         },
         "d2:addDays": {
@@ -2659,9 +2648,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             execute: function(parameters) {
                 var date = $filter('trimquotes')(parameters[0]);
                 var daystoadd = $filter('trimquotes')(parameters[1]);
-                var newdate = DateUtils.format( moment(date, CalendarService.getSetting().momentFormat).add(daystoadd, 'days') );
-                var newdatestring = "'" + newdate + "'";
-                return newdatestring
+                return DateUtils.format( moment(date, CalendarService.getSetting().momentFormat).add(daystoadd, 'days') );
             },
         },
         "d2:zing": {
@@ -2822,7 +2809,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             execute: function(parameters, variablesHash) {
                 var variableName = parameters[0];
                 var variableObject = variablesHash[variableName];
-                var valueFound = "''";
+                var valueFound = "";
                 if(variableObject)
                 {
                     if(variableObject.variableEventDate){
@@ -2937,7 +2924,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 var startChar = string.length < parameters[1] - 1 ? -1 : parameters[1];
                 var endChar = string.length < parameters[2] ? -1 : parameters[2];
                 if(startChar < 0 || endChar < 0) {
-                    return "''";
+                    return "";
                 }
                 var returnString =  string.substring(startChar, endChar);
                 returnString = VariableService.processValue(returnString, 'TEXT');
@@ -2991,14 +2978,8 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             parameters: 1,
             execute: function(parameters, _, selectedOrgUnit) {
                 var group = parameters[0];
-                var isInGroup = "false";
                 var orgUnitGroups = (selectedOrgUnit && selectedOrgUnit.g) || [];
-                var foundGroup = orgUnitGroups.find(function(o) {return o.id === group || o.code === group});
-                if(foundGroup)
-                {
-                    isInGroup = "true"
-                }
-                return isInGroup;
+                return !!orgUnitGroups.find(function(o) {return o.id === group || o.code === group});
             },
         },
         "d2:hasUserRole": {
@@ -3138,7 +3119,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
                 accExpression += 'false';
             } else {
                 const dhisFunctionResult = dhisFunction.execute(evaluatedArguments, variablesHash, selectedOrgUnit);
-                accExpression += dhisFunctionResult;
+                accExpression += getInjectionValue(dhisFunctionResult);
             }
 
             return {
@@ -3316,8 +3297,16 @@ var d2Services = angular.module('d2Services', ['ngResource'])
      * @param {*} optionSets all optionsets(matedata)
      * @param {*} flag execution flags
      */
-    var internalFetchContextData = function(selectedEnrollment,executingEvent){
-        return OrgUnitFactory.getFromStoreOrServer(executingEvent && executingEvent.orgUnit ? executingEvent.orgUnit : selectedEnrollment.orgUnit)
+    var internalFetchContextData = function(selectedEnrollment, executingEvent, selectedOrgUnitId){
+        var orgUnitId = null;
+        if (executingEvent && executingEvent.orgUnit)
+            orgUnitId = executingEvent.orgUnit;
+        else if (selectedEnrollment.orgUnit)
+            orgUnitId = selectedEnrollment.orgUnit;
+        else
+            orgUnitId = selectedOrgUnitId;
+
+        return OrgUnitFactory.getFromStoreOrServer(orgUnitId)
             .then(function (orgUnit) {
                 var data = { selectedOrgUnit: orgUnit, selectedProgramStage: null};
                 if(executingEvent && executingEvent.program && executingEvent.programStage){
@@ -3333,7 +3322,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
     }
 
 
-    var internalExecuteRules = function(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flag) {
+    var internalExecuteRules = function(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnitId, optionSets, flag) {
         if(allProgramRules) {
             var variablesHash = {};
 
@@ -3356,7 +3345,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             //Run rules in priority - lowest number first(priority null is last)
             rules = orderByFilter(rules, 'priority');
 
-            return internalFetchContextData(selectedEnrollment, executingEvent).then(function (data) {
+            return internalFetchContextData(selectedEnrollment, executingEvent, selectedOrgUnitId).then(function (data) {
                 var selectedOrgUnit = data.selectedOrgUnit;
                 var selectedProgramStage = data.selectedProgramStage;
                 var variablesHash = VariableService.getVariables(allProgramRules, executingEvent, evs, allDataElements,
@@ -3593,8 +3582,8 @@ var d2Services = angular.module('d2Services', ['ngResource'])
     }
 
     return {
-        executeRules: function(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flags) {
-            return internalExecuteRules(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flags);
+        executeRules: function(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnitId, optionSets, flags) {
+            return internalExecuteRules(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnitId, optionSets, flags);
         },
         processRuleEffectsForTrackedEntityAttributes: function(context, currentTei, teiOriginalValues, attributesById, optionSets,optionGroupsById) {
             var hiddenFields = {};

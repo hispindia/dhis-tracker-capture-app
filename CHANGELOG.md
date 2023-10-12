@@ -1,3 +1,122 @@
+## [31.13.31](https://github.com/dhis2/tracker-capture-app/compare/v31.13.30...v31.13.31) (2023-09-15)
+
+
+### Bug Fixes
+
+* [DHIS2-15844] allow multiple occurences of d2:hasValue in a single expression ([#1863](https://github.com/dhis2/tracker-capture-app/issues/1863)) ([ac8bb95](https://github.com/dhis2/tracker-capture-app/commit/ac8bb95e035d0aeec9446b03cde835ceb992acb7))
+
+## [31.13.30](https://github.com/dhis2/tracker-capture-app/compare/v31.13.29...v31.13.30) (2023-09-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([902a86a](https://github.com/dhis2/tracker-capture-app/commit/902a86a1f15528d9858831080493f3abe471a217))
+
+## [31.13.29](https://github.com/dhis2/tracker-capture-app/compare/v31.13.28...v31.13.29) (2023-09-08)
+
+
+### Bug Fixes
+
+* [DHIS2-15102] assign data elements sequentially ([#1852](https://github.com/dhis2/tracker-capture-app/issues/1852)) ([e7194d2](https://github.com/dhis2/tracker-capture-app/commit/e7194d2a0b9611985e97ee3c069818a94c7a012a))
+
+## [31.13.28](https://github.com/dhis2/tracker-capture-app/compare/v31.13.27...v31.13.28) (2023-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-15532] return proper booleans from `d2:inOrgUnitGroup` ([#1842](https://github.com/dhis2/tracker-capture-app/issues/1842)) ([aeddb4b](https://github.com/dhis2/tracker-capture-app/commit/aeddb4b32bd276b035e989f8927a2a4cb1af7259))
+
+## [31.13.27](https://github.com/dhis2/tracker-capture-app/compare/v31.13.26...v31.13.27) (2023-06-30)
+
+
+### Bug Fixes
+
+* [15521] translated form name on data elements ([#1828](https://github.com/dhis2/tracker-capture-app/issues/1828)) ([a6a1a08](https://github.com/dhis2/tracker-capture-app/commit/a6a1a08de1dfd9ce202cdb99c6122d3d67971a80))
+
+## [31.13.26](https://github.com/dhis2/tracker-capture-app/compare/v31.13.25...v31.13.26) (2023-06-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e8a5091](https://github.com/dhis2/tracker-capture-app/commit/e8a509196d75d4686bfd71dae199a3c00e4d6452))
+
+## [31.13.25](https://github.com/dhis2/tracker-capture-app/compare/v31.13.24...v31.13.25) (2023-06-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([97982b8](https://github.com/dhis2/tracker-capture-app/commit/97982b82f7b495543a16a6d9a92487c80d02a645))
+
+## [31.13.24](https://github.com/dhis2/tracker-capture-app/compare/v31.13.23...v31.13.24) (2023-06-28)
+
+
+### Bug Fixes
+
+* [DHIS2-15500] use `displayFormName` instead of `formName` ([#1815](https://github.com/dhis2/tracker-capture-app/issues/1815)) ([559bf91](https://github.com/dhis2/tracker-capture-app/commit/559bf911007dca376206eeb270d923fc5111df6e))
+
+## [31.13.23](https://github.com/dhis2/tracker-capture-app/compare/v31.13.22...v31.13.23) (2023-06-22)
+
+
+### Bug Fixes
+
+* [DHIS2-15464] d2:right on numerical strings ([#1809](https://github.com/dhis2/tracker-capture-app/issues/1809)) ([d422190](https://github.com/dhis2/tracker-capture-app/commit/d42219039b8095702d007056c7652f465c3a4fc0))
+
+## [31.13.22](https://github.com/dhis2/tracker-capture-app/compare/v31.13.21...v31.13.22) (2023-06-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d07a9fa](https://github.com/dhis2/tracker-capture-app/commit/d07a9fae03b8f737e3492c9cc561f8761ef15df8))
+
+## [31.13.21](https://github.com/dhis2/tracker-capture-app/compare/v31.13.20...v31.13.21) (2023-06-21)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0c77d57](https://github.com/dhis2/tracker-capture-app/commit/0c77d5771d261e4997547868a76d0538c42da141))
+
+## [31.13.20](https://github.com/dhis2/tracker-capture-app/compare/v31.13.19...v31.13.20) (2023-06-20)
+
+
+### Bug Fixes
+
+* [DHIS2-15453] show errors and warnings during TEI registration ([#1792](https://github.com/dhis2/tracker-capture-app/issues/1792)) ([8a83f71](https://github.com/dhis2/tracker-capture-app/commit/8a83f71690e77f09198c541b659cb42805133aad))
+
+## [31.13.19](https://github.com/dhis2/tracker-capture-app/compare/v31.13.18...v31.13.19) (2023-06-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([311c537](https://github.com/dhis2/tracker-capture-app/commit/311c5373613ded14b38ecd53cb406c1eeedef29b))
+
+## [31.13.18](https://github.com/dhis2/tracker-capture-app/compare/v31.13.17...v31.13.18) (2023-06-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e9edb0d](https://github.com/dhis2/tracker-capture-app/commit/e9edb0dc2cbf3f361e1acc3a78f94aaac1497af0))
+
+## [31.13.17](https://github.com/dhis2/tracker-capture-app/compare/v31.13.16...v31.13.17) (2023-06-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([01ef2c7](https://github.com/dhis2/tracker-capture-app/commit/01ef2c708610dbd13fe2199b7d9a2a925f832ac5))
+
+## [31.13.16](https://github.com/dhis2/tracker-capture-app/compare/v31.13.15...v31.13.16) (2023-06-13)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8938018](https://github.com/dhis2/tracker-capture-app/commit/89380181fd7ac56a14666c9059d98c723768b47b))
+
+## [31.13.15](https://github.com/dhis2/tracker-capture-app/compare/v31.13.14...v31.13.15) (2023-06-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8fa3a5a](https://github.com/dhis2/tracker-capture-app/commit/8fa3a5a7d5b1a7044d30727dc61b9a8e5e5cb3e2))
+
 ## [31.13.14](https://github.com/dhis2/tracker-capture-app/compare/v31.13.13...v31.13.14) (2023-05-28)
 
 
