@@ -1221,8 +1221,383 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             CurrentSelection.currentSelection.tei.programOwnersById[program] = ou;
             var url =  DHIS2URL+'/tracker/ownership/transfer?trackedEntityInstance='+tei+'&program='+program+'&ou='+ou;
             return $http.put(url,{});
+        },
+
+        pushToAggregatedDataValue: function( eventDataValue ){
+            var deferred = $q.defer();
+
+            let dataValues = [];
+            let tempEventDate = new Date(eventDataValue.eventDate);
+            let quarter =  parseInt(tempEventDate.getMonth() / 3 ) + 1;
+            let tempPeriod = parseInt(tempEventDate.getFullYear()) + "Q" + quarter;
+            console.log(quarter);
+            if (eventDataValue.KlrfpnCYJAj !== '' && eventDataValue.KlrfpnCYJAj !== undefined) {
+                let dataValueExAnte = {};
+                dataValueExAnte.dataElement = 'kYv6z40PUry';
+                dataValueExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnte.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnte.value = eventDataValue.KlrfpnCYJAj;
+                dataValueExAnte.period = tempPeriod;
+                dataValues.push(dataValueExAnte);
+
+                let dataValueExPost = {};
+                dataValueExPost.dataElement = 'PrbmJuFTmXr';
+                dataValueExPost.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPost.orgUnit = eventDataValue.orgUnit;
+                dataValueExPost.value = eventDataValue.KlrfpnCYJAj;
+                dataValueExPost.period = tempPeriod;
+                dataValues.push(dataValueExPost);
+
+            }
+            if (eventDataValue.AQAxhZf5ac8 !== '' || eventDataValue.tIjpeBxQEmv !== '' || eventDataValue.sRpBeAUYgMr !== '') {
+                let dataValueExAnte = {};
+                dataValueExAnte.dataElement = 'ScbtoYqPXgC';
+                dataValueExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnte.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnte.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
+                dataValueExAnte.period = tempPeriod;
+                dataValues.push(dataValueExAnte);
+
+                let dataValueExPost = {};
+                dataValueExPost.dataElement = 'QElnHktlv6U';
+                dataValueExPost.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPost.orgUnit = eventDataValue.orgUnit;
+                dataValueExPost.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
+                dataValueExPost.period = tempPeriod;
+                dataValues.push(dataValueExPost);
+
+            }
+            if (eventDataValue.ZgcURySniLD !== '' && eventDataValue.ZgcURySniLD !== undefined) {
+                let dataValueExAntePA = {};
+                dataValueExAntePA.dataElement = 'k6WL8QTahRx';
+                dataValueExAntePA.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAntePA.orgUnit = eventDataValue.orgUnit;
+                dataValueExAntePA.value = eventDataValue.ZgcURySniLD;
+                dataValueExAntePA.period = tempPeriod;
+                dataValues.push(dataValueExAntePA);
+
+                let dataValueExPostPA = {};
+                dataValueExPostPA.dataElement = 'WMA04edTuBB';
+                dataValueExPostPA.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostPA.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostPA.value = eventDataValue.ZgcURySniLD;
+                dataValueExPostPA.period = tempPeriod;
+                dataValues.push(dataValueExPostPA);
+            }
+
+            if (eventDataValue.i5kIcliOLTc !== '' && eventDataValue.i5kIcliOLTc !== undefined) {
+                let dataValueExAnteGP = {};
+                dataValueExAnteGP.dataElement = 'V75j3GmNl4F';
+                dataValueExAnteGP.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteGP.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteGP.value = eventDataValue.i5kIcliOLTc;
+                dataValueExAnteGP.period = tempPeriod;
+                dataValues.push(dataValueExAnteGP);
+
+                let dataValueExPostGP = {};
+                dataValueExPostGP.dataElement = 'PPmVItFSsiX';
+                dataValueExPostGP.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostGP.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostGP.value = eventDataValue.i5kIcliOLTc;
+                dataValueExPostGP.period = tempPeriod;
+                dataValues.push(dataValueExPostGP);
+            }
+
+            if (eventDataValue.VvGLnxMa2sv !== '' && eventDataValue.VvGLnxMa2sv !== undefined) {
+                let dataValueExAnteCW = {};
+                dataValueExAnteCW.dataElement = 'vE9FX7noI2B';
+                dataValueExAnteCW.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteCW.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteCW.value = eventDataValue.VvGLnxMa2sv;
+                dataValueExAnteCW.period = tempPeriod;
+                dataValues.push(dataValueExAnteCW);
+
+                let dataValueExPostCW = {};
+                dataValueExPostCW.dataElement = 'SSgQFGh74yJ';
+                dataValueExPostCW.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostCW.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostCW.value = eventDataValue.VvGLnxMa2sv;
+                dataValueExPostCW.period = tempPeriod;
+                dataValues.push(dataValueExPostCW);
+            }
+
+            if (eventDataValue.rASLM0hqIYF !== '' && eventDataValue.rASLM0hqIYF !== undefined) {
+                let dataValueExAnteHW = {};
+                dataValueExAnteHW.dataElement = 'NbVCoMXdrNs';
+                dataValueExAnteHW.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteHW.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteHW.value = eventDataValue.rASLM0hqIYF;
+                dataValueExAnteHW.period = tempPeriod;
+                dataValues.push(dataValueExAnteHW);
+
+                let dataValueExPostHW = {};
+                dataValueExPostHW.dataElement = 'bnCQHZLZnML';
+                dataValueExPostHW.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostHW.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostHW.value = eventDataValue.rASLM0hqIYF;
+                dataValueExPostHW.period = tempPeriod;
+                dataValues.push(dataValueExPostHW);
+            }
+
+            if (eventDataValue.eZ6d42PJkp2 !== '' && eventDataValue.eZ6d42PJkp2 !== undefined) {
+                let dataValueExAnteToilets = {};
+                dataValueExAnteToilets.dataElement = 'i3IhffpHeVl';
+                dataValueExAnteToilets.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteToilets.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteToilets.value = eventDataValue.eZ6d42PJkp2;
+                dataValueExAnteToilets.period = tempPeriod;
+                dataValues.push(dataValueExAnteToilets);
+
+                let dataValueExPostToilets = {};
+                dataValueExPostToilets.dataElement = 'YTUsKqUh7LR';
+                dataValueExPostToilets.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostToilets.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostToilets.value = eventDataValue.eZ6d42PJkp2;
+                dataValueExPostToilets.period = tempPeriod;
+                dataValues.push(dataValueExPostToilets);
+            }
+            if (eventDataValue.shULFYxYJLU !== '' && eventDataValue.shULFYxYJLU !== undefined) {
+                let dataValueExAnteMedicalWasteHandling = {};
+                dataValueExAnteMedicalWasteHandling.dataElement = 'UC2uPvPmH3B';
+                dataValueExAnteMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
+                dataValueExAnteMedicalWasteHandling.period = tempPeriod;
+                dataValues.push(dataValueExAnteMedicalWasteHandling);
+
+                let dataValueExPostMedicalWasteHandling = {};
+                dataValueExPostMedicalWasteHandling.dataElement = 'PN367HKp0Jy';
+                dataValueExPostMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
+                dataValueExPostMedicalWasteHandling.period = tempPeriod;
+                dataValues.push(dataValueExPostMedicalWasteHandling);
+            }
+
+            if (eventDataValue.pHdhGRXtgYK !== '' && eventDataValue.pHdhGRXtgYK !== undefined) {
+                let dataValueExAnteMedicalWasteDisposal = {};
+                dataValueExAnteMedicalWasteDisposal.dataElement = 'YZ8ju7yq2Rn';
+                dataValueExAnteMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
+                dataValueExAnteMedicalWasteDisposal.period = tempPeriod;
+                dataValues.push(dataValueExAnteMedicalWasteDisposal);
+
+                let dataValueExPostMedicalWasteDisposal = {};
+                dataValueExPostMedicalWasteDisposal.dataElement = 'byYvooPVfuU';
+                dataValueExPostMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
+                dataValueExPostMedicalWasteDisposal.period = tempPeriod;
+                dataValues.push(dataValueExPostMedicalWasteDisposal);
+            }
+            if (eventDataValue.AuBUhr0hGcX !== '' && eventDataValue.AuBUhr0hGcX !== undefined) {
+                let dataValueExAnteAPS = {};
+                dataValueExAnteAPS.dataElement = 'zZa8EMGcYSA';
+                dataValueExAnteAPS.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteAPS.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteAPS.value = eventDataValue.AuBUhr0hGcX;
+                dataValueExAnteAPS.period = tempPeriod;
+                dataValues.push(dataValueExAnteAPS);
+            }
+
+            if (eventDataValue.uEZlhrZA1Tf !== '' && eventDataValue.uEZlhrZA1Tf !== undefined) {
+                let dataValueExPostAPS = {};
+                dataValueExPostAPS.dataElement = 'ij7E9nvjGSU';
+                dataValueExPostAPS.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostAPS.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostAPS.value = eventDataValue.uEZlhrZA1Tf;
+                dataValueExPostAPS.period = tempPeriod;
+                dataValues.push(dataValueExPostAPS);
+            }
+
+            if (eventDataValue.OsdaS7OtRMO !== '' && eventDataValue.OsdaS7OtRMO !== undefined) {
+                let dataValueExAnteInsuranceEfficiency = {};
+                dataValueExAnteInsuranceEfficiency.dataElement = 'usaznFLM8LA';
+                dataValueExAnteInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
+                dataValueExAnteInsuranceEfficiency.period = tempPeriod;
+                dataValues.push(dataValueExAnteInsuranceEfficiency);
+
+                let dataValueExPostInsuranceEfficiency = {};
+                dataValueExPostInsuranceEfficiency.dataElement = 'p3SPRXXN7ql';
+                dataValueExPostInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
+                dataValueExPostInsuranceEfficiency.period = tempPeriod;
+                dataValues.push(dataValueExPostInsuranceEfficiency);
+            }
+
+
+            if ( ( eventDataValue.NryCpvgIjgf !== '' && eventDataValue.NryCpvgIjgf !== undefined ) || ( eventDataValue.ZTAiGHl0H2a !== '' && eventDataValue.ZTAiGHl0H2a !== undefined ) ) {
+
+                let calculatedValue = "";
+                if( eventDataValue.NryCpvgIjgf !== undefined  && eventDataValue.ZTAiGHl0H2a !== undefined ){
+                    calculatedValue = parseInt(eventDataValue.NryCpvgIjgf) + parseInt(eventDataValue.ZTAiGHl0H2a);
+                }
+                if( eventDataValue.NryCpvgIjgf !== undefined  && eventDataValue.ZTAiGHl0H2a === undefined ){
+                    calculatedValue = parseInt(eventDataValue.NryCpvgIjgf);
+                }
+                if( eventDataValue.ZTAiGHl0H2a !== undefined  && eventDataValue.NryCpvgIjgf === undefined ){
+                    calculatedValue = parseInt(eventDataValue.ZTAiGHl0H2a);
+                }
+
+                let dataValueExAnteProvidersKnowledge1 = {};
+                dataValueExAnteProvidersKnowledge1.dataElement = 'roxV1Oz25wH';
+                dataValueExAnteProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteProvidersKnowledge1.value = calculatedValue;
+                dataValueExAnteProvidersKnowledge1.period = tempPeriod;
+                dataValues.push(dataValueExAnteProvidersKnowledge1);
+
+                let dataValueExPostProvidersKnowledge1 = {};
+                dataValueExPostProvidersKnowledge1.dataElement = 'PdNYCSQ3Gp8';
+                dataValueExPostProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostProvidersKnowledge1.value = calculatedValue;
+                dataValueExPostProvidersKnowledge1.period = tempPeriod;
+                dataValues.push(dataValueExPostProvidersKnowledge1);
+            }
+
+            if (eventDataValue.ulBdw5b0IHO !== '' && eventDataValue.ulBdw5b0IHO !== undefined) {
+                let dataValueExAnteGrievanceRedressal = {};
+                dataValueExAnteGrievanceRedressal.dataElement = 'USrnj98vrY6';
+                dataValueExAnteGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
+                dataValueExAnteGrievanceRedressal.period = tempPeriod;
+                dataValues.push(dataValueExAnteGrievanceRedressal);
+
+                let dataValueExPostGrievanceRedressal = {};
+                dataValueExPostGrievanceRedressal.dataElement = 'QXqyvSoE8OJ';
+                dataValueExPostGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
+                dataValueExPostGrievanceRedressal.period = tempPeriod;
+                dataValues.push(dataValueExPostGrievanceRedressal);
+            }
+
+            if (eventDataValue.ulBdw5b0IHO !== '' && eventDataValue.ulBdw5b0IHO !== undefined) {
+                let dataValueExAnteHumanResourceForHealth = {};
+                dataValueExAnteHumanResourceForHealth.dataElement = 'Z7VNKSnj9bR';
+                dataValueExAnteHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
+                dataValueExAnteHumanResourceForHealth.period = tempPeriod;
+                dataValues.push(dataValueExAnteHumanResourceForHealth);
+
+                let dataValueExPostHumanResourceForHealth = {};
+                dataValueExPostHumanResourceForHealth.dataElement = 'dEMabXieh9q';
+                dataValueExPostHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
+                dataValueExPostHumanResourceForHealth.period = tempPeriod;
+                dataValues.push(dataValueExPostHumanResourceForHealth);
+            }
+
+            if (eventDataValue.VQfr47DujUb !== '' && eventDataValue.VQfr47DujUb !== undefined) {
+                let dataValueExAnteEssentialMedicines = {};
+                dataValueExAnteEssentialMedicines.dataElement = 'MBXhuZ9OegK';
+                dataValueExAnteEssentialMedicines.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteEssentialMedicines.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteEssentialMedicines.value = eventDataValue.VQfr47DujUb;
+                dataValueExAnteEssentialMedicines.period = tempPeriod;
+                dataValues.push(dataValueExAnteEssentialMedicines);
+
+                let dataValueExPostEssentialMedicines = {};
+                dataValueExPostEssentialMedicines.dataElement = 'A4YqbwfGKbU';
+                dataValueExPostEssentialMedicines.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostEssentialMedicines.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostEssentialMedicines.value = eventDataValue.VQfr47DujUb;
+                dataValueExPostEssentialMedicines.period = tempPeriod;
+                dataValues.push(dataValueExPostEssentialMedicines);
+            }
+
+            if (eventDataValue.s3c29xLWsHM !== '' && eventDataValue.s3c29xLWsHM !== undefined) {
+                let dataValueExAnteEssentialDiagnostics = {};
+                dataValueExAnteEssentialDiagnostics.dataElement = 't2MhPj0U4mQ';
+                dataValueExAnteEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
+                dataValueExAnteEssentialDiagnostics.period = tempPeriod;
+                dataValues.push(dataValueExAnteEssentialDiagnostics);
+
+                let dataValueExPostEssentialDiagnostics = {};
+                dataValueExPostEssentialDiagnostics.dataElement = 'Dbui9QRFzZQ';
+                dataValueExPostEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
+                dataValueExPostEssentialDiagnostics.period = tempPeriod;
+                dataValues.push(dataValueExPostEssentialDiagnostics);
+            }
+
+            if (eventDataValue.p1CksgJdni5 !== '' && eventDataValue.p1CksgJdni5 !== undefined) {
+                let dataValueExAnteLowCostDrugs = {};
+                dataValueExAnteLowCostDrugs.dataElement = 'EMXIN8NrEP5';
+                dataValueExAnteLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExAnteLowCostDrugs.orgUnit = eventDataValue.orgUnit;
+                dataValueExAnteLowCostDrugs.value = eventDataValue.p1CksgJdni5;
+                dataValueExAnteLowCostDrugs.period = tempPeriod;
+                dataValues.push(dataValueExAnteLowCostDrugs);
+
+                let dataValueExPostLowCostDrugs = {};
+                dataValueExPostLowCostDrugs.dataElement = 'kGF0N1AJ53A';
+                dataValueExPostLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
+                dataValueExPostLowCostDrugs.orgUnit = eventDataValue.orgUnit;
+                dataValueExPostLowCostDrugs.value = eventDataValue.p1CksgJdni5;
+                dataValueExPostLowCostDrugs.period = tempPeriod;
+                dataValues.push(dataValueExPostLowCostDrugs);
+            }
+
+            let dataValueSet = {};
+            dataValueSet.dataValues = dataValues;
+            console.log(" final dataValueSet : " + dataValueSet );
+            let dataJSON = JSON.stringify(dataValueSet);
+            $.ajax({
+                type: "POST",
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                data: dataJSON,
+                url: DHIS2URL + '/dataValueSets',
+
+                success: function (response) {
+                    //console.log( __rowNum__ + " -- "+ row.event + "Event updated with " + row.value + "response: " + response );
+
+                    console.log("response : " + response);
+                    console.log("conflicts : " + response.response.conflicts);
+
+                    let impCount = response.response.importCount.imported;
+                    let upCount = response.response.importCount.updated;
+                    let igCount = response.response.importCount.ignored;
+                    let conflictsDetails   = response.response.conflicts;
+
+                    console.log(  "impCount - " + impCount + " upCount - " + upCount + " igCount - " + igCount + " conflictsDetails - " + conflictsDetails  );
+
+                    deferred.resolve(response);
+                },
+                error: function (response) {
+                    console.log("error : " + response.status );
+                    deferred.resolve(response);
+                },
+                warning: function (response) {
+                    console.log("warning : " + response.status );
+                    deferred.resolve(response);
+                }
+
+            });
+
+            return deferred.promise;
+
         }
+
     };
+
+
+
+
+
 })
 
 /* Factory for getting tracked entity attributes */

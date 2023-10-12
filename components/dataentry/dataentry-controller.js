@@ -37,7 +37,8 @@ trackerCapture
       AuthorityService,
       AccessUtils,
       TCOrgUnitService,
-      UsersService
+      UsersService,
+      TEIService,
     ) {
       //Unique instance id for the controller:
       $scope.APIURL = DHIS2URL;
@@ -3359,6 +3360,22 @@ trackerCapture
             } else {
               //complete event
               $scope.currentEvent.status = "COMPLETED";
+            }
+
+            if (modalResult === 'complete') {
+
+              TEIService.pushToAggregatedDataValue( $scope.currentEvent ).then(function(aggregatedDataValueResponse){
+
+                if( aggregatedDataValueResponse.status === 'OK'){
+                  console.log( aggregatedDataValueResponse.message );
+                  console.log( aggregatedDataValueResponse );
+                }
+                else{
+                  console.log( "error in importing" );
+                }
+                //console.log( aggregatedDataValueResponse.response.importCount.imported );
+              });
+
             }
 
             setStatusColor();
