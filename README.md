@@ -16,3 +16,19 @@ yarn start
 ```
 
 This starts the development server on port `8081`.
+
+
+This starts the development server on port `8081`.
+
+### build the application
+
+```
+yarn install
+
+yarn build
+
+### add features
+
+1) custom id generation
+2) hide registration button based on program meta-attribute value
+3) assign one program stage datavalue to other programstage datavalue
