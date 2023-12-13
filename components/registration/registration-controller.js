@@ -76,6 +76,10 @@ trackerCapture.controller('RegistrationController',
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
 
+    // custom change for PMTCT customID generation
+    $scope.generatedCustomId = '';
+    $scope.parentDisplayName  = '';
+
     if(!$scope.attributesById){
         $scope.attributesById = [];
         AttributesFactory.getAll().then(function(atts){
@@ -115,11 +119,22 @@ trackerCapture.controller('RegistrationController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
-    
-    
+    // custom change for PMTCT Start
+    // update for PMTCT  for disable attribute pmtct_code_number
+    $scope.isDisabled = function (attribute) {
+        if (attribute.code === 'pmtct_code_number' ) {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
+    // custom change for PMTCT end
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
+    */
 
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
@@ -340,6 +355,18 @@ trackerCapture.controller('RegistrationController',
                 trackedEntityType = $scope.selectedProgram.trackedEntityType;
             }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
+
+                // change for pmtct-customizations display on load parent orgUnitName
+                $timeout( function (){
+
+                    var org_id = $scope.selectedOrgUnit.id;
+                    $.getJSON("../api/organisationUnits/"+ org_id +".json?fields=id,displayName,code,parent[id,displayName]", function (data) {
+                        $scope.orgUnitCode = data.code;
+                        $scope.parentDisplayName = data.parent.displayName;
+                    });
+
+                },0);
+
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
                 if (generateAttributes) {
                     fetchGeneratedAttributes();
@@ -760,7 +787,44 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
-        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+
+        // custom-code for PMTCT for generate Custom-Id start
+        if ( $scope.selectedProgram.id === 'B8MqLS47pW6' && $scope.registrationMode === 'REGISTRATION' ) {
+
+            var registerNumber = "";
+            var midwifeName = "";
+            var assignedFacilityName = "";
+            var enrollmentDateYear = $scope.selectedEnrollment.enrollmentDate.split("-")[0];
+            var selectedOrgUnitCode = $scope.selectedOrgUnit.code;
+            //var selectedOrgUnitName = $scope.selectedOrgUnit.displayName;
+            //var selectedOrgUnitName = $scope.parentDisplayName;
+            var assignedFacilityParentName = $scope.parentDisplayName;
+            var selectedOrgUnitName = $scope.selectedOrgUnit.displayName;
+            assignedFacilityName = selectedOrgUnitName.substr(0, 4).toUpperCase();
+
+            //var assignedFacilityParentName = $scope.selectedOrgUnit.parent.displayName;
+
+            //var orgUnitCodeUpperCase = selectedOrgUnitCode.substr(0, 4).toUpperCase();
+
+            // 6 digit random number
+            //var suffix = Math.floor(Math.random() * 1000000) + 1;
+
+            if ($scope.selectedTei.v5VT9tm9UDE !== undefined) {
+                registerNumber = $scope.selectedTei.v5VT9tm9UDE;
+
+            }
+            if ($scope.selectedTei.EHigryFcChY !== undefined) {
+                var tempStr = $scope.selectedTei.EHigryFcChY;
+                midwifeName = tempStr.substr(0, 4).toUpperCase();
+            }
+
+            $scope.generatedCustomId = registerNumber + "/" + midwifeName + "/" +  assignedFacilityName +  "/" +  assignedFacilityParentName + "/" +  enrollmentDateYear ;
+        }
+        // custom change for PMTCT end
+
+
+
+        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.apiFormattedTei = result.tei;
 
