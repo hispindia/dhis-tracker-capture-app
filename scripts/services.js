@@ -1233,248 +1233,614 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             console.log(quarter);
             if (eventDataValue.KlrfpnCYJAj !== '' && eventDataValue.KlrfpnCYJAj !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnte = {};
+                    let dataValuePHCExAnte = {};
+                    dataValuePHCExAnte.dataElement = 'kYv6z40PUry';
+                    dataValuePHCExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnte.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnte.value = eventDataValue.KlrfpnCYJAj;
+                    dataValuePHCExAnte.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnte);
 
-                    dataValueExAnte.dataElement = 'kYv6z40PUry';
-                    dataValueExAnte.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnte.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnte.value = eventDataValue.KlrfpnCYJAj;
-                    dataValueExAnte.period = tempPeriod;
-                    dataValues.push(dataValueExAnte);
+                    let dataValueCHCExAnte = {};
+                    dataValueCHCExAnte.dataElement = 'wHeR9Hvw1Dj';
+                    dataValueCHCExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnte.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnte.value = eventDataValue.KlrfpnCYJAj;
+                    dataValueCHCExAnte.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnte);
+
+                    let dataValueDHExAnte = {};
+                    dataValueDHExAnte.dataElement = 'zyeuAHHGHhk';
+                    dataValueDHExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnte.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnte.value = eventDataValue.KlrfpnCYJAj;
+                    dataValueDHExAnte.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnte);
                 }
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPost = {};
-                    dataValueExPost.dataElement = 'PrbmJuFTmXr';
-                    dataValueExPost.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPost.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPost.value = eventDataValue.KlrfpnCYJAj;
-                    dataValueExPost.period = tempPeriod;
-                    dataValues.push(dataValueExPost);
+                    let dataValuePHCExPost = {};
+                    dataValuePHCExPost.dataElement = 'PrbmJuFTmXr';
+                    dataValuePHCExPost.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPost.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPost.value = eventDataValue.KlrfpnCYJAj;
+                    dataValuePHCExPost.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPost);
+
+                    let dataValueCHCExPost = {};
+                    dataValueCHCExPost.dataElement = 'wZgdSExWtWj';
+                    dataValueCHCExPost.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPost.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPost.value = eventDataValue.KlrfpnCYJAj;
+                    dataValueCHCExPost.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPost);
+
+                    let dataValueDHExPost = {};
+                    dataValueDHExPost.dataElement = 'T4yGu8Kg9Ea';
+                    dataValueDHExPost.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPost.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPost.value = eventDataValue.KlrfpnCYJAj;
+                    dataValueDHExPost.period = tempPeriod;
+                    dataValues.push(dataValueDHExPost);
                 }
 
             }
             if (eventDataValue.AQAxhZf5ac8 !== '' || eventDataValue.tIjpeBxQEmv !== '' || eventDataValue.sRpBeAUYgMr !== '') {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnte = {};
-                    dataValueExAnte.dataElement = 'ScbtoYqPXgC';
-                    dataValueExAnte.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnte.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnte.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
-                    dataValueExAnte.period = tempPeriod;
-                    dataValues.push(dataValueExAnte);
+                    let dataValuePHCExAnte = {};
+                    dataValuePHCExAnte.dataElement = 'ScbtoYqPXgC';
+                    dataValuePHCExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnte.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnte.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
+                    dataValuePHCExAnte.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnte);
+
+                    let dataValueCHCExAnte = {};
+                    dataValueCHCExAnte.dataElement = 'a5HC30I2dOD';
+                    dataValueCHCExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnte.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnte.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
+                    dataValueCHCExAnte.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnte);
+
+                    let dataValueDHExAnte = {};
+                    dataValueDHExAnte.dataElement = 'z5R5cT2FYpU';
+                    dataValueDHExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnte.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnte.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
+                    dataValueDHExAnte.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnte);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPost = {};
-                    dataValueExPost.dataElement = 'QElnHktlv6U';
-                    dataValueExPost.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPost.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPost.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
-                    dataValueExPost.period = tempPeriod;
-                    dataValues.push(dataValueExPost);
+                    let dataValuePHCExPost = {};
+                    dataValuePHCExPost.dataElement = 'QElnHktlv6U';
+                    dataValuePHCExPost.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPost.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPost.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
+                    dataValuePHCExPost.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPost);
+
+                    let dataValueCHCExPost = {};
+                    dataValueCHCExPost.dataElement = 'CzorQYruj10';
+                    dataValueCHCExPost.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPost.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPost.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
+                    dataValueCHCExPost.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPost);
+
+                    let dataValueDHExPost = {};
+                    dataValueDHExPost.dataElement = 'CBwndsVgRGo';
+                    dataValueDHExPost.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPost.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPost.value = parseInt(eventDataValue.AQAxhZf5ac8) + parseInt(eventDataValue.tIjpeBxQEmv) + parseInt(eventDataValue.sRpBeAUYgMr);
+                    dataValueDHExPost.period = tempPeriod;
+                    dataValues.push(dataValueDHExPost);
                 }
 
             }
             if (eventDataValue.ZgcURySniLD !== '' && eventDataValue.ZgcURySniLD !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAntePA = {};
-                    dataValueExAntePA.dataElement = 'k6WL8QTahRx';
-                    dataValueExAntePA.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAntePA.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAntePA.value = eventDataValue.ZgcURySniLD;
-                    dataValueExAntePA.period = tempPeriod;
-                    dataValues.push(dataValueExAntePA);
+                    let dataValuePHCExAntePA = {};
+                    dataValuePHCExAntePA.dataElement = 'k6WL8QTahRx';
+                    dataValuePHCExAntePA.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAntePA.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAntePA.value = eventDataValue.ZgcURySniLD;
+                    dataValuePHCExAntePA.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAntePA);
+
+                    let dataValueCHCExAntePA = {};
+                    dataValueCHCExAntePA.dataElement = 'fohWNeyzgpi';
+                    dataValueCHCExAntePA.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAntePA.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAntePA.value = eventDataValue.ZgcURySniLD;
+                    dataValueCHCExAntePA.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAntePA);
+
+                    let dataValueDHExAntePA = {};
+                    dataValueDHExAntePA.dataElement = 'pBKaPU3oX4q';
+                    dataValueDHExAntePA.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAntePA.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAntePA.value = eventDataValue.ZgcURySniLD;
+                    dataValueDHExAntePA.period = tempPeriod;
+                    dataValues.push(dataValueDHExAntePA);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostPA = {};
-                    dataValueExPostPA.dataElement = 'WMA04edTuBB';
-                    dataValueExPostPA.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostPA.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostPA.value = eventDataValue.ZgcURySniLD;
-                    dataValueExPostPA.period = tempPeriod;
-                    dataValues.push(dataValueExPostPA);
+                    let dataValuePHCExPostPA = {};
+                    dataValuePHCExPostPA.dataElement = 'WMA04edTuBB';
+                    dataValuePHCExPostPA.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostPA.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostPA.value = eventDataValue.ZgcURySniLD;
+                    dataValuePHCExPostPA.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostPA);
+
+                    let dataValueCHCExPostPA = {};
+                    dataValueCHCExPostPA.dataElement = 'qKjY3OgTS1P';
+                    dataValueCHCExPostPA.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostPA.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostPA.value = eventDataValue.ZgcURySniLD;
+                    dataValueCHCExPostPA.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostPA);
+
+                    let dataValueDHExPostPA = {};
+                    dataValueDHExPostPA.dataElement = 'QeIUtMEcsr5';
+                    dataValueDHExPostPA.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostPA.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostPA.value = eventDataValue.ZgcURySniLD;
+                    dataValueDHExPostPA.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostPA);
                 }
             }
 
             if (eventDataValue.i5kIcliOLTc !== '' && eventDataValue.i5kIcliOLTc !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteGP = {};
-                    dataValueExAnteGP.dataElement = 'V75j3GmNl4F';
-                    dataValueExAnteGP.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteGP.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteGP.value = eventDataValue.i5kIcliOLTc;
-                    dataValueExAnteGP.period = tempPeriod;
-                    dataValues.push(dataValueExAnteGP);
+                    let dataValuePHCExAnteGP = {};
+                    dataValuePHCExAnteGP.dataElement = 'V75j3GmNl4F';
+                    dataValuePHCExAnteGP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteGP.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteGP.value = eventDataValue.i5kIcliOLTc;
+                    dataValuePHCExAnteGP.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteGP);
+
+                    let dataValueCHCExAnteGP = {};
+                    dataValueCHCExAnteGP.dataElement = 'azCwG2yRAPe';
+                    dataValueCHCExAnteGP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteGP.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteGP.value = eventDataValue.i5kIcliOLTc;
+                    dataValueCHCExAnteGP.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteGP);
+
+                    let dataValueDHExAnteGP = {};
+                    dataValueDHExAnteGP.dataElement = 'frzgARwUdnb';
+                    dataValueDHExAnteGP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteGP.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteGP.value = eventDataValue.i5kIcliOLTc;
+                    dataValueDHExAnteGP.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteGP);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostGP = {};
-                    dataValueExPostGP.dataElement = 'PPmVItFSsiX';
-                    dataValueExPostGP.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostGP.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostGP.value = eventDataValue.i5kIcliOLTc;
-                    dataValueExPostGP.period = tempPeriod;
-                    dataValues.push(dataValueExPostGP);
+                    let dataValuePHCExPostGP = {};
+                    dataValuePHCExPostGP.dataElement = 'PPmVItFSsiX';
+                    dataValuePHCExPostGP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostGP.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostGP.value = eventDataValue.i5kIcliOLTc;
+                    dataValuePHCExPostGP.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostGP);
+
+                    let dataValueCHCExPostGP = {};
+                    dataValueCHCExPostGP.dataElement = 'U3d4Ce0Zwog';
+                    dataValueCHCExPostGP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostGP.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostGP.value = eventDataValue.i5kIcliOLTc;
+                    dataValueCHCExPostGP.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostGP);
+
+                    let dataValueDHExPostGP = {};
+                    dataValueDHExPostGP.dataElement = 'xIv3hG0olRb';
+                    dataValueDHExPostGP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostGP.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostGP.value = eventDataValue.i5kIcliOLTc;
+                    dataValueDHExPostGP.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostGP);
                 }
             }
 
             if (eventDataValue.VvGLnxMa2sv !== '' && eventDataValue.VvGLnxMa2sv !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteCW = {};
-                    dataValueExAnteCW.dataElement = 'vE9FX7noI2B';
-                    dataValueExAnteCW.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteCW.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteCW.value = eventDataValue.VvGLnxMa2sv;
-                    dataValueExAnteCW.period = tempPeriod;
-                    dataValues.push(dataValueExAnteCW);
+                    let dataValuePHCExAnteCW = {};
+                    dataValuePHCExAnteCW.dataElement = 'vE9FX7noI2B';
+                    dataValuePHCExAnteCW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteCW.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteCW.value = eventDataValue.VvGLnxMa2sv;
+                    dataValuePHCExAnteCW.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteCW);
+
+                    let dataValueCHCExAnteCW = {};
+                    dataValueCHCExAnteCW.dataElement = 'pAFhVVWWjwE';
+                    dataValueCHCExAnteCW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteCW.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteCW.value = eventDataValue.VvGLnxMa2sv;
+                    dataValueCHCExAnteCW.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteCW);
+
+                    let dataValueDHExAnteCW = {};
+                    dataValueDHExAnteCW.dataElement = 'CwdBDr1WqFh';
+                    dataValueDHExAnteCW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteCW.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteCW.value = eventDataValue.VvGLnxMa2sv;
+                    dataValueDHExAnteCW.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteCW);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostCW = {};
-                    dataValueExPostCW.dataElement = 'SSgQFGh74yJ';
-                    dataValueExPostCW.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostCW.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostCW.value = eventDataValue.VvGLnxMa2sv;
-                    dataValueExPostCW.period = tempPeriod;
-                    dataValues.push(dataValueExPostCW);
+                    let dataValuePHCExPostCW = {};
+                    dataValuePHCExPostCW.dataElement = 'SSgQFGh74yJ';
+                    dataValuePHCExPostCW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostCW.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostCW.value = eventDataValue.VvGLnxMa2sv;
+                    dataValuePHCExPostCW.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostCW);
+
+                    let dataValueCHCExPostCW = {};
+                    dataValueCHCExPostCW.dataElement = 'mkT1TcZz0tC';
+                    dataValueCHCExPostCW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostCW.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostCW.value = eventDataValue.VvGLnxMa2sv;
+                    dataValueCHCExPostCW.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostCW);
+
+                    let dataValueDHExPostCW = {};
+                    dataValueDHExPostCW.dataElement = 'sE8Rv13vuYk';
+                    dataValueDHExPostCW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostCW.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostCW.value = eventDataValue.VvGLnxMa2sv;
+                    dataValueDHExPostCW.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostCW);
                 }
 
             }
 
             if (eventDataValue.rASLM0hqIYF !== '' && eventDataValue.rASLM0hqIYF !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteHW = {};
-                    dataValueExAnteHW.dataElement = 'NbVCoMXdrNs';
-                    dataValueExAnteHW.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteHW.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteHW.value = eventDataValue.rASLM0hqIYF;
-                    dataValueExAnteHW.period = tempPeriod;
-                    dataValues.push(dataValueExAnteHW);
+                    let dataValuePHCExAnteHW = {};
+                    dataValuePHCExAnteHW.dataElement = 'NbVCoMXdrNs';
+                    dataValuePHCExAnteHW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteHW.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteHW.value = eventDataValue.rASLM0hqIYF;
+                    dataValuePHCExAnteHW.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteHW);
+
+                    let dataValueCHCExAnteHW = {};
+                    dataValueCHCExAnteHW.dataElement = 'hKjlqYAX0k3';
+                    dataValueCHCExAnteHW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteHW.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteHW.value = eventDataValue.rASLM0hqIYF;
+                    dataValueCHCExAnteHW.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteHW);
+
+                    let dataValueDHExAnteHW = {};
+                    dataValueDHExAnteHW.dataElement = 'e0HTZVylnhQ';
+                    dataValueDHExAnteHW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteHW.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteHW.value = eventDataValue.rASLM0hqIYF;
+                    dataValueDHExAnteHW.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteHW);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostHW = {};
-                    dataValueExPostHW.dataElement = 'bnCQHZLZnML';
-                    dataValueExPostHW.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostHW.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostHW.value = eventDataValue.rASLM0hqIYF;
-                    dataValueExPostHW.period = tempPeriod;
-                    dataValues.push(dataValueExPostHW);
+                    let dataValuePHCExPostHW = {};
+                    dataValuePHCExPostHW.dataElement = 'bnCQHZLZnML';
+                    dataValuePHCExPostHW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostHW.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostHW.value = eventDataValue.rASLM0hqIYF;
+                    dataValuePHCExPostHW.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostHW);
+
+                    let dataValueCHCExPostHW = {};
+                    dataValueCHCExPostHW.dataElement = 'oCWBWoFWmwZ';
+                    dataValueCHCExPostHW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostHW.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostHW.value = eventDataValue.rASLM0hqIYF;
+                    dataValueCHCExPostHW.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostHW);
+
+                    let dataValueDHExPostHW = {};
+                    dataValueDHExPostHW.dataElement = 'e0HTZVylnhQ';
+                    dataValueDHExPostHW.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostHW.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostHW.value = eventDataValue.rASLM0hqIYF;
+                    dataValueDHExPostHW.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostHW);
                 }
             }
 
             if (eventDataValue.eZ6d42PJkp2 !== '' && eventDataValue.eZ6d42PJkp2 !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteToilets = {};
-                    dataValueExAnteToilets.dataElement = 'i3IhffpHeVl';
-                    dataValueExAnteToilets.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteToilets.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteToilets.value = eventDataValue.eZ6d42PJkp2;
-                    dataValueExAnteToilets.period = tempPeriod;
-                    dataValues.push(dataValueExAnteToilets);
+                    let dataValuePHCExAnteToilets = {};
+                    dataValuePHCExAnteToilets.dataElement = 'i3IhffpHeVl';
+                    dataValuePHCExAnteToilets.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteToilets.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteToilets.value = eventDataValue.eZ6d42PJkp2;
+                    dataValuePHCExAnteToilets.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteToilets);
+
+                    let dataValueCHCExAnteToilets = {};
+                    dataValueCHCExAnteToilets.dataElement = 'BhtXFAZakBM';
+                    dataValueCHCExAnteToilets.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteToilets.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteToilets.value = eventDataValue.eZ6d42PJkp2;
+                    dataValueCHCExAnteToilets.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteToilets);
+
+                    let dataValueDHExAnteToilets = {};
+                    dataValueDHExAnteToilets.dataElement = 'DFFZVXXlRr5';
+                    dataValueDHExAnteToilets.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteToilets.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteToilets.value = eventDataValue.eZ6d42PJkp2;
+                    dataValueDHExAnteToilets.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteToilets);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostToilets = {};
-                    dataValueExPostToilets.dataElement = 'YTUsKqUh7LR';
-                    dataValueExPostToilets.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostToilets.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostToilets.value = eventDataValue.eZ6d42PJkp2;
-                    dataValueExPostToilets.period = tempPeriod;
-                    dataValues.push(dataValueExPostToilets);
+                    let dataValuePHCExPostToilets = {};
+                    dataValuePHCExPostToilets.dataElement = 'YTUsKqUh7LR';
+                    dataValuePHCExPostToilets.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostToilets.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostToilets.value = eventDataValue.eZ6d42PJkp2;
+                    dataValuePHCExPostToilets.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostToilets);
+
+                    let dataValueCHCExPostToilets = {};
+                    dataValueCHCExPostToilets.dataElement = 'Jc5Ma591w5r';
+                    dataValueCHCExPostToilets.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostToilets.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostToilets.value = eventDataValue.eZ6d42PJkp2;
+                    dataValueCHCExPostToilets.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostToilets);
+
+                    let dataValueDHExPostToilets = {};
+                    dataValueDHExPostToilets.dataElement = 'Jwuc76UU1pX';
+                    dataValueDHExPostToilets.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostToilets.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostToilets.value = eventDataValue.eZ6d42PJkp2;
+                    dataValueDHExPostToilets.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostToilets);
                 }
             }
             if (eventDataValue.shULFYxYJLU !== '' && eventDataValue.shULFYxYJLU !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteMedicalWasteHandling = {};
-                    dataValueExAnteMedicalWasteHandling.dataElement = 'UC2uPvPmH3B';
-                    dataValueExAnteMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
-                    dataValueExAnteMedicalWasteHandling.period = tempPeriod;
-                    dataValues.push(dataValueExAnteMedicalWasteHandling);
+                    let dataValuePHCExAnteMedicalWasteHandling = {};
+                    dataValuePHCExAnteMedicalWasteHandling.dataElement = 'UC2uPvPmH3B';
+                    dataValuePHCExAnteMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
+                    dataValuePHCExAnteMedicalWasteHandling.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteMedicalWasteHandling);
+
+                    let dataValueCHCExAnteMedicalWasteHandling = {};
+                    dataValueCHCExAnteMedicalWasteHandling.dataElement = 'zp4dtkWEp29';
+                    dataValueCHCExAnteMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
+                    dataValueCHCExAnteMedicalWasteHandling.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteMedicalWasteHandling);
+
+                    let dataValueDHExAnteMedicalWasteHandling = {};
+                    dataValueDHExAnteMedicalWasteHandling.dataElement = 'LrFYCQe6GYC';
+                    dataValueDHExAnteMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
+                    dataValueDHExAnteMedicalWasteHandling.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteMedicalWasteHandling);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostMedicalWasteHandling = {};
-                    dataValueExPostMedicalWasteHandling.dataElement = 'PN367HKp0Jy';
-                    dataValueExPostMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
-                    dataValueExPostMedicalWasteHandling.period = tempPeriod;
-                    dataValues.push(dataValueExPostMedicalWasteHandling);
+                    let dataValuePHCExPostMedicalWasteHandling = {};
+                    dataValuePHCExPostMedicalWasteHandling.dataElement = 'PN367HKp0Jy';
+                    dataValuePHCExPostMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
+                    dataValuePHCExPostMedicalWasteHandling.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostMedicalWasteHandling);
+
+                    let dataValueCHCExPostMedicalWasteHandling = {};
+                    dataValueCHCExPostMedicalWasteHandling.dataElement = 'ZJPrG1dPHhw';
+                    dataValueCHCExPostMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
+                    dataValueCHCExPostMedicalWasteHandling.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostMedicalWasteHandling);
+
+                    let dataValueDHExPostMedicalWasteHandling = {};
+                    dataValueDHExPostMedicalWasteHandling.dataElement = 'gnWSMVGr8FS';
+                    dataValueDHExPostMedicalWasteHandling.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostMedicalWasteHandling.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostMedicalWasteHandling.value = eventDataValue.shULFYxYJLU;
+                    dataValueDHExPostMedicalWasteHandling.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostMedicalWasteHandling);
                 }
             }
 
             if (eventDataValue.pHdhGRXtgYK !== '' && eventDataValue.pHdhGRXtgYK !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteMedicalWasteDisposal = {};
-                    dataValueExAnteMedicalWasteDisposal.dataElement = 'YZ8ju7yq2Rn';
-                    dataValueExAnteMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
-                    dataValueExAnteMedicalWasteDisposal.period = tempPeriod;
-                    dataValues.push(dataValueExAnteMedicalWasteDisposal);
+                    let dataValuePHCExAnteMedicalWasteDisposal = {};
+                    dataValuePHCExAnteMedicalWasteDisposal.dataElement = 'YZ8ju7yq2Rn';
+                    dataValuePHCExAnteMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
+                    dataValuePHCExAnteMedicalWasteDisposal.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteMedicalWasteDisposal);
+
+                    let dataValueCHCExAnteMedicalWasteDisposal = {};
+                    dataValueCHCExAnteMedicalWasteDisposal.dataElement = 'CjovCpI9tCQ';
+                    dataValueCHCExAnteMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
+                    dataValueCHCExAnteMedicalWasteDisposal.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteMedicalWasteDisposal);
+
+                    let dataValueDHExAnteMedicalWasteDisposal = {};
+                    dataValueDHExAnteMedicalWasteDisposal.dataElement = 'aQT6upeOZRQ';
+                    dataValueDHExAnteMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
+                    dataValueDHExAnteMedicalWasteDisposal.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteMedicalWasteDisposal);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostMedicalWasteDisposal = {};
-                    dataValueExPostMedicalWasteDisposal.dataElement = 'byYvooPVfuU';
-                    dataValueExPostMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
-                    dataValueExPostMedicalWasteDisposal.period = tempPeriod;
-                    dataValues.push(dataValueExPostMedicalWasteDisposal);
+                    let dataValuePHCExPostMedicalWasteDisposal = {};
+                    dataValuePHCExPostMedicalWasteDisposal.dataElement = 'byYvooPVfuU';
+                    dataValuePHCExPostMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
+                    dataValuePHCExPostMedicalWasteDisposal.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostMedicalWasteDisposal);
+
+                    let dataValueCHCExPostMedicalWasteDisposal = {};
+                    dataValueCHCExPostMedicalWasteDisposal.dataElement = 'qCvOrt8icpo';
+                    dataValueCHCExPostMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
+                    dataValueCHCExPostMedicalWasteDisposal.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostMedicalWasteDisposal);
+
+                    let dataValueDHExPostMedicalWasteDisposal = {};
+                    dataValueDHExPostMedicalWasteDisposal.dataElement = 'q63kG9d3Qt3';
+                    dataValueDHExPostMedicalWasteDisposal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostMedicalWasteDisposal.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostMedicalWasteDisposal.value = eventDataValue.pHdhGRXtgYK;
+                    dataValueDHExPostMedicalWasteDisposal.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostMedicalWasteDisposal);
                 }
             }
             if (eventDataValue.AuBUhr0hGcX !== '' && eventDataValue.AuBUhr0hGcX !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteAPS = {};
-                    dataValueExAnteAPS.dataElement = 'zZa8EMGcYSA';
-                    dataValueExAnteAPS.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteAPS.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteAPS.value = eventDataValue.AuBUhr0hGcX;
-                    dataValueExAnteAPS.period = tempPeriod;
-                    dataValues.push(dataValueExAnteAPS);
+                    let dataValuePHCExAnteAPS = {};
+                    dataValuePHCExAnteAPS.dataElement = 'zZa8EMGcYSA';
+                    dataValuePHCExAnteAPS.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteAPS.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteAPS.value = eventDataValue.AuBUhr0hGcX;
+                    dataValuePHCExAnteAPS.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteAPS);
+
+                    let dataValueCHCExAnteAPS = {};
+                    dataValueCHCExAnteAPS.dataElement = 'ahWO1BzOk0N';
+                    dataValueCHCExAnteAPS.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteAPS.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteAPS.value = eventDataValue.AuBUhr0hGcX;
+                    dataValueCHCExAnteAPS.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteAPS);
                 }
-
             }
-
             if (eventDataValue.uEZlhrZA1Tf !== '' && eventDataValue.uEZlhrZA1Tf !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostAPS = {};
-                    dataValueExPostAPS.dataElement = 'ij7E9nvjGSU';
-                    dataValueExPostAPS.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostAPS.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostAPS.value = eventDataValue.uEZlhrZA1Tf;
-                    dataValueExPostAPS.period = tempPeriod;
-                    dataValues.push(dataValueExPostAPS);
+                    let dataValuePHCExPostAPS = {};
+                    dataValuePHCExPostAPS.dataElement = 'ij7E9nvjGSU';
+                    dataValuePHCExPostAPS.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostAPS.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostAPS.value = eventDataValue.uEZlhrZA1Tf;
+                    dataValuePHCExPostAPS.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostAPS);
+
+                    let dataValueCHCExPostAPS = {};
+                    dataValueCHCExPostAPS.dataElement = 'nJssxEhfZNr';
+                    dataValueCHCExPostAPS.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostAPS.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostAPS.value = eventDataValue.uEZlhrZA1Tf;
+                    dataValueCHCExPostAPS.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostAPS);
+                }
+            }
+
+            if ( ( eventDataValue.AuBUhr0hGcX !== '' && eventDataValue.AuBUhr0hGcX !== undefined ) || ( eventDataValue.uEZlhrZA1Tf !== '' && eventDataValue.uEZlhrZA1Tf !== undefined ) ) {
+
+                let calculatedValue = "";
+                if( eventDataValue.AuBUhr0hGcX !== undefined  && eventDataValue.uEZlhrZA1Tf !== undefined ){
+                    calculatedValue = parseInt(eventDataValue.AuBUhr0hGcX) + parseInt(eventDataValue.uEZlhrZA1Tf);
+                }
+                if( eventDataValue.AuBUhr0hGcX !== undefined  && eventDataValue.uEZlhrZA1Tf === undefined ){
+                    calculatedValue = parseInt(eventDataValue.NryCpvgIjgf);
+                }
+                if( eventDataValue.uEZlhrZA1Tf !== undefined  && eventDataValue.AuBUhr0hGcX === undefined ){
+                    calculatedValue = parseInt(eventDataValue.uEZlhrZA1Tf);
+                }
+
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+                    let dataValueDHExAnteProvidersKnowledge1 = {};
+                    dataValueDHExAnteProvidersKnowledge1.dataElement = 'x93J1Ob9OtB';
+                    dataValueDHExAnteProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteProvidersKnowledge1.value = calculatedValue;
+                    dataValueDHExAnteProvidersKnowledge1.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteProvidersKnowledge1);
+                }
+
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+                    let dataValueDHExPostProvidersKnowledge1 = {};
+                    dataValueDHExPostProvidersKnowledge1.dataElement = 'eVJlwktymlu';
+                    dataValueDHExPostProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostProvidersKnowledge1.value = calculatedValue;
+                    dataValueDHExPostProvidersKnowledge1.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostProvidersKnowledge1);
                 }
             }
 
             if (eventDataValue.OsdaS7OtRMO !== '' && eventDataValue.OsdaS7OtRMO !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteInsuranceEfficiency = {};
-                    dataValueExAnteInsuranceEfficiency.dataElement = 'usaznFLM8LA';
-                    dataValueExAnteInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
-                    dataValueExAnteInsuranceEfficiency.period = tempPeriod;
-                    dataValues.push(dataValueExAnteInsuranceEfficiency);
+                    let dataValuePHCExAnteInsuranceEfficiency = {};
+                    dataValuePHCExAnteInsuranceEfficiency.dataElement = 'usaznFLM8LA';
+                    dataValuePHCExAnteInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
+                    dataValuePHCExAnteInsuranceEfficiency.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteInsuranceEfficiency);
+
+                    let dataValueCHCExAnteInsuranceEfficiency = {};
+                    dataValueCHCExAnteInsuranceEfficiency.dataElement = 'LNuNHrvvzzY';
+                    dataValueCHCExAnteInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
+                    dataValueCHCExAnteInsuranceEfficiency.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteInsuranceEfficiency);
+
+                    let dataValueDHExAnteInsuranceEfficiency = {};
+                    dataValueDHExAnteInsuranceEfficiency.dataElement = 'KWBYEVjozvT';
+                    dataValueDHExAnteInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
+                    dataValueDHExAnteInsuranceEfficiency.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteInsuranceEfficiency);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostInsuranceEfficiency = {};
-                    dataValueExPostInsuranceEfficiency.dataElement = 'p3SPRXXN7ql';
-                    dataValueExPostInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
-                    dataValueExPostInsuranceEfficiency.period = tempPeriod;
-                    dataValues.push(dataValueExPostInsuranceEfficiency);
+                    let dataValuePHCExPostInsuranceEfficiency = {};
+                    dataValuePHCExPostInsuranceEfficiency.dataElement = 'p3SPRXXN7ql';
+                    dataValuePHCExPostInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
+                    dataValuePHCExPostInsuranceEfficiency.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostInsuranceEfficiency);
+
+                    let dataValueCHCExPostInsuranceEfficiency = {};
+                    dataValueCHCExPostInsuranceEfficiency.dataElement = 'zHyeRwMNXnb';
+                    dataValueCHCExPostInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
+                    dataValueCHCExPostInsuranceEfficiency.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostInsuranceEfficiency);
+
+                    let dataValueDHExPostInsuranceEfficiency = {};
+                    dataValueDHExPostInsuranceEfficiency.dataElement = 'hlDT4E4sRVd';
+                    dataValueDHExPostInsuranceEfficiency.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostInsuranceEfficiency.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostInsuranceEfficiency.value = eventDataValue.OsdaS7OtRMO;
+                    dataValueDHExPostInsuranceEfficiency.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostInsuranceEfficiency);
                 }
             }
-
 
             if ( ( eventDataValue.NryCpvgIjgf !== '' && eventDataValue.NryCpvgIjgf !== undefined ) || ( eventDataValue.ZTAiGHl0H2a !== '' && eventDataValue.ZTAiGHl0H2a !== undefined ) ) {
 
@@ -1490,132 +1856,442 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteProvidersKnowledge1 = {};
-                    dataValueExAnteProvidersKnowledge1.dataElement = 'roxV1Oz25wH';
-                    dataValueExAnteProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteProvidersKnowledge1.value = calculatedValue;
-                    dataValueExAnteProvidersKnowledge1.period = tempPeriod;
-                    dataValues.push(dataValueExAnteProvidersKnowledge1);
+                    let dataValuePHCExAnteProvidersKnowledge1 = {};
+                    dataValuePHCExAnteProvidersKnowledge1.dataElement = 'roxV1Oz25wH';
+                    dataValuePHCExAnteProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteProvidersKnowledge1.value = calculatedValue;
+                    dataValuePHCExAnteProvidersKnowledge1.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteProvidersKnowledge1);
+
+                    let dataValueCHCExAnteProvidersKnowledge1 = {};
+                    dataValueCHCExAnteProvidersKnowledge1.dataElement = 'Ew3pCQkT0h6';
+                    dataValueCHCExAnteProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteProvidersKnowledge1.value = calculatedValue;
+                    dataValueCHCExAnteProvidersKnowledge1.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteProvidersKnowledge1);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostProvidersKnowledge1 = {};
-                    dataValueExPostProvidersKnowledge1.dataElement = 'PdNYCSQ3Gp8';
-                    dataValueExPostProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostProvidersKnowledge1.value = calculatedValue;
-                    dataValueExPostProvidersKnowledge1.period = tempPeriod;
-                    dataValues.push(dataValueExPostProvidersKnowledge1);
+                    let dataValuePHCExPostProvidersKnowledge1 = {};
+                    dataValuePHCExPostProvidersKnowledge1.dataElement = 'PdNYCSQ3Gp8';
+                    dataValuePHCExPostProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostProvidersKnowledge1.value = calculatedValue;
+                    dataValuePHCExPostProvidersKnowledge1.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostProvidersKnowledge1);
+
+                    let dataValueCHCExPostProvidersKnowledge1 = {};
+                    dataValueCHCExPostProvidersKnowledge1.dataElement = 'S5SnhdjaRy6';
+                    dataValueCHCExPostProvidersKnowledge1.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostProvidersKnowledge1.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostProvidersKnowledge1.value = calculatedValue;
+                    dataValueCHCExPostProvidersKnowledge1.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostProvidersKnowledge1);
+                }
+            }
+            // only for DH
+            if (eventDataValue.ZTAiGHl0H2a !== '' && eventDataValue.ZTAiGHl0H2a !== undefined) {
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+                    let dataValueDHExAnteCKSI = {};
+                    dataValueDHExAnteCKSI.dataElement = 'BrYkWIAw28Z';
+                    dataValueDHExAnteCKSI.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteCKSI.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteCKSI.value = eventDataValue.ZTAiGHl0H2a;
+                    dataValueDHExAnteCKSI.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteCKSI);
+                }
+
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+                    let dataValueDHExPostCKSI = {};
+                    dataValueDHExPostCKSI.dataElement = 'pvFYgLT2kiA';
+                    dataValueDHExPostCKSI.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostCKSI.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostCKSI.value = eventDataValue.ZTAiGHl0H2a;
+                    dataValueDHExPostCKSI.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostCKSI);
                 }
             }
 
             if (eventDataValue.ulBdw5b0IHO !== '' && eventDataValue.ulBdw5b0IHO !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteGrievanceRedressal = {};
-                    dataValueExAnteGrievanceRedressal.dataElement = 'USrnj98vrY6';
-                    dataValueExAnteGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
-                    dataValueExAnteGrievanceRedressal.period = tempPeriod;
-                    dataValues.push(dataValueExAnteGrievanceRedressal);
+                    let dataValuePHCExAnteGrievanceRedressal = {};
+                    dataValuePHCExAnteGrievanceRedressal.dataElement = 'USrnj98vrY6';
+                    dataValuePHCExAnteGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
+                    dataValuePHCExAnteGrievanceRedressal.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteGrievanceRedressal);
+
+                    let dataValueCHCExAnteGrievanceRedressal = {};
+                    dataValueCHCExAnteGrievanceRedressal.dataElement = 'OGW78PSv1zG';
+                    dataValueCHCExAnteGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
+                    dataValueCHCExAnteGrievanceRedressal.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteGrievanceRedressal);
+
+                    let dataValueDHExAnteGrievanceRedressal = {};
+                    dataValueDHExAnteGrievanceRedressal.dataElement = 'QaG3vi2esPV';
+                    dataValueDHExAnteGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
+                    dataValueDHExAnteGrievanceRedressal.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteGrievanceRedressal);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostGrievanceRedressal = {};
-                    dataValueExPostGrievanceRedressal.dataElement = 'QXqyvSoE8OJ';
-                    dataValueExPostGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
-                    dataValueExPostGrievanceRedressal.period = tempPeriod;
-                    dataValues.push(dataValueExPostGrievanceRedressal);
+                    let dataValuePHCExPostGrievanceRedressal = {};
+                    dataValuePHCExPostGrievanceRedressal.dataElement = 'QXqyvSoE8OJ';
+                    dataValuePHCExPostGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
+                    dataValuePHCExPostGrievanceRedressal.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostGrievanceRedressal);
+
+                    let dataValueCHCExPostGrievanceRedressal = {};
+                    dataValueCHCExPostGrievanceRedressal.dataElement = 'Sk3OfbFSFOm';
+                    dataValueCHCExPostGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
+                    dataValueCHCExPostGrievanceRedressal.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostGrievanceRedressal);
+
+                    let dataValueDHExPostGrievanceRedressal = {};
+                    dataValueDHExPostGrievanceRedressal.dataElement = 'Vzs0wt3GCKL';
+                    dataValueDHExPostGrievanceRedressal.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostGrievanceRedressal.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostGrievanceRedressal.value = eventDataValue.ulBdw5b0IHO;
+                    dataValueDHExPostGrievanceRedressal.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostGrievanceRedressal);
                 }
             }
 
-            if (eventDataValue.ulBdw5b0IHO !== '' && eventDataValue.ulBdw5b0IHO !== undefined) {
+            if (eventDataValue.IdIkPvFudmu !== '' && eventDataValue.IdIkPvFudmu !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteHumanResourceForHealth = {};
-                    dataValueExAnteHumanResourceForHealth.dataElement = 'Z7VNKSnj9bR';
-                    dataValueExAnteHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
-                    dataValueExAnteHumanResourceForHealth.period = tempPeriod;
-                    dataValues.push(dataValueExAnteHumanResourceForHealth);
+                    let dataValuePHCExAnteHumanResourceForHealth = {};
+                    dataValuePHCExAnteHumanResourceForHealth.dataElement = 'Z7VNKSnj9bR';
+                    dataValuePHCExAnteHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
+                    dataValuePHCExAnteHumanResourceForHealth.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteHumanResourceForHealth);
+
+                    let dataValueCHCExAnteHumanResourceForHealth = {};
+                    dataValueCHCExAnteHumanResourceForHealth.dataElement = 'dtHo9pu47Gb';
+                    dataValueCHCExAnteHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
+                    dataValueCHCExAnteHumanResourceForHealth.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteHumanResourceForHealth);
+
+                    let dataValueDHExAnteHumanResourceForHealth = {};
+                    dataValueDHExAnteHumanResourceForHealth.dataElement = 'jO7UBAEqZQV';
+                    dataValueDHExAnteHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
+                    dataValueDHExAnteHumanResourceForHealth.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteHumanResourceForHealth);
 
                 }
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostHumanResourceForHealth = {};
-                    dataValueExPostHumanResourceForHealth.dataElement = 'dEMabXieh9q';
-                    dataValueExPostHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
-                    dataValueExPostHumanResourceForHealth.period = tempPeriod;
-                    dataValues.push(dataValueExPostHumanResourceForHealth);
+                    let dataValuePHCExPostHumanResourceForHealth = {};
+                    dataValuePHCExPostHumanResourceForHealth.dataElement = 'dEMabXieh9q';
+                    dataValuePHCExPostHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
+                    dataValuePHCExPostHumanResourceForHealth.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostHumanResourceForHealth);
+
+                    let dataValueCHCExPostHumanResourceForHealth = {};
+                    dataValueCHCExPostHumanResourceForHealth.dataElement = 'GNyBzyRdVKR';
+                    dataValueCHCExPostHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
+                    dataValueCHCExPostHumanResourceForHealth.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostHumanResourceForHealth);
+
+                    let dataValueDHExPostHumanResourceForHealth = {};
+                    dataValueDHExPostHumanResourceForHealth.dataElement = 'FgjtEVRtNKv';
+                    dataValueDHExPostHumanResourceForHealth.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostHumanResourceForHealth.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostHumanResourceForHealth.value = eventDataValue.IdIkPvFudmu;
+                    dataValueDHExPostHumanResourceForHealth.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostHumanResourceForHealth);
                 }
             }
 
             if (eventDataValue.VQfr47DujUb !== '' && eventDataValue.VQfr47DujUb !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteEssentialMedicines = {};
-                    dataValueExAnteEssentialMedicines.dataElement = 'MBXhuZ9OegK';
-                    dataValueExAnteEssentialMedicines.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteEssentialMedicines.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteEssentialMedicines.value = eventDataValue.VQfr47DujUb;
-                    dataValueExAnteEssentialMedicines.period = tempPeriod;
-                    dataValues.push(dataValueExAnteEssentialMedicines);
+                    let dataValuePHCExAnteEssentialMedicines = {};
+                    dataValuePHCExAnteEssentialMedicines.dataElement = 'MBXhuZ9OegK';
+                    dataValuePHCExAnteEssentialMedicines.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteEssentialMedicines.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteEssentialMedicines.value = eventDataValue.VQfr47DujUb;
+                    dataValuePHCExAnteEssentialMedicines.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteEssentialMedicines);
+
+                    let dataValueCHCExAnteEssentialMedicines = {};
+                    dataValueCHCExAnteEssentialMedicines.dataElement = 'wfAFMsCDEg6';
+                    dataValueCHCExAnteEssentialMedicines.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteEssentialMedicines.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteEssentialMedicines.value = eventDataValue.VQfr47DujUb;
+                    dataValueCHCExAnteEssentialMedicines.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteEssentialMedicines);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostEssentialMedicines = {};
-                    dataValueExPostEssentialMedicines.dataElement = 'A4YqbwfGKbU';
-                    dataValueExPostEssentialMedicines.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostEssentialMedicines.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostEssentialMedicines.value = eventDataValue.VQfr47DujUb;
-                    dataValueExPostEssentialMedicines.period = tempPeriod;
-                    dataValues.push(dataValueExPostEssentialMedicines);
+                    let dataValuePHCExPostEssentialMedicines = {};
+                    dataValuePHCExPostEssentialMedicines.dataElement = 'A4YqbwfGKbU';
+                    dataValuePHCExPostEssentialMedicines.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostEssentialMedicines.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostEssentialMedicines.value = eventDataValue.VQfr47DujUb;
+                    dataValuePHCExPostEssentialMedicines.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostEssentialMedicines);
+
+                    let dataValueCHCExPostEssentialMedicines = {};
+                    dataValueCHCExPostEssentialMedicines.dataElement = 'O24qj3VTRGn';
+                    dataValueCHCExPostEssentialMedicines.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostEssentialMedicines.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostEssentialMedicines.value = eventDataValue.VQfr47DujUb;
+                    dataValueCHCExPostEssentialMedicines.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostEssentialMedicines);
+
                 }
             }
             if (eventDataValue.s3c29xLWsHM !== '' && eventDataValue.s3c29xLWsHM !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteEssentialDiagnostics = {};
-                    dataValueExAnteEssentialDiagnostics.dataElement = 't2MhPj0U4mQ';
-                    dataValueExAnteEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
-                    dataValueExAnteEssentialDiagnostics.period = tempPeriod;
-                    dataValues.push(dataValueExAnteEssentialDiagnostics);
+                    let dataValuePHCExAnteEssentialDiagnostics = {};
+                    dataValuePHCExAnteEssentialDiagnostics.dataElement = 't2MhPj0U4mQ';
+                    dataValuePHCExAnteEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
+                    dataValuePHCExAnteEssentialDiagnostics.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteEssentialDiagnostics);
+
+                    let dataValueCHCExAnteEssentialDiagnostics = {};
+                    dataValueCHCExAnteEssentialDiagnostics.dataElement = 'jupf20PRBE3';
+                    dataValueCHCExAnteEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
+                    dataValueCHCExAnteEssentialDiagnostics.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteEssentialDiagnostics);
+
+                    let dataValueDHExAnteEssentialDiagnostics = {};
+                    dataValueDHExAnteEssentialDiagnostics.dataElement = 'jt0Iu1MbUMC';
+                    dataValueDHExAnteEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
+                    dataValueDHExAnteEssentialDiagnostics.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteEssentialDiagnostics);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostEssentialDiagnostics = {};
-                    dataValueExPostEssentialDiagnostics.dataElement = 'Dbui9QRFzZQ';
-                    dataValueExPostEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
-                    dataValueExPostEssentialDiagnostics.period = tempPeriod;
-                    dataValues.push(dataValueExPostEssentialDiagnostics);
+                    let dataValuePHCExPostEssentialDiagnostics = {};
+                    dataValuePHCExPostEssentialDiagnostics.dataElement = 'Dbui9QRFzZQ';
+                    dataValuePHCExPostEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
+                    dataValuePHCExPostEssentialDiagnostics.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostEssentialDiagnostics);
+
+                    let dataValueCHCExPostEssentialDiagnostics = {};
+                    dataValueCHCExPostEssentialDiagnostics.dataElement = 'Nha4Ad0mIEX';
+                    dataValueCHCExPostEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
+                    dataValueCHCExPostEssentialDiagnostics.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostEssentialDiagnostics);
+
+                    let dataValueDHExPostEssentialDiagnostics = {};
+                    dataValueDHExPostEssentialDiagnostics.dataElement = 'zyOMm1bgFES';
+                    dataValueDHExPostEssentialDiagnostics.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostEssentialDiagnostics.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostEssentialDiagnostics.value = eventDataValue.s3c29xLWsHM;
+                    dataValueDHExPostEssentialDiagnostics.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostEssentialDiagnostics);
                 }
             }
 
             if (eventDataValue.p1CksgJdni5 !== '' && eventDataValue.p1CksgJdni5 !== undefined) {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
-                    let dataValueExAnteLowCostDrugs = {};
-                    dataValueExAnteLowCostDrugs.dataElement = 'EMXIN8NrEP5';
-                    dataValueExAnteLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExAnteLowCostDrugs.orgUnit = eventDataValue.orgUnit;
-                    dataValueExAnteLowCostDrugs.value = eventDataValue.p1CksgJdni5;
-                    dataValueExAnteLowCostDrugs.period = tempPeriod;
-                    dataValues.push(dataValueExAnteLowCostDrugs);
+                    let dataValuePHCExAnteLowCostDrugs = {};
+                    dataValuePHCExAnteLowCostDrugs.dataElement = 'EMXIN8NrEP5';
+                    dataValuePHCExAnteLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExAnteLowCostDrugs.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExAnteLowCostDrugs.value = eventDataValue.p1CksgJdni5;
+                    dataValuePHCExAnteLowCostDrugs.period = tempPeriod;
+                    dataValues.push(dataValuePHCExAnteLowCostDrugs);
+
+                    let dataValueCHCExAnteLowCostDrugs = {};
+                    dataValueCHCExAnteLowCostDrugs.dataElement = 'dqlTcJVFg6N';
+                    dataValueCHCExAnteLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteLowCostDrugs.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteLowCostDrugs.value = eventDataValue.p1CksgJdni5;
+                    dataValueCHCExAnteLowCostDrugs.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteLowCostDrugs);
+
+                    let dataValueDHExAnteLowCostDrugs = {};
+                    dataValueDHExAnteLowCostDrugs.dataElement = 'j2K3OkE5jWX';
+                    dataValueDHExAnteLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteLowCostDrugs.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteLowCostDrugs.value = eventDataValue.p1CksgJdni5;
+                    dataValueDHExAnteLowCostDrugs.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteLowCostDrugs);
                 }
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
-                    let dataValueExPostLowCostDrugs = {};
-                    dataValueExPostLowCostDrugs.dataElement = 'kGF0N1AJ53A';
-                    dataValueExPostLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
-                    dataValueExPostLowCostDrugs.orgUnit = eventDataValue.orgUnit;
-                    dataValueExPostLowCostDrugs.value = eventDataValue.p1CksgJdni5;
-                    dataValueExPostLowCostDrugs.period = tempPeriod;
-                    dataValues.push(dataValueExPostLowCostDrugs);
+                    let dataValuePHCExPostLowCostDrugs = {};
+                    dataValuePHCExPostLowCostDrugs.dataElement = 'kGF0N1AJ53A';
+                    dataValuePHCExPostLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValuePHCExPostLowCostDrugs.orgUnit = eventDataValue.orgUnit;
+                    dataValuePHCExPostLowCostDrugs.value = eventDataValue.p1CksgJdni5;
+                    dataValuePHCExPostLowCostDrugs.period = tempPeriod;
+                    dataValues.push(dataValuePHCExPostLowCostDrugs);
+
+                    let dataValueCHCExPostLowCostDrugs = {};
+                    dataValueCHCExPostLowCostDrugs.dataElement = 'DG6dREcU4DQ';
+                    dataValueCHCExPostLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostLowCostDrugs.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostLowCostDrugs.value = eventDataValue.p1CksgJdni5;
+                    dataValueCHCExPostLowCostDrugs.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostLowCostDrugs);
+
+                    let dataValueDHExPostLowCostDrugs = {};
+                    dataValueDHExPostLowCostDrugs.dataElement = 'xFxbboUC9ZD';
+                    dataValueDHExPostLowCostDrugs.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostLowCostDrugs.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostLowCostDrugs.value = eventDataValue.p1CksgJdni5;
+                    dataValueDHExPostLowCostDrugs.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostLowCostDrugs);
+                }
+            }
+            // for CHC and DH only
+            if (eventDataValue.pSgwM5NsiBp !== '' && eventDataValue.pSgwM5NsiBp !== undefined) {
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+                    let dataValueCHCExAnteBP = {};
+                    dataValueCHCExAnteBP.dataElement = 'IBOzkgCd3Om';
+                    dataValueCHCExAnteBP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExAnteBP.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExAnteBP.value = eventDataValue.pSgwM5NsiBp;
+                    dataValueCHCExAnteBP.period = tempPeriod;
+                    dataValues.push(dataValueCHCExAnteBP);
+
+                    let dataValueDHExAnteBP = {};
+                    dataValueDHExAnteBP.dataElement = 'C9cHeXGpE0g';
+                    dataValueDHExAnteBP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteBP.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteBP.value = eventDataValue.pSgwM5NsiBp;
+                    dataValueDHExAnteBP.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteBP);
+                }
+
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+                    let dataValueCHCExPostBP = {};
+                    dataValueCHCExPostBP.dataElement = 'xZ67VykPksm';
+                    dataValueCHCExPostBP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueCHCExPostBP.orgUnit = eventDataValue.orgUnit;
+                    dataValueCHCExPostBP.value = eventDataValue.pSgwM5NsiBp;
+                    dataValueCHCExPostBP.period = tempPeriod;
+                    dataValues.push(dataValueCHCExPostBP);
+
+                    let dataValueDHExPostBP = {};
+                    dataValueDHExPostBP.dataElement = 'PPxbAUhwQKj';
+                    dataValueDHExPostBP.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostBP.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostBP.value = eventDataValue.pSgwM5NsiBp;
+                    dataValueDHExPostBP.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostBP);
+                }
+            }
+
+            // for DH only
+            if (eventDataValue.M3pmGgGBNmk !== '' && eventDataValue.M3pmGgGBNmk !== undefined) {
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+                    let dataValueDHExAnteInfectionControlF = {};
+                    dataValueDHExAnteInfectionControlF.dataElement = 'znG5DXj4W1X';
+                    dataValueDHExAnteInfectionControlF.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteInfectionControlF.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteInfectionControlF.value = eventDataValue.M3pmGgGBNmk;
+                    dataValueDHExAnteInfectionControlF.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteInfectionControlF);
+                }
+
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+                    let dataValueDHExPostInfectionControlF = {};
+                    dataValueDHExPostInfectionControlF.dataElement = 'LVAUgH7lhds';
+                    dataValueDHExPostInfectionControlF.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostInfectionControlF.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostInfectionControlF.value = eventDataValue.M3pmGgGBNmk;
+                    dataValueDHExPostInfectionControlF.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostInfectionControlF);
+                }
+            }
+
+            // for DH only
+            if (eventDataValue.UlAQZhfFIg3 !== '' && eventDataValue.UlAQZhfFIg3 !== undefined) {
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+                    let dataValueDHExAnteDrugSupplyChain = {};
+                    dataValueDHExAnteDrugSupplyChain.dataElement = 'jwBkdvtsvpc';
+                    dataValueDHExAnteDrugSupplyChain.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteDrugSupplyChain.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteDrugSupplyChain.value = eventDataValue.UlAQZhfFIg3;
+                    dataValueDHExAnteDrugSupplyChain.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteDrugSupplyChain);
+                }
+
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+                    let dataValueDHExPostDrugSupplyChain = {};
+                    dataValueDHExPostDrugSupplyChain.dataElement = 'ZJUZ5jdT4Aa';
+                    dataValueDHExPostDrugSupplyChain.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostDrugSupplyChain.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostDrugSupplyChain.value = eventDataValue.UlAQZhfFIg3;
+                    dataValueDHExPostDrugSupplyChain.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostDrugSupplyChain);
+                }
+            }
+            // for DH only
+            if (eventDataValue.ZgnIWM2ZFN1 !== '' && eventDataValue.ZgnIWM2ZFN1 !== undefined) {
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+                    let dataValueDHExAnteSurgicalSafetyChecklist = {};
+                    dataValueDHExAnteSurgicalSafetyChecklist.dataElement = 'cx4MnP9DSUM';
+                    dataValueDHExAnteSurgicalSafetyChecklist.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAnteSurgicalSafetyChecklist.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAnteSurgicalSafetyChecklist.value = eventDataValue.ZgnIWM2ZFN1;
+                    dataValueDHExAnteSurgicalSafetyChecklist.period = tempPeriod;
+                    dataValues.push(dataValueDHExAnteSurgicalSafetyChecklist);
+                }
+
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+                    let dataValueDHExPostSurgicalSafetyChecklist = {};
+                    dataValueDHExPostSurgicalSafetyChecklist.dataElement = 'OleBuGRanmu';
+                    dataValueDHExPostSurgicalSafetyChecklist.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostSurgicalSafetyChecklist.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostSurgicalSafetyChecklist.value = eventDataValue.ZgnIWM2ZFN1;
+                    dataValueDHExPostSurgicalSafetyChecklist.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostSurgicalSafetyChecklist);
+                }
+            }
+            // for DH only
+            if (eventDataValue.NtLb63Q3x4h !== '' && eventDataValue.NtLb63Q3x4h !== undefined) {
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+                    let dataValueDHExAntePortfolioServices = {};
+                    dataValueDHExAntePortfolioServices.dataElement = 'JOuucaWRGQ3';
+                    dataValueDHExAntePortfolioServices.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExAntePortfolioServices.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExAntePortfolioServices.value = eventDataValue.NtLb63Q3x4h;
+                    dataValueDHExAntePortfolioServices.period = tempPeriod;
+                    dataValues.push(dataValueDHExAntePortfolioServices);
+                }
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+                    let dataValueDHExPostPortfolioServices = {};
+                    dataValueDHExPostPortfolioServices.dataElement = 'FRVVt5e20qp';
+                    dataValueDHExPostPortfolioServices.categoryOptionCombo = 'HllvX50cXC0';
+                    dataValueDHExPostPortfolioServices.orgUnit = eventDataValue.orgUnit;
+                    dataValueDHExPostPortfolioServices.value = eventDataValue.NtLb63Q3x4h;
+                    dataValueDHExPostPortfolioServices.period = tempPeriod;
+                    dataValues.push(dataValueDHExPostPortfolioServices);
                 }
             }
 
