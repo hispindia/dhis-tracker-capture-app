@@ -623,11 +623,23 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 return def.promise;
             }
         },
-        processForm: function(existingTei, formTei, originalTei, attributesById){
+        processForm: function(existingTei, formTei, originalTei, attributesById, generatedCustomId){
             var tei = angular.copy(existingTei);
             tei.attributes = [];
             var formEmpty = true;
             for(var k in attributesById){
+
+                // custom change for custom-ID generation for myanmar_mis Assign attribute value before save
+                if( generatedCustomId !== null && generatedCustomId !== "" )
+                {
+                    if(  attributesById[k].code === 'custom_id' )
+                    {
+                        formTei[k] = generatedCustomId;
+                        console.log( " Final Custom Id -- " + generatedCustomId );
+                    }
+                }
+                // end
+
                 if( k in formTei ){
                     var att = attributesById[k];
                     tei.attributes.push({attribute: att.id, value: formTei[k], displayName: att.displayName, valueType: att.valueType});

@@ -68,6 +68,9 @@ trackerCapture.controller('RegistrationController',
     $scope.fileNames = CurrentSelection.getFileNames();
     $scope.currentFileNames = $scope.fileNames;
 
+    $scope.generatedCustomId = ''; // custom change for myanmar_mis
+    $scope.parentParentParentOrgUnitCode = '' ;
+
     // Slow connection fix: this signal is emitted after all listeners on the enrollment dashboard has been set up
     $timeout(function() {
         $scope.$emit('registrationControllerReady', {});
@@ -115,11 +118,22 @@ trackerCapture.controller('RegistrationController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
-    
-    
+
+    // custom change for myanmar_mis for disable custom-ID
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
+    */
+    $scope.isDisabled = function (attribute) {
+        if (attribute.code === 'custom_id' ) {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
+    // custom change for myanmar_mis for disable custom-ID end
 
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
@@ -341,6 +355,20 @@ trackerCapture.controller('RegistrationController',
             }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+
+                // custom change for custom-ID get parent parent parent orgUnit code for myanmar_mis
+                $timeout( function (){
+                    let org_uid = $scope.selectedOrgUnit.id;
+
+                    $.getJSON("../api/organisationUnits/"+ org_uid +".json?fields=id,name,code,parent[id,name,code,parent[id,name,code,parent[id,name,code]]]", function (data) {
+                        $scope.orgUnitCode = data.code;
+                        $scope.parentOrgUnitName = data.parent.name;
+                        $scope.parentParentParentOrgUnitCode = data.parent.parent.parent.code;
+                        $scope.parentOrgUnitCode = data.parent.code;
+                    });
+                },0);
+                // end
+
                 if (generateAttributes) {
                     fetchGeneratedAttributes();
                 }
@@ -760,7 +788,26 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
-        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+        // custom change for custom-ID generation for myanmar_mis Assign attribute value before save
+        if ($scope.registrationMode === 'REGISTRATION' && $scope.selectedProgram.id === 'qDkgAbB5Jlk') {
+
+            //let orgUnitCode = $scope.selectedOrgUnit.code;
+            let orgUnitCodeForCustomID = $scope.parentParentParentOrgUnitCode;
+            let enrollmentDate = $scope.selectedEnrollment.enrollmentDate;
+            let automatedSerialNumber = ""; //
+
+            //RANDOM(XXX######)  SEQUENTIAL(#####)
+
+            if ($scope.selectedTei.HAZ7VQ730yn !== undefined) {
+                automatedSerialNumber = $scope.selectedTei.HAZ7VQ730yn;
+            }
+            $scope.generatedCustomId = orgUnitCodeForCustomID + "_" + enrollmentDate + "_" + automatedSerialNumber;
+        }
+        // end
+
+
+
+        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.apiFormattedTei = result.tei;
 
