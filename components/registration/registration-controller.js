@@ -363,7 +363,7 @@ trackerCapture.controller('RegistrationController',
                     $.getJSON("../api/organisationUnits/"+ org_uid +".json?fields=id,name,code,parent[id,name,code,parent[id,name,code,parent[id,name,code]]]", function (data) {
                         $scope.orgUnitCode = data.code;
                         $scope.parentOrgUnitName = data.parent.name;
-                        $scope.parentParentParentOrgUnitCode = data.parent.parent.parent.code;
+                        $scope.parentParentParentOrgUnitCode = data.parent.parent.parsent.code;
                         $scope.parentOrgUnitCode = data.parent.code;
                     });
                 },0);
