@@ -75,6 +75,125 @@ trackerCapture.controller('RegistrationController',
 
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
+    // <!-- custom change for styles SAVE-CHILD css for nepali calendar new start  -->
+    $scope.generatedCustomId = ''; // custom change for SAVE-CHILD
+    $scope.nepaliDatePicker = "";
+    $scope.initiateNepaliCalendar = function () {
+        /*
+        var currentDate = new Date();
+        var currentNepaliDate = calenderFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate() - 1);
+        var formatedNepaliDate = calenderFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+        */
+        var currentDate = new Date();
+        var currentNepaliDate = calendarFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
+        var formatedNepaliDate = calendarFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
+        $("#nepali-date-picker").val(formatedNepaliDate);
+        $("#nepali-date-picker").nepaliDatePicker({
+            dateFormat: "%y-%m-%d",
+            closeOnDateSelect: true,
+            //minDate: "२०००-२-१",
+            maxDate: formatedNepaliDate
+        });
+
+        $("#nepali-date-picker").on("dateChange", function (event) {
+            var finalUpdatedDate = "";
+            var date = [];
+            var val = $("#nepali-date-picker").val();
+            console.log('here is date', val);
+            //alert( val );
+            var arr = [];
+            var l = val.length;
+            for(var i=0; i<l; i++){
+                if( val[i] === "०") { arr.push(0) }
+                if( val[i] === "१") { arr.push(1) }
+                if( val[i] === "२") { arr.push(2) }
+                if( val[i] === "३") { arr.push(3) }
+                if( val[i] === "४") { arr.push(4) }
+                if( val[i] === "५") { arr.push(5) }
+                if( val[i] === "६") { arr.push(6) }
+                if( val[i] === "७") { arr.push(7) }
+                if( val[i] === "८") { arr.push(8) }
+                if( val[i] === "९") { arr.push(9) }
+                if( val[i] === "-") { arr.push("-") }
+                // console.log(l, arr);
+            }
+            var s = arr.toString();
+            s.replace(/\,/g,"");
+            var str2 = s.replace(/\,/g,"");
+            var arr = str2.split("-");
+            var year =  arr[0];
+            var month = arr[1];
+            var day = arr[2];
+            console.log(year, month, day , arr);
+            try{
+                var isoMonth = "";
+                var isoDate = "";
+                var converter = new DateConverter();
+                converter.setNepaliDate(year, month, day)
+                var convertedDate = converter.getEnglishYear()+"-"+converter.getEnglishMonth()+"-"+converter.getEnglishDate();
+
+                var IsoMonth = "";
+                var IsoDate = "";
+
+                if( parseInt(convertedDate.split("-")[1]) >=1 && parseInt(convertedDate.split("-")[1]) < 10 ){
+                    IsoMonth = "0" + parseInt(convertedDate.split("-")[1])
+                }
+                else{
+                    IsoMonth = parseInt(convertedDate.split("-")[1]);
+                }
+
+                if( parseInt(convertedDate.split("-")[2]) >=1 && parseInt(convertedDate.split("-")[2]) < 10 ){
+                    IsoDate = "0" + parseInt(convertedDate.split("-")[2])
+                }
+                else{
+                    IsoDate = parseInt(convertedDate.split("-")[2]);
+                }
+
+                finalUpdatedDate = parseInt(convertedDate.split("-")[0]) + "-" + IsoMonth + "-" + IsoDate;
+
+                console.log( "Final " + convertedDate + ' finalUpdatedDate ' + finalUpdatedDate );
+                console.log('date valooo', finalUpdatedDate);
+                $('#updatedISODate').val(finalUpdatedDate);
+                convertDateToISO();
+            }catch(err)
+            {
+                alert(err.message);
+            }
+        });
+
+    };
+    // <!-- custom change for styles SAVE-CHILD css for nepali calendar new end  -->
+
+    // custom change for SAVE-CHILD for fingerPrint string and id read Start
+    var url = $location.absUrl();
+    console.log(url);
+    var key = false;
+    var fidKey = "fid", fsKey = "string";
+    $scope.fingerprintID = "";
+    $scope.fingerprintStr = "";
+    var urll = url.split("html");
+    if (urll.length > 1) {
+        var url2 = urll[1];
+        var url3 = url2.split("&");
+        if (url3[0] === "?key=register") { key = true; }
+        if (key) {
+            var keyfs = url3[1];
+            var keyfid = url3[2];
+            if (fsKey === keyfs.split("=")[0]) {
+                var stringFs = keyfs.split("=")[1];
+                $scope.fingerprintStr = stringFs;
+                console.log($scope.fingerprintStr);
+
+            }
+            if (fidKey === keyfid.split("=")[0]) {
+                var numFid = keyfid.split("=")[1];
+                var anumFid = numFid.split("#")[0];
+                $scope.fingerprintID = anumFid;
+                console.log($scope.fingerprintID);
+            }
+        }
+    }
+    // custom change for SAVE-CHILD for fingerPrint string and id read end
 
     if(!$scope.attributesById){
         $scope.attributesById = [];
@@ -150,7 +269,74 @@ trackerCapture.controller('RegistrationController',
     $scope.incidentDateState = {
         date: $scope.selectedEnrollment.incidentDate,
     };
+    // <!-- custom change for styles SAVE-CHILD css for nepali calendar new end  -->
+    function convertDateToISO() {
+        var finalUpdatedDate = $("#updatedISODate").val();
+        console.log('here is final date',finalUpdatedDate);
+        if (finalUpdatedDate) {
+            $scope.selectedEnrollment = {
+                enrollmentDate: finalUpdatedDate,
+                incidentDate: finalUpdatedDate,
+                orgUnit: $scope.selectedOrgUnit.id,
+                orgUnitName: $scope.selectedOrgUnit ? $scope.selectedOrgUnit.displayName : ""
+            };
+        }
+        else{
 
+            $scope.selectedEnrollment = {
+                enrollmentDate: $scope.today,
+                incidentDate: $scope.today,
+                orgUnit: $scope.selectedOrgUnit.id,
+                orgUnitName: $scope.selectedOrgUnit ? $scope.selectedOrgUnit.displayName : ""
+            };
+        }
+    }
+    $scope.getNepaliDateFromISODate = function(){
+        var finalUpdatedDate = $("#updatedISODate").val();
+        //alert( finalUpdatedDate + " -- $scope.selectedEnrollment -- " + $scope.selectedEnrollment.enrollmentDate  );
+        var tempEnrollmentDate = $scope.selectedEnrollment.enrollmentDate;
+
+        var nepaliEnrollmentConverter = new DateConverter();
+
+        nepaliEnrollmentConverter.setEnglishDate( parseInt(tempEnrollmentDate.split("-")[0]), parseInt(tempEnrollmentDate.split("-")[1]), parseInt(tempEnrollmentDate.split("-")[2]) );
+
+        console.log('nepali date', parseInt(tempEnrollmentDate.split("-")[0]), parseInt(tempEnrollmentDate.split("-")[1]), parseInt(tempEnrollmentDate.split("-")[2]) );
+
+        var convertedEnrollmentNepaliDate = nepaliEnrollmentConverter.getNepaliYear()+"-"+ nepaliEnrollmentConverter.getNepaliMonth() +"-"+ nepaliEnrollmentConverter.getNepaliDate();
+
+        var tempEnrollmentArr = [];
+        var l = convertedEnrollmentNepaliDate.length;
+        for(var i=0; i<l; i++){
+            if( convertedEnrollmentNepaliDate[i] === "0" ) { tempEnrollmentArr.push("०") }
+            if( convertedEnrollmentNepaliDate[i] === "1" ) { tempEnrollmentArr.push("१") }
+            if( convertedEnrollmentNepaliDate[i] === "2" ) { tempEnrollmentArr.push("२") }
+            if( convertedEnrollmentNepaliDate[i] === "3" ) { tempEnrollmentArr.push("३") }
+            if( convertedEnrollmentNepaliDate[i] === "4" ) { tempEnrollmentArr.push("४") }
+            if( convertedEnrollmentNepaliDate[i] === "5" ) { tempEnrollmentArr.push("५") }
+            if( convertedEnrollmentNepaliDate[i] === "6" ) { tempEnrollmentArr.push("६") }
+            if( convertedEnrollmentNepaliDate[i] === "7" ) { tempEnrollmentArr.push("७") }
+            if( convertedEnrollmentNepaliDate[i] === "8" ) { tempEnrollmentArr.push("८") }
+            if( convertedEnrollmentNepaliDate[i] === "9" ) { tempEnrollmentArr.push("९") }
+            if( convertedEnrollmentNepaliDate[i] === "-" ) { tempEnrollmentArr.push("-") }
+        }
+
+        //var tempEnrollmentString = tempEnrollmentArr.toString();
+        var tempEnrollmentString = tempEnrollmentArr.toString();
+        tempEnrollmentString.replace(/\,/g,"");
+        var tempEnrollmentStr2 = tempEnrollmentString.replace(/\,/g,"");
+        tempEnrollmentArr = tempEnrollmentStr2.split("-");
+        var tempEnrollmentYear =  tempEnrollmentArr[0];
+        var tempEnrollmentMonth = tempEnrollmentArr[1];
+        var tempEnrollmentDay = tempEnrollmentArr[2];
+        console.log(tempEnrollmentArr, tempEnrollmentYear, tempEnrollmentMonth , tempEnrollmentDay);
+
+        var finalEnrollmentNepaliDate = tempEnrollmentYear + "-" + tempEnrollmentMonth + "-" + tempEnrollmentDay;
+
+        $('#nepali-date-picker').val(finalEnrollmentNepaliDate);
+
+    };
+    // <!-- custom change for styles SAVE-CHILD css for nepali calendar new end  -->
+            
     $scope.trackedEntityTypes = {available: []};
     var trackedEntityTypesById = {};
 
