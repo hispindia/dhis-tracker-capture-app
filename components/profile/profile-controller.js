@@ -92,6 +92,21 @@ trackerCapture.controller('ProfileController',
         $scope.teiOriginal = angular.copy($scope.selectedTei);
         $scope.editingDisabled = !$scope.editingDisabled; 
         $rootScope.profileWidget.expand = true;
+
+        <!-- custom change for disable service_number when value present in profile widget -->
+        //if (attribute.code === 'service_number'){
+        //alert( "1-- " +  $scope.selectedTei.Fu4LhjNsJZL );
+        $scope.service_number_disabled = {
+            isDisabled: false
+        };
+        if( $scope.selectedTei.Fu4LhjNsJZL !== undefined  )
+        {
+            //alert( "2-- " +  $scope.selectedTei.Fu4LhjNsJZL );
+            $scope.service_number_disabled = {
+                isDisabled: true
+            };
+        }
+        // end
     };
     
     $scope.cancel = function(){
