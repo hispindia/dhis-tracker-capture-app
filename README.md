@@ -15,4 +15,12 @@ To run the development server you can run the following command.
 yarn start
 ```
 
+### build the application
+
+```
+yarn install
+
+yarn build
+```
+
 This starts the development server on port `8081`.
