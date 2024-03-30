@@ -336,7 +336,7 @@ trackerCapture.controller('RegistrationController',
 
     };
     // <!-- custom change for styles SAVE-CHILD css for nepali calendar new end  -->
-            
+
     $scope.trackedEntityTypes = {available: []};
     var trackedEntityTypesById = {};
 
@@ -542,6 +542,33 @@ trackerCapture.controller('RegistrationController',
             }
             AttributesFactory.getByProgram($scope.selectedProgram).then(function (atts) {
                 $scope.attributes = TEIGridService.generateGridColumns(atts, null, false).columns;
+
+                //custom change for SAVE-CHILD fingerPrintID/string auto-populate when page load read start
+                $timeout( function (){
+                    if( !$scope.selectedTei["UHoTGT1dtjj"] && $scope.selectedTei["UHoTGT1dtjj"] === undefined)
+                    {
+                        $scope.selectedTei["UHoTGT1dtjj"] = $scope.fingerprintID; //put value on load form biometric application
+                    }
+                    if( !$scope.selectedTei["uiOMHu4LtAP"] && $scope.selectedTei["uiOMHu4LtAP"] === undefined)
+                    {
+                        $scope.selectedTei["uiOMHu4LtAP"] = $scope.fingerprintStr; //put value on load form biometric application
+                    }
+                    // for FHI-360 merge ( HIV-tracker)
+                    /*
+                    if( !$scope.selectedTei["PWdxGAN3OCD"] && $scope.selectedTei["PWdxGAN3OCD"] === undefined)
+                    {
+                        $scope.selectedTei["PWdxGAN3OCD"] = $scope.ImplementingAgencyAttrValue; //put default value on load form
+                    }
+
+                    if( !$scope.selectedTei["LmgPhZ0JTB3"] && $scope.selectedTei["LmgPhZ0JTB3"] === undefined)
+                    {
+                        $scope.selectedTei["LmgPhZ0JTB3"] = $scope.ImplementingPartnerAttrValue; //put default value on load form
+                    }
+                    */
+                },0);
+                //custom change for SAVE-CHILD fingerPrint read end
+
+
                 if (generateAttributes) {
                     fetchGeneratedAttributes();
                 }
