@@ -831,6 +831,35 @@ trackerCapture.controller('RegistrationController',
                                 var en = enrollmentResponse.response;
                                 if (en.status === 'SUCCESS') {
                                     TEIService.flushCachedTei();
+                                    // start methods for send SMS when TEI enrollment done and TEA Implementing Agency is NCASC to TEI mobile-number
+                                    var tempCustomClientCode = '';
+                                    var tempMobileNumber = '';
+                                    var enrollmentDate = $scope.selectedEnrollment.enrollmentDate;
+                                    var orgUnitName = $scope.selectedEnrollment.orgUnitName;
+                                    var tempImplementingAgency = '';
+                                    for( var j=0; j < $scope.apiFormattedTei.attributes.length; j++ ){
+
+                                        if ( $scope.apiFormattedTei.attributes[j].attribute === 'drKkLxaGFwv'){
+                                            tempCustomClientCode = $scope.apiFormattedTei.attributes[j].value;
+                                        }
+                                        if ( $scope.apiFormattedTei.attributes[j].attribute === 'cjWJx7Sj0Ry'){
+                                            tempMobileNumber = $scope.apiFormattedTei.attributes[j].value;
+                                        }
+                                        if ( $scope.apiFormattedTei.attributes[j].attribute === 'PWdxGAN3OCD'){
+                                            tempImplementingAgency = $scope.apiFormattedTei.attributes[j].value;
+                                        }
+                                    }
+                                    if ( tempImplementingAgency === "NCASC" ){
+                                        var smsTextMessage = "नमस्ते , तपाई सफलतापूर्वक यस " + $scope.selectedEnrollment.orgUnitName + " को  सेवामा भर्ना हुनु भएको छ। " + $scope.selectedEnrollment.enrollmentDate + " . तपाइको ID " + tempCustomClientCode;
+                                        //"नमस्ते , तपाई सफलतापूर्वक यस V{org_unit_name} को  सेवामा भर्ना हुनु भएको छ। V{enrollment_date}. तपाइको ID A{drKkLxaGFwv}."
+                                        TEIService.sendEnrollmentSMS( tempMobileNumber, smsTextMessage ).then(function(enrollmentSMSSendResponse){
+                                            //TEIService.sendEnrollmentEmail( $scope.selectedEnrollment.orgUnit,tempMobileNumber, smsTextMessage ).then(function(enrollmentSMSSendResponse){
+                                            console.log( "Enrollment SMS send" );
+                                            console.log( enrollmentSMSSendResponse.message );
+                                        });
+                                    }
+                                    // end methods for send SMS when TEI enrollment done and TEA Implementing Agency is NCASC to TEI mobile-number
+
                                     if($scope.registrationMode !== 'ENROLLMENT') {
                                         $scope.model.savingRegistration = false;
                                     }
