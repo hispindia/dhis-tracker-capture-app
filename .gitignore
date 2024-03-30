@@ -11,3 +11,4 @@ nbproject/*
 yarn.lock
 package-lock.json
 *.lock
+yarn.lock
