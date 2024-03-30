@@ -1886,6 +1886,7 @@ trackerCapture.controller('RegistrationController',
     }
 
     $scope.updateEnrollmentDate = function(){
+        //$scope.getNepaliDateFromISODate();
         if(!DateUtils.isValid($scope.enrollmentDateState.date) || !$scope.selectedProgram.selectEnrollmentDatesInFuture && DateUtils.isAfterToday($scope.enrollmentDateState.date)){
             $scope.enrollmentDateState.date = $scope.selectedEnrollment.enrollmentDate;
             return NotificationService.showNotifcationDialog($translate.instant('error'), $scope.selectedProgram.enrollmentDateLabel + ' ' + $translate.instant('invalid'));

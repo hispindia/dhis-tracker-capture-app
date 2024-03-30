@@ -93,7 +93,7 @@ trackerCapture.controller('ProfileController',
         $scope.editingDisabled = !$scope.editingDisabled; 
         $rootScope.profileWidget.expand = true;
 
-        <!-- custom change for disable service_number when value present in profile widget -->
+        //custom change for disable service_number when value present in profile widget
         //if (attribute.code === 'service_number'){
         //alert( "1-- " +  $scope.selectedTei.Fu4LhjNsJZL );
         $scope.service_number_disabled = {
