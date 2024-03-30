@@ -46,6 +46,9 @@ import '../components/home/search/search-controller.js';
 import '../components/topbar/topbar-controller.js';
 import '../components/teiAudit/tei-audit-controller.js';
 
+//for PLAN
+import '../plan-customizations/scripts/custom-services.js';
+
 import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;
 
