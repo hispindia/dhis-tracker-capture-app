@@ -1740,6 +1740,33 @@ trackerCapture.controller('DataEntryController',
     };
     
     $scope.getDataEntryForm = function () {
+        // custom change for SAVE-CHILD for hide delete/print button based on user-role
+        $scope.userDetails = SessionStorageService.get('USER_PROFILE');
+        //alert( $scope.currentEvent.orgUnit + "  " + $scope.selectedOrgUnit.id );
+        $scope.hideDeleteButtonForEvent = "YES";
+        if( $scope.currentEvent.orgUnit === $scope.selectedOrgUnit.id ){
+            //$scope.currentUserRole = "Superuser";
+            $scope.hideDeleteButtonForEvent = "NO";
+        }
+        else if ( $scope.userDetails.userCredentials.userRoles.length !==0 )
+        {
+            for( var i=0; i<$scope.userDetails.userCredentials.userRoles.length; i++ ){
+
+                if ( $scope.userDetails.userCredentials.userRoles[i].name === 'Superuser' ){
+                    //$scope.currentUserRole = $scope.userDetails.userCredentials.userRoles[i].name;
+                    $scope.hideDeleteButtonForEvent = "NO";
+                }
+                else{
+                    $scope.hideDeleteButtonForEvent = "YES";
+                }
+            }
+        }
+        else{
+            $scope.hideDeleteButtonForEvent = "YES";
+        }
+        //alert( $scope.hideDeleteButtonForEvent );
+        //end
+
         $scope.showAttributeCategoryOptions = false;
         $scope.currentFileNames = $scope.fileNames ? ($scope.fileNames[$scope.currentEvent.event] ? $scope.fileNames[$scope.currentEvent.event] : []) : [];
         $scope.currentStage = $scope.stagesById[$scope.currentEvent.programStage];

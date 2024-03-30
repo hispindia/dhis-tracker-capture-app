@@ -125,7 +125,9 @@
                                     </tr>
                                 </table>
 
-                                <div class="vertical-spacing">
+                                <!-- custom change for hide delete/print button based on user-role -->
+                                <!--<div class="vertical-spacing">-->
+                                <div class="vertical-spacing" ng-show="currentUserRoleEnrollment==='Superuser'">
                                     <button type="button" 
                                             class="btn btn-primary"
                                             ng-if="selectedProgram.access.data.write && selectedEnrollment.status !== 'CANCELLED'"

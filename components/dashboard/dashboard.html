@@ -49,7 +49,7 @@
                             style="height: 35px;">
                         <i class="fa fa-thumb-tack"></i>
                     </button>
-                    
+                    <!-- comment code
                     <div class="btn-group trim" ng-if="showManageTeiDropdown()">
                         <button type="button" ng-attr-title="{{'manage' | translate}} {{trackedEntityType.displayName}}" class="btn btn-danger dropdown-toggle" ng-disabled="selectedOrgUnit.closedStatus" data-toggle="dropdown" style="height: 35px;">
                             <i class="fa fa-exclamation-circle"></i>
@@ -59,7 +59,18 @@
                             <li><a href ng-click="deleteTEI()">{{'delete' | translate}} {{trackedEntityType.displayName}}</a></li>
                         </ul>
                     </div>
-                    
+                    -->
+                    <!--custom change for hide delete/deactivate TEI dropdown based on user-role-->
+                    <!--<div class="btn-group trim" ng-if="showManageTeiDropdown()">-->
+                    <div class="btn-group trim" ng-if="showManageTeiDropdown()" ng-show="currentUserRoleDashboard === 'Superuser'">
+                        <button type="button" ng-attr-title="{{'manage' | translate}} {{trackedEntityType.displayName}}" class="btn btn-danger dropdown-toggle" ng-disabled="selectedOrgUnit.closedStatus" data-toggle="dropdown" style="height: 35px;">
+                            <i class="fa fa-exclamation-circle"></i>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href ng-click="activiateTEI()">{{selectedTei.inactive ? 'activate' : 'deactivate' | translate}} {{trackedEntityType.displayName}}</a></li>
+                            <li><a href ng-click="deleteTEI()">{{'delete' | translate}} {{trackedEntityType.displayName}}</a></li>
+                        </ul>
+                    </div>
                     <div class="btn-group trim">
                         <button type="button" ng-attr-title="{{settingsLabel}}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 35px;">
                             <i class="fa fa-cog"></i>
