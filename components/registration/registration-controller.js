@@ -115,11 +115,26 @@ trackerCapture.controller('RegistrationController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
-    
-    
+
+    // comment previous code
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
     };
+    */
+    // custom change for SAVE-CHILD for disable attribute name client code finger print id and String Start
+    // update for SAVE CHILD  for disable attribute patient_identifier
+
+    $scope.isDisabled = function (attribute) {
+        if (attribute.code === 'Client_code' || attribute.code === 'fingerprint_id' || attribute.code === 'fingerprint_str') {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
+    };
+    // custom change for SAVE-CHILD for disable attribute name client code finger print id and String end
+
 
     $scope.selectedEnrollment = {
         enrollmentDate: $scope.today,
