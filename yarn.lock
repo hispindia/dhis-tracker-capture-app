@@ -2353,6 +2353,11 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg==
 
+"jquery@>= 1.11.1":
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
+  integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
+
 js-base64@^2.1.9:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
@@ -2725,6 +2730,13 @@ negotiator@0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
+
+nepali-date-picker@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/nepali-date-picker/-/nepali-date-picker-2.0.1.tgz#b150f2579d362ccd3c7a72433ff0986289a12b06"
+  integrity sha512-/RGFI/sEvLxdfdMBsl3Y3+UZPtuI6WJKIMb1V1NYvC7FckAD5oDJj4Mg7tWy+L9ERU5LmGqEY92RF+SCTEhkaw==
+  dependencies:
+    jquery ">= 1.11.1"
 
 ng-annotate-loader@^0.2.0:
   version "0.2.0"
