@@ -151,7 +151,6 @@ trackerCapture.controller('DataEntryController',
         $scope.initiateNepaliEventCalendar = function () {
 
             $scope.convertISOEventDateToNepaliDate();
-
             $scope.convertedFromNepaliCalEventDate = '';
             /*
             var currentDate = new Date();
@@ -1743,8 +1742,23 @@ trackerCapture.controller('DataEntryController',
         // custom change for SAVE-CHILD for hide delete/print button based on user-role
         $scope.userDetails = SessionStorageService.get('USER_PROFILE');
         //alert( $scope.currentEvent.orgUnit + "  " + $scope.selectedOrgUnit.id );
+        // hide delete/complete/incomplete buttons for event more than 90 days
+        var tempEventDate = $scope.currentEvent.eventDate;
+        let date1 = new Date(tempEventDate);
+        let date2 = new Date();
+        // Calculating the time difference
+        // of two dates
+        let Difference_In_Time = date2.getTime() - date1.getTime();
+
+        // Calculating the no. of days between
+        // two dates
+        let difference_In_Days =  Math.round(Difference_In_Time / (1000 * 3600 * 24));
+
+        // To display the final no. of days (result)
+        console.log("Total number of days between dates:\n" + date1.toDateString() + " and " +  date2.toDateString() + " is: " + difference_In_Days + " days");
+
         $scope.hideDeleteButtonForEvent = "YES";
-        if( $scope.currentEvent.orgUnit === $scope.selectedOrgUnit.id ){
+        if( $scope.currentEvent.orgUnit === $scope.selectedOrgUnit.id && parseInt(difference_In_Days) <= 90 ){
             //$scope.currentUserRole = "Superuser";
             $scope.hideDeleteButtonForEvent = "NO";
         }
