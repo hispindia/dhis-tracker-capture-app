@@ -606,13 +606,14 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 return def.promise;
             }
         },
-        processForm: function(existingTei, formTei, originalTei, attributesById, generatedCustomId){
+        processForm: function(existingTei, formTei, originalTei, attributesById){
             var tei = angular.copy(existingTei);
             tei.attributes = [];
             var formEmpty = true;
             for(var k in attributesById){
 
                 // custom change for custom-ID generation for ippf_v34 Assign attribute value before save
+                /*
                 if( generatedCustomId !== null && generatedCustomId !== "" )
                 {
                     if(  attributesById[k].code === 'custom_id' )
@@ -621,6 +622,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         console.log( " Final Custom Id -- " + generatedCustomId );
                     }
                 }
+                 */
                 // end
 
                 if( k in formTei ){
