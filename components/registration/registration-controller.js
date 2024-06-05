@@ -357,6 +357,7 @@ trackerCapture.controller('RegistrationController',
 
                 // custom change for custom-ID get parent orgUnit code
                 // and TEI count based on orgUnit and enrollment Date(SQL-View -- CLFhvw5bXhl) for ippf_she_maldives-v38
+                /*
                 $timeout( function (){
                     let org_uid = $scope.selectedOrgUnit.id;
 
@@ -380,6 +381,8 @@ trackerCapture.controller('RegistrationController',
 
                     //});
                 },0);
+
+                 */
                 // end
 
                 if (generateAttributes) {
@@ -625,7 +628,10 @@ trackerCapture.controller('RegistrationController',
                 else {
                     updateCurrentSelection();
                     if ($scope.selectedProgram) {
-
+                        //add for IPPF custom ID generation
+                        $scope.model.savingRegistration = true;
+                        //end
+                        //enroll TEI
                         //enroll TEI
                         var enrollment = {};
                         enrollment.trackedEntityInstance = $scope.apiFormattedTei.trackedEntityInstance;
@@ -645,7 +651,10 @@ trackerCapture.controller('RegistrationController',
                                 if (en.status === 'SUCCESS') {
                                     TEIService.flushCachedTei();
                                     if($scope.registrationMode !== 'ENROLLMENT') {
-                                        $scope.model.savingRegistration = false;
+                                        // comment previous one
+                                        //$scope.model.savingRegistration = false;
+                                        // update for IPPF custom ID generation
+                                        $scope.model.savingRegistration = true;
                                     }
                                     enrollment.enrollment = en.importSummaries[0].reference;
                                     var availableEvent = $scope.currentEvent && $scope.currentEvent.event ? $scope.currentEvent : null;
@@ -653,9 +662,12 @@ trackerCapture.controller('RegistrationController',
                                     if (dhis2Events.events.length > 0) {
                                         DHIS2EventFactory.create(dhis2Events).then(function () {
                                             notifyRegistrtaionCompletion(destination, $scope.apiFormattedTei.trackedEntityInstance);
+                                            // add for IPPF custom ID generation
+                                            $scope.model.savingRegistration = false;
                                         });
                                     } else {
                                         notifyRegistrtaionCompletion(destination, $scope.apiFormattedTei.trackedEntityInstance);
+                                        $scope.model.savingRegistration = false;
                                     }
                                 }
                                 else {
@@ -782,37 +794,135 @@ trackerCapture.controller('RegistrationController',
 
         // custom change for custom-ID generation for ippf_she_maldives-v38 Assign attribute value before save
 
-        if ($scope.registrationMode === 'REGISTRATION' ) {
-            /*
-            let serviceDeliveryPoint = "";
-            let strParentName = "";
-            let selOrgUnitName = $scope.selectedOrgUnit.displayName;
+        var finalGeneratedCustomId = "";
+        var finalTEICount = "";
+        var firstNameProfile = "";
+        var customEnrollmentDate = "";
+        var strP = "";
+        //let org_uid = $scope.selectedOrgUnit.id;
+        var param = "var=orgUnitUid:" + $scope.selectedOrgUnit.id + "&var=programUid:" + $scope.selectedProgram.id + "&var=enrollmentDate:" + $scope.selectedEnrollment.enrollmentDate;
+        if ( $scope.registrationMode === 'REGISTRATION' ||
+            ( ( $scope.registrationMode === 'PROFILE' ) && ($scope.selectedTei.Jn6YH8KIKpg === undefined)) ) {
 
-            if( selOrgUnitName === 'Associate Clinic') serviceDeliveryPoint = 'AC';
-            else if( selOrgUnitName === 'CBD' ) serviceDeliveryPoint = 'CB';
-            if( selOrgUnitName === 'Static Clinic') serviceDeliveryPoint = 'SC';
-            else if( selOrgUnitName === 'Mobile Clinic' ) serviceDeliveryPoint = 'MC';
+            $scope.model.savingRegistration = true;
+            //alert( "  in " + $scope.model.savingRegistration);
+            $.getJSON("../api/sqlViews/CLFhvw5bXhl/data?"+param+"&paging=false", function (teiCountResponse) {
+                var count = teiCountResponse.listGrid.rows[0];
+                var teiCountByOrgUnitAndProgram = count[0];
+                var teiCount = teiCountByOrgUnitAndProgram;
+                var prefix = "";
+                var totalTei = parseInt(teiCount) + 1;
+                if( totalTei <10) prefix="00";
+                else if (totalTei >9 && totalTei<100) prefix="0";
 
-            if ($scope.parentOrgUnitName !== undefined) {
-                strParentName = $scope.parentOrgUnitName.substr(0, 2).toUpperCase();
-            }
-            */
-            let firstNameProfile = "";
-            if ($scope.selectedTei.tsBbDQe3sGo !== undefined) {
-                let strP = $scope.selectedTei.tsBbDQe3sGo;
-                firstNameProfile = strP.substr(0, 2).toUpperCase();
-            }
+                finalTEICount = prefix + totalTei;
+                console.log(" 1 finalTEICount " + finalTEICount);
 
-            let customEnrollmentDate = $scope.selectedEnrollment.enrollmentDate.split("-")[2]+$scope.selectedEnrollment.enrollmentDate.split("-")[1]+$scope.selectedEnrollment.enrollmentDate.split("-")[0];
-            //let firstString = strParentName + serviceDeliveryPoint + $scope.parentOrgUnitCode;
-            let firstString = $scope.selectedOrgUnit.code;
-            let secondString = firstNameProfile;
-            let thirdString = customEnrollmentDate;
-            let fourthString = $scope.finalTEICount;
-            $scope.generatedCustomId =  firstString+ "/" + secondString + "/" + thirdString + "/" + fourthString;
+                if ( finalTEICount !== undefined) {
+                    if ($scope.selectedTei.tsBbDQe3sGo !== undefined) {
+                        strP = $scope.selectedTei.tsBbDQe3sGo;
+                        firstNameProfile = strP.substr(0, 2).toUpperCase();
+                    }
+                    customEnrollmentDate = $scope.selectedEnrollment.enrollmentDate.split("-")[2]+$scope.selectedEnrollment.enrollmentDate.split("-")[1]+$scope.selectedEnrollment.enrollmentDate.split("-")[0];
+                    //let firstString = strParentName + serviceDeliveryPoint + $scope.parentOrgUnitCode;
+                    //let firstString = $scope.selectedOrgUnit.code;
+                    //let secondString = firstNameProfile;
+                    //let thirdString = customEnrollmentDate;
+                    //let fourthString = $scope.finalTEICount;
+
+                    finalGeneratedCustomId =  $scope.selectedOrgUnit.code+ "/" + firstNameProfile + "/" + customEnrollmentDate + "/" + finalTEICount;
+                    console.log(" 2 finalGeneratedCustomId " + finalGeneratedCustomId);
+
+                    //finalGeneratedCustomId = $scope.finalTEICount;
+                    $scope.selectedTei["EWQRiVxnLH2"] = finalGeneratedCustomId;
+                    //alert( "  out " + $scope.model.savingRegistration);
+                    $scope.model.savingRegistration = false;
+
+                    var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+                    $scope.formEmpty = result.formEmpty;
+                    $scope.apiFormattedTei = result.tei;
+
+                    if ($scope.formEmpty) {//registration form is empty
+                        NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_is_empty_fill_at_least_one"));
+                        return;
+                    }
+                    if(!destination && $scope.apiFormattedTei) {
+                        TEIService.getRelationships($scope.apiFormattedTei.trackedEntityInstance).then(function(result) {
+                            $scope.apiFormattedTei.relationships = result;
+                            performRegistration(destination);
+                        });
+                    } else {
+                        performRegistration(destination);
+                    }
+                }
+                else{
+                    //$scope.model.savingRegistration = true;
+                }
+
+            });
         }
-        // end
+        else{
+            if ($scope.registrationMode === 'PROFILE' && $scope.selectedTei.Jn6YH8KIKpg !== undefined) {
 
+                $.getJSON("../api/sqlViews/CLFhvw5bXhl/data?"+param+"&paging=false", function (teiCountResponse) {
+                    var count = teiCountResponse.listGrid.rows[0];
+                    var teiCountByOrgUnitAndProgram = count[0];
+                    var teiCount = teiCountByOrgUnitAndProgram;
+                    var prefix = "";
+                    var totalTei = parseInt(teiCount) + 1;
+                    if( totalTei <10) prefix="00";
+                    else if (totalTei >9 && totalTei<100) prefix="0";
+
+                    finalTEICount = prefix + totalTei;
+                    console.log(" 1 finalTEICount " + finalTEICount);
+                    if (finalTEICount !== undefined) {
+
+                        if ($scope.selectedTei.tsBbDQe3sGo !== undefined) {
+                            strP = $scope.selectedTei.tsBbDQe3sGo;
+                            firstNameProfile = strP.substr(0, 2).toUpperCase();
+                        }
+                        customEnrollmentDate = $scope.selectedEnrollment.enrollmentDate.split("-")[2]+$scope.selectedEnrollment.enrollmentDate.split("-")[1]+$scope.selectedEnrollment.enrollmentDate.split("-")[0];
+                        //let firstString = strParentName + serviceDeliveryPoint + $scope.parentOrgUnitCode;
+                        //let firstString = $scope.selectedOrgUnit.code;
+                        //let secondString = firstNameProfile;
+                        //let thirdString = customEnrollmentDate;
+                        //let fourthString = $scope.finalTEICount;
+
+                        finalGeneratedCustomId =  $scope.selectedOrgUnit.code+ "/" + firstNameProfile + "/" + customEnrollmentDate + "/" + finalTEICount;
+                        console.log(" 2 finalGeneratedCustomId " + finalGeneratedCustomId);
+
+                        //finalGeneratedCustomId = $scope.finalTEICount;
+                        $scope.selectedTei["EWQRiVxnLH2"] = finalGeneratedCustomId;
+                        //alert( "  out " + $scope.model.savingRegistration);
+
+                        $scope.model.savingRegistration = false;
+
+                        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+                        $scope.formEmpty = result.formEmpty;
+                        $scope.apiFormattedTei = result.tei;
+
+                        if ($scope.formEmpty) {//registration form is empty
+                            NotificationService.showNotifcationDialog($translate.instant("error"), $translate.instant("form_is_empty_fill_at_least_one"));
+                            return;
+                        }
+                        if(!destination && $scope.apiFormattedTei) {
+                            TEIService.getRelationships($scope.apiFormattedTei.trackedEntityInstance).then(function(result) {
+                                $scope.apiFormattedTei.relationships = result;
+                                performRegistration(destination);
+                            });
+                        } else {
+                            performRegistration(destination);
+                        }
+                    }
+                    else{
+                        //$scope.model.savingRegistration = true;
+                    }
+                });
+            }
+        }
+        //end
+        /* previous one code */
+        /*
         var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById, $scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.apiFormattedTei = result.tei;
@@ -829,6 +939,7 @@ trackerCapture.controller('RegistrationController',
         } else {
             performRegistration(destination);
         }
+         */
     };
 
     $scope.executeRules = function () {
