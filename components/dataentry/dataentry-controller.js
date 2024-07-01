@@ -1758,7 +1758,14 @@ trackerCapture.controller('DataEntryController',
         console.log("Total number of days between dates:\n" + date1.toDateString() + " and " +  date2.toDateString() + " is: " + difference_In_Days + " days");
 
         $scope.hideDeleteButtonForEvent = "YES";
+        // comment for some time date 01/07/2024
+        /*
         if( $scope.currentEvent.orgUnit === $scope.selectedOrgUnit.id && parseInt(difference_In_Days) <= 90 ){
+            //$scope.currentUserRole = "Superuser";
+            $scope.hideDeleteButtonForEvent = "NO";
+        }
+        */
+        if( $scope.currentEvent.orgUnit === $scope.selectedOrgUnit.id ){
             //$scope.currentUserRole = "Superuser";
             $scope.hideDeleteButtonForEvent = "NO";
         }
