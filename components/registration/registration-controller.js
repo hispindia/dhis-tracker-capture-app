@@ -868,6 +868,7 @@ trackerCapture.controller('RegistrationController',
                                             tempImplementingAgency = $scope.apiFormattedTei.attributes[j].value;
                                         }
                                     }
+
                                     if ( tempImplementingAgency === "NCASC" ){
                                         var smsTextMessage = "नमस्ते , तपाई सफलतापूर्वक यस " + $scope.selectedEnrollment.orgUnitName + " को  सेवामा भर्ना हुनु भएको छ। " + $scope.selectedEnrollment.enrollmentDate + " . तपाइको ID " + tempCustomClientCode;
                                         //"नमस्ते , तपाई सफलतापूर्वक यस V{org_unit_name} को  सेवामा भर्ना हुनु भएको छ। V{enrollment_date}. तपाइको ID A{drKkLxaGFwv}."
@@ -1770,6 +1771,13 @@ trackerCapture.controller('RegistrationController',
 
     $scope.attributeFieldDisabled = function(attribute){
         if($scope.isDisabled(attribute)) return true;
+
+        // custom change for SAVE-CHILD for disable attribute code service_number
+        /*
+        if ($scope.registrationMode === 'PROFILE' && $scope.selectedTei.Fu4LhjNsJZL !== undefined ) {
+            if (attribute.code === 'service_number') return true;
+        }
+        */
         if(!$scope.teTypeAttributesById || !$scope.teTypeAttributesById[attribute.id]){
             if($scope.selectedTei && $scope.selectedTei.programOwnersById && $scope.selectedProgram && $scope.selectedTei.programOwnersById[$scope.selectedProgram.id] && $scope.selectedTei.programOwnersById[$scope.selectedProgram.id] != $scope.selectedOrgUnit.id) return true;
             if($scope.selectedOrgUnit.closedStatus) return true;
