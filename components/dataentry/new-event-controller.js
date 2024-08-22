@@ -344,9 +344,34 @@ trackerCapture.controller('EventCreationController',
             console.log( multipleSmsSendResponse.message );
         });
         */
+
+        // start methods for send SMS and E-mail when TEI move One-time referal and Move permanently as on
+        var currSelections = CurrentSelection.get();
+        $scope.tei = currSelections.tei;
+        /*
+        TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit );
+        console.log( "Email and SMS send" );
+        */
+        //$scope.selectedOrgUnit.id // parent orgUnit
+        // start methods for send SMS and E-mail when TEI move One-time referral and Move permanently as on 02/07/2024
+
+        //dummyEvent.orgUnitName;
+        var tempCustomClientCode = '';
+        for( var j=0; j < $scope.tei.attributes.length; j++ ){
+
+            if ( $scope.tei.attributes[j].attribute === 'drKkLxaGFwv'){
+                tempCustomClientCode = $scope.tei.attributes[j].value;
+            }
+        }
+        TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, dummyEvent.orgUnit, $scope.selectedOrgUnit.displayName, dummyEvent.orgUnitName, tempCustomClientCode ).then(function(emailSMSSendToReferedOrgUnitResponse){
+            console.log( emailSMSSendToReferedOrgUnitResponse.message );
+        });
+
+        /*
         var currSelections = CurrentSelection.get();
         $scope.tei = currSelections.tei;
         TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit )
+        */
 
         console.log( "Email and SMS send" );
 
@@ -402,14 +427,37 @@ trackerCapture.controller('EventCreationController',
             var currSelections = CurrentSelection.get();
             $scope.tei = currSelections.tei;
 
+            var tempCustomClientCode = '';
+            for( var j=0; j < $scope.tei.attributes.length; j++ ){
+
+                if ( $scope.tei.attributes[j].attribute === 'drKkLxaGFwv'){
+                    tempCustomClientCode = $scope.tei.attributes[j].value;
+                }
+            }
+
             TEIService.changeTeiProgramOwner($scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit).then(function(response){
                 $scope.save();
                 $rootScope.$broadcast('ownerUpdated', {programExists: true});
-                // start methods for send SMS and E-mail when TEI move One-time referal and Move permanently
 
+                // start methods for send SMS and E-mail when TEI move One-time referral and Move permanently as on 02/07/2024
+                TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, dummyEvent.orgUnit, $scope.selectedOrgUnit.displayName, dummyEvent.orgUnitName, tempCustomClientCode ).then(function(emailSMSSendToReferedOrgUnitResponse){
+                    console.log( emailSMSSendToReferedOrgUnitResponse.message );
+                });
+                // email SMS Send to Parent orgUnit
+                /*
+                TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, dummyEvent.orgUnit, $scope.selectedOrgUnit.displayName, dummyEvent.orgUnitName, tempCustomClientCode ).then(function(emailSMSSendResponseToParent){
+                    console.log( emailSMSSendResponseToParent.message );
+                });
+
+                 */
+                // end methods for send SMS and E-mail when TEI move One-time referral and Move permanently
+
+                // start methods for send SMS and E-mail when TEI move One-time referal and Move permanently
+                /*
                 TEIService.sendEmailAndSMS( $scope.tei.trackedEntityInstance, $scope.selectedProgram.id, dummyEvent.orgUnit ).then(function(emailSendResponse){
                     console.log( emailSendResponse.message );
                 });
+                 */
                 // end methods for send SMS and E-mail when TEI move One-time referal and Move permanently
             });
         });

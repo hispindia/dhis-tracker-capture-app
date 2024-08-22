@@ -1315,7 +1315,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             });
             return promise;
         },
-        sendEmailAndSMS: function(tei, program,ou){
+        tempSendEmailAndSMS: function(tei, program,ou){
             var deferred = $q.defer();
             //organisationUnits/vXdngpv3PzI.json?fields=id,users[id,username,email,phoneNumber]
             $.ajax({
@@ -1360,6 +1360,78 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         "recipients": tempRecipientsPhoneNumber
                     };
 
+                    var sendTempSMS = $http.post( DHIS2URL + '/sms/outbound', smsParam ).then(function(multipleSmsSendResponse){
+                        console.log( multipleSmsSendResponse.message );
+
+                    });
+
+                },
+                error: function (orgUnitUsers) {
+                    console.log(  " response: " + JSON.stringify(orgUnitUsers) );
+                    deferred.resolve(orgUnitUsers);
+                },
+                warning: function (orgUnitUsers) {
+                    console.log(  " response: " + JSON.stringify(orgUnitUsers) );
+                    deferred.resolve(orgUnitUsers);
+                }
+            });
+
+            return deferred.promise;
+        },
+        // add methods for send SMS and E-mail when TEI move One-time referral and Move permanently as on 02/07/2024
+        sendEmailAndSMS: function(tei,ou,fromOUName,toOUName,teiClientCode){
+            var deferred = $q.defer();
+            //organisationUnits/vXdngpv3PzI.json?fields=id,users[id,username,email,phoneNumber]
+
+            console.log( tei + " - " + ou + " - " + fromOUName + " - " + toOUName + " - " + teiClientCode );
+            //नमस्ते , मिती {2023-01-31} मा CLIENT ID: {MU982110}, {SUKRARAJ TROPICAL HOSPITAL_KATHMANDU} सेवाबाट , सफलतापूर्वक  यस  {DISTRICT HOSPITAL_ SINDHULI } मा Transfer-Out हुनु भएको छ।
+
+            var today  = new Date();
+            var todayDate= today.getFullYear() + "-" +("00" + (today.getMonth() + 1)).slice(-2) + "-" + ("00" + (today.getDate())).slice(-2);
+            var smsEmailText = "नमस्ते , मिती :  " + todayDate + " मा CLIENT ID: " + teiClientCode + ", " + fromOUName + " सेवाबाट , सफलतापूर्वक  यस  " + toOUName + " मा Transfer-Out हुनु भएको छ।";
+            //console.log( " smsEmailText " + smsEmailText  );
+
+            $.ajax({
+                type: "GET",
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                //data: JSON.stringify(emailParam),
+                url: DHIS2URL + '/organisationUnits/' +ou + '.json?fields=id,users[id,displayName,userName,firstName,email,phoneNumber]',
+
+                success: function (orgUnitUsers) {
+                    //console.log( __rowNum__ + " -- "+ row.event + "Event updated with " + row.value + "response: " + response );
+                    //console.log(  " response: " + JSON.stringify(orgUnitUsers) );
+                    var tempRecipientsPhoneNumber = [];
+                    for( var i=0; i < orgUnitUsers.users.length; i++ ){
+
+                        if( orgUnitUsers.users[i].email !== undefined ){
+                            var tempEmail = orgUnitUsers.users[i].email;
+                            var tempSubject = smsEmailText;
+                            var tempMessage = smsEmailText;
+
+                            //console.log( " to user " + orgUnitUsers.users[i].displayName + " email : " + tempEmail );
+
+                            var sendTempEmail = $http.post( DHIS2URL + '/email/notification?recipients=' + tempEmail + '&subject=' + tempSubject + '&message=' + tempMessage).then(function(emailSendResponse){
+                                console.log( emailSendResponse.message + " to user " + orgUnitUsers.users[i].displayName + " email : " + tempEmail );
+                            });
+
+                        }
+                    }
+                    // collect phoneNumbers of users
+                    for( var j=0; j < orgUnitUsers.users.length; j++ ){
+                        if( orgUnitUsers.users[j].phoneNumber !== undefined ){
+                            tempRecipientsPhoneNumber.push( orgUnitUsers.users[j].phoneNumber );
+                            //console.log( " user " + orgUnitUsers.users[j].displayName + " phoneNo : " + orgUnitUsers.users[j].phoneNumber );
+                        }
+                    }
+                    //console.log( " phone no " + tempRecipientsPhoneNumber  );
+
+                    var smsParam = {
+                        //"recipients":tempRecipients,
+                        "message": smsEmailText,
+                        "recipients": tempRecipientsPhoneNumber
+                    };
 
                     var sendTempSMS = $http.post( DHIS2URL + '/sms/outbound', smsParam ).then(function(multipleSmsSendResponse){
                         console.log( multipleSmsSendResponse.message );
@@ -1379,7 +1451,6 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
 
             return deferred.promise;
         },
-
         sendEnrollmentSMS: function( mobileNumber, smsTextMessage){
             //"नमस्ते , तपाई सफलतापूर्वक यस V{org_unit_name} को  सेवामा भर्ना हुनु भएको छ। V{enrollment_date}. तपाइको ID A{drKkLxaGFwv}."
             var tempRecipientsPhoneNumber = [];
