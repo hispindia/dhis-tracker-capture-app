@@ -1232,9 +1232,30 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             let quarter =  parseInt(tempEventDate.getMonth() / 3 ) + 1;
             let tempPeriod = parseInt(tempEventDate.getFullYear()) + "Q" + quarter;
             console.log(quarter);
+            // PHC
             if (eventDataValue.program === 'XdyicAxrGPC' && eventDataValue.programStage === 'Oy7oALmesOu') {
 
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'NxpizrKetxX';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'dHuVSKPUOtv';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+
                     if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
                         let dataValuePHCNQASExAnte = {};
                         dataValuePHCNQASExAnte.dataElement = 'MgBNehilt4X';
@@ -1423,9 +1444,28 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
 
                 }
             }
-
+            // CHC
             else if (eventDataValue.program === 'goWEjxK4YXb' && eventDataValue.programStage === 'KB6QqF6Vcv6') {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'NxpizrKetxX';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'dHuVSKPUOtv';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
 
                     if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
                         let dataValueCHCNQASExAnte = {};
@@ -1589,6 +1629,25 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             // DH
             else if (eventDataValue.program === 'bWDC55iriq5' && eventDataValue.programStage === 'kcv8f5aW7E6') {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
+
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'NxpizrKetxX';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'dHuVSKPUOtv';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
 
                     if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
                         let dataValueDHNQASExAnte = {};
@@ -1783,6 +1842,26 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             else if (eventDataValue.program === 'T9rLO6TLFrx' && eventDataValue.programStage === 'bgyWZTN72Is') {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
 
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'NxpizrKetxX';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'dHuVSKPUOtv';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+
+
                     if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
                         let dataValueDHTNQASExAnte = {};
                         dataValueDHTNQASExAnte.dataElement = 'HMJl1ihGttQ';
@@ -1918,7 +1997,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                     }
 
 
-                    if (eventDataValue.CMGA0AX5PTf !== '' && eventDataValue.CMGA0AX5PTf !== undefined) {
+                    if (eventDataValue.CMGA0AX5PTf !== 'NaN' && eventDataValue.CMGA0AX5PTf !== '' && eventDataValue.CMGA0AX5PTf !== undefined) {
                         let dataValueDHTCondemnation_medical_equipmentExAnte = {};
                         dataValueDHTCondemnation_medical_equipmentExAnte.dataElement = 'xWJHsHBdENm';
                         dataValueDHTCondemnation_medical_equipmentExAnte.categoryOptionCombo = 'HllvX50cXC0';
@@ -1955,6 +2034,25 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             else if (eventDataValue.program === 'T9rLO6TLFrx' && eventDataValue.programStage === 'PT9rqtMc6vU') {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
 
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'NxpizrKetxX';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'dHuVSKPUOtv';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+
                     if (eventDataValue.rOb9Xs9yC93 !== '' && eventDataValue.rOb9Xs9yC93 !== undefined) {
                         let dataValueDHTIndicator1ExAnte = {};
                         dataValueDHTIndicator1ExAnte.dataElement = 'FHh0DreGwAg';
@@ -1980,6 +2078,25 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
             else if (eventDataValue.program === 'J2WLAhMNTa9' && eventDataValue.programStage === 'RgeKAiRQ3yo') {
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
 
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'NxpizrKetxX';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'dHuVSKPUOtv';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    
                     if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
                         let dataValueSHTNQASExAnte = {};
                         dataValueSHTNQASExAnte.dataElement = 't74ltsSf68i';
