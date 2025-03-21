@@ -1441,8 +1441,217 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         dataValueNCD_ConsultationsExAnte.period = tempPeriod;
                         dataValues.push(dataValueNCD_ConsultationsExAnte);
                     }
+                }
+                // for Ex-Post Assessment
+                else if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'Qk8Rqen858g';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'mAWraF09EcL';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+
+                    if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'Pf2xD0Xi5mj';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.tm5mca1RtIi;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.yiLQuZMuSmj !== '' && eventDataValue.yiLQuZMuSmj !== undefined) {
+                        let dataValuePHCPlanningsExAnte = {};
+                        dataValuePHCPlanningsExAnte.dataElement = 'DwDrjQBi90c';
+                        dataValuePHCPlanningsExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCPlanningsExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCPlanningsExAnte.value = eventDataValue.yiLQuZMuSmj;
+                        dataValuePHCPlanningsExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCPlanningsExAnte);
+                    }
+                    if (eventDataValue.WSAbtRZhxM5 !== '' && eventDataValue.WSAbtRZhxM5 !== undefined) {
+                        let dataValuePHCPlan_ExecutionExAnte = {};
+                        dataValuePHCPlan_ExecutionExAnte.dataElement = 'aXKCWDX5hnu';
+                        dataValuePHCPlan_ExecutionExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCPlan_ExecutionExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCPlan_ExecutionExAnte.value = eventDataValue.WSAbtRZhxM5;
+                        dataValuePHCPlan_ExecutionExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCPlan_ExecutionExAnte);
+                    }
+                    if (eventDataValue.BNyKVjqlhtL !== '' && eventDataValue.BNyKVjqlhtL !== undefined) {
+                        let dataValuePHCAssesmentExAnte = {};
+                        dataValuePHCAssesmentExAnte.dataElement = 'xOJUyfVSsZz';
+                        dataValuePHCAssesmentExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCAssesmentExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCAssesmentExAnte.value = eventDataValue.BNyKVjqlhtL;
+                        dataValuePHCAssesmentExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCAssesmentExAnte);
+                    }
+                    if (eventDataValue.pMGCVgtvVOS !== '' && eventDataValue.pMGCVgtvVOS !== undefined) {
+                        let dataValuePHCHWC_CBACExAnte = {};
+                        dataValuePHCHWC_CBACExAnte.dataElement = 'W5GVAxG5LPb';
+                        dataValuePHCHWC_CBACExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCHWC_CBACExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCHWC_CBACExAnte.value = eventDataValue.pMGCVgtvVOS;
+                        dataValuePHCHWC_CBACExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCHWC_CBACExAnte);
+                    }
+
+                    if (eventDataValue.cG5yglbpgRR !== '' && eventDataValue.cG5yglbpgRR !== undefined) {
+                        let dataValuePHCHWC_OutreachExAnte = {};
+                        dataValuePHCHWC_OutreachExAnte.dataElement = 'kgCBnuc68Ip';
+                        dataValuePHCHWC_OutreachExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCHWC_OutreachExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCHWC_OutreachExAnte.value = eventDataValue.cG5yglbpgRR;
+                        dataValuePHCHWC_OutreachExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCHWC_OutreachExAnte);
+                    }
+
+                    if (eventDataValue.oPZ91aEQbxC !== '' && eventDataValue.oPZ91aEQbxC !== undefined) {
+                        let dataValuePHCHWC_MedicineExAnte = {};
+                        dataValuePHCHWC_MedicineExAnte.dataElement = 'aeOvRBBi8OH';
+                        dataValuePHCHWC_MedicineExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCHWC_MedicineExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCHWC_MedicineExAnte.value = eventDataValue.oPZ91aEQbxC;
+                        dataValuePHCHWC_MedicineExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCHWC_MedicineExAnte);
+                    }
+
+                    if (eventDataValue.zWCr9GKfyTz !== '' && eventDataValue.zWCr9GKfyTz !== undefined) {
+                        let dataValuePHCLow_cost_MedicineExAnte = {};
+                        dataValuePHCLow_cost_MedicineExAnte.dataElement = 'PTiMIRhtJ4p';
+                        dataValuePHCLow_cost_MedicineExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCLow_cost_MedicineExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCLow_cost_MedicineExAnte.value = eventDataValue.zWCr9GKfyTz;
+                        dataValuePHCLow_cost_MedicineExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCLow_cost_MedicineExAnte);
+                    }
+
+                    if (eventDataValue.TDPUQXGEy0n !== '' && eventDataValue.TDPUQXGEy0n !== undefined) {
+                        let dataValuePHCMedicine_Quality_TestExAnte = {};
+                        dataValuePHCMedicine_Quality_TestExAnte.dataElement = 'nQ3mhxS2ry3';
+                        dataValuePHCMedicine_Quality_TestExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCMedicine_Quality_TestExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCMedicine_Quality_TestExAnte.value = eventDataValue.TDPUQXGEy0n;
+                        dataValuePHCMedicine_Quality_TestExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCMedicine_Quality_TestExAnte);
+                    }
+
+                    if (eventDataValue.mwBMY6pBnNt !== '' && eventDataValue.mwBMY6pBnNt !== undefined) {
+                        let dataValuePHCDrug_Store_QualityExAnte = {};
+                        dataValuePHCDrug_Store_QualityExAnte.dataElement = 'fZ1bWI4B62z';
+                        dataValuePHCDrug_Store_QualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCDrug_Store_QualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCDrug_Store_QualityExAnte.value = eventDataValue.mwBMY6pBnNt;
+                        dataValuePHCDrug_Store_QualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCDrug_Store_QualityExAnte);
+                    }
+
+                    if (eventDataValue.NronO8j2Fft !== '' && eventDataValue.NronO8j2Fft !== undefined) {
+                        let dataValuePHCDrug_DispensationExAnte = {};
+                        dataValuePHCDrug_DispensationExAnte.dataElement = 'dPsAozrM7kO';
+                        dataValuePHCDrug_DispensationExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCDrug_DispensationExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCDrug_DispensationExAnte.value = eventDataValue.NronO8j2Fft;
+                        dataValuePHCDrug_DispensationExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCDrug_DispensationExAnte);
+                    }
+
+                    if (eventDataValue.LA8oFJGjiX3 !== '' && eventDataValue.LA8oFJGjiX3 !== undefined) {
+                        let dataValuePHCKnowledgeExAnte = {};
+                        dataValuePHCKnowledgeExAnte.dataElement = 'mckPM2YPhFc';
+                        dataValuePHCKnowledgeExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCKnowledgeExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCKnowledgeExAnte.value = eventDataValue.LA8oFJGjiX3;
+                        dataValuePHCKnowledgeExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCKnowledgeExAnte);
+                    }
+
+                    if (eventDataValue.uIbs7yJJGEe !== '' && eventDataValue.uIbs7yJJGEe !== undefined) {
+                        let dataValuePHCBMWExAnte = {};
+                        dataValuePHCBMWExAnte.dataElement = 'eFPCXtmas70';
+                        dataValuePHCBMWExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCBMWExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCBMWExAnte.value = eventDataValue.uIbs7yJJGEe;
+                        dataValuePHCBMWExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCBMWExAnte);
+                    }
+
+                    if (eventDataValue.OjLkSpUqD2P !== '' && eventDataValue.OjLkSpUqD2P !== undefined) {
+                        let dataValuePHCOutcome_QualityExAnte = {};
+                        dataValuePHCOutcome_QualityExAnte.dataElement = 'u1NTzxc0p96';
+                        dataValuePHCOutcome_QualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCOutcome_QualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCOutcome_QualityExAnte.value = eventDataValue.OjLkSpUqD2P;
+                        dataValuePHCOutcome_QualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCOutcome_QualityExAnte);
+                    }
+
+                    if (eventDataValue.FuBMShCvsTa !== '' && eventDataValue.FuBMShCvsTa !== undefined) {
+                        let dataValuePHCAccountabilityExAnte = {};
+                        dataValuePHCAccountabilityExAnte.dataElement = 'sDbz1KBbqul';
+                        dataValuePHCAccountabilityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCAccountabilityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCAccountabilityExAnte.value = eventDataValue.FuBMShCvsTa;
+                        dataValuePHCAccountabilityExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCAccountabilityExAnte);
+                    }
+
+                    if (eventDataValue.mdbSU6XYoK3 !== '' && eventDataValue.mdbSU6XYoK3 !== undefined) {
+                        let dataValuePHCPatient_Experience_ScoreExAnte = {};
+                        dataValuePHCPatient_Experience_ScoreExAnte.dataElement = 'wk5EHERlILV';
+                        dataValuePHCPatient_Experience_ScoreExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCPatient_Experience_ScoreExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCPatient_Experience_ScoreExAnte.value = eventDataValue.mdbSU6XYoK3;
+                        dataValuePHCPatient_Experience_ScoreExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCPatient_Experience_ScoreExAnte);
+                    }
+
+                    if (eventDataValue.uj9OgZ2awL0 !== '' && eventDataValue.uj9OgZ2awL0 !== undefined) {
+                        let dataValuePHCGrievanceExAnte = {};
+                        dataValuePHCGrievanceExAnte.dataElement = 'gbGGFzlWmRb';
+                        dataValuePHCGrievanceExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCGrievanceExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCGrievanceExAnte.value = eventDataValue.uj9OgZ2awL0;
+                        dataValuePHCGrievanceExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCGrievanceExAnte);
+                    }
+
+                    if (eventDataValue.SdPujxa8O9N !== '' && eventDataValue.SdPujxa8O9N !== undefined) {
+                        let dataValueHMIS_ReportingExAnte = {};
+                        dataValueHMIS_ReportingExAnte.dataElement = 'GrQuzkOescD';
+                        dataValueHMIS_ReportingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueHMIS_ReportingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueHMIS_ReportingExAnte.value = eventDataValue.SdPujxa8O9N;
+                        dataValueHMIS_ReportingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueHMIS_ReportingExAnte);
+                    }
+
+                    if (eventDataValue.xSSLUxMZgqP !== '' && eventDataValue.xSSLUxMZgqP !== undefined) {
+                        let dataValueNCD_ConsultationsExAnte = {};
+                        dataValueNCD_ConsultationsExAnte.dataElement = 'JnFHZA1ofJw';
+                        dataValueNCD_ConsultationsExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueNCD_ConsultationsExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueNCD_ConsultationsExAnte.value = eventDataValue.xSSLUxMZgqP;
+                        dataValueNCD_ConsultationsExAnte.period = tempPeriod;
+                        dataValues.push(dataValueNCD_ConsultationsExAnte);
+                    }
 
                 }
+
             }
             // CHC
             else if (eventDataValue.program === 'goWEjxK4YXb' && eventDataValue.programStage === 'KB6QqF6Vcv6') {
@@ -1623,11 +1832,188 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                     }
 
                 }
+                // CHC Ex-Post Assessment
+                else if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
 
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'Qk8Rqen858g';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'mAWraF09EcL';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+
+                    if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
+                        let dataValueCHCNQASExAnte = {};
+                        dataValueCHCNQASExAnte.dataElement = 'SlEOuSdn4t6';
+                        dataValueCHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCNQASExAnte.value = eventDataValue.tm5mca1RtIi;
+                        dataValueCHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCNQASExAnte);
+                    }
+                    if (eventDataValue.yiLQuZMuSmj !== '' && eventDataValue.yiLQuZMuSmj !== undefined) {
+                        let dataValueCHCPlanningsExAnte = {};
+                        dataValueCHCPlanningsExAnte.dataElement = 'QwFvcX2oRGx';
+                        dataValueCHCPlanningsExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCPlanningsExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCPlanningsExAnte.value = eventDataValue.yiLQuZMuSmj;
+                        dataValueCHCPlanningsExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCPlanningsExAnte);
+                    }
+                    if (eventDataValue.WSAbtRZhxM5 !== '' && eventDataValue.WSAbtRZhxM5 !== undefined) {
+                        let dataValueCHCPlan_ExecutionExAnte = {};
+                        dataValueCHCPlan_ExecutionExAnte.dataElement = 'aUfTC3fQWgY';
+                        dataValueCHCPlan_ExecutionExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCPlan_ExecutionExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCPlan_ExecutionExAnte.value = eventDataValue.WSAbtRZhxM5;
+                        dataValueCHCPlan_ExecutionExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCPlan_ExecutionExAnte);
+                    }
+                    if (eventDataValue.BNyKVjqlhtL !== '' && eventDataValue.BNyKVjqlhtL !== undefined) {
+                        let dataValueCHCAssesmentExAnte = {};
+                        dataValueCHCAssesmentExAnte.dataElement = 'wSJsT5CR3n3';
+                        dataValueCHCAssesmentExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCAssesmentExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCAssesmentExAnte.value = eventDataValue.BNyKVjqlhtL;
+                        dataValueCHCAssesmentExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCAssesmentExAnte);
+                    }
+
+                    if (eventDataValue.atgisgKyF3t !== '' && eventDataValue.atgisgKyF3t !== undefined) {
+                        let dataValueCHCBloodExAnte = {};
+                        dataValueCHCBloodExAnte.dataElement = 'oPca7SZn15U';
+                        dataValueCHCBloodExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCBloodExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCBloodExAnte.value = eventDataValue.atgisgKyF3t;
+                        dataValueCHCBloodExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCBloodExAnte);
+                    }
+
+                    if (eventDataValue.zWCr9GKfyTz !== '' && eventDataValue.zWCr9GKfyTz !== undefined) {
+                        let dataValueCHCLow_cost_MedicineExAnte = {};
+                        dataValueCHCLow_cost_MedicineExAnte.dataElement = 'J5gstCNY8t4';
+                        dataValueCHCLow_cost_MedicineExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCLow_cost_MedicineExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCLow_cost_MedicineExAnte.value = eventDataValue.zWCr9GKfyTz;
+                        dataValueCHCLow_cost_MedicineExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCLow_cost_MedicineExAnte);
+                    }
+                    if (eventDataValue.TDPUQXGEy0n !== '' && eventDataValue.TDPUQXGEy0n !== undefined) {
+                        let dataValueCHCMedicine_Quality_TestExAnte = {};
+                        dataValueCHCMedicine_Quality_TestExAnte.dataElement = 'QHlopEoN7b3';
+                        dataValueCHCMedicine_Quality_TestExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCMedicine_Quality_TestExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCMedicine_Quality_TestExAnte.value = eventDataValue.TDPUQXGEy0n;
+                        dataValueCHCMedicine_Quality_TestExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCMedicine_Quality_TestExAnte);
+                    }
+                    if (eventDataValue.mwBMY6pBnNt !== '' && eventDataValue.mwBMY6pBnNt !== undefined) {
+                        let dataValueCHCDrug_Store_QualityExAnte = {};
+                        dataValueCHCDrug_Store_QualityExAnte.dataElement = 'pjPz7XhMJi5';
+                        dataValueCHCDrug_Store_QualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCDrug_Store_QualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCDrug_Store_QualityExAnte.value = eventDataValue.mwBMY6pBnNt;
+                        dataValueCHCDrug_Store_QualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCDrug_Store_QualityExAnte);
+                    }
+
+                    if (eventDataValue.NronO8j2Fft !== '' && eventDataValue.NronO8j2Fft !== undefined) {
+                        let dataValueCHCDrug_DispensationExAnte = {};
+                        dataValueCHCDrug_DispensationExAnte.dataElement = 'kysAi2zrMBA';
+                        dataValueCHCDrug_DispensationExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCDrug_DispensationExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCDrug_DispensationExAnte.value = eventDataValue.NronO8j2Fft;
+                        dataValueCHCDrug_DispensationExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCDrug_DispensationExAnte);
+                    }
+
+                    if (eventDataValue.LA8oFJGjiX3 !== '' && eventDataValue.LA8oFJGjiX3 !== undefined) {
+                        let dataValueCHCKnowledgeExAnte = {};
+                        dataValueCHCKnowledgeExAnte.dataElement = 'HiR8SPybuKO';
+                        dataValueCHCKnowledgeExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCKnowledgeExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCKnowledgeExAnte.value = eventDataValue.LA8oFJGjiX3;
+                        dataValueCHCKnowledgeExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCKnowledgeExAnte);
+                    }
+
+                    if (eventDataValue.uIbs7yJJGEe !== '' && eventDataValue.uIbs7yJJGEe !== undefined) {
+                        let dataValueCHCBMWExAnte = {};
+                        dataValueCHCBMWExAnte.dataElement = 'KJKQgzDo3gA';
+                        dataValueCHCBMWExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCBMWExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCBMWExAnte.value = eventDataValue.uIbs7yJJGEe;
+                        dataValueCHCBMWExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCBMWExAnte);
+                    }
+
+                    if (eventDataValue.OjLkSpUqD2P !== '' && eventDataValue.OjLkSpUqD2P !== undefined) {
+                        let dataValueCHCOutcome_QualityExAnte = {};
+                        dataValueCHCOutcome_QualityExAnte.dataElement = 'NwCBCZ8nryJ';
+                        dataValueCHCOutcome_QualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCOutcome_QualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCOutcome_QualityExAnte.value = eventDataValue.OjLkSpUqD2P;
+                        dataValueCHCOutcome_QualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCOutcome_QualityExAnte);
+                    }
+
+                    if (eventDataValue.FuBMShCvsTa !== '' && eventDataValue.FuBMShCvsTa !== undefined) {
+                        let dataValueCHCAccountabilityExAnte = {};
+                        dataValueCHCAccountabilityExAnte.dataElement = 'XILSmYprKGZ';
+                        dataValueCHCAccountabilityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCAccountabilityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCAccountabilityExAnte.value = eventDataValue.FuBMShCvsTa;
+                        dataValueCHCAccountabilityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCAccountabilityExAnte);
+                    }
+
+                    if (eventDataValue.mdbSU6XYoK3 !== '' && eventDataValue.mdbSU6XYoK3 !== undefined) {
+                        let dataValueCHCPatient_Experience_ScoreExAnte = {};
+                        dataValueCHCPatient_Experience_ScoreExAnte.dataElement = 'thRJSdwxIAq';
+                        dataValueCHCPatient_Experience_ScoreExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCPatient_Experience_ScoreExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCPatient_Experience_ScoreExAnte.value = eventDataValue.mdbSU6XYoK3;
+                        dataValueCHCPatient_Experience_ScoreExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCPatient_Experience_ScoreExAnte);
+                    }
+
+                    if (eventDataValue.uj9OgZ2awL0 !== '' && eventDataValue.uj9OgZ2awL0 !== undefined) {
+                        let dataValueCHCGrievanceExAnte = {};
+                        dataValueCHCGrievanceExAnte.dataElement = 'iMOah4eHcFE';
+                        dataValueCHCGrievanceExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCGrievanceExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCGrievanceExAnte.value = eventDataValue.uj9OgZ2awL0;
+                        dataValueCHCGrievanceExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCGrievanceExAnte);
+                    }
+
+                    if (eventDataValue.aYF1TLh8Wgo !== '' && eventDataValue.aYF1TLh8Wgo !== undefined) {
+                        let dataValueCHCHMIS_ReportingExAnte = {};
+                        dataValueCHCHMIS_ReportingExAnte.dataElement = 'PO1c14NmHqS';
+                        dataValueCHCHMIS_ReportingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueCHCHMIS_ReportingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueCHCHMIS_ReportingExAnte.value = eventDataValue.aYF1TLh8Wgo;
+                        dataValueCHCHMIS_ReportingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueCHCHMIS_ReportingExAnte);
+                    }
+                }
             }
 
             // DH
             else if (eventDataValue.program === 'bWDC55iriq5' && eventDataValue.programStage === 'kcv8f5aW7E6') {
+                // DH Ex-Ante Assessment
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
 
                     if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
@@ -1832,14 +2218,220 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         dataValueDhHMIS_ReportingExAnte.period = tempPeriod;
                         dataValues.push(dataValueDhHMIS_ReportingExAnte);
                     }
-
                 }
 
-            }
+                // DH Ex-Post Assessment
+                if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
 
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'Qk8Rqen858g';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'mAWraF09EcL';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+
+                    if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
+                        let dataValueDHNQASExAnte = {};
+                        dataValueDHNQASExAnte.dataElement = 'tDRrBsV5eCj';
+                        dataValueDHNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHNQASExAnte.value = eventDataValue.tm5mca1RtIi;
+                        dataValueDHNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHNQASExAnte);
+                    }
+                    if (eventDataValue.yiLQuZMuSmj !== '' && eventDataValue.yiLQuZMuSmj !== undefined) {
+                        let dataValueDHPlanningsExAnte = {};
+                        dataValueDHPlanningsExAnte.dataElement = 'HBOVjynWP6a';
+                        dataValueDHPlanningsExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHPlanningsExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHPlanningsExAnte.value = eventDataValue.yiLQuZMuSmj;
+                        dataValueDHPlanningsExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHPlanningsExAnte);
+                    }
+                    if (eventDataValue.WSAbtRZhxM5 !== '' && eventDataValue.WSAbtRZhxM5 !== undefined) {
+                        let dataValueDHPlan_ExecutionExAnte = {};
+                        dataValueDHPlan_ExecutionExAnte.dataElement = 'bE48aKPqBMh';
+                        dataValueDHPlan_ExecutionExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHPlan_ExecutionExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHPlan_ExecutionExAnte.value = eventDataValue.WSAbtRZhxM5;
+                        dataValueDHPlan_ExecutionExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHPlan_ExecutionExAnte);
+                    }
+                    if (eventDataValue.BNyKVjqlhtL !== '' && eventDataValue.BNyKVjqlhtL !== undefined) {
+                        let dataValueDHAssesmentExAnte = {};
+                        dataValueDHAssesmentExAnte.dataElement = 'asHJgUaIcLt';
+                        dataValueDHAssesmentExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHAssesmentExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHAssesmentExAnte.value = eventDataValue.BNyKVjqlhtL;
+                        dataValueDHAssesmentExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHAssesmentExAnte);
+                    }
+
+                    if (eventDataValue.OOCyt8UhcPS !== '' && eventDataValue.OOCyt8UhcPS !== undefined) {
+                        let dataValueDHPortfolioExAnte = {};
+                        dataValueDHPortfolioExAnte.dataElement = 'O7hUl8Iw3SD';
+                        dataValueDHPortfolioExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHPortfolioExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHPortfolioExAnte.value = eventDataValue.OOCyt8UhcPS;
+                        dataValueDHPortfolioExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHPortfolioExAnte);
+                    }
+
+                    if (eventDataValue.atgisgKyF3t !== '' && eventDataValue.atgisgKyF3t !== undefined) {
+                        let dataValueDHBloodExAnte = {};
+                        dataValueDHBloodExAnte.dataElement = 'zAjMWzU30QI';
+                        dataValueDHBloodExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHBloodExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHBloodExAnte.value = eventDataValue.atgisgKyF3t;
+                        dataValueDHBloodExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHBloodExAnte);
+                    }
+
+                    if (eventDataValue.zWCr9GKfyTz !== '' && eventDataValue.zWCr9GKfyTz !== undefined) {
+                        let dataValueDHLow_cost_MedicineExAnte = {};
+                        dataValueDHLow_cost_MedicineExAnte.dataElement = 'n8EMKkHzG08';
+                        dataValueDHLow_cost_MedicineExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHLow_cost_MedicineExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHLow_cost_MedicineExAnte.value = eventDataValue.zWCr9GKfyTz;
+                        dataValueDHLow_cost_MedicineExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHLow_cost_MedicineExAnte);
+                    }
+                    if (eventDataValue.TDPUQXGEy0n !== '' && eventDataValue.TDPUQXGEy0n !== undefined) {
+                        let dataValueDHMedicine_Quality_TestExAnte = {};
+                        dataValueDHMedicine_Quality_TestExAnte.dataElement = 'y67SDImvjmn';
+                        dataValueDHMedicine_Quality_TestExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHMedicine_Quality_TestExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHMedicine_Quality_TestExAnte.value = eventDataValue.TDPUQXGEy0n;
+                        dataValueDHMedicine_Quality_TestExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHMedicine_Quality_TestExAnte);
+                    }
+                    if (eventDataValue.mwBMY6pBnNt !== '' && eventDataValue.mwBMY6pBnNt !== undefined) {
+                        let dataValueDHDrug_Store_QualityExAnte = {};
+                        dataValueDHDrug_Store_QualityExAnte.dataElement = 'VJXTEic6IY2';
+                        dataValueDHDrug_Store_QualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHDrug_Store_QualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHDrug_Store_QualityExAnte.value = eventDataValue.mwBMY6pBnNt;
+                        dataValueDHDrug_Store_QualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHDrug_Store_QualityExAnte);
+                    }
+
+                    if (eventDataValue.NronO8j2Fft !== '' && eventDataValue.NronO8j2Fft !== undefined) {
+                        let dataValueDHDrug_DispensationExAnte = {};
+                        dataValueDHDrug_DispensationExAnte.dataElement = 'd1QQiEKyKLQ';
+                        dataValueDHDrug_DispensationExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHDrug_DispensationExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHDrug_DispensationExAnte.value = eventDataValue.NronO8j2Fft;
+                        dataValueDHDrug_DispensationExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHDrug_DispensationExAnte);
+                    }
+                    if (eventDataValue.uAV0mbGmpU3 !== '' && eventDataValue.uAV0mbGmpU3 !== undefined) {
+                        let dataValueDHMedicinesExAnte = {};
+                        dataValueDHMedicinesExAnte.dataElement = 'uZ3u08X2xa5';
+                        dataValueDHMedicinesExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHMedicinesExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHMedicinesExAnte.value = eventDataValue.uAV0mbGmpU3;
+                        dataValueDHMedicinesExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHMedicinesExAnte);
+                    }
+
+                    if (eventDataValue.LA8oFJGjiX3 !== '' && eventDataValue.LA8oFJGjiX3 !== undefined) {
+                        let dataValueDHKnowledgeExAnte = {};
+                        dataValueDHKnowledgeExAnte.dataElement = 'X0PLrZbHEeu';
+                        dataValueDHKnowledgeExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHKnowledgeExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHKnowledgeExAnte.value = eventDataValue.LA8oFJGjiX3;
+                        dataValueDHKnowledgeExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHKnowledgeExAnte);
+                    }
+
+                    if (eventDataValue.uIbs7yJJGEe !== '' && eventDataValue.uIbs7yJJGEe !== undefined) {
+                        let dataValueDHBMWExAnte = {};
+                        dataValueDHBMWExAnte.dataElement = 'T0e2EZp9H6q';
+                        dataValueDHBMWExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHBMWExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHBMWExAnte.value = eventDataValue.uIbs7yJJGEe;
+                        dataValueDHBMWExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHBMWExAnte);
+                    }
+
+                    if (eventDataValue.ZgnIWM2ZFN1 !== '' && eventDataValue.ZgnIWM2ZFN1 !== undefined) {
+                        let dataValueDH_Surgical_safety_checklistExAnte = {};
+                        dataValueDH_Surgical_safety_checklistExAnte.dataElement = 'JA6FkCQv14p';
+                        dataValueDH_Surgical_safety_checklistExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDH_Surgical_safety_checklistExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDH_Surgical_safety_checklistExAnte.value = eventDataValue.ZgnIWM2ZFN1;
+                        dataValueDH_Surgical_safety_checklistExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDH_Surgical_safety_checklistExAnte);
+                    }
+
+                    if (eventDataValue.OjLkSpUqD2P !== '' && eventDataValue.OjLkSpUqD2P !== undefined) {
+                        let dataValueDHOutcome_QualityExAnte = {};
+                        dataValueDHOutcome_QualityExAnte.dataElement = 'y5LVmFyjmIu';
+                        dataValueDHOutcome_QualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHOutcome_QualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHOutcome_QualityExAnte.value = eventDataValue.OjLkSpUqD2P;
+                        dataValueDHOutcome_QualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHOutcome_QualityExAnte);
+                    }
+
+                    if (eventDataValue.FuBMShCvsTa !== '' && eventDataValue.FuBMShCvsTa !== undefined) {
+                        let dataValueDHAccountabilityExAnte = {};
+                        dataValueDHAccountabilityExAnte.dataElement = 'NL6cZ0VvWdP';
+                        dataValueDHAccountabilityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHAccountabilityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHAccountabilityExAnte.value = eventDataValue.FuBMShCvsTa;
+                        dataValueDHAccountabilityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHAccountabilityExAnte);
+                    }
+
+                    if (eventDataValue.mdbSU6XYoK3 !== '' && eventDataValue.mdbSU6XYoK3 !== undefined) {
+                        let dataValueDHPatient_Experience_ScoreExAnte = {};
+                        dataValueDHPatient_Experience_ScoreExAnte.dataElement = 'snsQHAZY7fv';
+                        dataValueDHPatient_Experience_ScoreExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHPatient_Experience_ScoreExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHPatient_Experience_ScoreExAnte.value = eventDataValue.mdbSU6XYoK3;
+                        dataValueDHPatient_Experience_ScoreExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHPatient_Experience_ScoreExAnte);
+                    }
+
+                    if (eventDataValue.uj9OgZ2awL0 !== '' && eventDataValue.uj9OgZ2awL0 !== undefined) {
+                        let dataValueDHGrievanceExAnte = {};
+                        dataValueDHGrievanceExAnte.dataElement = 'eA4aHIvFJd9';
+                        dataValueDHGrievanceExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHGrievanceExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHGrievanceExAnte.value = eventDataValue.uj9OgZ2awL0;
+                        dataValueDHGrievanceExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHGrievanceExAnte);
+                    }
+
+                    if (eventDataValue.aYF1TLh8Wgo !== '' && eventDataValue.aYF1TLh8Wgo !== undefined) {
+                        let dataValueDhHMIS_ReportingExAnte = {};
+                        dataValueDhHMIS_ReportingExAnte.dataElement = 'tcFOLhtUEKl';
+                        dataValueDhHMIS_ReportingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDhHMIS_ReportingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDhHMIS_ReportingExAnte.value = eventDataValue.aYF1TLh8Wgo;
+                        dataValueDhHMIS_ReportingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDhHMIS_ReportingExAnte);
+                    }
+
+                }
+            }
 
             // DHT
             else if (eventDataValue.program === 'T9rLO6TLFrx' && eventDataValue.programStage === 'bgyWZTN72Is') {
+                // DHT Ex-Ante Assessment
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
 
                     if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
@@ -1860,8 +2452,6 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         dataValuePHCNQASExAnte.period = tempPeriod;
                         dataValues.push(dataValuePHCNQASExAnte);
                     }
-
-
                     if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
                         let dataValueDHTNQASExAnte = {};
                         dataValueDHTNQASExAnte.dataElement = 'HMJl1ihGttQ';
@@ -2027,11 +2617,197 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         dataValues.push(dataValueDHTNCD_Screening_Data_SubmissionExAnte);
                     }
                 }
+                // DHT Ex-Post Assessment
+                else if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
 
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'Qk8Rqen858g';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'mAWraF09EcL';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
+                        let dataValueDHTNQASExAnte = {};
+                        dataValueDHTNQASExAnte.dataElement = 'QEewp3DChqs';
+                        dataValueDHTNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTNQASExAnte.value = eventDataValue.tm5mca1RtIi;
+                        dataValueDHTNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTNQASExAnte);
+                    }
+                    if (eventDataValue.yiLQuZMuSmj !== '' && eventDataValue.yiLQuZMuSmj !== undefined) {
+                        let dataValueDHTPlanningsExAnte = {};
+                        dataValueDHTPlanningsExAnte.dataElement = 'HAWBvWWEI36';
+                        dataValueDHTPlanningsExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTPlanningsExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTPlanningsExAnte.value = eventDataValue.yiLQuZMuSmj;
+                        dataValueDHTPlanningsExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTPlanningsExAnte);
+                    }
+                    if (eventDataValue.WSAbtRZhxM5 !== '' && eventDataValue.WSAbtRZhxM5 !== undefined) {
+                        let dataValueDHTPlan_ExecutionExAnte = {};
+                        dataValueDHTPlan_ExecutionExAnte.dataElement = 'JpxheEiIr8c';
+                        dataValueDHTPlan_ExecutionExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTPlan_ExecutionExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTPlan_ExecutionExAnte.value = eventDataValue.WSAbtRZhxM5;
+                        dataValueDHTPlan_ExecutionExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTPlan_ExecutionExAnte);
+                    }
+                    if (eventDataValue.XctfwttQv93 !== '' && eventDataValue.XctfwttQv93 !== undefined) {
+                        let dataValueDHTAssesmentExAnte = {};
+                        dataValueDHTAssesmentExAnte.dataElement = 'dgBgKBKcQb6';
+                        dataValueDHTAssesmentExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTAssesmentExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTAssesmentExAnte.value = eventDataValue.XctfwttQv93;
+                        dataValueDHTAssesmentExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTAssesmentExAnte);
+                    }
+
+                    if (eventDataValue.zYPbdrUOHCu !== '' && eventDataValue.zYPbdrUOHCu !== undefined) {
+                        let dataValueDHTcoaching_visit_Quality_HRExAnte = {};
+                        dataValueDHTcoaching_visit_Quality_HRExAnte.dataElement = 'cOhkSQPTDEG';
+                        dataValueDHTcoaching_visit_Quality_HRExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTcoaching_visit_Quality_HRExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTcoaching_visit_Quality_HRExAnte.value = eventDataValue.zYPbdrUOHCu;
+                        dataValueDHTcoaching_visit_Quality_HRExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTcoaching_visit_Quality_HRExAnte);
+                    }
+
+                    if (eventDataValue.sNSCyMN95ys !== '' && eventDataValue.sNSCyMN95ys !== undefined) {
+                        let dataValueDHTDrug_QualityExAnte = {};
+                        dataValueDHTDrug_QualityExAnte.dataElement = 'coQENsePTcN';
+                        dataValueDHTDrug_QualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTDrug_QualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTDrug_QualityExAnte.value = eventDataValue.sNSCyMN95ys;
+                        dataValueDHTDrug_QualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTDrug_QualityExAnte);
+                    }
+
+                    if (eventDataValue.mwBMY6pBnNt !== '' && eventDataValue.mwBMY6pBnNt !== undefined) {
+                        let dataValueDHTDrug_Store_QualityExAnte = {};
+                        dataValueDHTDrug_Store_QualityExAnte.dataElement = 'LxAJLLxJ3mp';
+                        dataValueDHTDrug_Store_QualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTDrug_Store_QualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTDrug_Store_QualityExAnte.value = eventDataValue.mwBMY6pBnNt;
+                        dataValueDHTDrug_Store_QualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTDrug_Store_QualityExAnte);
+                    }
+
+                    if (eventDataValue.RyKtdJOt0mN !== '' && eventDataValue.RyKtdJOt0mN !== undefined) {
+                        let dataValueDHTStore_quality_PHC_CHCExAnte = {};
+                        dataValueDHTStore_quality_PHC_CHCExAnte.dataElement = 'iT1Hn4x9MZl';
+                        dataValueDHTStore_quality_PHC_CHCExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTStore_quality_PHC_CHCExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTStore_quality_PHC_CHCExAnte.value = eventDataValue.RyKtdJOt0mN;
+                        dataValueDHTStore_quality_PHC_CHCExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTStore_quality_PHC_CHCExAnte);
+                    }
+                    if (eventDataValue.RXbBpPnx2yl !== '' && eventDataValue.RXbBpPnx2yl !== undefined) {
+                        let dataValueDHTPharmacy_reviewExAnte = {};
+                        dataValueDHTPharmacy_reviewExAnte.dataElement = 'VPGsJ0SSjd7';
+                        dataValueDHTPharmacy_reviewExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTPharmacy_reviewExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTPharmacy_reviewExAnte.value = eventDataValue.RXbBpPnx2yl;
+                        dataValueDHTPharmacy_reviewExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTPharmacy_reviewExAnte);
+                    }
+
+                    if (eventDataValue.lgK2dP5Zp8S !== '' && eventDataValue.lgK2dP5Zp8S !== undefined) {
+                        let dataValueDHTNursing_reviewExAnte = {};
+                        dataValueDHTNursing_reviewExAnte.dataElement = 'IXfG3ffcVDW';
+                        dataValueDHTNursing_reviewExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTNursing_reviewExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTNursing_reviewExAnte.value = eventDataValue.lgK2dP5Zp8S;
+                        dataValueDHTNursing_reviewExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTNursing_reviewExAnte);
+                    }
+                    if (eventDataValue.ZABLh7HEOko !== '' && eventDataValue.ZABLh7HEOko !== undefined) {
+                        let dataValueDHTEmergency_TrainingExAnte = {};
+                        dataValueDHTEmergency_TrainingExAnte.dataElement = 'yiVDmnkFe9c';
+                        dataValueDHTEmergency_TrainingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTEmergency_TrainingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTEmergency_TrainingExAnte.value = eventDataValue.ZABLh7HEOko;
+                        dataValueDHTEmergency_TrainingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTEmergency_TrainingExAnte);
+                    }
+                    if (eventDataValue.FuBMShCvsTa !== '' && eventDataValue.FuBMShCvsTa !== undefined) {
+                        let dataValueDHTAccountabilityExAnte = {};
+                        dataValueDHTAccountabilityExAnte.dataElement = 'WNZvDM6NAN7';
+                        dataValueDHTAccountabilityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTAccountabilityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTAccountabilityExAnte.value = eventDataValue.FuBMShCvsTa;
+                        dataValueDHTAccountabilityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTAccountabilityExAnte);
+                    }
+
+                    if (eventDataValue.uj9OgZ2awL0 !== '' && eventDataValue.uj9OgZ2awL0 !== undefined) {
+                        let dataValueDHTGrievanceExAnte = {};
+                        dataValueDHTGrievanceExAnte.dataElement = 'bUcEUrVPIMd';
+                        dataValueDHTGrievanceExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTGrievanceExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTGrievanceExAnte.value = eventDataValue.uj9OgZ2awL0;
+                        dataValueDHTGrievanceExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTGrievanceExAnte);
+                    }
+
+                    if (eventDataValue.aYF1TLh8Wgo !== '' && eventDataValue.aYF1TLh8Wgo !== undefined) {
+                        let dataValueDHTHMIS_ReportingExAnte = {};
+                        dataValueDHTHMIS_ReportingExAnte.dataElement = 'QN5mAwfWAF9';
+                        dataValueDHTHMIS_ReportingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTHMIS_ReportingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTHMIS_ReportingExAnte.value = eventDataValue.aYF1TLh8Wgo;
+                        dataValueDHTHMIS_ReportingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTHMIS_ReportingExAnte);
+                    }
+
+
+                    if (eventDataValue.CMGA0AX5PTf !== 'NaN' && eventDataValue.CMGA0AX5PTf !== '' && eventDataValue.CMGA0AX5PTf !== undefined) {
+                        let dataValueDHTCondemnation_medical_equipmentExAnte = {};
+                        dataValueDHTCondemnation_medical_equipmentExAnte.dataElement = 'FUEj9575KD4';
+                        dataValueDHTCondemnation_medical_equipmentExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTCondemnation_medical_equipmentExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTCondemnation_medical_equipmentExAnte.value = eventDataValue.CMGA0AX5PTf;
+                        dataValueDHTCondemnation_medical_equipmentExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTCondemnation_medical_equipmentExAnte);
+                    }
+
+                    if (eventDataValue.mnFzdiwV2cB !== '' && eventDataValue.mnFzdiwV2cB !== undefined) {
+                        let dataValueDHTCondemnation_VehiclesExAnte = {};
+                        dataValueDHTCondemnation_VehiclesExAnte.dataElement = 'P3ENCyN6gP4';
+                        dataValueDHTCondemnation_VehiclesExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTCondemnation_VehiclesExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTCondemnation_VehiclesExAnte.value = eventDataValue.mnFzdiwV2cB;
+                        dataValueDHTCondemnation_VehiclesExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTCondemnation_VehiclesExAnte);
+                    }
+
+                    if (eventDataValue.Nnfhzkv2Hzi !== '' && eventDataValue.Nnfhzkv2Hzi !== undefined) {
+                        let dataValueDHTNCD_Screening_Data_SubmissionExAnte = {};
+                        dataValueDHTNCD_Screening_Data_SubmissionExAnte.dataElement = 'YvpQ5BwHYQL';
+                        dataValueDHTNCD_Screening_Data_SubmissionExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTNCD_Screening_Data_SubmissionExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTNCD_Screening_Data_SubmissionExAnte.value = eventDataValue.Nnfhzkv2Hzi;
+                        dataValueDHTNCD_Screening_Data_SubmissionExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTNCD_Screening_Data_SubmissionExAnte);
+                    }
+                }
             }
 
             // DHT
             else if (eventDataValue.program === 'T9rLO6TLFrx' && eventDataValue.programStage === 'PT9rqtMc6vU') {
+                // DHT Ex-Ante Assessment
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
 
                     if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
@@ -2072,10 +2848,52 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         dataValues.push(dataValueDHTIndicator2ExAnte);
                     }
                 }
+                // DHT Ex-Post Assessment
+                else if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'Qk8Rqen858g';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'mAWraF09EcL';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+
+                    if (eventDataValue.rOb9Xs9yC93 !== '' && eventDataValue.rOb9Xs9yC93 !== undefined) {
+                        let dataValueDHTIndicator1ExAnte = {};
+                        dataValueDHTIndicator1ExAnte.dataElement = 'axLC51g4iQj';
+                        dataValueDHTIndicator1ExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTIndicator1ExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTIndicator1ExAnte.value = eventDataValue.rOb9Xs9yC93;
+                        dataValueDHTIndicator1ExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTIndicator1ExAnte);
+                    }
+                    if (eventDataValue.PGP05ncWrql !== '' && eventDataValue.PGP05ncWrql !== undefined) {
+                        let dataValueDHTIndicator2ExAnte = {};
+                        dataValueDHTIndicator2ExAnte.dataElement = 'DnNsrf3v8fl';
+                        dataValueDHTIndicator2ExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTIndicator2ExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTIndicator2ExAnte.value = eventDataValue.PGP05ncWrql;
+                        dataValueDHTIndicator2ExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTIndicator2ExAnte);
+                    }
+                }
             }
 
             // SHT
             else if (eventDataValue.program === 'J2WLAhMNTa9' && eventDataValue.programStage === 'RgeKAiRQ3yo') {
+                // SHT Ex-Ante Assessment
                 if( eventDataValue.hqDoSMfLh8F === 'Ex-Ante Assessment'){
 
                     if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
@@ -2265,6 +3083,196 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                         dataValues.push(dataValueDHTQuality_Outcome_reportingAnte);
                     }
 
+                }
+                // SHT Ex-Post Assessment
+                else if( eventDataValue.hqDoSMfLh8F === 'Ex-Post Assessment'){
+
+                    if ( eventDataValue.i2afLnjFrdh !== 'NaN' && eventDataValue.i2afLnjFrdh !== '' && eventDataValue.i2afLnjFrdh !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'Qk8Rqen858g';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.i2afLnjFrdh;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+                    if (eventDataValue.wJ3A5NF5Acj !== 'NaN' && eventDataValue.wJ3A5NF5Acj !== '' && eventDataValue.wJ3A5NF5Acj !== undefined) {
+                        let dataValuePHCNQASExAnte = {};
+                        dataValuePHCNQASExAnte.dataElement = 'mAWraF09EcL';
+                        dataValuePHCNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValuePHCNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValuePHCNQASExAnte.value = eventDataValue.wJ3A5NF5Acj;
+                        dataValuePHCNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValuePHCNQASExAnte);
+                    }
+
+                    if (eventDataValue.tm5mca1RtIi !== '' && eventDataValue.tm5mca1RtIi !== undefined) {
+                        let dataValueSHTNQASExAnte = {};
+                        dataValueSHTNQASExAnte.dataElement = 'AnnVOEDRRDw';
+                        dataValueSHTNQASExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTNQASExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTNQASExAnte.value = eventDataValue.tm5mca1RtIi;
+                        dataValueSHTNQASExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTNQASExAnte);
+                    }
+                    if (eventDataValue.yiLQuZMuSmj !== '' && eventDataValue.yiLQuZMuSmj !== undefined) {
+                        let dataValueSHTPlanningsExAnte = {};
+                        dataValueSHTPlanningsExAnte.dataElement = 'U7DLoUy0FvN';
+                        dataValueSHTPlanningsExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTPlanningsExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTPlanningsExAnte.value = eventDataValue.yiLQuZMuSmj;
+                        dataValueSHTPlanningsExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTPlanningsExAnte);
+                    }
+
+                    if (eventDataValue.XctfwttQv93 !== '' && eventDataValue.XctfwttQv93 !== undefined) {
+                        let dataValueSHTAssesmentExAnte = {};
+                        dataValueSHTAssesmentExAnte.dataElement = 'vG4dKnrUJ2V';
+                        dataValueSHTAssesmentExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTAssesmentExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTAssesmentExAnte.value = eventDataValue.XctfwttQv93;
+                        dataValueSHTAssesmentExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTAssesmentExAnte);
+                    }
+
+                    if (eventDataValue.YTAbmm1yY1a !== '' && eventDataValue.YTAbmm1yY1a !== undefined) {
+                        let dataValueSHTState_HR_PolicyExAnte = {};
+                        dataValueSHTState_HR_PolicyExAnte.dataElement = 'LLD0n9NRHO8';
+                        dataValueSHTState_HR_PolicyExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTState_HR_PolicyExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTState_HR_PolicyExAnte.value = eventDataValue.YTAbmm1yY1a;
+                        dataValueSHTState_HR_PolicyExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTState_HR_PolicyExAnte);
+                    }
+                    if (eventDataValue.fnF8q74shy9 !== '' && eventDataValue.fnF8q74shy9 !== undefined) {
+                        let dataValueSHTPolicy_procurementExAnte = {};
+                        dataValueSHTPolicy_procurementExAnte.dataElement = 'e9lO4I25CEM';
+                        dataValueSHTPolicy_procurementExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTPolicy_procurementExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTPolicy_procurementExAnte.value = eventDataValue.fnF8q74shy9;
+                        dataValueSHTPolicy_procurementExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTPolicy_procurementExAnte);
+                    }
+                    if (eventDataValue.GEnbQ2z3sYm !== '' && eventDataValue.GEnbQ2z3sYm !== undefined) {
+                        let dataValueSHTpolicy_low_cost_supplyExAnte = {};
+                        dataValueSHTpolicy_low_cost_supplyExAnte.dataElement = 'XyFe3tD0J0B';
+                        dataValueSHTpolicy_low_cost_supplyExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTpolicy_low_cost_supplyExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTpolicy_low_cost_supplyExAnte.value = eventDataValue.GEnbQ2z3sYm;
+                        dataValueSHTpolicy_low_cost_supplyExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTpolicy_low_cost_supplyExAnte);
+                    }
+
+                    if (eventDataValue.lYr5l9KrV66 !== '' && eventDataValue.lYr5l9KrV66 !== undefined) {
+                        let dataValueSHTPolicy_drug_qualityExAnte = {};
+                        dataValueSHTPolicy_drug_qualityExAnte.dataElement = 'XgnnVnokpyb';
+                        dataValueSHTPolicy_drug_qualityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTPolicy_drug_qualityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTPolicy_drug_qualityExAnte.value = eventDataValue.lYr5l9KrV66;
+                        dataValueSHTPolicy_drug_qualityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTPolicy_drug_qualityExAnte);
+                    }
+
+                    if (eventDataValue.qxwrCsihPNn !== '' && eventDataValue.qxwrCsihPNn !== undefined) {
+                        let dataValueSHTPolicy_drug_Store_low_costExAnte = {};
+                        dataValueSHTPolicy_drug_Store_low_costExAnte.dataElement = 'AHBXYlLOx9d';
+                        dataValueSHTPolicy_drug_Store_low_costExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTPolicy_drug_Store_low_costExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTPolicy_drug_Store_low_costExAnte.value = eventDataValue.qxwrCsihPNn;
+                        dataValueSHTPolicy_drug_Store_low_costExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTPolicy_drug_Store_low_costExAnte);
+                    }
+                    if (eventDataValue.Q2qJAUF1LGn !== '' && eventDataValue.Q2qJAUF1LGn !== undefined) {
+                        let dataValueSHTPolicy_drug_Inventory_trainingExAnte = {};
+                        dataValueSHTPolicy_drug_Inventory_trainingExAnte.dataElement = 'vvSQcqBCjdy';
+                        dataValueSHTPolicy_drug_Inventory_trainingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTPolicy_drug_Inventory_trainingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTPolicy_drug_Inventory_trainingExAnte.value = eventDataValue.Q2qJAUF1LGn;
+                        dataValueSHTPolicy_drug_Inventory_trainingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTPolicy_drug_Inventory_trainingExAnte);
+                    }
+
+                    if (eventDataValue.iWsvaVa1WgB !== '' && eventDataValue.iWsvaVa1WgB !== undefined) {
+                        let dataValueSHTdrug_prescription_Stock_reportingExAnte = {};
+                        dataValueSHTdrug_prescription_Stock_reportingExAnte.dataElement = 'P90CTG9boey';
+                        dataValueSHTdrug_prescription_Stock_reportingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTdrug_prescription_Stock_reportingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTdrug_prescription_Stock_reportingExAnte.value = eventDataValue.iWsvaVa1WgB;
+                        dataValueSHTdrug_prescription_Stock_reportingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTdrug_prescription_Stock_reportingExAnte);
+                    }
+
+                    if (eventDataValue.v5igqtf3Voc !== '' && eventDataValue.v5igqtf3Voc !== undefined) {
+                        let dataValueSHTMonitoring_of_Condemnation_medicalequipmentExAnte = {};
+                        dataValueSHTMonitoring_of_Condemnation_medicalequipmentExAnte.dataElement = 'mc6BxtGekuE';
+                        dataValueSHTMonitoring_of_Condemnation_medicalequipmentExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTMonitoring_of_Condemnation_medicalequipmentExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTMonitoring_of_Condemnation_medicalequipmentExAnte.value = eventDataValue.v5igqtf3Voc;
+                        dataValueSHTMonitoring_of_Condemnation_medicalequipmentExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTMonitoring_of_Condemnation_medicalequipmentExAnte);
+                    }
+
+                    if (eventDataValue.ujW3zJfdGjQ !== '' && eventDataValue.ujW3zJfdGjQ !== undefined) {
+                        let dataValueSHTcoachingExAnte = {};
+                        dataValueSHTcoachingExAnte.dataElement = 'ECovFol5TYr';
+                        dataValueSHTcoachingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueSHTcoachingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueSHTcoachingExAnte.value = eventDataValue.ujW3zJfdGjQ;
+                        dataValueSHTcoachingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueSHTcoachingExAnte);
+                    }
+
+                    if (eventDataValue.FuBMShCvsTa !== '' && eventDataValue.FuBMShCvsTa !== undefined) {
+                        let dataValueDHTAccountabilityExAnte = {};
+                        dataValueDHTAccountabilityExAnte.dataElement = 'XIRc7MAERCt';
+                        dataValueDHTAccountabilityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTAccountabilityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTAccountabilityExAnte.value = eventDataValue.FuBMShCvsTa;
+                        dataValueDHTAccountabilityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTAccountabilityExAnte);
+                    }
+
+
+                    if (eventDataValue.alGDwMT8VsD !== '' && eventDataValue.alGDwMT8VsD !== undefined) {
+                        let dataValueDHTgrievance_accountabilityExAnte = {};
+                        dataValueDHTgrievance_accountabilityExAnte.dataElement = 'PZIjiYHwVpD';
+                        dataValueDHTgrievance_accountabilityExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTgrievance_accountabilityExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTgrievance_accountabilityExAnte.value = eventDataValue.alGDwMT8VsD;
+                        dataValueDHTgrievance_accountabilityExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTgrievance_accountabilityExAnte);
+                    }
+
+                    if (eventDataValue.aYF1TLh8Wgo !== '' && eventDataValue.aYF1TLh8Wgo !== undefined) {
+                        let dataValueDHTHMIS_ReportingExAnte = {};
+                        dataValueDHTHMIS_ReportingExAnte.dataElement = 'FS5F3mhuTOt';
+                        dataValueDHTHMIS_ReportingExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTHMIS_ReportingExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTHMIS_ReportingExAnte.value = eventDataValue.aYF1TLh8Wgo;
+                        dataValueDHTHMIS_ReportingExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTHMIS_ReportingExAnte);
+                    }
+
+
+                    if (eventDataValue.DEwB2WbxHkq !== '' && eventDataValue.DEwB2WbxHkq !== undefined) {
+                        let dataValueDHTInsurance_Efficiency_Medical_AuditExAnte = {};
+                        dataValueDHTInsurance_Efficiency_Medical_AuditExAnte.dataElement = 'liAttWOUAzg';
+                        dataValueDHTInsurance_Efficiency_Medical_AuditExAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTInsurance_Efficiency_Medical_AuditExAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTInsurance_Efficiency_Medical_AuditExAnte.value = eventDataValue.DEwB2WbxHkq;
+                        dataValueDHTInsurance_Efficiency_Medical_AuditExAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTInsurance_Efficiency_Medical_AuditExAnte);
+                    }
+
+                    if (eventDataValue.OjLkSpUqD2P !== '' && eventDataValue.OjLkSpUqD2P !== undefined) {
+                        let dataValueDHTQuality_Outcome_reportingAnte = {};
+                        dataValueDHTQuality_Outcome_reportingAnte.dataElement = 'poky1ni6zoZ';
+                        dataValueDHTQuality_Outcome_reportingAnte.categoryOptionCombo = 'HllvX50cXC0';
+                        dataValueDHTQuality_Outcome_reportingAnte.orgUnit = eventDataValue.orgUnit;
+                        dataValueDHTQuality_Outcome_reportingAnte.value = eventDataValue.BNyKVjqlhtL;
+                        dataValueDHTQuality_Outcome_reportingAnte.period = tempPeriod;
+                        dataValues.push(dataValueDHTQuality_Outcome_reportingAnte);
+                    }
                 }
             }
 
