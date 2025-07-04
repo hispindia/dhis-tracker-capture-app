@@ -75,6 +75,8 @@ trackerCapture.controller('RegistrationController',
 
     //Placeholder till proper settings for time is implemented. Currently hard coded to 24h format.
     $scope.timeFormat = '24h';
+    // <!-- custom change for styles PLAN css for nepali calendar new start  -->
+    $scope.generatedCustomId = ''; // custom change for PLAN
 
     if(!$scope.attributesById){
         $scope.attributesById = [];
@@ -115,10 +117,23 @@ trackerCapture.controller('RegistrationController',
             CurrentSelection.setOptionSets($scope.optionSets);
         });
     }
-    
-    
+
+    // comment previous code
+    /*
     $scope.isDisabled = function(attribute) {
         return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+    };
+    */
+
+    // update for PLAN  for disable attribute patient_identifier
+
+    $scope.isDisabled = function (attribute) {
+        if (attribute.code === 'patient_identifier') {
+            return true;
+        }
+        else {
+            return attribute.generated || $scope.assignedFields[attribute.id] || $scope.editingDisabled;
+        }
     };
 
     $scope.selectedEnrollment = {
@@ -760,7 +775,35 @@ trackerCapture.controller('RegistrationController',
         //get tei attributes and their values
         //but there could be a case where attributes are non-mandatory and
         //registration form comes empty, in this case enforce at least one value
-        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById);
+
+        // custom-change for PLAN for generate Custom-Id start in registration and update/profile
+        if( $scope.selectedProgram.id === 'HPEdnKUcTqU'){
+            if ($scope.registrationMode === 'REGISTRATION' || $scope.registrationMode === 'PROFILE') {
+
+                var firstName = "";
+                var lastName = "";
+                var dateOfBirth = "";
+                var orgUnitName = $scope.selectedOrgUnit.displayName;
+
+                if ($scope.selectedTei.gJ7mFiFa0dU !== undefined) {
+                    var firstNameStr = $scope.selectedTei.gJ7mFiFa0dU;
+                    firstName = firstNameStr.substr(0, 1).toUpperCase();
+                }
+                if ($scope.selectedTei.t67rLuGIQmZ !== undefined) {
+                    var lastNameStr = $scope.selectedTei.t67rLuGIQmZ;
+                    lastName = lastNameStr.substr(0, 1);
+                }
+                if ($scope.selectedTei.Zgi47Dql2Ei !== undefined) {
+                    var dateOfBirthStr = $scope.selectedTei.Zgi47Dql2Ei;
+                    dateOfBirth = dateOfBirthStr.split("-")[1] + dateOfBirthStr.split("-")[2] + dateOfBirthStr.split("-")[0];
+                }
+
+                $scope.generatedCustomId = orgUnitName + " - " + firstName + lastName + dateOfBirth;
+            }
+
+        }
+
+        var result = RegistrationService.processForm($scope.apiFormattedTei, $scope.selectedTei, $scope.teiOriginal, $scope.attributesById,$scope.generatedCustomId);
         $scope.formEmpty = result.formEmpty;
         $scope.apiFormattedTei = result.tei;
 

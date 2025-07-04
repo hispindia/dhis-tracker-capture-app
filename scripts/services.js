@@ -623,11 +623,22 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
                 return def.promise;
             }
         },
-        processForm: function(existingTei, formTei, originalTei, attributesById){
+        processForm: function(existingTei, formTei, originalTei, attributesById, finalCustomId){
             var tei = angular.copy(existingTei);
             tei.attributes = [];
             var formEmpty = true;
             for(var k in attributesById){
+
+                // custom change for custom-ID generation for PLAN Assign attribute value before save
+                if( finalCustomId !== null && finalCustomId !== "" )
+                {
+                    if(  attributesById[k].code === 'patient_identifier' )
+                    {
+                        formTei[k] = finalCustomId;
+                        console.log( " Final Participant ID -- " + finalCustomId );
+                    }
+                }
+                // end
                 if( k in formTei ){
                     var att = attributesById[k];
                     tei.attributes.push({attribute: att.id, value: formTei[k], displayName: att.displayName, valueType: att.valueType});
